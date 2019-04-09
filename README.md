@@ -1,6 +1,11 @@
 # DiveProMe+
 DiveProMe+ is a Java and HTML5 decompression program that uses the Bühlmann (ZHL-16) for decompression profiles. The Bühlmann decompression model is well suited to today's technical diving.
-DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and warnings. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
+
+The simple Waterfall GUI style provides divers with an unprecedented level of control and convenience. User can immediately change any part of their dive plan and instantly recalculate their profile.
+
+Experience of control over safety factors with ZHL16A, ZHL16B, ZHL16C gradient factor method, which allows safety factors to be customized across multiple diving profiles. For example, gradient factors establish a percentage of maximum compartment pressure, which can be individually established based on individual decompression success.
+
+DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and alerts.  It is designed to allow you to compare several scenario, while optimizing your parameters and gaz mixes. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
 
 # Features
 - A complete multiple dive / multi-level dive planner for the technical diver. Includes support for Open Circuit Diving.
@@ -15,7 +20,7 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - Multilevel Planning and computing difficult Cave Profiles.
 - Now you can save and restore all your Plan Settings (mixes, ascending speed and all other).
 - Internet connection is not required now.
-- Complete Charts of Diving Profile, Gas Pressures and Compartment Pressures.
+- Complete Charts of Diving Profile, Gas Pressures and Compartment Pressures(Tissue Plots). Plenty of nice solid and colored curves.
 - "Level by Level" Plan of Gas consumptions and Rates.
 - DiveProMe+ is available for major platforms PC, Mac, Linux and Android.
 - Microsoft Excel (XLS) and Portable Document Format (PDF) Export from plan and charts. Very useful option for Instructors.
@@ -50,6 +55,9 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+# Privacy Policy
+DiveProMe+ doesn't collect any personal data.
 
 # Warning
 Please note - this program is made with the experienced and technical diver in mind. If you're relatively new to diving, you may find this program difficult to use. You're expected to know the theory behind the diving practices and procedures used here.
