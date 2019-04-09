@@ -23,14 +23,14 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
 
 # Geting Started
-Get the latest version online http://scan3d.ru/DiveMePro+/
+Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
 
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
-If DiveProMe+ is not working properly, please file a report in the Facebook Project Page https://www.facebook.com/DiveProMe/. We also welcome issues submitted on GitHub.
+If DiveProMe+ is not working properly, please file a report in the [Facebook Project Page](https://www.facebook.com/DiveProMe/). We also welcome issues submitted on GitHub.
 
 # Roadmap
-For information regarding DiveProMe+ plans and release schedule, please see the Facebook https://www.facebook.com/DiveProMe/
+For information regarding DiveProMe+ plans and release schedule, please see the  [Facebook DiveProMe+](https://www.facebook.com/DiveProMe/)
 
 # Related Projects
 Many of the core components and extensions to Code live in their own repositories on GitHub. For example, the [JsPDF](https://github.com/MrRio/jsPDF) and the [JsXLSX](https://github.com/clarketm/js-xlsx) have their own repositories. Simply ask if you need more info.
