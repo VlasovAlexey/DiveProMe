@@ -5,22 +5,22 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 # Features
 - A complete multiple dive / multi-level dive planner for the technical diver. Includes support for Open Circuit Diving.
 - Supports Air to TriMix (any combination of O2/He/N2), with an unlimited number of decompression gases. Includes Thirds support for planning dives.
-3.	Available in English, Spanish and Russian
-4.	Support ZHL16A, ZHL16B, ZHL16C
-5.	Support different Gradient Factor
-6.	User defined Bottom, Travel and Decompression Mixtures.
-7.	Automatic Mixtures Corrector with your personal Limits.
-8.	PPO2 Min\Max, PPN2, ICDHe, ICDN2 Limits with your Dive Plans.
-9.	Personal Settings for Descent, Ascent and Deco Ascending Speed.
-10.	Multilevel Planning and computing difficult Cave Profiles.
-11.	Now you can save and restore all your Plan Settings (mixes, ascending speed and all other).
-12.	 Internet connection is not required now.
-13.	Complete Charts of Diving Profile, Gas Pressures and Compartment Pressures.
-14.	"Level by Level" Plan of Gas consumptions and Rates.
-15.	DiveProMe+ is available for major platforms PC, Mac, Linux and Android.
-16.	 XLS and PDF Export fro Plan and Charts. Very useful option for Instructors.
-17.	Alerts for Cylinders capacity by mixtures type(O2% and profile type).
-18.	ICD Alerts. Steve Burton method and PP gas maximum difference.
+- Available in English, Spanish and Russian
+- Support ZHL16A, ZHL16B, ZHL16C
+- Support different Gradient Factor
+- User defined Bottom, Travel and Decompression Mixtures.
+- Automatic Mixtures Corrector with your personal Limits.
+- PPO2 Min\Max, PPN2, ICDHe, ICDN2 Limits with your Dive Plans.
+- Personal Settings for Descent, Ascent and Deco Ascending Speed.
+- Multilevel Planning and computing difficult Cave Profiles.
+- Now you can save and restore all your Plan Settings (mixes, ascending speed and all other).
+- Internet connection is not required now.
+- Complete Charts of Diving Profile, Gas Pressures and Compartment Pressures.
+- "Level by Level" Plan of Gas consumptions and Rates.
+- DiveProMe+ is available for major platforms PC, Mac, Linux and Android.
+- Microsoft Excel (XLS) and Portable Document Format (PDF) Export from plan and charts. Very useful option for Instructors.
+17.	Alerts for cylinders capacity by mixtures type (O2% and profile type).
+18.	ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
 
 # Geting Started
 Get the latest version online http://scan3d.ru/DiveMePro+/
