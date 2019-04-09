@@ -18,7 +18,7 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - PPO2 Min\Max, PPN2, ICDHe, ICDN2 Limits with your Dive Plans.
 - Personal Settings for Descent, Ascent and Deco Ascending Speed.
 - Multilevel Planning and computing difficult Cave Profiles.
-- Now you can save and restore all your Plan Settings (mixes, ascending speed and all other).
+- You can save and restore all your Plan Settings (mixes, ascending speed and all other) for future use.
 - Internet connection is not required now.
 - Complete Charts of Diving Profile, Gas Pressures and Compartment Pressures(Tissue Plots). Plenty of nice solid and colored curves.
 - "Level by Level" Plan of Gas consumptions and Rates.
@@ -27,8 +27,11 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - Alerts for cylinders capacity by mixtures type (O2% and profile type).
 - ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
 
+# Available Settings
+(comming soon)
+
 # Geting Started
-Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
+Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/), clone or download from GitHub. Search index.html and start it/ Use latest Google Chrome\Mozilla Firefox\Safari for view. Thats all!
 
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
