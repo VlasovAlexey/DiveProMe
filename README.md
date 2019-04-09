@@ -1,7 +1,5 @@
 # DiveProMe+
 DiveProMe+ is a Java and HTML5 decompression program that uses the Bühlmann (ZHL-16) for decompression profiles. The Bühlmann decompression model is well suited to today's technical diving.
-
-# Info
 DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and warnings. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
 
 # Features
@@ -26,6 +24,13 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 
 # Geting Started
 Get the latest version online http://scan3d.ru/DiveMePro+/
+
+# Contributing
+Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
+If DiveProMe+ is not working properly, please file a report in the Facebook Project Page https://www.facebook.com/DiveProMe/. We also welcome issues submitted on GitHub.
+
+# Roadmap
+For information regarding DiveProMe+ plans and release schedule, please see the Facebook https://www.facebook.com/DiveProMe/
 
 # Licensing
 DiveProMe+ is Open Source Software based on Apache License 2.0. Copyright © 2016 Alexey Vlasov, Thomas Holloway.
