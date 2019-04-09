@@ -29,7 +29,7 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 
 # Geting Started
 - Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/) or clone\download from GitHub
-- Unzip arhive. Use latest Google Chrome\Mozilla Firefox\Safari for view
+- Unzip arhive. Use latest Google Chrome\Mozilla Firefox\Safari Browser for view
 - Search index.html and start it
 - Thats all!
 
