@@ -36,7 +36,7 @@ For information regarding DiveProMe+ plans and release schedule, please see the 
 Many of the core components and extensions to Code live in their own repositories on GitHub. For example, the [JsPDF](https://github.com/MrRio/jsPDF) and the [JsXLSX](https://github.com/clarketm/js-xlsx) have their own repositories. Simply ask if you need more info.
 
 # Licensing
-Copyright (c) 2016, VlasovAlexey, Thomas Holloway
+Copyright (c) 2016, VlasovAlexey, Thomas Holloway.
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
