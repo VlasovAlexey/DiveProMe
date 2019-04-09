@@ -36,7 +36,20 @@ For information regarding DiveProMe+ plans and release schedule, please see the 
 Many of the core components and extensions to Code live in their own repositories on GitHub. For example, the [JsPDF](https://github.com/MrRio/jsPDF) and the [JsXLSX](https://github.com/clarketm/js-xlsx) have their own repositories. Simply ask if you need more info.
 
 # Licensing
-DiveProMe+ is Open Source Software based on Apache License 2.0. Copyright © 2016 Alexey Vlasov, Thomas Holloway.
+Copyright (c) 2016, VlasovAlexey, Thomas Holloway
+All rights reserved.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 # Warning
 Please note - this program is made with the experienced and technical diver in mind. If you're relatively new to diving, you may find this program difficult to use. You're expected to know the theory behind the diving practices and procedures used here.
