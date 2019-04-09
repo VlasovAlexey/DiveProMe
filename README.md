@@ -19,8 +19,8 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - "Level by Level" Plan of Gas consumptions and Rates.
 - DiveProMe+ is available for major platforms PC, Mac, Linux and Android.
 - Microsoft Excel (XLS) and Portable Document Format (PDF) Export from plan and charts. Very useful option for Instructors.
-17.	Alerts for cylinders capacity by mixtures type (O2% and profile type).
-18.	ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
+- Alerts for cylinders capacity by mixtures type (O2% and profile type).
+- ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
 
 # Geting Started
 Get the latest version online http://scan3d.ru/DiveMePro+/
