@@ -27,11 +27,11 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - Alerts for cylinders capacity by mixtures type (O2% and profile type).
 - ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference.
 
-# Available Settings
-(comming soon)
-
 # Geting Started
-Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/), clone or download from GitHub. Search index.html and start it/ Use latest Google Chrome\Mozilla Firefox\Safari for view. Thats all!
+- Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/) or clone\download from GitHub.
+- Unzip arhive. Use latest Google Chrome\Mozilla Firefox\Safari for view.
+- Search index.html and start it.
+- Thats all!
 
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
@@ -64,4 +64,5 @@ DiveProMe+ doesn't collect any personal data.
 
 # Warning
 WARNING! THERE IS ALWAYS A RISK OF DECOMPRESSION SICKNESS (DCS) FOR ANY DIVE PROFILE EVEN IF YOU FOLLOW THE DIVE PLAN PRESCRIBED BY DIVE TABLES. NO PROCEDURE OR DIVE TABLE WILL PREVENT THE POSSIBILITY OF DCS OR OXYGEN TOXICITY! An individual’s physiological make up can vary from day to day. You are strongly advised to remain well within the exposure limits provided by the planner to minimize the risk of DCS.
+
 Please note - this program is made with the experienced and technical diver in mind. If you're relatively new to diving, you may find this program difficult to use. You're expected to know the theory behind the diving practices and procedures used here.
