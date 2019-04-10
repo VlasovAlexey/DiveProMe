@@ -5,7 +5,7 @@ The simple "Waterfall" GUI style provides users with an unprecedented level of c
 
 Experience of control over safety factors with ZHL16A, ZHL16B, ZHL16C gradient factor method, which allows safety factors to be customized across multiple diving profiles. For example, gradient factors establish a percentage of maximum compartment pressure, which can be individually established based on individual decompression success.
 
-DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and alerts.  It is designed to allow you to compare several scenario, while optimizing your parameters and gaz mixes. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
+DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and alerts.  It is designed to allow you to compare several scenario, while optimizing your parameters and gas mixes. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
 
 # Features
 - A complete multiple dive / multi-level dive planner for the technical diver
