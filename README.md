@@ -33,6 +33,15 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 - Search index.html and start it
 - Thats all!
 
+# Browser compatibility
+- Firefox
+- Chrome
+- Opera
+- Safari
+- iOS
+- Android
+- Windows Phone
+
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
 If DiveProMe+ is not working properly, please file a report in the [Facebook Project Page](https://www.facebook.com/DiveProMe/). We also welcome issues submitted on GitHub.
