@@ -1,4 +1,6 @@
 # DiveProMe+
+Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
+
 DiveProMe+ is a Java and HTML5 decompression program that uses the Bühlmann (ZHL-16) for decompression profiles. The Bühlmann decompression model is well suited to today's technical diving.
 
 The simple "Waterfall" GUI style provides users with an unprecedented level of control and convenience. User can immediately change any part of their dive plan and instantly recalculate their profile.
