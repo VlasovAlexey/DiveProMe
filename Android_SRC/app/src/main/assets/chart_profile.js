@@ -297,7 +297,7 @@ function btn_build_tiss(){
                 tooltip: {
                     headerFormat: '<span style="font-size:15px;text-align: left">{point.key}'+ " " + plan_lng("ch_tmx") + '</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0;border-bottom: 0px;font-size:15px;text-align: left">{series.name}: </td>' +
-                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.1f}' + plan_lng("ch_ata") + '</b></td></tr>',
+                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.2f}' + plan_lng("ch_ata") + '</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
@@ -344,7 +344,7 @@ function btn_build_tiss(){
                 tooltip: {
                     headerFormat: '<span style="font-size:15px;text-align: left">{point.key}'+ " " + plan_lng("ch_tmx") + '</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0;border-bottom: 0px;font-size:15px;text-align: left">{series.name}: </td>' +
-                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.1f}' + plan_lng("ch_ata") + '</b></td></tr>',
+                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.2f}' + plan_lng("ch_ata") + '</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true
@@ -391,7 +391,7 @@ function btn_build_tiss(){
                 tooltip: {
                     headerFormat: '<span style="font-size:15px;text-align: left">{point.key}'+ " " + plan_lng("ch_tmx") + '</span><table>',
                     pointFormat: '<tr><td style="color:{series.color};padding:0;border-bottom: 0px;font-size:15px;text-align: left">{series.name}: </td>' +
-                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.1f}' + plan_lng("ch_ata") + '</b></td></tr>',
+                    '<td style="padding:0;border-bottom: 0px;font-size:15px;text-align: left"><b>{point.y:.2f}' + plan_lng("ch_ata") + '</b></td></tr>',
                     footerFormat: '</table>',
                     shared: true,
                     useHTML: true

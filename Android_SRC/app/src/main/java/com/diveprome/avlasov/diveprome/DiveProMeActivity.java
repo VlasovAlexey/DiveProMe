@@ -1,14 +1,14 @@
 package com.diveprome.avlasov.diveprome;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.DownloadListener;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 
@@ -45,11 +45,19 @@ public class DiveProMeActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_dive_pro_me);
+
+        String myURL = "file:///android_asset/index.html";
+        android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.acceptCookie();
+        cookieManager.setAcceptFileSchemeCookies(true);
+        cookieManager.getInstance().setAcceptCookie(true);
+        cookieManager.getCookie(myURL);
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
 
@@ -64,18 +72,19 @@ public class DiveProMeActivity extends AppCompatActivity {
         mWebView.getSettings().setLoadWithOverviewMode(true);
         mWebView.getSettings().setUseWideViewPort(true);
 
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+
+        //make visible all console log from WebView visible on Android Studio Console
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+                android.util.Log.d("WebView--> ", consoleMessage.message());
+                return true;
+            }
+        });
 
         mWebView.loadUrl("file:///android_asset/index.html");
 
-        mWebView.setDownloadListener(new DownloadListener() {
-            public void onDownloadStart(String url, String userAgent,
-                                        String contentDisposition, String mimetype,
-                                        long contentLength) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
     }
 
     @Override
@@ -87,3 +96,6 @@ public class DiveProMeActivity extends AppCompatActivity {
         }
     }
 }
+
+
+

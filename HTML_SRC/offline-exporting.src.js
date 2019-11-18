@@ -78,46 +78,56 @@
          *        The name of the resulting file (w/extension)
          */
         Highcharts.downloadURL = function (dataURL, filename) {
-            var a = doc.createElement('a'),
-                windowRef;
 
-            // IE specific blob implementation
-            // Don't use for normal dataURLs
-            if (
-                typeof dataURL !== 'string' &&
-                !(dataURL instanceof String) &&
-                nav.msSaveOrOpenBlob
-            ) {
-                nav.msSaveOrOpenBlob(dataURL, filename);
-                return;
+            //DiveProMe Hook
+            //if node js enabled use special file save dialog
+            if(node_enable()===true){
+                NodesaveFile("#nodejs_export_pdf", dataURL , true);
             }
+            //else standart web based datauri64 blob save file for browser
+            else
+            {
+                var a = doc.createElement('a'),
+                    windowRef;
 
-            // Some browsers have limitations for data URL lengths. Try to convert to
-            // Blob or fall back. Edge always needs that blob.
-            if (isEdgeBrowser || dataURL.length > 2000000) {
-                dataURL = Highcharts.dataURLtoBlob(dataURL);
-                if (!dataURL) {
-                    throw new Error('Failed to convert to blob');
+                // IE specific blob implementation
+                // Don't use for normal dataURLs
+                if (
+                    typeof dataURL !== 'string' &&
+                    !(dataURL instanceof String) &&
+                    nav.msSaveOrOpenBlob
+                ) {
+                    nav.msSaveOrOpenBlob(dataURL, filename);
+                    return;
                 }
-            }
 
-            // Try HTML5 download attr if supported
-            if (a.download !== undefined) {
-                a.href = dataURL;
-                a.download = filename; // HTML5 download attribute
-                doc.body.appendChild(a);
-                a.click();
-                doc.body.removeChild(a);
-            } else {
-                // No download attr, just opening data URI
-                try {
-                    windowRef = win.open(dataURL, 'chart');
-                    if (windowRef === undefined || windowRef === null) {
-                        throw new Error('Failed to open window');
+                // Some browsers have limitations for data URL lengths. Try to convert to
+                // Blob or fall back. Edge always needs that blob.
+                if (isEdgeBrowser || dataURL.length > 2000000) {
+                    dataURL = Highcharts.dataURLtoBlob(dataURL);
+                    if (!dataURL) {
+                        throw new Error('Failed to convert to blob');
                     }
-                } catch (e) {
-                    // window.open failed, trying location.href
-                    win.location.href = dataURL;
+                }
+
+                // Try HTML5 download attr if supported
+                if (a.download !== undefined) {
+                    a.href = dataURL;
+                    a.download = filename; // HTML5 download attribute
+                    doc.body.appendChild(a);
+                    a.click();
+                    doc.body.removeChild(a);
+                } else {
+                    // No download attr, just opening data URI
+                    try {
+                        windowRef = win.open(dataURL, 'chart');
+                        if (windowRef === undefined || windowRef === null) {
+                            throw new Error('Failed to open window');
+                        }
+                    } catch (e) {
+                        // window.open failed, trying location.href
+                        win.location.href = dataURL;
+                    }
                 }
             }
         };
@@ -395,7 +405,11 @@
                 );
 
                 win.svg2pdf(svgElement, pdf, { removeInvalid: true });
+
+
+
                 return pdf.output('datauristring');
+
             }
 
             function downloadPDF() {
@@ -438,7 +452,9 @@
                         el.removeChild(titleElement);
                     });
                 });
+
                 svgData = svgToPdf(dummySVGContainer.firstChild, 0);
+
                 try {
                     Highcharts.downloadURL(svgData, filename);
                     if (successCallback) {

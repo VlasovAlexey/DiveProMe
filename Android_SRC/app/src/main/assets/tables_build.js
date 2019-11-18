@@ -578,7 +578,6 @@
       tr.appendChild(td);
       table.appendChild(tr);
     }
-
     return body.appendChild(table);
   }
     
@@ -703,7 +702,7 @@ function depth_from_name_arr(tmp_arr){
             
       time1 = time_to_dec_time(dec_table[tick].Time);
       
-      //select comsumation rate deco or botom      
+      //select consumption rate deco or bottom
       if (i-1 < (lvl_arr.length/3)*2){
         coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
       }
@@ -761,6 +760,7 @@ function depth_from_name_arr(tmp_arr){
   td = "";
 
   pdf_table_cons_arr = [];
+  //price_cons_arr =[];
 
   firstTable = document.getElementById("t_total_cons");
   table = document.createElement("table");
@@ -772,7 +772,6 @@ function depth_from_name_arr(tmp_arr){
   td = document.createElement("td");
   td.innerHTML = plan_lng("tab_tr_mix");
   pdf_table_cons_arr.push(plan_lng("tab_tr_mix"));
-
   tr.appendChild(td);
             
   td = document.createElement("td");
@@ -813,6 +812,7 @@ function depth_from_name_arr(tmp_arr){
     td.setAttribute("class", aler_atr);
     text = document.createTextNode(plan_lng(coms_final_arr[i].Mix));
     pdf_table_cons_arr.push(plan_lng(coms_final_arr[i].Mix));
+
     td.appendChild(text);
     tr.appendChild(td);
 

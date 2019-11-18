@@ -13,10 +13,13 @@ function build_dive(){
   //calculate ascending numbers for potentialy deco stops
   for (i = 0; i < lvl_arr.length/3; i++) {
     if(i > 0){
+        //console.log("all_as_fine_ASCENT");
       //if ascend you need build potentialy deco levels
       if(lvl_arr[a9+1]*1.0 < lvl_arr[a9-2]*1.0){
         del_to_depth = lvl_arr[a9+1]*1.0;
+
         out_segment = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
+
         //Delete from end to next lvl all levels after
         for (f = out_segment.length-1; f >= 0; f--) {
           if(out_segment[f].startDepth < del_to_depth){
@@ -29,14 +32,17 @@ function build_dive(){
           for (f = 0; f < out_segment.length; f++) {
             if(out_segment[f].startDepth != out_segment[f].endDepth){
               out_segment.splice(f,1);
+
             }
           }
+
         }
         //Delete all levels from start
         out_segment.splice(0,tmp_lvl_arr.length/3);
         //console.log(out_segment);
         //Everything is almost ready for add extra deco stops if exist
         for (f = 0; f < out_segment.length; f++) {
+
           tmp_lvl_arr.push(tmp_lvl_arr.length/3+1 , out_segment[f].startDepth , out_segment[f].time);
           ret_mix = gass_from_name_arr(out_segment[f].gasName);
           tmp_lvl_mix_arr.push(ret_mix[0],ret_mix[2]);
@@ -47,7 +53,7 @@ function build_dive(){
       }
       else
       {
-        tmp_lvl_arr.push(tmp_lvl_arr.length/3+1 , lvl_arr[a9+1]*1.0 , lvl_arr[a9+2]*1.0);
+          tmp_lvl_arr.push(tmp_lvl_arr.length/3+1 , lvl_arr[a9+1]*1.0 , lvl_arr[a9+2]*1.0);
         tmp_lvl_mix_arr.push(lvl_mix_arr[b9]*1.0 , lvl_mix_arr[b9+1]*1.0);
       }
     }
@@ -55,89 +61,30 @@ function build_dive(){
     {
       tmp_lvl_arr.push(lvl_arr[a9]*1.0 , lvl_arr[a9+1]*1.0 , lvl_arr[a9+2]*1.0);
       tmp_lvl_mix_arr.push(lvl_mix_arr[b9]*1.0 , lvl_mix_arr[b9+1]*1.0);
+
     }
     a9 = a9 + 3;
     b9 = b9 + 2;
   }
+
   //if last last segment above 7 meters. This code does`t work korect with no deco segments and
   //zacominchen:))
   if(tmp_lvl_arr[tmp_lvl_arr.length -2]*1.0 < 7){
-     /*
-    last_level = tmp_lvl_arr.slice();
-    last_level.splice(0, last_level.length - 3);
 
-    last_mix = tmp_lvl_mix_arr.slice();
-    last_mix.splice(0,last_mix.length - 2);
-
-    console.log(last_level,last_mix);
-
-    tmp_lvl_arr.splice(tmp_lvl_arr.length-3 , 3);
-    tmp_lvl_mix_arr.splice(tmp_lvl_mix_arr.length-2 , 2);
-
-    console.log(tmp_lvl_arr,tmp_lvl_mix_arr);
-
-    output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
-
-    //Delete from end to next lvl all levels to 6 meters
-        for (f = output.length-1; f >= 0; f--) {
-          if(output[f].startDepth < last_level[1] || output[f].endDepth < last_level[1]){
-            output.splice(f,1);
-          }
-        }
-
-    tmp_gass_name = mix_to_txt_arr(last_mix);
-
-    start_depth_1 = output[output.length-1].endDepth;
-    defence = (start_depth_1*1.0)-(last_level[1]*1.0);
-    if(defence > 0){
-      tmp_time = (defence/rate_asc_idx);
-    }
-    else
-    {
-      tmp_time = (defence/rate_dsc_idx);
-    }
-
-
-    //add trevel from previos to no deco lvl
-    output.push({
-      gasName: output[output.length-1].gasName,
-      startDepth: output[output.length-1].endDepth,
-      endDepth: last_level[1],
-      time: tmp_time
-      }
-    );
-    //add no deco level
-    output.push({
-      gasName: tmp_gass_name.toString(),
-      startDepth: last_level[1],
-      endDepth: last_level[1],
-      time: last_level[2]
-      }
-    );
-
-    //add exit to surface
-    tmp_time = (last_level[1]*1.0/rate_asc_idx);
-
-    output.push({
-      gasName: tmp_gass_name.toString(),
-      startDepth: last_level[1],
-      endDepth: 0.0,
-      time: tmp_time
-      }
-    );
-   */
-   //hole for fix
    output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
+
   }
   else
   {
     //compute regular dive under 6 meters last lvl
     output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
+
   }
   return output;
 }
 //main function to build any dive segment
 function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm_dive){
+
   var rate_asc = document.getElementById("opt_rate_asc");
   var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
 
@@ -262,7 +209,9 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
       ff = [levels_mix_segment_arr[aaa] , levels_mix_segment_arr[aaa+1]];
       //alert(mix_to_txt_arr(ff));
       plan.addBottomGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
-      aaa = aaa+2;
+      //console.log(mix_to_txt_arr(ff));
+
+      aaa = aaa + 2;
     }
 
     //Add deco gases
@@ -320,6 +269,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
     mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
 
+      //ERROR!
     output = plan.calculateDecompression(false, gf_arr[0]*0.01, gf_arr[1]*0.01, ppo2_deco_idx*1.0, mxis_end);
 
     }
@@ -484,7 +434,7 @@ function upd_lvl_opt_arr(){
     }
    a=a+3;
   }
-  upd_lvl_list();
+  //upd_lvl_list();
   upd_all();
 }
 
@@ -527,19 +477,6 @@ function src_to_5_arr(tmp_arr){
   tn_lst_stop1 = document.getElementById("opt_lst_stop");
   tn_lst_stop1_idx = parseFloat(tn_lst_stop1.options[tn_lst_stop1.selectedIndex].value);
   test_dp = depth_from_name_arr(dec_table[dec_table.length - 9]);
-  //console.log(dec_table.length - 9);
-  //console.log(test_dp);
-
-  if(test_dp[0] > 6){
-    /*if(tn_lst_stop1_idx == 3){
-      dec_table[(dec_table.length - 4)] = "3-0";
-    }
-    else
-    {
-      dec_table[(dec_table.length - 4)] = "6-0";
-    }*/
-  }
-
 
 
   //fix gass swich error on exit for very short dive plans

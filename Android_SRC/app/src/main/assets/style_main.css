@@ -113,14 +113,19 @@ tr:hover td{
     color: steelblue;
     background: #e8edff;
 }
-body {
+body,html {
     text-align: center;
     background: #2b2b2c;
     color: #e4e4e4;
     font-family: FirstFont;
     font-size: 12px;
     cursor: default;
+/*
+    height: 100%;
+    overflow: hidden; */
 }
+
+
 select
 {
     background: url(arrow_01.svg) no-repeat 95% 50%;
@@ -603,4 +608,147 @@ br{
     animation-name: wrn_lipid_anim;
     animation-duration: 2s;
     animation-iteration-count: infinite;
+}
+
+.opt_calc_o2
+{
+    background-color: #188958;
+}
+.opt_calc_he
+{
+    background-color: #446184;
+}
+.opt_calc_depth,
+.opt_calc_depth_lo
+{
+    background-color: #006bac;
+
+}
+
+.tn_calc_end,
+.tn_calc_ead,
+.tn_calc_o2max,
+.tn_calc_o2min,
+.tn_calc_n2max
+{
+    font-weight: bold;
+}
+
+#tr_circle_mix {
+    z-index: 98;
+    position: absolute;
+
+
+    top: 50%;
+    left: 50%;
+    height:26px;
+    width: 90px;
+
+    margin-top: -9px;
+    margin-left: -45px;
+
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.opt_circle_mix{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tr_circle_param{
+    z-index: 98;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    height:26px;
+    width: 120px;
+
+    margin-top: 52px;
+    margin-left: -154px;
+}
+
+.tn_calc_ead{
+    color: #d94c26;
+}
+
+.tn_calc_end{
+    color: #953a48;
+}
+
+/*Title Bar*/
+header{
+    z-index: 98;
+    position: fixed;
+
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    display: block;
+    width:         100%;
+    height:         34px;
+    background:    #424242;
+    /*border-top: 3px solid rgb(205,205,205);*/
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+    top:0px;
+}
+
+/*Window Controls*/
+header>ul{
+    float:        right;
+    text-align:   right;
+    line-height:  0;
+    padding-left: 0px;
+}
+header>ul>li,
+header>ul>li>a{
+    display: inline-block;
+}
+header>ul{
+    float: right;
+}
+header>ul>li>a{
+    width: 22px;
+    height: 22px;
+    margin: 6px 6px 6px 0;
+    background-image: url("window_controls_icons.svg");
+    background-repeat: no-repeat;
+    -webkit-transition: -webkit-transform 100ms;
+    -webkit-app-region: no-drag;
+}
+header>ul>li>a:hover,
+header>ul>li>a:focus{
+    -webkit-transform:  scale(1.22,1.22);
+    outline: none;
+}
+a#windowControlClose{
+    background-position: -44px 0;
+}
+a#windowControlMaximize{
+    background-position: -22px 0;
+}
+a#windowControlMinimize{
+    background-position: 0 0;
+}
+
+#body_main{
+    /* This is the magic bit for Firefox */
+    scrollbar-width: none;
+}
+
+#body_main::-webkit-scrollbar {
+    /* This is the magic bit for WebKit */
+    display: none;
+}
+
+.tn_price_table_total_style{
+    font-weight: bold;
+    color: #ffffff;
+    background: #132331;
 }

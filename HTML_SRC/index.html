@@ -1,10 +1,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
 <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>DiveProMe Decompression Planner Software</title>
+
+    <meta property="og:title" content="DiveProMe Decompression Planner Software"/>
+    <meta property="og:description" content="DiveProMe Decompression Planner Software"/>
+    <meta property="og:image" content="http://scan3d.ru/DiveMePro/promo_label.jpg">
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content= "http://scan3d.ru/DiveMePro/promo_label.jpg" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  minimum-scale=1.0">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+    <link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+    <link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+    <link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
+    <link href="icon-hires.png" rel="icon" sizes="192x192" />
+    <link href="icon-normal.png" rel="icon" sizes="128x128" />
+
     <link rel="stylesheet" type="text/css" href="style_main.css?v0.621">
+
+    <!-- If Started on Desktop OS version prepare to add custom toolbar
+    <script>
+        //check for Node JS is present
+        if(typeof process === 'object' && process + '' === '[object process]'){
+            var nw = require('nw.gui');
+            var win = nw.Window.get();
+            win.isMaximized = false;
+        }
+    </script>
+     -->
     <!-- Preloader Info Wait when all Page Loaded-->
     <style type="text/css">
+        /*** CSS Reset
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+        form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer,
+        header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video{
+            margin: 0;padding: 0;border: 0;font-size: 100%; font: inherit;vertical-align: baseline;
+        }
+        }
+        ol, ul{
+            list-style: none;
+        }
+        blockquote, q {
+            quotes: none;
+        }
+        blockquote:before, blockquote:after, q:before, q:after{
+            content: '';
+            content: none;
+        }
+        table{
+            border-collapse: collapse;
+            border-spacing:  0;
+        }
+        a{
+            text-decoration: none;
+        }
+        */
+
         #preloader {
             position: fixed;
             top: 0;
@@ -22,10 +78,12 @@
         }
         #preloader div {
             font-family: arial;
-            font-size: 15px;
+            font-size: 70%;
             text-align: center;
             position: fixed;
             z-index: 999;
+            color: #e4e4e4;
+            padding: 2%;
             top: 0;
             left: 0;
             right: 0;
@@ -34,6 +92,7 @@
             -moz-transition: opacity 400ms ease-in-out;
             transition: opacity 400ms ease-in-out;
         }
+
         @keyframes AnimationName1 {
             0%{background-size:100% 200%}
             50%{background-size:500% 100%}
@@ -48,23 +107,11 @@
             100%{
             }
         }
-        .animate {
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            height:100%;
-            color: white;
-            font-family: Arial;
-            font-size: 16px;
-            animation: load 1.2s infinite 0s ease-in-out;
-            animation-direction: alternate;
-        }
-        .fil0 {fill:#E5E5E5}
-        .fil1 {fill:#E5E5E5}
+
     </style>
     <div id="preloader">
         <div>
-            <svg class="preloader" viewBox="0 -100 205 160" width="50%" height="50%" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 210 60" xmlns:xlink="http://www.w3.org/1999/xlink" id="el_iCETpszOu"><style type="text/css">@-webkit-keyframes kf_el_I3f1lXc0ZO_an_uJ0TZrclw {
+            <svg class="preloader" viewBox="0 -100 205 160" width="50%"  height="50%"  xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd" viewBox="0 0 210 60" xmlns:xlink="http://www.w3.org/1999/xlink" id="el_iCETpszOu"><style type="text/css">@-webkit-keyframes kf_el_I3f1lXc0ZO_an_uJ0TZrclw {
                                                                                                                                                                                                                                                                                                                                                                                                            }
 
             @keyframes kf_el_I3f1lXc0ZO_an_uJ0TZrclw {
@@ -1201,10 +1248,9 @@
   <g id="el_INEuwdrwFt9_an_rlS58nC9Z" data-animator-group="true" data-animator-type="0"><g id="el_INEuwdrwFt9_an_53RUdoerP" data-animator-group="true" data-animator-type="2"><circle cx="32.0264" cy="18.5673" r="3.18105" id="el_INEuwdrwFt9"/></g></g>
  </g>
 </svg>
+            <div>Copyright © 2016 Alexey Vlasov<br/>
+            Version 7.4</div>
         </div>
-        <br/>
-        <!--
-        <div class="animate">LOADING</div>-->
     </div>
 
   <title>DiveProMe+ Decompression Planner Software</title>
@@ -1223,8 +1269,6 @@
   <link href="apple-touch-icon-180x180+.png" rel="apple-touch-icon" sizes="180x180" />
   <link href="icon-hires+.png" rel="icon" sizes="192x192" />
   <link href="icon-normal+.png" rel="icon" sizes="128x128" />
-
-  <script src="jquery-3.2.1.min.js"></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -1238,32 +1282,46 @@
 
 </head>
 
-<body onload="">
+<body id="body_main" onload="">
+<!-- custom node js Platforms(Win,OsX, Linux) start interface position control
+<div id="node_os_custom_height"><br/></div> -->
+
+<!-- custom window toolbar control -->
+
+<header id="custom_window_ctrl">
+    <ul>
+        <li><a href='#' title='Minimize' id='windowControlMinimize'></a></li>
+         <li><a href='#' title='Maximize' id='windowControlMaximize'></a></li>
+         <li><a href='#' title='Close'    id='windowControlClose'   ></a></li>
+    </ul>
+</header>
+<!--custom window toolbar end  -->
+
   <div id="intro" id="main_body">
       <div id="slider">
           <div class="header" id="0-header"><div class="header0"></div></div>
           <div class="content" id="0-content">
-              <div class="div_block">
+              <div class="div_block" id="visuallyhidden">
                   <div id="tn_download_local" class="tn_download_local"></div>
-                  <table class="tr_download_me">
+                  <table class="tr_download_me" id="tr_download_me">
                       <tr class="tr_download_me">
                           <th class="tr_download_win">
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v0.3.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v7.4.zip?v7.4">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_mac" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v0.3.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v7.4.zip?v7.4">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_andr" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_6.apk">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_7_4.apk?v7.4">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_lnx" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_linux64_v0.3.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v7.4.zip?v7.4">
                                   <img src="download_me.png">
                               </a>
                           </th>
@@ -1471,8 +1529,49 @@
                   </tr>
               </table>
           </div>
+              <div class="div_block">
+                  <div id="tn_calc_cur_ex_rate" class="tn_calc_cur_ex_rate"></div>
+                  <table class="tbl_price_style">
+
+                      <tr class="tr_tbl_cur">
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_pound" id="tn_calc_cur_ex_rate_pound"></div><br>
+                              <div class="tr_calc_cur_ex_rate_pound" id="tr_calc_cur_ex_rate_pound"></div>
+                          </td >
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_pence" id="tn_calc_cur_ex_rate_pence"></div><br>
+                              <div class="tr_calc_cur_ex_rate_pence" id="tr_calc_cur_ex_rate_pence"></div>
+                          </td>
+                      </tr>
+                      <tr class="tr_tbl_cur">
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_euro" id="tn_calc_cur_ex_rate_euro"></div><br>
+                              <div class="tr_calc_cur_ex_rate_euro" id="tr_calc_cur_ex_rate_euro"></div>
+                          </td>
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_eucents" id="tn_calc_cur_ex_rate_eucents"></div><br>
+                              <div class="tr_calc_cur_ex_rate_eucents" id="tr_calc_cur_ex_rate_eucents"></div>
+                          </td>
+                      </tr>
+                      <tr class="tr_tbl_cur">
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_rub" id="tn_calc_cur_ex_rate_rub"></div><br>
+                              <div class="tr_calc_cur_ex_rate_rub" id="tr_calc_cur_ex_rate_rub"></div>
+                          </td>
+                          <td class="td_price_style">
+                              <div class="tn_calc_cur_ex_rate_kopek" id="tn_calc_cur_ex_rate_kopek"></div><br>
+                              <div class="tr_calc_cur_ex_rate_kopek" id="tr_calc_cur_ex_rate_kopek"></div>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="div_block">
+                  <div id="t_price_chart" align="center"></div>
+                  <div id="t_price_main"></div><br/>
+                  <div id="t_price_total"></div>
+              </div>
           </div>
-          <div class="header" id="9-header"><div class="header9"></div></div>
+          <!--<<div class="header" id="9-header"><div class="header9"></div></div>
           <div class="content" id="9-content">
               <div class="div_block">
                   <div class="tn_blnd_temp" id="tn_blnd_temp"></div>
@@ -1502,21 +1601,81 @@
 
               </div>
           </div>
-          <div class="header" id="10-header"><div class="header10"></div></div>
-          <div class="content" id="10-content">
+           >-->
+          <div class="header" id="9-header"><div class="header9"></div></div>
+          <div class="content" id="9-content">
               <div class="div_block">
                   <div class="tn_calc_depth" id="tn_calc_depth"></div>
                   <div class="tr_calc_depth" id="tr_calc_depth"></div>
+                  <div class="tn_calc_depth_lo" id="tn_calc_depth_lo"></div>
+                  <div class="tr_calc_depth_lo" id="tr_calc_depth_lo"></div>
+                  <table class="tbl_price_style">
+                      <tr class="tr_tbl_cur">
+                          <td class="td_price_style">
+                              <div class="tn_calc_o2" id="tn_calc_o2"></div><br>
+                              <div class="tr_calc_o2" id="tr_calc_o2"></div>
+                          </td>
+                          <td class="td_price_style">
+                              <div class="tn_calc_he" id="tn_calc_he"></div><br>
+                              <div class="tr_calc_he" id="tr_calc_he"></div>
+                          </td>
+                      </tr>
+                  </table>
+
+                  <div id="tn_container">
+                      <div id="tr_circle_mix"></div>
+                      <div id="tr_circle_param">
+                          <table class="tbl_price_style">
+                              <tr class="tr_tbl_cur">
+                                  <td class="td_price_style">
+                                      <div class="tn_calc_ead" id="tn_calc_ead"></div>
+                                      <div class="tn_calc_end" id="tn_calc_end"></div>
+                                  </td>
+                              <td class="td_price_style">
+                                      <div class="tr_calc_ead" id="tr_calc_ead"></div>
+                                      <div class="tr_calc_end" id="tr_calc_end"></div>
+                                  </td>
+                              </tr>
+                          </table>
+
+                      </div>
+                    <div id="tr_circle_sld_depth"></div>
+                    <div id="tr_circle_sld_oxy"></div>
+                    <div id="tr_circle_sld_he"></div>
+                  </div>
+
               </div>
               <div class="div_block">
-                  <div class="tn_calc_o2" id="tn_calc_o2"></div>
-                  <div class="tr_calc_o2" id="tr_calc_o2"></div>
-                  <div class="tn_calc_he" id="tn_calc_he"></div>
-                  <div class="tr_calc_he" id="tr_calc_he"></div>
-                  <div class="tn_calc_n2" id="tn_calc_n2"></div>
-                  <div class="tr_calc_n2" id="tr_calc_n2"></div>
+                  <table class="tbl_price_style">
+                      <tr class="tr_tbl_cur">
+                          <td class="td_price_style">
+                              <div class="tn_calc_o2max" id="tn_calc_o2max"></div><br>
+                              <div class="tr_calc_o2max" id="tr_calc_o2max"></div>
+                          </td>
+                          <td class="td_price_style">
+                              <div class="tn_calc_o2min" id="tn_calc_o2min"></div><br>
+                              <div class="tr_calc_o2min" id="tr_calc_o2min"></div>
+                          </td>
+                          <td class="td_price_style">
+                              <div class="tn_calc_n2max" id="tn_calc_n2max"></div><br>
+                              <div class="tr_calc_n2max" id="tr_calc_n2max"></div>
+                          </td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="div_block">
+                  <div class="tn_calc_f_app" id="tn_calc_f_app"></div>
+                  <div class="tn_calc_f_mod" id="tn_calc_f_mod"></div><br>
+                  <div class="tr_calc_f_mod" id="tr_calc_f_mod"></div><br><br>
+                  <div class="tn_calc_f_ead" id="tn_calc_f_ead"></div>
+                  <div class="tn_calc_f_ead2" id="tn_calc_f_ead2"></div><br>
+                  <div class="tr_calc_f_ead" id="tr_calc_f_ead"></div><br><br>
+                  <div class="tn_calc_f_end" id="tn_calc_f_end"></div>
+                  <div class="tn_calc_f_end2" id="tn_calc_f_end2"></div><br>
+                  <div class="tr_calc_f_end" id="tr_calc_f_end"></div><br><br>
               </div>
           </div>
+
       </div>
   </div>
 
@@ -1536,10 +1695,22 @@
           <button type="button" onClick="closeNav();" id="tn_btn_overlay" class="tn_btn_overlay"></button>
       </div>
   </div>
+  <!--<node js specific lines for export choising>-->
+  <input id="nodejs_export_xls" type="file"  nwsaveas style="display:none" accept="application/vnd.ms-excel" nwworkingdir=""/>
+  <input id="nodejs_export_pdf" type="file"  nwsaveas style="display:none" accept="application/pdf" nwworkingdir=""/>
+
+
+<script src="jquery-3.2.1.min.js"></script>
+  <script src="jquery.mCustomScrollbar.js"></script>
+  <script src="jquery.mousewheel.js"></script>
+  <script src="roundslider.js"></script>
 
 
   <script src="jszip.js"></script>
   <script src="xlsx.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="katex.css">
+  <script src="katex.js"></script>
 
   <!--<script src="jspdf.debug.js"></script>-->
   <script src="jspdf.src.js"></script>
@@ -1547,29 +1718,39 @@
   <script src="svg2pdf.src.js"></script>
   <script src="jspdf.plugin.autotable.js"></script>
 
-
   <script src="highstock.js" charset="UTF-8"></script>
   <script src="exporting.src.js" charset="UTF-8"></script>
   <script src="offline-exporting.src.js" charset="UTF-8"></script>
 
-  <script src="html_new_gen_main.js?v0.18" charset="UTF-8"></script>
-  <script src="cookie_settings.js?v0.63" charset="UTF-8"></script>
-  <script src="lng_fn.js?v0.23"charset="UTF-8"></script>
-  <script src="dive_comp.js?0.10"charset="UTF-8"></script>
-  <script src="block_gen.js?v0.14" charset="UTF-8"></script>
-
-  <script src="gases_list_gen.js?v0.20" charset="UTF-8"></script>
-  <script src="build_dive.js?v0.18" charset="UTF-8"></script>
-  <script src="tables_build.js?v0.5" charset="UTF-8"></script>
-  <script src="gf_option.js?v0.11" charset="UTF-8"></script>
-  <script src="chart_theme.js?v0.3" charset="UTF-8"></script>
-  <script src="chart_profile.js?v0.3" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.8" charset="UTF-8"></script>
-  <script src="main.js?v0.18" charset="UTF-8"></script>
+  <script src="html_new_gen_main.js?v0.485" charset="UTF-8"></script>
 
 
-  <script src="lvl_functions.js?v0.6" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.61" charset="UTF-8"></script>
+<script src="android_fn.js?v0.485" charset="UTF-8"></script>
+
+  <script src="cookie_settings.js?v0.485" charset="UTF-8"></script>
+  <script src="lng_fn.js?v0.485"charset="UTF-8"></script>
+  <script src="dive_comp.js?0.485"charset="UTF-8"></script>
+  <script src="block_gen.js?v0.485" charset="UTF-8"></script>
+
+  <script src="gases_list_gen.js?v0.485" charset="UTF-8"></script>
+  <script src="build_dive.js?v0.485" charset="UTF-8"></script>
+  <script src="tables_build.js?v0.485" charset="UTF-8"></script>
+  <script src="gf_option.js?v0.485" charset="UTF-8"></script>
+  <script src="chart_theme.js?v0.485" charset="UTF-8"></script>
+  <script src="chart_profile.js?v0.485" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.485" charset="UTF-8"></script>
+  <script src="calc_learn.js?v0.485" charset="UTF-8"></script>
+
+<!-- Very important place only here node js check functions! -->
+<script src="nodejs_fn.js?v0.485" charset="UTF-8"></script>
+
+  <script src="price_calc.js?v0.081" charset="UTF-8"></script>
+
+  <script src="main.js?v0.485" charset="UTF-8"></script>
+
+
+  <script src="lvl_functions.js?v0.485" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.485" charset="UTF-8"></script>
 
   <!-- Preloader Info Wait when all Page Loaded-->
   <script type="text/javascript">
@@ -1579,7 +1760,7 @@
             setTimeout(function() {
                 document.getElementById("preloader").style.display = "none";
             }, 1000);
-          }, 3000);
+          }, 1000);
       };
   </script>
   <!--<Preloader_End>-->

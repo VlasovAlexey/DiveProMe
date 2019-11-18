@@ -32,7 +32,8 @@ function Slider(selector, currentId) {
 
 			this.current = i;
 			//,function(){e.currentTarget.scrollIntoView(true)} added for move header to top of the page
-			this.body.eq(this.current).slideDown(this.duration,function(){e.currentTarget.scrollIntoView(true)});
+			    this.body.eq(this.current).slideDown(this.duration,function(){(e.currentTarget.scrollIntoView(true)) + 30});
+            //this.body.eq(this.current).slideDown(this.duration);
 
 		};
 

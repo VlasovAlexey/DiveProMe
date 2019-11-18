@@ -1931,6 +1931,7 @@ var consts = {
 function write_file(cfb, filename, options) {
 	get_fs();
 	var o = _write(cfb, options);
+
 fs.writeFileSync(filename, o);
 }
 
@@ -1947,6 +1948,7 @@ function write(cfb, options) {
 		case "binary": return a2s(o);
 		case "base64": return Base64.encode(a2s(o));
 	}
+
 	return o;
 }
 /* node < 8.1 zlib does not expose bytesRead, so default to pure JS */
@@ -2586,37 +2588,59 @@ function blobify(data) {
 }
 /* write or download file */
 function write_dl(fname, payload, enc) {
-	/*global IE_SaveFile, Blob, navigator, saveAs, URL, document, File, chrome */
-	if(typeof _fs !== 'undefined' && _fs.writeFileSync) return enc ? _fs.writeFileSync(fname, payload, enc) : _fs.writeFileSync(fname, payload);
-	var data = (enc == "utf8") ? utf8write(payload) : payload;
-if(typeof IE_SaveFile !== 'undefined') return IE_SaveFile(data, fname);
-	if(typeof Blob !== 'undefined') {
-		var blob = new Blob([blobify(data)], {type:"application/octet-stream"});
-if(typeof navigator !== 'undefined' && navigator.msSaveBlob) return navigator.msSaveBlob(blob, fname);
-if(typeof saveAs !== 'undefined') return saveAs(blob, fname);
-		if(typeof URL !== 'undefined' && typeof document !== 'undefined' && document.createElement && URL.createObjectURL) {
-			var url = URL.createObjectURL(blob);
-if(typeof chrome === 'object' && typeof (chrome.downloads||{}).download == "function") {
-				if(URL.revokeObjectURL && typeof setTimeout !== 'undefined') setTimeout(function() { URL.revokeObjectURL(url); }, 60000);
-				return chrome.downloads.download({ url: url, filename: fname, saveAs: true});
-			}
-			var a = document.createElement("a");
-			if(a.download != null) {
-a.download = fname; a.href = url; document.body.appendChild(a); a.click();
-document.body.removeChild(a);
-				if(URL.revokeObjectURL && typeof setTimeout !== 'undefined') setTimeout(function() { URL.revokeObjectURL(url); }, 60000);
-				return url;
-			}
-		}
-	}
-	// $FlowIgnore
-	if(typeof $ !== 'undefined' && typeof File !== 'undefined' && typeof Folder !== 'undefined') try { // extendscript
-		// $FlowIgnore
-		var out = File(fname); out.open("w"); out.encoding = "binary";
-		if(Array.isArray(payload)) payload = a2s(payload);
-		out.write(payload); out.close(); return payload;
-	} catch(e) { if(!e.message || !e.message.match(/onstruct/)) throw e; }
-	throw new Error("cannot save file " + fname);
+
+	//DiveProMe Hook
+    //if node js enabled use special file save dialog
+    if(node_enable()===true){
+        NodesaveFile("#nodejs_export_xls", payload , false);
+    }
+    //else standart web based datauri64 blob save file for all browser
+    else {
+        /*global IE_SaveFile, Blob, navigator, saveAs, URL, document, File, chrome */
+        if (typeof _fs !== 'undefined' && _fs.writeFileSync) return enc ? _fs.writeFileSync(fname, payload, enc) : _fs.writeFileSync(fname, payload);
+        var data = (enc == "utf8") ? utf8write(payload) : payload;
+        if (typeof IE_SaveFile !== 'undefined') return IE_SaveFile(data, fname);
+        if (typeof Blob !== 'undefined') {
+            var blob = new Blob([blobify(data)], {type: "application/octet-stream"});
+            if (typeof navigator !== 'undefined' && navigator.msSaveBlob) return navigator.msSaveBlob(blob, fname);
+            if (typeof saveAs !== 'undefined') return saveAs(blob, fname);
+            if (typeof URL !== 'undefined' && typeof document !== 'undefined' && document.createElement && URL.createObjectURL) {
+                var url = URL.createObjectURL(blob);
+                if (typeof chrome === 'object' && typeof (chrome.downloads || {}).download == "function") {
+                    if (URL.revokeObjectURL && typeof setTimeout !== 'undefined') setTimeout(function () {
+                        URL.revokeObjectURL(url);
+                    }, 60000);
+                    return chrome.downloads.download({url: url, filename: fname, saveAs: true});
+                }
+                var a = document.createElement("a");
+                if (a.download != null) {
+                    a.download = fname;
+                    a.href = url;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    if (URL.revokeObjectURL && typeof setTimeout !== 'undefined') setTimeout(function () {
+                        URL.revokeObjectURL(url);
+                    }, 60000);
+                    return url;
+                }
+            }
+        }
+        // $FlowIgnore
+        if (typeof $ !== 'undefined' && typeof File !== 'undefined' && typeof Folder !== 'undefined') try { // extendscript
+            // $FlowIgnore
+            var out = File(fname);
+            out.open("w");
+            out.encoding = "binary";
+            if (Array.isArray(payload)) payload = a2s(payload);
+            out.write(payload);
+            out.close();
+            return payload;
+        } catch (e) {
+            if (!e.message || !e.message.match(/onstruct/)) throw e;
+        }
+        throw new Error("cannot save file " + fname);
+    }
 }
 
 /* read binary data from file */

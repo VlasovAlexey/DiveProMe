@@ -7,7 +7,7 @@
 
 		  ".tn_download_local" : "Download Local Version",
 		".tn_btn_tiss" : "Build Charts",
-		".td_copyright" : "Copyright © 2016 Alexey Vlasov, Thomas Holloway. Licensed under the Apache License 2.0",
+		".td_copyright" : "Copyright © 2016 Alexey Vlasov. Licensed under the Apache License 2.0",
 	    ".btn_save" : "Save Current Settings",
 		".btn_restore" : "Restore Defaults",
         ".tr_ifc_set" : "Interface Style",
@@ -59,8 +59,8 @@
         ".header6" : "Gas Tension in Tissue Compartments",
           ".header7" : "Gas Consumption",
           ".header8" : "Gas Price",
-          ".header9" : "Gas Blending",
-          ".header10" : "Learning Tools",
+          //".header9" : "Gas Blending",
+          ".header9" : "Learning Tools",
 
 	    ".tr_lng" : "Language",
 	    ".tr_dmn" : "Dimensions",
@@ -75,34 +75,28 @@
           ".tn_ibcd_lip_yes" :"Yes",
           ".tn_ibcd_lip_no" :"No",
 
-          ".tn_blnd_temp" :"Gas Temperature C<sup><small>o</small></sup>",
-          ".tn_blnd_temp_mode" :"Gas Model",
-          ".tn_blend_mix_first" :"Add First Gas",
+          //".tn_blnd_temp" :"Gas Temperature C<sup><small>o</small></sup>",
+          //".tn_blnd_temp_mode" :"Gas Model",
+          //".tn_blend_mix_first" :"Add First Gas",
 
-          ".tn_blend_press_start" :"Mix Start Pressure",
-          ".tn_blend_press_end" :"New Mix Pressure",
-          ".tn_blend_he_start" :"He Mix Start Percents",
-          ".tn_blend_o2_start" :"O<sub><small>2</small></sub> Mix Start Percents",
-          ".tn_blend_he_end" :"He New Mix Percents",
-          ".tn_blend_o2_end" :"O<sub><small>2</small></sub> New Mix Percents",
+          //".tn_blend_press_start" :"Mix Start Pressure",
+          //".tn_blend_press_end" :"New Mix Pressure",
+          //".tn_blend_he_start" :"He Mix Start Percents",
+          //".tn_blend_o2_start" :"O<sub><small>2</small></sub> Mix Start Percents",
+          //".tn_blend_he_end" :"He New Mix Percents",
+          //".tn_blend_o2_end" :"O<sub><small>2</small></sub> New Mix Percents",
 
           ".tn_calc_depth" :"Maximum Operation Depth",
           ".tn_calc_o2" :"Oxygen",
           ".tn_calc_he" :"Helium",
-          ".tn_calc_n2" :"Nitrogen",
+          ".tn_calc_depth_lo" :"Minimum Operation Depth",
 
-          ".tn_blnd_temp_mode_ideal" :"Ideal Model",
-          ".tn_blnd_temp_mode_vdv" :"Van Der Waals Model",
-          ".tn_mix_first_he" :"He",
-          ".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+          //".tn_blnd_temp_mode_ideal" :"Ideal Model",
+          //".tn_blnd_temp_mode_vdv" :"Van Der Waals Model",
+          //".tn_mix_first_he" :"He",
+          //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
 
           ".tn_price_cur" :"Currency Selection",
-          ".tn_price_dls_name1" :"Dollars",
-          ".tn_price_cnt_name1" :"Cents",
-          ".tn_price_dls_name2" :"Dollars",
-          ".tn_price_cnt_name2" :"Cents",
-          ".tn_price_dls_name3" :"Dollars",
-          ".tn_price_cnt_name3" :"Cents",
           ".tn_price_top" :"Gas Top Price",
           ".tn_price_he" :"He Price per Unit",
           ".tn_price_o2" :"O<sub><small>2</small></sub> Price per Unit",
@@ -115,14 +109,36 @@
           ".btn_export_pdf_pp" :"PDF Export",
           ".tn_btn_overlay" :"Close",
           ".btn_export_xls" :"Export XLS Table",
-          ".btn_tbl_pdf" :"Export PDF Table"
+          ".btn_tbl_pdf" :"Export PDF Table",
+
+          ".tn_calc_ead" :"EAD:&nbsp;",
+          ".tn_calc_end" :"END:&nbsp;",
+
+          ".tn_calc_o2max" : "&nbsp;PPO<sub><small>2</small></sub> Bottom&nbsp;",
+          ".tn_calc_o2min" : "&nbsp;PPO<sub><small>2</small></sub> Min&nbsp;",
+          ".tn_calc_n2max" : "&nbsp;PPN<sub><small>2</small></sub> Max",
+
+          ".tn_calc_f_app" :"Formulas and Computation",
+          ".tn_calc_f_mod" :"Maximum Operation Depth",
+          ".tn_calc_f_ead" :"Equivalent Air Depth",
+          ".tn_calc_f_ead2" :"Only N<sub><small>2</small></sub> Narcotic",
+          ".tn_calc_f_end" :"Equivalent Narcotic Depth",
+          ".tn_calc_f_end2" :"N<sub><small>2</small></sub> and O<sub><small>2</small></sub> Narcotic",
+
+          ".tn_calc_cur_ex_rate" :"Exchange Rate for One Dollar",
+          ".tn_calc_cur_ex_rate_pound" :"Pounds",
+          ".tn_calc_cur_ex_rate_pence" :"Pence",
+          ".tn_calc_cur_ex_rate_euro" :"Euro",
+          ".tn_calc_cur_ex_rate_eucents" :"Cents",
+          ".tn_calc_cur_ex_rate_rub" :"Roubles",
+          ".tn_calc_cur_ex_rate_kopek" :"Kopeks"
 	  },
 	  
 	  //Rus
 	  2: {
           ".tn_download_local" : "Скачать локальную версию",
         ".tn_btn_tiss" : "Построить диаграммы",
-        ".td_copyright" : "Все права защищены © 2016 Alexey Vlasov, Thomas Holloway. Использование в соответствии с Apache 2.0 лицензией.",
+        ".td_copyright" : "Все права защищены © 2016 Алексей Власов. Использование в соответствии с Apache 2.0 лицензией.",
 	    ".btn_save" : "Сохранить текущие настройки",
         ".btn_restore" : "Настройки по умолчанию",
         ".tr_ifc_set" : "Стиль интерфейса",
@@ -134,7 +150,7 @@
 	    ".tn_water_glake" : "Великое озеро Юта",
 	    ".tn_water_deadsea" : "Мертвое море",
 	    ".tn_water_salt" : "Атлантика",
-	    
+
 	    ".tn_ppn2_max_deco" : "Максимальное ПД N<sub><small>2</small></sub> деко",
 	    ".tr_celsus" : "Температура на поверхности C<sup><small>o</small></sup> ",
 	    ".tr_levels" : "Смесь / глубина / время",
@@ -144,8 +160,8 @@
 	    ".tr_rate_dsc" : "Скорость погружения",
 	    ".tr_rate_asc" : "Скорость всплытия",
 	    ".tr_rate_asc_deco" : "Скорость всплытия на деко",
-	    ".tr_rmv_deco" : "Дыхание на дне",
-	    ".tr_rmv_bt" : "Дыхание на деко",
+	    ".tr_rmv_deco" : "Дыхание на деко",
+	    ".tr_rmv_bt" : "Дыхание на дне",
 	    ".tr_cng_time" : "Время смены смесей",
 	    ".tr_lst_stop" : "Последняя остановка",
 	    
@@ -178,8 +194,8 @@
         ".header6" : "Давление газов в тканях",
           ".header7" : "Расход газов",
           ".header8" : "Стоимость газов",
-          ".header9" : "Компрессорная",
-          ".header10" : "Инструменты обучения",
+          //".header9" : "Компрессорная",
+          ".header9" : "Инструменты обучения",
 
 
 
@@ -196,34 +212,28 @@
           ".tn_ibcd_lip_yes" :"Да",
           ".tn_ibcd_lip_no" :"Нет",
 
-          ".tn_blnd_temp" :"Температура газа C<sup><small>o</small></sup>",
-          ".tn_blnd_temp_mode" :"Модель газа",
+          //".tn_blnd_temp" :"Температура газа C<sup><small>o</small></sup>",
+          //".tn_blnd_temp_mode" :"Модель газа",
 
-          ".tn_blend_mix_first" :"Какой газ набиваем первый",
-          ".tn_blend_press_start" :"Давление газа до забивки",
-          ".tn_blend_press_end" :"Желаемое давление газа",
-          ".tn_blend_he_start" :"Процент He до забивки",
-          ".tn_blend_o2_start" :"Процент O<sub><small>2</small></sub> до забивки",
-          ".tn_blend_he_end" :"Желаемый процент He в смеси",
-          ".tn_blend_o2_end" :"Желаемый процент O<sub><small>2</small></sub> в смеси",
+          //".tn_blend_mix_first" :"Какой газ набиваем первый",
+          //".tn_blend_press_start" :"Давление газа до забивки",
+          //".tn_blend_press_end" :"Желаемое давление газа",
+          //".tn_blend_he_start" :"Процент He до забивки",
+          //".tn_blend_o2_start" :"Процент O<sub><small>2</small></sub> до забивки",
+          //".tn_blend_he_end" :"Желаемый процент He в смеси",
+          //".tn_blend_o2_end" :"Желаемый процент O<sub><small>2</small></sub> в смеси",
 
           ".tn_calc_depth" :"Максимальная рабочая глубина",
           ".tn_calc_o2" :"Кислород",
           ".tn_calc_he" :"Гелий",
-          ".tn_calc_n2" :"Азот",
+          ".tn_calc_depth_lo" :"Минимальная рабочая глубина",
 
-          ".tn_blnd_temp_mode_ideal" :"Идеальный газ",
-          ".tn_blnd_temp_mode_vdv" :"Ван-дер-Ваальс",
-          ".tn_mix_first_he" :"He",
-          ".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+          //".tn_blnd_temp_mode_ideal" :"Идеальный газ",
+          //".tn_blnd_temp_mode_vdv" :"Ван-дер-Ваальс",
+          //".tn_mix_first_he" :"He",
+          //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
 
           ".tn_price_cur" :"Выбор Валюты",
-          ".tn_price_dls_name1" :"Долларов",
-          ".tn_price_cnt_name1" :"Центов",
-          ".tn_price_dls_name2" :"Долларов",
-          ".tn_price_cnt_name2" :"Центов",
-          ".tn_price_dls_name3" :"Долларов",
-          ".tn_price_cnt_name3" :"Центов",
           ".tn_price_top" :"Стоимость забивки газов",
           ".tn_price_he" :"He стоимость за еденицу",
           ".tn_price_o2" :"O<sub><small>2</small></sub> стоимость за еденицу",
@@ -236,14 +246,36 @@
           ".btn_export_pdf_pp" :"Экспорт в PDF",
           ".tn_btn_overlay" :"Закрыть",
           ".btn_export_xls" :"Экспорт в XLS таблицу",
-          ".btn_tbl_pdf" :"Экспорт таблицы в PDF"
+          ".btn_tbl_pdf" :"Экспорт таблицы в PDF",
+
+          ".tn_calc_ead" :"ЭВГ:&nbsp;",
+          ".tn_calc_end" :"ЭНГ:&nbsp;",
+
+          ".tn_calc_o2max" : "&nbsp;ПД O<sub><small>2</small></sub> на дне&nbsp;",
+          ".tn_calc_o2min" : "&nbsp;ПД O<sub><small>2</small></sub> мин.&nbsp;",
+          ".tn_calc_n2max" : "&nbsp;ПД N<sub><small>2</small></sub> макс.",
+
+          ".tn_calc_f_app" :"Формулы и расчеты",
+          ".tn_calc_f_mod" :"Максимальная рабочая глубина",
+          ".tn_calc_f_ead" :"Эквивалентная воздушная глубина",
+          ".tn_calc_f_ead2" :"Наркотичен только N<sub><small>2</small></sub>",
+          ".tn_calc_f_end" :"Эквивалентная наркотическая глубина",
+          ".tn_calc_f_end2" :"Наркотичен N<sub><small>2</small></sub> и O<sub><small>2</small></sub>",
+
+          ".tn_calc_cur_ex_rate" :"Обменный курс к одному доллару",
+          ".tn_calc_cur_ex_rate_pound" :"Фунтов",
+          ".tn_calc_cur_ex_rate_pence" :"Пенсов",
+          ".tn_calc_cur_ex_rate_euro" :"Евро",
+          ".tn_calc_cur_ex_rate_eucents" :"Центов",
+          ".tn_calc_cur_ex_rate_rub" :"Рублей",
+          ".tn_calc_cur_ex_rate_kopek" :"Копеек"
       },
 	  
 	  //Spa
 	  3: {
           ".tn_download_local" : "Descargue Versión Local",
         ".tn_btn_tiss" : "Construya Сartas",
-        ".td_copyright" : "Copyright © 2016 Alexey Vlasov, Thomas Holloway. Licenciado según la licencia de Apache 2.0.",
+        ".td_copyright" : "Copyright © 2016 Alexey Vlasov. Licenciado según la licencia de Apache 2.0.",
 	    ".btn_save" : "Salve Ajustes Corrientes",
         ".btn_restore" : "Restaure Configuraciones",
         ".tr_ifc_set" : "Estilo del Interfaz",
@@ -255,7 +287,7 @@
 	    ".tn_water_glake" : "Gran Lago Utah",
 	    ".tn_water_deadsea" : "Mar Muerto",
 	    ".tn_water_salt" : "Atlántico",
-	    
+
 	    ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max. Desco",
 	    ".tr_celsus" : "Temperatura Firme del Ambiente C<sup><small>o</small></sup> ",
 	    ".tr_levels" : "Mezcla / Nivel / Tiempo",
@@ -265,8 +297,8 @@
 	    ".tr_rate_dsc" : "Descenso Precio",
 	    ".tr_rate_asc" : "Subida Precio",
 	    ".tr_rate_asc_deco" : "Subida Deco Precio",
-	    ".tr_rmv_deco" : "Fondo RMV",
-	    ".tr_rmv_bt" : "Desco RMV",
+	    ".tr_rmv_deco" : "Desco RMV",
+	    ".tr_rmv_bt" : "Fondo RMV",
 	    ".tr_cng_time" : "Prórroga Cambio de Mezcla",
 	    ".tr_lst_stop" : "Última Parada",
 	    
@@ -295,8 +327,8 @@
         ".header6" : "Tensión Gas en Compartimentos",
           ".header7" : "Consumo",
           ".header8" : "Precio Gas",
-          ".header9" : "Mezcla Gas",
-          ".header10" : "Aprendizaje Instrumentos",
+          //".header9" : "Mezcla Gas",
+          ".header9" : "Aprendizaje Instrumentos",
 
 	    ".tr_lng" : "Lengue",
 	    ".tr_dmn" : "Dimensión",
@@ -310,34 +342,28 @@
           ".tn_ibcd_lip_yes" :"Si",
           ".tn_ibcd_lip_no" :"No",
 
-          ".tn_blnd_temp" :"Temperatura Gas C<sup><small>o</small></sup>",
-          ".tn_blnd_temp_mode" :"Modelo Gas",
+         // ".tn_blnd_temp" :"Temperatura Gas C<sup><small>o</small></sup>",
+          //".tn_blnd_temp_mode" :"Modelo Gas",
 
-          ".tn_blend_mix_first" :"Añada Primer Gas",
-          ".tn_blend_press_start" :"Presión Principio Mezcla",
-          ".tn_blend_press_end" :"Nueva Presión Mezcla",
-          ".tn_blend_he_start" :"He Por Ciento Principio Mezcla",
-          ".tn_blend_o2_start" :"O<sub><small>2</small></sub> Por Ciento Principio Mezcla",
-          ".tn_blend_he_end" :"He Nuevos Ciento Mezcla",
-          ".tn_blend_o2_end" :"O<sub><small>2</small></sub> Nuevos Ciento Mezcla",
+          //".tn_blend_mix_first" :"Añada Primer Gas",
+          //".tn_blend_press_start" :"Presión Principio Mezcla",
+          //".tn_blend_press_end" :"Nueva Presión Mezcla",
+          //".tn_blend_he_start" :"He Por Ciento Principio Mezcla",
+          //".tn_blend_o2_start" :"O<sub><small>2</small></sub> Por Ciento Principio Mezcla",
+          //".tn_blend_he_end" :"He Nuevos Ciento Mezcla",
+          //".tn_blend_o2_end" :"O<sub><small>2</small></sub> Nuevos Ciento Mezcla",
 
           ".tn_calc_depth" :"Profundidad Operación Máxima",
           ".tn_calc_o2" :"Oxígeno",
           ".tn_calc_he" :"Helio",
-          ".tn_calc_n2" :"Nitrógeno",
+          ".tn_calc_depth_lo" :"Profundidad Operación Mínima",
 
-          ".tn_blnd_temp_mode_ideal" :"Ideal",
-          ".tn_blnd_temp_mode_vdv" :"Van Der Waals",
-          ".tn_mix_first_he" :"He",
-          ".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+          //".tn_blnd_temp_mode_ideal" :"Ideal",
+          //".tn_blnd_temp_mode_vdv" :"Van Der Waals",
+          //".tn_mix_first_he" :"He",
+          //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
 
           ".tn_price_cur" :"Selección Monetaria",
-          ".tn_price_dls_name1" :"Dólares",
-          ".tn_price_cnt_name1" :"Сéntimos",
-          ".tn_price_dls_name2" :"Dólares",
-          ".tn_price_cnt_name2" :"Сéntimos",
-          ".tn_price_dls_name3" :"Dólares",
-          ".tn_price_cnt_name3" :"Сéntimos",
           ".tn_price_top" :"Cumbre Gas",
           ".tn_price_he" :"He Precio de He por Unidad",
           ".tn_price_o2" :"Precio de O<sub><small>2</small></sub> por Unidad",
@@ -350,7 +376,29 @@
 
           ".tn_btn_overlay" :"Close",
           ".btn_export_xls" :"Exporte XLS Mesa",
-          ".btn_tbl_pdf" :"Export PDF Mesa"
+          ".btn_tbl_pdf" :"Export PDF Mesa",
+
+          ".tn_calc_ead" :"EAP:&nbsp;",
+          ".tn_calc_end" :"ENP:&nbsp;",
+
+          ".tn_calc_o2max" : "&nbsp;PPO<sub><small>2</small></sub>  Fondo&nbsp;",
+          ".tn_calc_o2min" : "&nbsp;PPO<sub><small>2</small></sub> Min.&nbsp;",
+          ".tn_calc_n2max" : "&nbsp;PPN<sub><small>2</small></sub> Max.",
+
+          ".tn_calc_f_app" :"Fórmulas y Cálculo",
+          ".tn_calc_f_mod" :"Profundidad de Operación Máxima",
+          ".tn_calc_f_ead" :"Profundidad de Aire Equivalente",
+          ".tn_calc_f_ead2" :"Sólo Narcótico N<sub><small>2</small></sub>",
+          ".tn_calc_f_end" :"Profundidad Narcótica Equivalente",
+          ".tn_calc_f_end2" :"Narcótico N<sub><small>2</small></sub> y O<sub><small>2</small></sub>",
+
+          ".tn_calc_cur_ex_rate" :"Tipo de Cambio por un Dólar",
+          ".tn_calc_cur_ex_rate_pound" :"Libras",
+          ".tn_calc_cur_ex_rate_pence" :"Peniques",
+          ".tn_calc_cur_ex_rate_euro" :"Euro",
+          ".tn_calc_cur_ex_rate_eucents" :"Centavos",
+          ".tn_calc_cur_ex_rate_rub" :"Rublos",
+          ".tn_calc_cur_ex_rate_kopek" :"Copecs"
       }
 	};
 	
@@ -360,7 +408,9 @@
         for (var i in lang[td_lng]) {
             document.querySelector(i).innerHTML = lang[td_lng][i];
         }
-	}
+
+        price_lng_cur_upd();
+    }
 
 	lng_opt.addEventListener('change', changeLang);
 	changeLang();
@@ -436,6 +486,29 @@
           if(val == "ch_tbl_name"){val = "Decompression Table"}
           if(val == "ch_tbl_cons"){val = "Table of Gas Consumption"}
 
+          if(val == "dmn_air"){val = "Air"}
+          if(val == "dmn_mod"){val = "MOD"}
+          if(val == "dmn_ead"){val = "EAD"}
+          if(val == "dmn_end"){val = "END"}
+
+          if(val == "dmn_msw"){val = "msw"}
+          if(val == "dmn_fsw"){val = "fsw"}
+          if(val == "dmn_bar"){val = "bar"}
+          if(val == "dmn_ata"){val = "ATA"}
+
+          if(val == "tn_price_dls_name_dollars"){val = "Dollars"}
+          if(val == "tn_price_dls_name_cents"){val = "Cents"}
+          if(val == "tn_price_dls_name_euro"){val = "Euros"}
+          if(val == "tn_price_dls_name_pound"){val = "Pounds"}
+          if(val == "tn_price_dls_name_pence"){val = "Pence"}
+          if(val == "tn_price_dls_name_rouble"){val = "Roubles"}
+          if(val == "tn_price_dls_name_kopek"){val = "Kopeks"}
+
+          if(val == "price_price"){val = "Price"}
+          if(val == "price_currency"){val = "Currency"}
+          if(val == "price_gas"){val = "Gas"}
+          if(val == "price_gas_total"){val = "Total Price:"}
+
 
     }
     if(td_lng == 2){
@@ -489,6 +562,29 @@
         if(val == "ch_tbl_name"){val = "Декомпрессионная таблица"}
         if(val == "ch_tbl_cons"){val = "Таблица расхода газа"}
 
+        if(val == "dmn_air"){val = "Воздух"}
+        if(val == "dmn_mod"){val = "МРГ"}
+        if(val == "dmn_ead"){val = "ЭВГ"}
+        if(val == "dmn_end"){val = "ЭНГ"}
+
+        if(val == "dmn_msw"){val = "ммв"}
+        if(val == "dmn_fsw"){val = "фмв"}
+        if(val == "dmn_bar"){val = "бар"}
+        if(val == "dmn_ata"){val = "АТА"}
+
+        if(val == "tn_price_dls_name_dollars"){val = "Долларов"}
+        if(val == "tn_price_dls_name_cents"){val = "Центов"}
+        if(val == "tn_price_dls_name_euro"){val = "Евро"}
+        if(val == "tn_price_dls_name_pound"){val = "Фунтов"}
+        if(val == "tn_price_dls_name_pence"){val = "Пенсов"}
+        if(val == "tn_price_dls_name_rouble"){val = "Рублей"}
+        if(val == "tn_price_dls_name_kopek"){val = "Копеек"}
+
+        if(val == "price_price"){val = "Цена"}
+        if(val == "price_currency"){val = "Валюта"}
+        if(val == "price_gas"){val = "Газ"}
+        if(val == "price_gas_total"){val = "Итого:"}
+
     }
     if(td_lng == 3){
         if(val  == "t_tiss_wrn"){val = "Este Plan no Tiene Paradas de Descompresión. Los Compartimentos del tejido se esconderán."}
@@ -539,8 +635,91 @@
         if(val == "ch_UnderDev"){val = "¡Advertencia!<br>Este Instrumento bajo Se desarrolla. Este GUI sólo demuestra Producto en proceso.<br>¡Gracias!<br>"}
         if(val == "ch_tbl_name"){val = "Deco Tabla"}
         if(val == "ch_tbl_cons"){val = "Mesa de Consumo de Gas"}
+
+        if(val == "dmn_air"){val = "Aire"}
+        if(val == "dmn_mod"){val = "MOP"}
+        if(val == "dmn_ead"){val = "EAP"}
+        if(val == "dmn_end"){val = "ENP"}
+
+        if(val == "dmn_msw"){val = "mma"}
+        if(val == "dmn_fsw"){val = "fma"}
+        if(val == "dmn_bar"){val = "bar"}
+        if(val == "dmn_ata"){val = "ATA"}
+
+        if(val == "tn_price_dls_name_dollars"){val = "Dólares"}
+        if(val == "tn_price_dls_name_cents"){val = "Centavos"}
+        if(val == "tn_price_dls_name_euro"){val = "Euros"}
+        if(val == "tn_price_dls_name_pound"){val = "Libras"}
+        if(val == "tn_price_dls_name_pence"){val = "Peniques"}
+        if(val == "tn_price_dls_name_rouble"){val = "Rublos"}
+        if(val == "tn_price_dls_name_kopek"){val = "Copecs"}
+
+        if(val == "price_price"){val = "Precio"}
+        if(val == "price_currency"){val = "Dinero"}
+        if(val == "price_gas"){val = "Gas"}
+        if(val == "price_gas_total"){val = "Precio Total:"}
+
     }
     return (val.toString());
   }
-  
-  
+
+    function price_lng_cur_upd(){
+        //get current selected currency
+        var a = [];
+        $.each($(".opt_price_cur option:selected"), function(){
+            a.push($(this).val());
+        });
+        //no force lng english now
+        force_lng = 0;
+
+        //clear current text value
+        del_html_elem("tn_price_dls_name1");
+        del_html_elem("tn_price_dls_name2");
+        del_html_elem("tn_price_dls_name3");
+
+        del_html_elem("tn_price_cnt_name1");
+        del_html_elem("tn_price_cnt_name2");
+        del_html_elem("tn_price_cnt_name3");
+
+        //Dollars selected
+        if(a[0] == 1){
+            create_html_text("tn_price_dls_name1" , "opt_price_dls_name1" , plan_lng("tn_price_dls_name_dollars"));
+            create_html_text("tn_price_dls_name2" , "opt_price_dls_name2" , plan_lng("tn_price_dls_name_dollars"));
+            create_html_text("tn_price_dls_name3" , "opt_price_dls_name3" , plan_lng("tn_price_dls_name_dollars"));
+
+            create_html_text("tn_price_cnt_name1" , "opt_price_cnt_name1" , plan_lng("tn_price_dls_name_cents"));
+            create_html_text("tn_price_cnt_name2" , "opt_price_cnt_name2" , plan_lng("tn_price_dls_name_cents"));
+            create_html_text("tn_price_cnt_name3" , "opt_price_cnt_name3" , plan_lng("tn_price_dls_name_cents"));
+        }
+        //Euro selected
+        if(a[0] == 2){
+            create_html_text("tn_price_dls_name1" , "opt_price_dls_name1" , plan_lng("tn_price_dls_name_euro"));
+            create_html_text("tn_price_dls_name2" , "opt_price_dls_name2" , plan_lng("tn_price_dls_name_euro"));
+            create_html_text("tn_price_dls_name3" , "opt_price_dls_name3" , plan_lng("tn_price_dls_name_euro"));
+
+            create_html_text("tn_price_cnt_name1" , "opt_price_cnt_name1" , plan_lng("tn_price_dls_name_cents"));
+            create_html_text("tn_price_cnt_name2" , "opt_price_cnt_name2" , plan_lng("tn_price_dls_name_cents"));
+            create_html_text("tn_price_cnt_name3" , "opt_price_cnt_name3" , plan_lng("tn_price_dls_name_cents"));
+        }
+        //Pounds selected
+        if(a[0] == 3){
+            create_html_text("tn_price_dls_name1" , "opt_price_dls_name1" , plan_lng("tn_price_dls_name_pound"));
+            create_html_text("tn_price_dls_name2" , "opt_price_dls_name2" , plan_lng("tn_price_dls_name_pound"));
+            create_html_text("tn_price_dls_name3" , "opt_price_dls_name3" , plan_lng("tn_price_dls_name_pound"));
+
+            create_html_text("tn_price_cnt_name1" , "opt_price_cnt_name1" , plan_lng("tn_price_dls_name_pence"));
+            create_html_text("tn_price_cnt_name2" , "opt_price_cnt_name2" , plan_lng("tn_price_dls_name_pence"));
+            create_html_text("tn_price_cnt_name3" , "opt_price_cnt_name3" , plan_lng("tn_price_dls_name_pence"));
+        }
+        //Roubles selected
+        if(a[0] == 4){
+            create_html_text("tn_price_dls_name1" , "opt_price_dls_name1" , plan_lng("tn_price_dls_name_rouble"));
+            create_html_text("tn_price_dls_name2" , "opt_price_dls_name2" , plan_lng("tn_price_dls_name_rouble"));
+            create_html_text("tn_price_dls_name3" , "opt_price_dls_name3" , plan_lng("tn_price_dls_name_rouble"));
+
+            create_html_text("tn_price_cnt_name1" , "opt_price_cnt_name1" , plan_lng("tn_price_dls_name_kopek"));
+            create_html_text("tn_price_cnt_name2" , "opt_price_cnt_name2" , plan_lng("tn_price_dls_name_kopek"));
+            create_html_text("tn_price_cnt_name3" , "opt_price_cnt_name3" , plan_lng("tn_price_dls_name_kopek"));
+        }
+    }
+    //price_lng_cur_upd();

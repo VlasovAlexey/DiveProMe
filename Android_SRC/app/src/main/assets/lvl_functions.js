@@ -108,8 +108,16 @@ function btn_export_tbl_plan_pdf(){
 
         body: pdf_fin_arr
     });
+
     //Save build to pdf file
-    doc.save( "DiveProMe "+ plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
+    //if node js enabled use special file save dialog
+    if(node_enable()===true){
+        NodesaveFile("#nodejs_export_pdf", doc.output() , false);
+    }
+    //else standart web based datauri64 blob save file for all browser
+    else {
+        doc.save("DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
+    }
 }
 
 //Export XLS Table
@@ -139,7 +147,8 @@ function btn_export_xls(){
 
     //save xls
     XLSX.writeFile(wb, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xlsx");
-    //console.log(XLSX);
+
+
     //XLSX.save("DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xlsx");
 }
 
@@ -151,18 +160,20 @@ function btn_export_pdf(){
     var fname_depth = plan_lng("ch_depth");
     var fname_dim = plan_lng("ch_mtr").replace(".", "");
 
-    //force_lng = 1;
     DrawChart("chart_pdf","chart_pdf", "chart_pdf", main_plan);
 
-    chart_mainprofile.exportChartLocal({
-        type: 'application/pdf',
-        //type : "image/svg+xml",
-        filename: "DiveProMe " + fname_depth + ' '+ ld_dp + fname_dim
-    });
-    //delete "temp" html element for PDF
-    del_html_elem("chart_pdf");
-    //force_lng = 0;
+            chart_mainprofile.exportChartLocal({
+            type: 'application/pdf',
+            //type : "image/svg+xml",
+            filename: "DiveProMe " + fname_depth + ' '+ ld_dp + fname_dim
+        });
 
+
+    //var a = pdf.output('datauristring');
+    //console.log(a);
+    //NodesaveFile("#nodejs_export_pdf", a);
+
+    del_html_elem("chart_pdf");
 }
 
 //Export_PDF pp chart

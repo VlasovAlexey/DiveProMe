@@ -12,7 +12,7 @@
    viewBox="0 0 6 10"
    version="1.1"
    sodipodi:docname="arrow_02.svg"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
      id="metadata4617">
     <rdf:RDF>
@@ -41,7 +41,7 @@
      inkscape:zoom="94.4"
      inkscape:cx="0.63055461"
      inkscape:cy="5.7042749"
-     inkscape:window-x="-8"
+     inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="Layer_1" />
@@ -57,7 +57,7 @@
      width="6"
      height="10"
      id="rect4608"
-     style="fill:#eeeeef;fill-opacity:0.94117647" />
+     style="fill:#eeeeef;fill-opacity:0" />
   <polygon
      class="cls-2"
      points="1.41 4.67 2.48 3.18 3.54 4.67 1.41 4.67"
