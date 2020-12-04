@@ -31,39 +31,7 @@ function mix_to_txt_arr(tmp_arr){
     return mix_text_arr.toString();
 }
 
-//Make from fraction array text gases array
-function nrm_to_txt_arr(tmp_arr){
-    mix_travel_idx = tmp_arr.length/2;
-    a = 0;
-    mix_text_arr=[];
-    txt = "";
-    for(c = 0 ; c < mix_travel_idx ; c++){
 
-        if (tmp_arr[a]*1.0 > 0){
-            if(tmp_arr[a+1]*1.0 === 0){
-                txt="EAN"+tmp_arr[a];
-            }
-        }
-
-        if(tmp_arr[a+1]*1.0 > 0){
-            txt="Tmx"+(tmp_arr[a]*1.0)+"/"+(tmp_arr[a+1]*1.0);
-        }
-
-        if (tmp_arr[a]*1.0 == 21){
-            if(tmp_arr[a+1]*1.0 === 0){
-                txt="Air";
-            }
-        }
-        if (tmp_arr[a]*1.0 == 100){
-            if(tmp_arr[a+1]*1.0 === 0){
-                txt="OXY";
-            }
-        }
-        mix_text_arr.push(txt);
-        a=a+2;
-    }
-    return mix_text_arr;
-}
 
 // Create / update round slider and optios for oxy and depth lo with custom parameters
 function learn_slider_upd(){
@@ -143,13 +111,13 @@ function learn_slider_upd(){
 
     //Update options sizes to actual
     del_html_elem("tr_calc_he");
-    create_option("tr_calc_he", "opt_calc_he", 0 , he_max , opt_calc_he_usr , 1 , 0);
+    create_option("tr_calc_he", "opt_calc_he", 0 , he_max , opt_calc_he_usr , 1 , 0 , "none");
 
     del_html_elem("tr_calc_o2");
-    create_option("tr_calc_o2", "opt_calc_o2", oxy_min, 100 , opt_calc_o2_usr , 1 , 0);
+    create_option("tr_calc_o2", "opt_calc_o2", oxy_min, 100 , opt_calc_o2_usr , 1 , 0, "none");
 
     del_html_elem("tr_calc_depth_lo");
-    create_option("tr_calc_depth_lo", "opt_calc_depth_lo", 0, depth_min , depth_min , 1 , 0);
+    create_option("tr_calc_depth_lo", "opt_calc_depth_lo", 0, depth_min , depth_min , 1 , 0, "depth");
     //$("#opt_calc_depth_lo option[value=" + depth_min + "]").prop('selected', true);
 }
 learn_slider_upd();
@@ -390,7 +358,14 @@ function calc_upd_best_mix(flag) {
     }
 
     //Display EAD and END
-    calc_disp_end_ead(calc_end_n2_only((calc_he_fr*0.01) , calc_depth_max) , calc_ead_fn(((100 - calc_oxy_fr - calc_he_fr)*0.01) , calc_depth_max));
+    //in meters
+    if($( "#tn_dmn" ).val() == 1){
+        calc_disp_end_ead(calc_end_n2_only((calc_he_fr*0.01) , calc_depth_max) , calc_ead_fn(((100 - calc_oxy_fr - calc_he_fr)*0.01) , calc_depth_max));
+    }
+    //in feets
+    if($( "#tn_dmn" ).val() == 2){
+        calc_disp_end_ead(Math.ceil(3.28084 * calc_end_n2_only((calc_he_fr*0.01) , calc_depth_max)) , Math.ceil(3.28084 * calc_ead_fn(((100 - calc_oxy_fr - calc_he_fr)*0.01) , calc_depth_max)));
+    }
 
     //set computed value on round slider
     $("#tr_circle_sld_oxy").roundSlider("setValue", calc_oxy_fr );

@@ -7,18 +7,18 @@
 
     <meta property="og:title" content="DiveProMe Decompression Planner Software"/>
     <meta property="og:description" content="DiveProMe Decompression Planner Software"/>
-    <meta property="og:image" content="http://scan3d.ru/DiveMePro/promo_label.jpg">
+    <meta property="og:image" content="http://scan3d.ru/DiveMePro/promo_label.jpg?v0.81284415">
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content= "http://scan3d.ru/DiveMePro/promo_label.jpg" />
+    <meta property="og:url" content= "http://scan3d.ru/DiveMePro/promo_label.jpg?v0.81284415" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0,  minimum-scale=1.0">
-    <link href="apple-touch-icon.png" rel="apple-touch-icon" />
-    <link href="apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
-    <link href="apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
-    <link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
-    <link href="apple-touch-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
-    <link href="icon-hires.png" rel="icon" sizes="192x192" />
-    <link href="icon-normal.png" rel="icon" sizes="128x128" />
+    <link href="apple-touch-icon.png?v0.81284415" rel="apple-touch-icon" />
+    <link href="apple-touch-icon-76x76.png?v0.81284415" rel="apple-touch-icon" sizes="76x76" />
+    <link href="apple-touch-icon-120x120.png?v0.81284415" rel="apple-touch-icon" sizes="120x120" />
+    <link href="apple-touch-icon-152x152.png?v0.81284415" rel="apple-touch-icon" sizes="152x152" />
+    <link href="apple-touch-icon-180x180.png?v0.81284415" rel="apple-touch-icon" sizes="180x180" />
+    <link href="icon-hires.png?v0.81284415" rel="icon" sizes="192x192" />
+    <link href="icon-normal.png?v0.81284415" rel="icon" sizes="128x128" />
 
     <link rel="stylesheet" type="text/css" href="style_main.css?v0.621">
 
@@ -69,20 +69,62 @@
             bottom: 0;
             z-index: 99;
             opacity:1;
+            background: repeating-linear-gradient(45deg, #3d203e, #b90037);
+            background: repeating-linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: repeating-radial-gradient(#aaaaaa, #ffffff);
+            background: repeating-linear-gradient(45deg, #3986d9 , #efc96d, #c9411a);
             background: repeating-linear-gradient(45deg, #08203e, #4684ee);
-            background-size: 300% 300%;
-            -webkit-transition: opacity 400ms ease-in-out;
-            -moz-transition: opacity 400ms ease-in-out;
-            transition: opacity 400ms ease-in-out;
-            animation: AnimationName1 7s ease infinite;
+
+            background-size: 400% 400%;
+            animation: gradient 4s ease infinite;
+
+            -webkit-transition: opacity 200ms ease-in-out;
+            -moz-transition: opacity 200ms ease-in-out;
+            transition: opacity 200ms ease-in-out;
+
         }
+
+        @keyframes gradient {
+            0% {
+
+                background-size: 100% 200%;
+            }
+            50% {
+
+                background-size: 400% 400%;
+            }
+            100% {
+                
+                background-size: 200% 100%;
+            }
+        }
+
+        /*
+        #preloader {
+            z-index: 99;
+            opacity: 1;
+            width: 2000px;
+            height: 2000px;
+            background: url(apple-touch-icon-76x76.png) repeat;
+            background-size: cover;
+            animation: spin 10s linear infinite;
+        }
+        @keyframes spin {
+            from {
+                transform: rotate(0deg)
+            }
+            to {
+                transform: rotate(360deg)
+            }
+        }
+        */
         #preloader div {
             font-family: arial;
             font-size: 70%;
             text-align: center;
             position: fixed;
             z-index: 999;
-            color: #e4e4e4;
+            color: #ffffff;
             padding: 2%;
             top: 0;
             left: 0;
@@ -92,6 +134,7 @@
             -moz-transition: opacity 400ms ease-in-out;
             transition: opacity 400ms ease-in-out;
         }
+
 
         @keyframes AnimationName1 {
             0%{background-size:100% 200%}
@@ -1248,8 +1291,8 @@
   <g id="el_INEuwdrwFt9_an_rlS58nC9Z" data-animator-group="true" data-animator-type="0"><g id="el_INEuwdrwFt9_an_53RUdoerP" data-animator-group="true" data-animator-type="2"><circle cx="32.0264" cy="18.5673" r="3.18105" id="el_INEuwdrwFt9"/></g></g>
  </g>
 </svg>
-            <div>Copyright © 2016 Alexey Vlasov<br/>
-            Version 7.4</div>
+            <div style="color: #ffffff">Copyright © 2020 Alexey Vlasov<br/>
+            Version 9.0</div>
         </div>
     </div>
 
@@ -1269,7 +1312,27 @@
   <link href="apple-touch-icon-180x180+.png" rel="apple-touch-icon" sizes="180x180" />
   <link href="icon-hires+.png" rel="icon" sizes="192x192" />
   <link href="icon-normal+.png" rel="icon" sizes="128x128" />
-  <script>
+
+    <!--<node js specific lines for properly google analytics work
+    <script src="analytics.js"></script>
+    <script>
+        // THIS IS FOR LOCALSTORAGE
+        var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+        ga('create', 'UA-106149389-1', {
+            'storage': 'none',
+            'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+        });
+        ga(function(tracker) {
+            localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+        });
+
+        // THIS IS FOR FILE URL SUPPORT
+        ga('set', 'checkProtocolTask', function(){ga('send', 'pageview');});
+        ga('send', 'pageview');
+    </script>
+>-->
+
+    <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -1306,22 +1369,27 @@
                   <table class="tr_download_me" id="tr_download_me">
                       <tr class="tr_download_me">
                           <th class="tr_download_win">
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v0.4.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v9.0.zip?v123">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_mac" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v0.4.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v9.0.zip?v123">
+                                  <img src="download_me.png">
+                              </a>
+                          </th>
+                          <th class="tr_download_ios" >
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_IOS_v9.0.ipa">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_andr" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_7_3.apk">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_9.0.apk?v123">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_lnx" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v0.4.zip">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v9.0.zip?v123">
                                   <img src="download_me.png">
                               </a>
                           </th>
@@ -1331,6 +1399,8 @@
               <div class="div_block">
                   <div id="tr_lng" class="tr_lng"></div>
                   <div id="tr_lng_sel" class="tr_lng_sel"></div>
+                  <div id="tr_plan_ccr" class="tr_plan_ccr"></div>
+                  <div name ="tn_plan_ccr_sel" id="tn_plan_ccr_sel" class="tn_plan_ccr_sel"></div>
                   <div id="tr_dmn" class="tr_dmn"></div>
                   <div id="tr_dmn_sel" class="tr_dmn_sel"></div>
                   <div id="tr_mdl" class="tr_mdl"></div>
@@ -1347,6 +1417,8 @@
               <div class="div_block">
                   <div id="tr_ifc_set" class="tr_ifc_set"></div>
                   <div name ="tn_ifc_set" id="tn_ifc_set" class="tn_ifc_set"></div>
+                  <div id="tr_plan_style" class="tr_plan_style"></div>
+                  <div name ="tn_plan_style_sel" id="tn_plan_style_sel" class="tn_plan_style_sel"></div>
                   <div class="tn_btn_save" id="tn_btn_save">
                       <button type="button" onClick="btn_save();" id="btn_save" class="btn_save">Save Settings</button>
                   </div>
@@ -1359,16 +1431,24 @@
           <div class="header" id="1-header"><div class="header1"></div></div>
           <div class="content" id="1-content">
               <div class="div_block">
-                  <div id="tn_ppo2_deco" class="tn_ppo2_deco"></div>
-                  <div id="tr_ppo2_deco"></div>
                   <div id="tn_ppo2_bottom" class="tn_ppo2_bottom"></div>
                   <div id="tr_ppo2_bottom"></div>
+                  <div id="tn_ppo2_deco" class="tn_ppo2_deco"></div>
+                  <div id="tr_ppo2_deco"></div>
                   <div id="tn_ppo2_min" class="tn_ppo2_min"></div>
                   <div id="tr_ppo2_min"></div>
                   <div id="tn_ppn2_max" class="tn_ppn2_max"></div>
                   <div id="tr_ppn2_max"></div>
                   <div id="tn_ppn2_max_deco" class="tn_ppn2_max_deco"></div>
                   <div id="tr_ppn2_max_deco"></div>
+              </div>
+              <div class="div_block" id="tr_setpoint_block">
+                  <div id="tr_setpoint_start" class="tr_setpoint_start"></div>
+                  <div id="tn_setpoint_start" class="tn_setpoint_start"></div>
+                  <div id="tr_setpoint_bottom" class="tr_setpoint_bottom"></div>
+                  <div id="tn_setpoint_bottom" class="tn_setpoint_bottom"></div>
+                  <div id="tr_setpoint_deco" class="tr_setpoint_deco"></div>
+                  <div id="tn_setpoint_deco" class="tn_setpoint_deco"></div>
               </div>
               <div class="div_block">
                   <div id="tr_rate_dsc" class="tr_rate_dsc"></div>
@@ -1389,6 +1469,21 @@
                   <div id="tn_cng_time" class="tn_cng_time"></div>
                   <div id="tr_lst_stop" class="tr_lst_stop"></div>
                   <div id="tn_lst_stop" class="tn_lst_stop"></div>
+              </div>
+              <div class="div_block">
+                  <div id="tr_airbr_header" class="tr_airbr_header"></div>
+                  <div id="tr_airbr_depth" class="tr_airbr_depth"></div>
+                  <div id="tn_airbr_depth" class="tn_airbr_depth"></div>
+                  <div id="tr_airbr_o2" class="tr_airbr_o2"></div>
+                  <div id="tn_airbr_o2" class="tn_airbr_o2"></div>
+                  <div id="tr_airbr_mix" class="tr_airbr_mix"></div>
+                  <div id="tn_airbr_mix" class="tn_airbr_mix"></div>
+                  <div id="tr_airbr_time_after" class="tr_airbr_time_after"></div>
+                  <div id="tn_airbr_time_after" class="tn_airbr_time_after"></div>
+                  <div id="tr_airbr_time" class="tr_airbr_time"></div>
+                  <div id="tn_airbr_time" class="tn_airbr_time"></div>
+                  <div id="tr_airbr_time_reset" class="tr_airbr_time_reset"></div>
+                  <div id="tn_airbr_time_reset" class="tn_airbr_time_reset"></div>
               </div>
           </div>
           <div class="header" id="2-header"><div class="header2"></div></div>
@@ -1419,7 +1514,7 @@
                   <div id="tr_travel"></div>
                   <div id="tr_travel_option"></div>
               </div>
-              <div class="div_block">
+              <div class="div_block" id="tn_deco_block">
                   <div id="tn_deco" class="tn_deco"></div>
                   <div id="tr_deco"></div>
                   <div id="tr_deco_option"></div>
@@ -1431,8 +1526,10 @@
                   <div class="tr_levels" id="tr_levels"></div>
                   <div class="tn_levels" id="tn_levels"></div>
                   <div class="tn_btn" id="tn_btn">
-                      <button type="button" onClick="btn_add_lvl();" id="btn_add_lvl" class="btn_add_lvl">Assa</button>
-                      <button type="button" onClick="btn_del_lvl();" id="btn_del_lvl" class="btn_del_lvl">Assa</button>
+                      <button type="button" onClick="btn_add_lvl();" id="btn_add_lvl" class="btn_add_lvl"></button>
+                      <button type="button" onClick="btn_del_lvl();" id="btn_del_lvl" class="btn_del_lvl"></button>
+                      <button type="button" onClick="btn_bailout();" id="btn_bailout" class="btn_bailout">Bailout</button>
+                      <button type="button" onClick="btn_diluent();" id="btn_diluent" class="btn_diluent">Diluent</button>
                   </div>
               </div>
           </div>
@@ -1444,6 +1541,7 @@
           <div class="div_block_bottom">
               <div id="t_table" class="t_table"></div>
               <div class="t_total_cons" id="t_total_cons"></div>
+              <div class="t_otu_cns" id="t_otu_cns"></div>
               <button type="button" id="btn_export_xls" class="btn_export_xls" onClick="btn_export_xls();">Export XLS!</button>
               <button type="button" id="btn_tbl_pdf" class="btn_tbl_pdf" onClick="btn_export_tbl_plan_pdf();">Export PDF!</button>
           </div>
@@ -1463,6 +1561,7 @@
                   <div class="t_tiss_ng" id="t_tiss_ng"></div>
                   <div class="t_tiss_hl" id="t_tiss_hl"></div>
                   <div class="t_tiss_tl" id="t_tiss_tl"></div>
+                  <div class="t_tiss_tl_heat" id="t_tiss_tl_heat"></div>
                   <div class="t_tiss_btn" id="t_tiss_btn">
                       <button type="button" onClick="btn_build_tiss();" id="tn_btn_tiss" class="tn_btn_tiss"></button>
                   </div>
@@ -1675,6 +1774,34 @@
                   <div class="tr_calc_f_end" id="tr_calc_f_end"></div><br><br>
               </div>
           </div>
+          <div class="header" id="10-header"><div class="header10"></div></div>
+          <div class="content" id="10-content">
+              <div class="div_block">
+                  <div class="tn_donat_header" id="tn_donat_header"></div>
+                  <button type="button" id="btn_msg" class="btn_msg"  onclick="window.location.href='mailto:all3862000@mail.ru?subject=DiveProMe%20Donation'"></button><br>
+                  <button type="button" id="btn_tel" class="btn_tel"  onclick="window.location.href='tel:+79204241850'"></button>
+              </div>
+              <div class="div_block">
+                  <div class="tn_donat_header_founder" id="tn_donat_header_founder"></div>
+                  <img src="cup_founder.png"><br>
+                  <div class="td_founder_list"></div>
+              </div>
+              <div class="div_block">
+                  <div class="tn_donat_header_gold" id="tn_donat_header_gold"></div>
+                  <img src="cup_gold.png"><br>
+                  <div class="td_gold_list"></div>
+              </div>
+              <div class="div_block">
+                  <div class="tn_donat_header_silver" id="tn_donat_header_silver"></div>
+                  <img src="cup_silver.png"><br>
+                  <div class="td_silver_list"></div>
+              </div>
+              <div class="div_block">
+                  <div class="tn_donat_header_bronze" id="tn_donat_header_bronze"></div>
+                  <img src="cup_bronze.png"><br>
+                  <div class="td_bronze_list"></div>
+              </div>
+          </div>
 
       </div>
   </div>
@@ -1700,7 +1827,8 @@
   <input id="nodejs_export_pdf" type="file"  nwsaveas style="display:none" accept="application/pdf" nwworkingdir=""/>
 
 
-<script src="jquery-3.2.1.min.js"></script>
+
+  <script src="jquery-3.5.1.min.js"></script>
   <script src="jquery.mCustomScrollbar.js"></script>
   <script src="jquery.mousewheel.js"></script>
   <script src="roundslider.js"></script>
@@ -1718,39 +1846,40 @@
   <script src="svg2pdf.src.js"></script>
   <script src="jspdf.plugin.autotable.js"></script>
 
-  <script src="highstock.js" charset="UTF-8"></script>
-  <script src="exporting.src.js" charset="UTF-8"></script>
-  <script src="offline-exporting.src.js" charset="UTF-8"></script>
+  <script src="highstock.js?v0.1819" charset="UTF-8"></script>
+  <script src="exporting.src.js?v0.18159" charset="UTF-8"></script>
+  <script src="offline-exporting.src.js?v0.1819" charset="UTF-8"></script>
+  <script src="cns_table.js?v0.1815"></script>
 
-  <script src="html_new_gen_main.js?v0.485" charset="UTF-8"></script>
+  <script src="html_new_gen_main.js?v0.18411841549" charset="UTF-8"></script>
 
 
-<script src="android_fn.js?v0.485" charset="UTF-8"></script>
+  <script src="android_fn.js?v0.284184159" charset="UTF-8"></script>
 
-  <script src="cookie_settings.js?v0.485" charset="UTF-8"></script>
-  <script src="lng_fn.js?v0.485"charset="UTF-8"></script>
-  <script src="dive_comp.js?0.485"charset="UTF-8"></script>
-  <script src="block_gen.js?v0.485" charset="UTF-8"></script>
+  <script src="cookie_settings.js?v0.28184415679" charset="UTF-8"></script>
+  <script src="lng_fn.js?v0.82154145159"charset="UTF-8"></script>
+  <script src="dive_comp.js?0.84284159"charset="UTF-8"></script>
+  <script src="block_gen.js?v0.8285159" charset="UTF-8"></script>
 
-  <script src="gases_list_gen.js?v0.485" charset="UTF-8"></script>
-  <script src="build_dive.js?v0.485" charset="UTF-8"></script>
-  <script src="tables_build.js?v0.485" charset="UTF-8"></script>
-  <script src="gf_option.js?v0.485" charset="UTF-8"></script>
-  <script src="chart_theme.js?v0.485" charset="UTF-8"></script>
-  <script src="chart_profile.js?v0.485" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.485" charset="UTF-8"></script>
-  <script src="calc_learn.js?v0.485" charset="UTF-8"></script>
+  <script src="gases_list_gen.js?v0.871143159" charset="UTF-8"></script>
+  <script src="build_dive.js?v0.88424159" charset="UTF-8"></script>
+  <script src="tables_build.js?v0.82484159" charset="UTF-8"></script>
+  <script src="gf_option.js?v0.88424159" charset="UTF-8"></script>
+  <script src="chart_theme.js?v0.82484159" charset="UTF-8"></script>
+  <script src="chart_profile.js?v0.82844159" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.8132484159" charset="UTF-8"></script>
+  <script src="calc_learn.js?v0.812844159" charset="UTF-8"></script>
 
 <!-- Very important place only here node js check functions! -->
-<script src="nodejs_fn.js?v0.485" charset="UTF-8"></script>
+<script src="nodejs_fn.js?v0.88244159" charset="UTF-8"></script>
 
-  <script src="price_calc.js?v0.081" charset="UTF-8"></script>
+  <script src="price_calc.js?v0.884214159" charset="UTF-8"></script>
 
-  <script src="main.js?v0.485" charset="UTF-8"></script>
+  <script src="main.js?v0.8812454159" charset="UTF-8"></script>
 
 
-  <script src="lvl_functions.js?v0.485" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.485" charset="UTF-8"></script>
+  <script src="lvl_functions.js?v0.82484159" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.88424159" charset="UTF-8"></script>
 
   <!-- Preloader Info Wait when all Page Loaded-->
   <script type="text/javascript">

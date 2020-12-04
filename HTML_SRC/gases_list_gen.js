@@ -119,6 +119,7 @@ function upd_travel_gas_list(){
     mix_travel_he = tmp.options[tmp.selectedIndex].value;
     
     new_mx_arr.push(mix_travel_o2 , mix_travel_he);
+
   }
   
   //Comparing old and new array and find what the idx changed

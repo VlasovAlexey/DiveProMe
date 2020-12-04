@@ -207,9 +207,11 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     aaa = 0;
     for(c = 0 ; c < levels_mix_segment_arr.length/2 ; c++){
       ff = [levels_mix_segment_arr[aaa] , levels_mix_segment_arr[aaa+1]];
-      //alert(mix_to_txt_arr(ff));
+
       plan.addBottomGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
-      //console.log(mix_to_txt_arr(ff));
+
+      //add bottom gass as deco gass !!!_need_deep_test_!!!
+      plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
 
       aaa = aaa + 2;
     }
@@ -220,7 +222,11 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     aaa = 0;
     for(c = 0 ; c < mix_deco_idx ; c++){
       tmp3 =[deco_mix_arr[aaa],deco_mix_arr[aaa+1]];
-      plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+
+      //!!! If Dive is CCR and no Bailout then disable deco gases. Build Diluent profile
+      if(opt_blt_dln == 1){
+          plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+      }
       //as Bottom/Travel gases, for lvl compatibility
       plan.addBottomGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
       aaa=aaa+2;
@@ -269,7 +275,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
     mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
 
-      //ERROR!
+
     output = plan.calculateDecompression(false, gf_arr[0]*0.01, gf_arr[1]*0.01, ppo2_deco_idx*1.0, mxis_end);
 
     }
@@ -315,7 +321,8 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     //if changing mix time === 0 we need add some time for property dive plan computation.
     if(tn_cng_time_idx === 0)
     {
-      tn_cng_time_idx = 0.01;
+        //!!!need deep test! changed from 0.01 to 0 after v9.0
+      tn_cng_time_idx = 0;
     }
 
     for(c = 1 ; c < output.length ; c++){
@@ -349,8 +356,8 @@ function get_rl_fraction(idx_arr){
   }
   return tmp_arr;
 }
-//return depth range, for selected by idx, mix array. Only two min max number
-function ret_mix_range(idx , tmp_mix_arr){
+//return depth range, for selected by idx, mix array. Only two min max number for OC
+function ret_mix_range_oc(idx , tmp_mix_arr){
 
   var ppo2_bottom = document.getElementById("opt_ppo2_bottom");
   var ppo2_min = document.getElementById("opt_ppo2_min");
@@ -372,7 +379,6 @@ function ret_mix_range(idx , tmp_mix_arr){
       if(dp_o2_min == Infinity){dp_o2_min = 1;}
       dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
 
-      //alert(dp_o2_min);
       tmp_arr.push(dp_o2_min);
       if (dp_ppn2_max >= dp_o2_max){
         tmp_arr.push(dp_o2_max);
@@ -385,8 +391,48 @@ function ret_mix_range(idx , tmp_mix_arr){
     }
     a=a+2;
   }
-  //alert(tmp_arr)
+
   return tmp_arr;
+}
+//return depth range, for selected by idx, mix array. Only two min max number for CCR
+function ret_mix_range_ccr(idx , tmp_mix_arr){
+
+    //get from setpoint bottom option
+    var ppo2_bottom = document.getElementById("opt_setpoint_bottom");
+
+    //ppn max get from bailout settings
+    var ppn2_max = document.getElementById("opt_ppn2_max");
+
+    var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
+    var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
+    tmp_arr=[];
+    a = 0;
+    for(c = 0 ; c < tmp_mix_arr.length ; c++){
+        if(c+1 == idx){
+            dp_o2_max = (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
+            dp_o2_min = 1;
+            dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
+
+            //fix error if mix n2 > 95%
+            if(dp_ppn2_max < 1 ){
+                dp_ppn2_max = 6;
+            };
+
+            tmp_arr.push(dp_o2_min);
+
+            if (dp_ppn2_max >= dp_o2_max){
+                tmp_arr.push(dp_o2_max);
+            }
+            else
+            {
+                tmp_arr.push(dp_ppn2_max);
+            }
+            break;
+        }
+        a=a+2;
+    }
+    //tmp_arr[0] = 1;
+    return tmp_arr;
 }
 function upd_lvl_opt_arr(){
   //check if level time changed then write to lvl_arr and update interface
@@ -468,10 +514,15 @@ function height_to_bar(){
   }
 
   //Recombine output plan to five column table format
-function src_to_5_arr(tmp_arr){
+function src_to_5_arr(tmp_arr, flag_full){
 
   tmp_arr = zero_lvl_arr(tmp_arr);
-  dec_table = to_5_column_arr(tmp_arr);
+  if(flag_full == 1){
+      dec_table = to_5_column_arr_full(tmp_arr);
+  }
+  else{
+      dec_table = to_5_column_arr(tmp_arr);
+  }
 
   //fix tissue error on very short dive plans
   tn_lst_stop1 = document.getElementById("opt_lst_stop");
@@ -507,17 +558,58 @@ function src_to_5_arr(tmp_arr){
   }
   //add table different info
   function to_5_column_arr(tmp_arr){
+
+      //console.log(tmp_arr);
+
     dec_table = ["Action" , "Depth" , "Time" , "RunTime" , "Mix"];
 
+      //check plan style selection status
+      var pln_style_val = $("#tn_plan_style option:selected").val();
+
     runtime = 0;
+    var blns = 0;
     for (var i = 0; i < tmp_arr.length; i++) {
+        dp_end1 = tmp_arr[i].endDepth*1.0;
+        dp_start1 = tmp_arr[i].startDepth*1.0;
+        dp_c_time = tmp_arr[i].time*1.0;
+
+        //make plan time rounded if classic style selected
+        if (pln_style_val == 2){
+            if(dp_start1 == dp_end1){
+                //levels or stops
+                if(blns >= 1){
+                    dp_c_time = Math.ceil(dp_c_time + blns);
+                    blns = 0;
+                }
+                //dp_c_time = Math.ceil(dp_c_time);
+            }
+             else{
+                //transition balances between levels or stops
+                if(blns >= 1){
+                    //dp_c_time = Math.ceil(dp_c_time + blns);
+                    //blns = 0;
+                    //console.log("ADD!")
+                }
+                else{
+                    blns = blns + dp_c_time;
+                    dp_c_time = 0;
+                }
+                //console.log(blns);
+            }
+            //fix start and exit to surface. Every time this make round to ceil. This add two more minutes to detailed plan anyway
+            if(i == 0 || i == tmp_arr.length-1){
+                dp_c_time = Math.ceil(tmp_arr[i].time*1.0);
+            }
+            //final update
+            runtime = runtime + (dp_c_time);
+        }
 
 
-      dp_end1 = tmp_arr[i].endDepth*1.0;
-      dp_start1 = tmp_arr[i].startDepth*1.0;
-      dp_c_time = tmp_arr[i].time*1.0;
-      dp_c_mix = tmp_arr[i].gasName;
-      runtime = runtime + (dp_c_time);
+        else{
+            runtime = runtime + (dp_c_time);
+        }
+
+        dp_c_mix = tmp_arr[i].gasName;
 
       if(dp_end1 == dp_start1){
 
@@ -548,3 +640,76 @@ function src_to_5_arr(tmp_arr){
     }
     return dec_table;
   }
+
+//very crappy code. copy of slightly modifed function before. add table different info but don`t use "classic" fixes view. it is keep all other (exclude main table) safety
+function to_5_column_arr_full(tmp_arr){
+    dec_table = ["Action" , "Depth" , "Time" , "RunTime" , "Mix"];
+
+    //check plan style selection status
+    var pln_style_val = $("#tn_plan_style option:selected").val();
+
+    runtime = 0;
+    var blns = 0;
+    for (var i = 0; i < tmp_arr.length; i++) {
+        dp_end1 = tmp_arr[i].endDepth*1.0;
+        dp_start1 = tmp_arr[i].startDepth*1.0;
+        dp_c_time = tmp_arr[i].time*1.0;
+
+
+            runtime = runtime + (dp_c_time);
+
+
+        dp_c_mix = tmp_arr[i].gasName;
+
+        if(dp_end1 == dp_start1){
+
+            if(((lvl_arr.length/3)*2) > i){
+                dec_table.push("Level");
+            }
+            else
+            {
+                dec_table.push("Stop");
+            }
+        }
+        if(dp_end1 < dp_start1){
+            dec_table.push("Ascent");
+        }
+        if(dp_end1 > dp_start1){
+            dec_table.push("Descent");
+        }
+        if(dp_start1 == dp_end1){
+            dec_table.push(dp_start1);
+        }
+        else
+        {
+            dec_table.push(dp_start1 + "-" + dp_end1);
+        }
+        dec_table.push(time_dec_to_time(dp_c_time));
+        dec_table.push("(" + time_dec_to_time(runtime) +")");
+        dec_table.push(dp_c_mix);
+    }
+    return dec_table;
+}
+
+//fix ultra short stops not integer time
+function ShortStop(mn_plan){
+
+    for (var i = 0; i < mn_plan.length; i++) {
+        //only for stops or flat segments
+        if(mn_plan[i].startDepth === mn_plan[i].endDepth){
+            //only for non integer time
+            if(mn_plan[i].time !== Math.floor(mn_plan[i].time)){
+
+                var rep = {
+                    gasName : mn_plan[i].gasName,
+                    startDepth : mn_plan[i].startDepth,
+                    endDepth : mn_plan[i].endDepth,
+                    //fix not integer time if present
+                    time : Math.ceil(mn_plan[i].time)
+                };
+                mn_plan.splice(i,1,rep);
+            }
+        }
+    }
+    return mn_plan;
+}

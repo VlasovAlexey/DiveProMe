@@ -1,15 +1,23 @@
 package com.diveprome.avlasov.diveprome;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 
 /**
@@ -18,6 +26,8 @@ import android.webkit.WebView;
  */
 public class DiveProMeActivity extends AppCompatActivity {
 
+    public static GoogleAnalytics analytics;
+    public static Tracker tracker;
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -43,9 +53,44 @@ public class DiveProMeActivity extends AppCompatActivity {
     private WebView mWebView;
     WebView browser;
 
+    //Make call or mail to on Android
+    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        if (url.startsWith("tel:")) {
+            Intent tel = new Intent(Intent.ACTION_DIAL, Uri.parse(url));
+            startActivity(tel);
+            return true;
+        }
+        else if (url.contains("mailto:")) {
+            view.getContext().startActivity(
+                    new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            return true;
+
+        }else {
+            view.loadUrl(url);
+            return true;
+        }
+    }
+    
+    //main loop
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //hide main bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        //google analytics
+        analytics = GoogleAnalytics.getInstance(this);
+        analytics.setLocalDispatchPeriod(1800);
+        GoogleAnalytics.getInstance(this).setLocalDispatchPeriod(5);
+
+        tracker = analytics.newTracker("UA-106149389-1"); // Replace with actual tracker id
+        tracker.enableExceptionReporting(true);
+        tracker.enableAdvertisingIdCollection(true);
+        tracker.enableAutoActivityTracking(true);
+        tracker.send(new HitBuilders.ScreenViewBuilder().build());
+
+        GoogleAnalytics.getInstance(this).dispatchLocalHits();
+        //Google Analytics End
 
         super.onCreate(savedInstanceState);
 
@@ -74,6 +119,8 @@ public class DiveProMeActivity extends AppCompatActivity {
 
         mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
+
+
         //make visible all console log from WebView visible on Android Studio Console
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -82,6 +129,7 @@ public class DiveProMeActivity extends AppCompatActivity {
                 return true;
             }
         });
+
 
         mWebView.loadUrl("file:///android_asset/index.html");
 

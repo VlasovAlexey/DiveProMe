@@ -729,6 +729,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
         buhlmannTissue.prototype.addFlat = function (depth, fO2, fHe, time) {
             //This is a helper into depth change - with start/end depths identical
             this.addDepthChange(depth, depth, fO2, fHe, time);
+
         };
 
         buhlmannTissue.prototype.addDepthChange = function (startDepth, endDepth, fO2, fHe, time) {
@@ -762,7 +763,8 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                 TimeCurrent: time,
                 NitroLoad: this.pNitrogen,
                 HeliumLoad: this.pHelium,
-                TotalLoad: this.pTotal
+                TotalLoad: this.pTotal,
+                HalfTime: halfTime
             });
             //return difference - how much load was added
             return this.pTotal - prevTotal;
@@ -836,9 +838,12 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     ceiling = tissueCeiling;
                 }
             }
-            while (ceiling % (tn_lst_stop1_idx) != 0) {
+            //while (ceiling % (tn_lst_stop1_idx) != 0) {
+                while (ceiling % 3 != 0) {
                 ceiling++;
             }
+            //!!!_problem with time
+            // wor now corect only if las stop is 3!
             return ceiling;
         };
 

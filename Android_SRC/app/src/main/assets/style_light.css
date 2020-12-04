@@ -19,6 +19,13 @@
     height: 30px;
     background-position: center;
 }
+.tr_download_ios
+{
+    border: 0px;
+    background: url(os_ios_light.svg) no-repeat 100% 100%;
+    height: 50px;
+    background-position: center;
+}
 .tr_download_lnx
 {
     border: 0px;
@@ -38,7 +45,7 @@ div {
     text-align: center;
     font-family: FirstFont;
     color: #000000;
-    font-size: 20px;
+    font-size: 16px;
     cursor: default;
     -khtml-user-select: none;
     user-select: none;
@@ -83,7 +90,7 @@ th {
     text-align-last: center;
 }
 td {
-    font-size: 15px;
+    font-size: 11px;
     color: #000000;
     padding: 9px 2px;
     transition: .3s linear;
@@ -129,22 +136,27 @@ select
     -webkit-appearance: none;
     -moz-appearance: none;
     height: 30px;
-    width: 80px;
+    width: 100px;
     cursor: pointer;
     color: #000000;
     font-family: FirstFont;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 15px;
     margin-left: 2px;
     margin-right: 2px;
     border-radius: 7px;
     text-align-last: center;
 }
-.tn_dmn,
+
 .opt_blnd_temp_mode,
-.opt_price_cur
+.opt_price_cur,
+.tn_plan_ccr
 {
     width: 200px;
+}
+.tn_dmn
+{
+    width: 220px;
 }
 .tn_lng,
 .tn_mdl,
@@ -153,11 +165,13 @@ select
     width: 160px;
 }
 .tn_water,
-.tn_color
+.tn_color,
+.tn_plan_style
 {
     width: 170px;
 }
-.lvl_option_style
+.lvl_option_style,
+.opt_airbr_mix
 {
     width: 115px;
 }
@@ -187,7 +201,7 @@ select
     background: #ffffff;
     color: #000000;
     font-family: FirstFont;
-    font-size:20px;
+    font-size:16px;
     cursor: default;
     border-radius: 7px;
 }
@@ -196,7 +210,7 @@ select
     width: 100%;
     color:#666666;
     font-family: FirstFont;
-    font-size: 20px;
+    font-size: 16px;
 }
 .header0,
 .header1,
@@ -218,8 +232,7 @@ select
 }
 .header7,
 .header8,
-.header9,
-.header10
+.header9
 {
     width: 91%;
     border: 2px solid #00aefe;
@@ -262,6 +275,21 @@ select
     color: #ffffff;
     background: #0080fc;
 }
+.header10
+{
+    background: linear-gradient(-45deg, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C);
+    background-size: 400% 400%;
+    animation: gold_section 35s ease infinite;
+    width: 91%;
+    border: 2px solid #d6cf8e;
+    color: #ffffff;
+    padding: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    border-radius: 7px;
+}
+
 .content {
     overflow: hidden;
 }
@@ -312,13 +340,17 @@ select
 .btn_export_pdf_profile,
 .btn_export_pdf_pp,
 .btn_export_xls,
-.btn_tbl_pdf
+.btn_tbl_pdf,
+.btn_msg,
+.btn_tel,
+.btn_bailout,
+.btn_diluent
 {
     border: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: FirstFont;
-    font-size: 18px;
+    font-size: 16px;
     width: auto;
     position: relative;
     display: inline-block;
@@ -342,7 +374,11 @@ select
 .btn_export_pdf_profile:hover,
 .btn_export_pdf_pp:hover,
 .btn_export_xls:hover,
-.btn_tbl_pdf:hover
+.btn_tbl_pdf:hover,
+.btn_msg:hover,
+.btn_tel:hover,
+.btn_bailout:hover,
+.btn_diluent:hover
 {
     background: #ffffff;
     color: #0080fc;
@@ -356,12 +392,66 @@ select
 .btn_export_pdf_profile:active,
 .btn_export_pdf_pp:active,
 .btn_export_xls:active,
-.btn_tbl_pdf:active
+.btn_tbl_pdf:active,
+.btn_msg:active,
+.btn_tel:active,
+.btn_bailout:active,
+.btn_diluent:active
 {
     top: 1px;
     background: #ffffff;
     color: #0080fc;
     box-shadow: 0 0 0px #ffffff inset, 0 0px 0px #ffffff inset, 0 0px 0px #ffffff;
+}
+
+.btn_bailout
+{
+    border: 2px solid #969696;
+    background: #b60000;
+}
+.btn_diluent
+{
+    border: 2px solid #969696;
+    background: #2b83ff;
+}
+
+.btn_msg,
+.btn_tel
+{
+    background: linear-gradient(-45deg, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C);
+    background-size: 1000% 1000%;
+    animation: gold_section 35s ease infinite;
+    border: 2px solid #d6cf8e;
+
+}
+
+.btn_tel{
+    animation: gold_section 50s ease infinite;
+}
+.td_founder_list,
+.td_gold_list,
+.td_silver_list,
+.td_bronze_list
+{
+    background: linear-gradient(-45deg, #d4861a,#d4861a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gold_section 35s ease infinite;
+    background-size: 1000% 1000%;
+    display: inline-block;
+    padding: 0.3em 0.6em ;
+}
+.td_silver_list
+{
+    background: linear-gradient(-45deg, #525254,#525254);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.td_bronze_list
+{
+    background: linear-gradient(-45deg, #9f4e24,#9f4e24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 @keyframes ibcd_ppn2_anim
 {
@@ -459,7 +549,7 @@ br{
 .tn_price_cnt_name2,
 .tn_price_cnt_name3
 {
-    font-size: 20px;
+    font-size: 16px;
     margin: 0 auto;
 }
 
@@ -498,7 +588,7 @@ br{
     background: #e83636;
     color: #ffffff;
     font-family: FirstFont;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     -khtml-user-select: none;
     user-select: none;
@@ -513,7 +603,7 @@ br{
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: FirstFont;
-    font-size: 18px;
+    font-size: 16px;
     width: auto;
     position: relative;
     display: inline-block;

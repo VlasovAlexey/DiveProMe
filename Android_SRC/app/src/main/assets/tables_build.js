@@ -2,16 +2,29 @@
 
   function dplan_sort_arr(tmp_arr){
     del_html_elem("t_table");
-    
-    dec_table = tmp_arr;
+
+    //make real copy not equal massive
+    dec_table = tmp_arr.slice();
     pdf_table_export_arr = [];
+
+      //check plan style selection status
+      var pln_style_val = $("#tn_plan_style option:selected").val();
+
+      // remove ascent\descent rows if user select classic plan style
+      if (pln_style_val == 2){
+          for (j = 9; j < dec_table.length-5; j++) {
+              if(dec_table[j] == "Ascent" || dec_table[j] == "Descent"){
+                  dec_table.splice(j , 5);
+              }
+          }
+      }
 
     body = document.getElementById("t_table");
     columns = 5;
     rows = ((dec_table.length)-1)/columns;
     tr = "";
     td = "";
-  
+
     firstTable = document.querySelector("#table");
     
     table = document.createElement("table");
@@ -19,9 +32,21 @@
       table.setAttribute("id", "opt_main_plan_table");
       table.setAttribute("class", "opt_main_plan_table");
     tick = 0;
+
+    //CCR diluent first gas marker
+      var diluent_cng = 0;
+
     for (i = 0; i < rows; i++) {
+
+        //set class to hide table row
+        if(dec_table[tick] == "Ascent" || dec_table[tick] == "Descent"){
+            tr.setAttribute("id", "tab_hide_me");
+            tr.setAttribute("class", "tab_hide_me");
+        }
+
       tr = document.createElement("tr");
       tr.setAttribute("width", "100%");
+
 
       clr = 0;
       gass_cng = 0;
@@ -47,6 +72,9 @@
           td.setAttribute("id", "tab_mix");
           td.setAttribute("class", "tab_mix");
         }
+
+
+
         //make colors for levels and stops
         if(dec_table[tick] === "Level" ){
           clr = 1;
@@ -59,12 +87,13 @@
         if (clr === 1){
           td.setAttribute("class", "tab_black");
         }
-        
+
         //Make horizontal lines if gass changed
         if (i > 1){
           if (j === 0){
             if(dec_table[tick+4].toString() !== dec_table[tick-1].toString() ){
               gass_cng = 1;
+                diluent_cng = 1;
 
                 //Prepare check for IBCD Alert
                 var dp1 = depth_from_name_arr(dec_table[tick-1]);
@@ -97,12 +126,7 @@
 
                             var diff_he = Math.abs(((dp1*0.1+1)*(0.01*gas1[2]))- ((dp1*0.1+1)*(0.01*gas2[2]))).toFixed(2);
                             var diff_n2 = Math.abs(((dp1*0.1+1)*(0.01*gas1[1]))- ((dp1*0.1+1)*(0.01*gas2[1]))).toFixed(2);
-                              /*
-                            console.log( dp1);
-                            console.log(gas1 +" , " + gas2);
-                            console.log("helium: " + diff_he);
-                            console.log("n2: " + diff_n2);
-                        */
+
                             //get IBCD limits from GUI
                             var he_limit = document.getElementById("opt_ibcd_pphe");
                             var opt_ibcd_pphe_idx = he_limit.options[he_limit.selectedIndex].value;
@@ -128,25 +152,15 @@
                                 var he_diff = Math.abs(gas1[2]-gas2[2]);
                                 var n2_diff = Math.abs(gas1[1]-gas2[1]);
 
-                                /*
-                                console.log(gas1);
-                                console.log(gas2);
-                                console.log("he diff:"+he_diff);
-                                console.log("n2 diff:"+n2_diff);
-                                console.log("he/5: "+he_diff/5+" , n2: " + n2_diff);
-                                */
-
                                 //check for 1/5 he to n2 ratio
                                 if((he_diff/5) < n2_diff && he_diff !== 0 ){
                                     dp_state = "LIP_WRN!";
                                 }
-
                             }
                             break;
                         }
                     }
                 }
-                //console.log(dp_state);
             }
             else
             {
@@ -168,15 +182,65 @@
                 td.setAttribute("id", "gs_lip_limit_wrn");
             }
         }
-        text = document.createTextNode(plan_lng(dec_table[tick]));
-        pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+            //make Diluent prefix on first mix if used CCR mode
+            if($( "#tn_plan_ccr" ).val() == 1){
+                //OC
+                if(i > 0 && j === 1){
+                    //meters
+                    if($( "#tn_dmn" ).val() == 1){
+                        text = document.createTextNode(plan_lng(dec_table[tick]));
+                        pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                    }
+                    //feet
+                    if($( "#tn_dmn" ).val() == 2){
+                        var dp_arr = depth_from_name_arr(plan_lng(dec_table[tick]));
+                        if(dp_arr.length == 1){
+                            text = document.createTextNode(Math.ceil(3.28084 * dp_arr[0]));
+                            pdf_table_export_arr.push(Math.ceil(3.28084 * dp_arr[0]));
+                        }
+                        else{
+                            text = document.createTextNode(Math.ceil(3.28084 * dp_arr[0]) + "-" + Math.ceil(3.28084 * dp_arr[1]));
+                            pdf_table_export_arr.push(Math.ceil(3.28084 * dp_arr[0]) + "-" + Math.ceil(3.28084 * dp_arr[1]));
+                        }
+                    }
+
+                }
+                else{
+                    text = document.createTextNode(plan_lng(dec_table[tick]));
+                    pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                }
+            }
+            else{
+                //CCR
+                if(i > 0 && j === 4){
+                    if(diluent_cng == 0){
+                      //add text "Diluent" only for first mix in the plan
+                        text = document.createTextNode(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
+                        pdf_table_export_arr.push(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
+                    }
+                    else{
+                        text = document.createTextNode(plan_lng(dec_table[tick]));
+                        pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                    }
+                }
+                else{
+                    text = document.createTextNode(plan_lng(dec_table[tick]));
+                    pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                }
+            }
+
+
 
         td.appendChild(text);
         tr.appendChild(td);
+
+
         tick = tick+1;
       }
       table.appendChild(tr);
     }
+        //restore primary dec_table array if modified
+      dec_table = tmp_arr.slice();
       
     if (firstTable === null) {
       return body.appendChild(table);
@@ -427,26 +491,49 @@
   
 //Build Cons table
   function dplan_cons_arr(tmp_arr){
+
+
+
     del_html_elem("t_cons");
     columns = 5;
     rows = ((tmp_arr.length)-1)/columns;
     tick = 0;
     dec_table = [];
     //dec_table.push("Mix","Cons", "Time", "Dimension");
-    
     for (i = 0; i < rows; i++) {
       for (j = 0; j < columns; j++) {
-        
           if(j == 1){
-           dec_table.push(tmp_arr[tick],tmp_arr[tick+1], tmp_arr[tick+3], "litres"); 
+           dec_table.push(tmp_arr[tick],tmp_arr[tick+1], tmp_arr[tick+3], "litres");
           }
-          
-        
         tick = tick + 1;
       }
       
     }
-    
+
+      //if CCR BAILOUT mode remove tree or two lines with first gas
+      if($( "#tn_plan_ccr" ).val() == 2) {
+          //CCR!                     ^^^^
+          columns = 4;
+          rows = ((tmp_arr.length)-1)/columns;
+          tick = 0;
+          var ipdx = 0;
+          //Depth,Time,Mix,litres
+          for (i = 0; i < rows; i++) {
+              for (j = 0; j < columns; j++) {
+
+                  if(j == 0 && i > 1){
+                      //console.log(dec_table[tick+2],dec_table[tick-2]);
+                      if(dec_table[tick+2] != dec_table[tick-2]){
+                          ipdx = tick;
+                          break;
+                      }
+                  }
+                  tick = tick + 1;
+              }
+          }
+          dec_table.splice(3 , ipdx - 4);
+      }
+
     body = document.getElementById("t_cons");
     columns = 4;
     rows = ((dec_table.length)-1)/columns;
@@ -462,6 +549,11 @@
     
     tick = 0;
     clr = 0;
+
+
+
+
+
     for (i = 0; i < rows; i++) {
       tr = document.createElement("tr");
       tr.setAttribute("width", "100%");
@@ -500,6 +592,32 @@
           td.setAttribute("class", "tr_coms_light");
         }
         if(i > 0){
+          /*
+          //make Diluent prefix on first mix if used CCR mode
+            if($( "#tn_plan_ccr" ).val() == 1){
+                //OC
+                text = document.createTextNode(plan_lng(dec_table[tick]));
+                pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+            }
+            else{
+                //CCR
+                if(i > 0 && j === 4){
+                    if(diluent_cng == 0){
+                      //add text "Diluent" only for first mix in the plan
+                        text = document.createTextNode(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
+                        pdf_table_export_arr.push(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
+                    }
+                    else{
+                        text = document.createTextNode(plan_lng(dec_table[tick]));
+                        pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                    }
+                }
+                else{
+                    text = document.createTextNode(plan_lng(dec_table[tick]));
+                    pdf_table_export_arr.push(plan_lng(dec_table[tick]));
+                }
+            }
+            */
           if(j == 1){
             depth = depth_from_name_arr(dec_table[tick-1]);
             depth_start = depth[0];
@@ -525,7 +643,14 @@
             {
               coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
             }
-            text = document.createTextNode(coms);
+              //liters
+              if($( "#tn_dmn" ).val() == 1){
+                  text = document.createTextNode(coms);
+              }
+              //cubic foot
+              if($( "#tn_dmn" ).val() == 2){
+                  text = document.createTextNode((0.0353147 * coms).toFixed(2));
+              }
             td.appendChild(text);
           }
           if(j === 0){
@@ -654,33 +779,263 @@ function depth_from_name_arr(tmp_arr){
     }
     return tmp_time;
   }
-  
-//Total Gass Computation
-  function total_gass_arr(tmp_arr){
-    del_html_elem("t_total_cons");
-    tmp_arr.splice(0,5);
-    
+
+  //Get CNS for selected ppO2
+function ppo2_to_cns(tmp_val){
+    tmp_val = (tmp_val.toFixed(2));
+
+    var cns_min = cns_arr[0].CNS;
+    var cns_max = cns_arr[cns_arr.length - 1].CNS;
+    var ppo2_min = cns_arr[0].ppO2;
+    var ppo2_max = cns_arr[cns_arr.length - 1].ppO2;
+    var cns_calc = 0;
+
+    //process if ppo2 present in table we use tables value
+    if(tmp_val >= ppo2_min ){
+      if(tmp_val <= ppo2_max){
+
+        var tbl_idx =  ((tmp_val - ppo2_min) * 100).toFixed(0);
+        cns_calc = cns_arr[tbl_idx].CNS;
+      }
+    }
+
+    //or if this ppo2 not present in table we use first or last know
+    if(tmp_val < ppo2_min){
+        cns_calc = cns_min;
+    }
+    if(tmp_val > ppo2_max){
+        cns_calc = cns_max;
+    }
+
+    return cns_calc;
+}
+
+//Total OTU and CNS Computation
+function total_cns_otu(tmp_arr) {
+    del_html_elem("t_otu_cns");
+
+    //Extract Depth\Time\Mix from tmp_arr 5 columns
+    //tmp_arr.splice(0,5);
+
     columns = 5;
     rows = ((tmp_arr.length)-1)/columns;
     tick = 0;
     dec_table = [];
-    //dec_table.push("Mix","Cons", "Time", "Dimension");
-    
+
     for (i = 0; i < rows; i++) {
-      for (j = 0; j < columns; j++) {
-        
-          if(j === 0){
-           dec_table.push(
-            {
-              Mix: tmp_arr[tick+4].toString(),
-              Depth: tmp_arr[tick+1],
-              Time: tmp_arr[tick+2]
+        for (j = 0; j < columns; j++) {
+
+            if(j === 0){
+                dec_table.push(
+                    {
+                        Mix: tmp_arr[tick+4].toString(),
+                        Depth: tmp_arr[tick+1],
+                        Time: tmp_arr[tick+2]
+                    }
+                );
             }
-          ); 
+            tick = tick + 1;
         }
-        tick = tick + 1;
-      }
     }
+
+    tick = 0;
+    var otu_final = 0;
+    var cns_final = 0;
+    for (i = 0; i < dec_table.length; i++) {
+
+      var otu_current = 0;
+      var cns_current = 0;
+        var depth = depth_from_name_arr(dec_table[tick].Depth);
+        var time = time_to_dec_time(dec_table[tick].Time);
+        var mix = gass_from_name_arr(dec_table[tick].Mix);
+        //O2 only to fraction
+        mix = mix[0]*0.01;
+
+        //Ascent or Descent
+        if( depth.length > 1 ){
+            var depth1 = depth[0];
+            var depth2 = depth[1];
+
+            //OTU computation
+            var ppo2_1 = (mix*((depth1 + 10) / 10));
+            var ppo2_2 = (mix*((depth2 + 10) / 10));
+
+            if (ppo2_1 < 0.5 && ppo2_2 < 0.5){
+                otu_current = 0;
+            }
+            else
+            {
+                //if ppo2 from depth1 >= 0.5 and ppo2 from depth 2 >=0.5
+                if(ppo2_1 >= 0.5 && ppo2_2 >= 0.5){
+                    otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+                }
+
+              //if ppo2 from depth1 < 0.5
+              if(ppo2_1 < 0.5){
+                  ppo2_1 = 0.5;
+                  //recompute time for segment higher ppo2 >0.5 only
+                  time = (time*(ppo2_2 - 0.5)/(ppo2_2 - mix));
+                  otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+              }
+                //if ppo2 from depth2 < 0.5
+                if(ppo2_2 < 0.5){
+                    ppo2_2 = 0.5;
+                    //recompute time for segment higher ppo2 >0.5 only
+                    time = (time*(ppo2_1 - 0.5)/(ppo2_1 - mix));
+                    otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+                }
+            }
+            //CNS computation
+            var depth_lo = 0;
+            if(depth1 < depth2){
+                depth_lo = depth1;
+            }
+            else
+            {
+                depth_lo = depth2;
+            }
+            var time_steep = time/(Math.abs(depth1-depth2));
+            for (f = 0; f < (Math.abs(depth1-depth2)); f++) {
+                var cns_steep = 0;
+                cns_steep = ppo2_to_cns(mix*((depth_lo + f + 10) / 10))*time_steep;
+
+                cns_current = cns_current + cns_steep;
+            }
+            //console.log("rise/lo",mix, time,cns_current);
+        }
+
+        //Level
+        else
+        {
+            depth = depth[0];
+            //OTU computation
+            //if po2 lower 0.5 computations don`t apply for current segment and OTU=0
+            if((mix*((depth + 10) / 10)) > 0.5){
+                otu_current = time*Math.pow((0.5/((mix*((depth + 10) / 10)) - 0.5)) , (-5.0/6.0));
+            }
+            else
+            {
+              otu_current = 0;
+            }
+
+            //CNS computation
+            cns_current = ppo2_to_cns(mix*((depth + 10) / 10))*time;
+            //console.log("flat",mix, time, mix*((depth + 10) / 10), ppo2_to_cns(mix*((depth + 10) / 10)),cns_current);
+        }
+        //Compute final OTU
+        otu_final = otu_final + otu_current;
+
+        //ComputeFinal CNS
+        cns_final = cns_final + cns_current;
+        tick = tick + 1;
+    }
+
+    //test array
+    otu_cns_arr =[
+        {
+            OTU: Math.ceil(otu_final),
+            CNS: Math.ceil(cns_final)
+        }
+    ];
+
+    //Build final table
+    body = document.getElementById("t_otu_cns");
+
+    tr = "";
+    td = "";
+
+    pdf_table_otu_cns_arr = [];
+    //price_cons_arr =[];
+
+    firstTable = document.getElementById("t_otu_cns");
+    table = document.createElement("table");
+    table.setAttribute("width", "100%");
+    table.setAttribute("id", "opt_otu_cns");
+
+    tr = document.createElement("tr");
+    tr.setAttribute("width", "100%");
+
+    td = document.createElement("td");
+    //td.setAttribute("class", "tab_black");
+    td.innerHTML = plan_lng("tab_tr_OTU");
+    pdf_table_otu_cns_arr.push(plan_lng("tab_tr_OTU"));
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    //td.setAttribute("class", "tab_black");
+    td.innerHTML = plan_lng("tab_tr_CNS");
+    pdf_table_otu_cns_arr.push(plan_lng("tab_tr_CNS"));
+
+    tr.appendChild(td);
+    table.appendChild(tr);
+
+    //
+    tr = document.createElement("tr");
+    tr.setAttribute("width", "100%");
+
+    td = document.createElement("td");
+    td.setAttribute("class", "tab_black");
+    td.innerHTML = otu_cns_arr[0].OTU;
+    pdf_table_otu_cns_arr.push(otu_cns_arr[0].OTU);
+    tr.appendChild(td);
+
+    td = document.createElement("td");
+    td.setAttribute("class", "tab_black");
+    td.innerHTML = otu_cns_arr[0].CNS;
+    pdf_table_otu_cns_arr.push(otu_cns_arr[0].CNS);
+
+    tr.appendChild(td);
+    table.appendChild(tr);
+
+    return body.appendChild(table);
+}
+//Total Gass Computation
+  function total_gass_arr(tmp_arr){
+
+    del_html_elem("t_total_cons");
+
+      //Delete Depth\Time\Mix from tmp_arr 5 columns
+      tmp_arr.splice(0,5);
+      //console.log(tmp_arr);
+
+
+
+      columns = 5;
+      rows = ((tmp_arr.length)-1)/columns;
+      tick = 0;
+      dec_table = [];
+//dec_table.push("Mix","Cons", "Time", "Dimension");
+
+      for (i = 0; i < rows; i++) {
+          for (j = 0; j < columns; j++) {
+
+              if(j === 0){
+                      dec_table.push(
+                          {
+                              Mix: tmp_arr[tick + 4].toString(),
+                              Depth: tmp_arr[tick + 1],
+                              Time: tmp_arr[tick + 2]
+                          }
+                      );
+              }
+              tick = tick + 1;
+          }
+      }
+      //if CCR BAILOUT mode remove tree or two lines with first gas
+      if($( "#tn_plan_ccr" ).val() == 2) {
+          //CCR!                     ^^^^
+          var mxt_idx = 0;
+          for (i = 0; i < dec_table.length; i++) {
+                if(dec_table[0].Mix != dec_table[i].Mix){
+                    mxt_idx = i;
+                    break;
+                }
+          }
+          //cut first gas
+          dec_table.splice(0 , mxt_idx);
+      }
+
+
     tick = 0;
     gas_swich = 0;
     coms_ttl_arr = [];
@@ -720,118 +1075,151 @@ function depth_from_name_arr(tmp_arr){
       tick = tick + 1;
     }
     coms_final_arr = [];
-    coms_total = coms_ttl_arr[0].Comsum;
-    for (i = 1; i < coms_ttl_arr.length; i++) {
-      
-      a = (coms_ttl_arr[i].Mix);
-      b = (coms_ttl_arr[i-1].Mix);
-      if(a != b){
-        coms_final_arr.push(
-        {
-          Mix: dec_table[i-1].Mix,
-          Сonsumption: coms_total
+
+    //if CCR dive dipest 6 meters process to display gas consumption
+    if(coms_ttl_arr.length > 0){
+
+        //current CCR mode on
+        if($( "#tn_plan_ccr" ).val() == 2){
+
+            //current diluent on
+            if(opt_blt_dln == 1 && $( "#opt_deco" ).val()*1.0 != 0){
+                //show consumptions if hide
+                element_id_show("7-header");
+                element_id_show("t_total_cons");
+        }}
+
+
+
+        coms_total = coms_ttl_arr[0].Comsum;
+        for (i = 1; i < coms_ttl_arr.length; i++) {
+
+            a = (coms_ttl_arr[i].Mix);
+            b = (coms_ttl_arr[i-1].Mix);
+            if(a != b){
+                coms_final_arr.push(
+                    {
+                        Mix: dec_table[i-1].Mix,
+                        Сonsumption: coms_total
+                    }
+                );
+                coms_total = 0;
+            }
+            coms_total = coms_total + coms_ttl_arr[i].Comsum;
+            if(i == coms_ttl_arr.length-1){
+                coms_final_arr.push(
+                    {
+                        Mix: dec_table[i].Mix,
+                        Сonsumption: coms_total
+                    }
+                );
+            }
         }
-      );
-        coms_total = 0;
-      }
-      coms_total = coms_total + coms_ttl_arr[i].Comsum;
-      if(i == coms_ttl_arr.length-1){
-        coms_final_arr.push(
-        {
-          Mix: dec_table[i].Mix,
-          Сonsumption: coms_total
+        for (i = 0; i < coms_final_arr.length; i++) {
+            for (j = i+1; j < coms_final_arr.length; j++) {
+                if(coms_final_arr[j].Mix == coms_final_arr[i].Mix){
+                    coms_final_arr[i].Сonsumption = coms_final_arr[i].Сonsumption + coms_final_arr[j].Сonsumption;
+                    coms_final_arr.splice(j,1);
+                }
+            }
         }
-      );
-      }
-  }
-  for (i = 0; i < coms_final_arr.length; i++) {
-    for (j = i+1; j < coms_final_arr.length; j++) {
-      if(coms_final_arr[j].Mix == coms_final_arr[i].Mix){
-        coms_final_arr[i].Сonsumption = coms_final_arr[i].Сonsumption + coms_final_arr[j].Сonsumption;
-        coms_final_arr.splice(j,1);
-      }
+
+        //CCR dive belaut dive. Remove first row from
+
+        //Build Final Table
+        body = document.getElementById("t_total_cons");
+
+        tr = "";
+        td = "";
+
+        pdf_table_cons_arr = [];
+        //price_cons_arr =[];
+
+        firstTable = document.getElementById("t_total_cons");
+        table = document.createElement("table");
+        table.setAttribute("width", "100%");
+        table.setAttribute("id", "opt_total_cons");
+
+        tr = document.createElement("tr");
+        tr.setAttribute("width", "100%");
+        td = document.createElement("td");
+        td.innerHTML = plan_lng("tab_tr_mix");
+        pdf_table_cons_arr.push(plan_lng("tab_tr_mix"));
+        tr.appendChild(td);
+
+        td = document.createElement("td");
+        td.innerHTML = plan_lng("tab_tr_coms");
+        pdf_table_cons_arr.push(plan_lng("tab_tr_coms"));
+        tr.appendChild(td);
+        td = document.createElement("td");
+        td.innerHTML = plan_lng("tab_tr_dmn");
+        pdf_table_cons_arr.push(plan_lng("tab_tr_dmn"));
+        tr.appendChild(td);
+
+        table.appendChild(tr);
+
+        //extract dipest mix from plan
+        var dpst_mix = dipest_mix_ret(main_plan);
+
+        for (i = 0; i < coms_final_arr.length; i++) {
+            tr = document.createElement("tr");
+            var aler_atr = "";
+
+
+            //Make alerts if exist
+            if(limit_return(coms_final_arr[i].Mix , coms_final_arr[i].Сonsumption , dpst_mix) != 0){
+                if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 2){aler_atr ="cons_wrn_deco_mix49"};
+                if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 3){aler_atr ="cons_wrn_deco_mix50"};
+                if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 4){aler_atr ="cons_wrn_deco_mix100"};
+
+                //Bottom mix check
+                if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 1){aler_atr ="cons_wrn_btm_mix"};
+            }
+            else
+            //all is ok and no change
+            {
+                aler_atr = "tab_black";
+            }
+
+            td = document.createElement("td");
+            td.setAttribute("class", aler_atr);
+            text = document.createTextNode(plan_lng(coms_final_arr[i].Mix));
+            pdf_table_cons_arr.push(plan_lng(coms_final_arr[i].Mix));
+
+            td.appendChild(text);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            td.setAttribute("class", aler_atr);
+            //liters
+            if($( "#tn_dmn" ).val() == 1){
+                text = document.createTextNode(coms_final_arr[i].Сonsumption);
+                pdf_table_cons_arr.push(coms_final_arr[i].Сonsumption);
+            }
+            //cubic foot
+            if($( "#tn_dmn" ).val() == 2){
+                text = document.createTextNode((0.0353147 * coms_final_arr[i].Сonsumption).toFixed(2));
+                pdf_table_cons_arr.push((0.0353147 * coms_final_arr[i].Сonsumption).toFixed(2));
+            }
+            td.appendChild(text);
+            tr.appendChild(td);
+
+            td = document.createElement("td");
+            td.setAttribute("class", aler_atr);
+            td.innerHTML = plan_lng("tab_dmn_ltr");
+            pdf_table_cons_arr.push(plan_lng("tab_dmn_ltr"));
+            tr.appendChild(td);
+
+            table.appendChild(tr);
+        }
+        return body.appendChild(table);
     }
-  }
-  
-  //Build Final Table
-  body = document.getElementById("t_total_cons");
+    else{
+        //hide consumption because list is empty
+        element_id_hide("7-header");
+        element_id_hide("t_total_cons");
+    }
 
-  tr = "";
-  td = "";
-
-  pdf_table_cons_arr = [];
-  //price_cons_arr =[];
-
-  firstTable = document.getElementById("t_total_cons");
-  table = document.createElement("table");
-  table.setAttribute("width", "100%");
-  table.setAttribute("id", "opt_total_cons");
-
-  tr = document.createElement("tr");
-  tr.setAttribute("width", "100%");
-  td = document.createElement("td");
-  td.innerHTML = plan_lng("tab_tr_mix");
-  pdf_table_cons_arr.push(plan_lng("tab_tr_mix"));
-  tr.appendChild(td);
-            
-  td = document.createElement("td");
-  td.innerHTML = plan_lng("tab_tr_coms");
-  pdf_table_cons_arr.push(plan_lng("tab_tr_coms"));
-  tr.appendChild(td);
-  td = document.createElement("td");
-  td.innerHTML = plan_lng("tab_tr_dmn");
-  pdf_table_cons_arr.push(plan_lng("tab_tr_dmn"));
-  tr.appendChild(td);
-  
-  table.appendChild(tr);
-
-      //extract dipest mix from plan
-      var dpst_mix = dipest_mix_ret(main_plan);
-
-  for (i = 0; i < coms_final_arr.length; i++) {
-    tr = document.createElement("tr");
-    var aler_atr = "";
-
-
-    //Make alerts if exist
-      if(limit_return(coms_final_arr[i].Mix , coms_final_arr[i].Сonsumption , dpst_mix) != 0){
-         if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 2){aler_atr ="cons_wrn_deco_mix49"};
-         if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 3){aler_atr ="cons_wrn_deco_mix50"};
-         if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 4){aler_atr ="cons_wrn_deco_mix100"};
-
-         //Bottom mix check
-          if(limit_return(coms_final_arr[i].Mix,coms_final_arr[i].Сonsumption , dpst_mix) == 1){aler_atr ="cons_wrn_btm_mix"};
-     }
-     else
-       //all is ok and no change
-     {
-         aler_atr = "tab_black";
-     }
-
-    td = document.createElement("td");
-    td.setAttribute("class", aler_atr);
-    text = document.createTextNode(plan_lng(coms_final_arr[i].Mix));
-    pdf_table_cons_arr.push(plan_lng(coms_final_arr[i].Mix));
-
-    td.appendChild(text);
-    tr.appendChild(td);
-
-    td = document.createElement("td");
-    td.setAttribute("class", aler_atr);
-    text = document.createTextNode(coms_final_arr[i].Сonsumption);
-    pdf_table_cons_arr.push(coms_final_arr[i].Сonsumption);
-    td.appendChild(text);
-    tr.appendChild(td);
-    
-    td = document.createElement("td");
-    td.setAttribute("class", aler_atr);
-    td.innerHTML = plan_lng("tab_dmn_ltr");
-    pdf_table_cons_arr.push(plan_lng("tab_dmn_ltr"));
-    tr.appendChild(td);
-        
-    table.appendChild(tr);
-  }
-  return body.appendChild(table);
 }
 
 //Compute limits is hi or lo and return true for alert or no

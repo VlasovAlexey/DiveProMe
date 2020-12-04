@@ -50,11 +50,41 @@ function hide_download_icons_node(){
 }
 hide_download_icons_node();
 
+//Load any js script and run it
+function loadScript(url, callback){
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    if (script.readyState){  //IE
+        script.onreadystatechange = function(){
+            if (script.readyState == "loaded" ||
+                script.readyState == "complete"){
+                script.onreadystatechange = null;
+                callback();
+            }
+        };
+    } else {  //Others
+        script.onload = function(){
+            callback();
+        };
+    }
+
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+}
+
 //Hide download section if run on Android Platform
 function hide_download_icons_android(){
     if(IsAndroid() === true){
         CSSLoad("style_hide_download_section.css?v0221");
         CSSLoad("style_hide_window_control_section.css?v023");
+
+        //and hide buttons on mobile devices PDF and XLS save documents
+        element_id_hide("btn_export_pdf_profile");
+        element_id_hide("btn_export_xls");
+        element_id_hide("btn_tbl_pdf");
+        element_id_hide("btn_export_pdf_pp");
     }
 }
 hide_download_icons_android();

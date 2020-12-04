@@ -78,8 +78,53 @@ function btn_export_tbl_plan_pdf(){
     });
 
     //add another page with total gas consumption
-    doc.addPage();
-    doc.text(15,10,"DiveProMe "+ plan_lng("ch_tbl_cons") + ". " + plan_lng("ch_depth") + ' ' + ld_dp + plan_lng("ch_mtr"));
+    if($( "#tn_plan_ccr" ).val() == 1){
+        //OC
+        pdf_add_total_cons(doc);
+    }
+    else{
+
+        //CCR
+        if(opt_blt_dln == 1){
+            //Bailout
+            pdf_add_total_cons(doc);
+        }
+        else{
+            //Diluent
+        }
+    }
+
+    //add table with OTU and CNS
+
+    doc.autoTable({
+        styles: {
+            font: 'Arial_Digiscream_Normal'
+        },
+        headStyles: {
+            fontStyle: 'Arial_Digiscream_Normal',
+            fillColor: "#ff89a9"
+        }
+        ,
+        head: [[pdf_table_otu_cns_arr[0] , pdf_table_otu_cns_arr[1]]],
+
+        body: [[pdf_table_otu_cns_arr[2] , pdf_table_otu_cns_arr[3]]]
+    });
+
+    //Save build to pdf file
+    //if node js enabled use special file save dialog
+    if(node_enable()===true){
+        NodesaveFile("#nodejs_export_pdf", doc.output() , false);
+    }
+    //else standart web based datauri64 blob save file for all browser
+    else {
+        doc.save("DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
+    }
+}
+
+//Function add consumption to PDF
+function pdf_add_total_cons(doc){
+    //doc.addPage();
+    //doc.text(15,10,"DiveProMe "+ plan_lng("ch_tbl_cons") + ". " + plan_lng("ch_depth") + ' ' + ld_dp + plan_lng("ch_mtr"));
     var j = 0;
     var i = 0;
 
@@ -108,16 +153,6 @@ function btn_export_tbl_plan_pdf(){
 
         body: pdf_fin_arr
     });
-
-    //Save build to pdf file
-    //if node js enabled use special file save dialog
-    if(node_enable()===true){
-        NodesaveFile("#nodejs_export_pdf", doc.output() , false);
-    }
-    //else standart web based datauri64 blob save file for all browser
-    else {
-        doc.save("DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
-    }
 }
 
 //Export XLS Table
@@ -137,13 +172,43 @@ function btn_export_xls(){
     //add to selected workbook
     XLSX.utils.book_append_sheet(wb, ws, plan_lng("ch_tbl_name"));
 
-    //and make for another table
-    tbl = document.getElementById("opt_total_cons");
+    //and make for another table with consumption
+    if($( "#tn_plan_ccr" ).val() == 1){
+        //OC
+        tbl = document.getElementById("opt_total_cons");
+        ws = XLSX.utils.table_to_sheet(tbl , {
+                raw : true
+            }
+        );
+        XLSX.utils.book_append_sheet(wb, ws, plan_lng("ch_tbl_cons"));
+    }
+    else{
+
+        //CCR
+        if(opt_blt_dln == 1){
+            //Bailout
+            tbl = document.getElementById("opt_total_cons");
+            ws = XLSX.utils.table_to_sheet(tbl , {
+                    raw : true
+                }
+            );
+            XLSX.utils.book_append_sheet(wb, ws, plan_lng("ch_tbl_cons"));
+        }
+        else{
+            //Diluent
+        }
+    }
+
+
+    //add OTU, CNS sheet
+    //and make for another table with consumption
+    tbl = document.getElementById("opt_otu_cns");
     ws = XLSX.utils.table_to_sheet(tbl , {
             raw : true
         }
     );
-    XLSX.utils.book_append_sheet(wb, ws, plan_lng("ch_tbl_cons"));
+    XLSX.utils.book_append_sheet(wb, ws, plan_lng("tab_tr_OTU") + "," + plan_lng("tab_tr_CNS"));
+
 
     //save xls
     XLSX.writeFile(wb, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xlsx");
@@ -200,23 +265,4 @@ function sleep(milliseconds) {
             break;
         }
     }
-}
-
-//Open overlay window with custom text
-function openNav() {
-    del_html_elem( "tn_overlay_text");
-    create_html_text( "tn_overlay_text" , "opt_overlay_text" , plan_lng("ch_UnderDev"));
-    document.getElementById("AlertOverlay").style.height = "100%";
-    //document.getElementById("AlertOverlay").style.display = "block";
-    document.getElementById("AlertOverlay").style.opacity = "1";
-
-}
-
-//and close
-function closeNav() {
-    setTimeout(function(){
-        document.getElementById("AlertOverlay").style.height = "0%";
-    }, 400);
-    document.getElementById("AlertOverlay").style.opacity = "0";
-    //document.getElementById("AlertOverlay").style.display = "none";
 }

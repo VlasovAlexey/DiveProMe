@@ -30,7 +30,7 @@ function addOption_custom (oListbox, text, value, isDefaultSelected, isSelected,
 
     oListbox.appendChild(oOption);
 }
-/*create_option_nrm - only for INTIGER NUMBERS. After dot numbers must be specifed manuality.
+/*create_option_nrm - only for INTEGER NUMBERS. After dot numbers must be specified manually.
 htmls_id - select element inside your html to add
 opt_id - id for new added select element.
 start - start number
@@ -38,19 +38,51 @@ end - end number for option
 selected_elm - what the option selected in the "select" list
 step - steep of change
 nrm_after_dot - how many numbers after dot
+dmn_type - dimension type for correct conversion from meters to feet or from liters to cubic feet "none","vol" and "depth"
 */
-function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step , nrm_after_dot){
+function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step , nrm_after_dot, dmn_type){
   
   htmls_id = document.getElementById(htmls_id);
   tmp_div = document.createElement('select');
   tmp_div.setAttribute("id", opt_id);
   tmp_div.setAttribute("name", opt_id);
   tmp_div.setAttribute("class", opt_id);
-  
-  for(f = start ; f < end +nrm_step ; f = f + nrm_step){
-    fixed_f = f.toFixed(nrm_after_dot);
-    addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+
+  //not specified dimension e.g. time or partial pressures
+  if(dmn_type === "none"){
+      for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+          fixed_f = f.toFixed(nrm_after_dot);
+          addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+      }
   }
+    //meters\liters\bars
+    if($( "#tn_dmn" ).val() == 1){
+        if(dmn_type === "vol" || dmn_type === "depth"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+    }
+
+    //feet\cubic feet\bar
+    if($( "#tn_dmn" ).val() == 2){
+        //volume dimension cubic feet
+        if(dmn_type === "vol"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, (Math.ceil(0.0353147 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+        //long dimension feet
+        if(dmn_type === "depth"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, (Math.ceil(3.28084 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+    }
+
   htmls_id.appendChild(tmp_div);
 }
 
@@ -113,28 +145,47 @@ function del_html_elem(htmls_id){
 }
 //Special changes for custom class changes only for level number option
 function create_option_lvl(htmls_id , opt_id , start , end , selected_elm , nrm_step , nrm_after_dot){
-  
+
   htmls_id = document.getElementById(htmls_id);
   tmp_div = document.createElement('select');
   tmp_div.setAttribute("id", opt_id);
   tmp_div.setAttribute("name", opt_id);
   tmp_div.setAttribute("class", "lvl_option_number_style");
-  
-  for(f = start ; f < end +nrm_step ; f = f + nrm_step){
-    fixed_f = f.toFixed(nrm_after_dot);
-    addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
-  }
+
+    //meters\liters\bars
+    if($( "#tn_dmn" ).val() == 1){
+        for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+            fixed_f = f.toFixed(nrm_after_dot);
+            addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+        }
+    }
+
+    //feet\cubic feet\bar
+    if($( "#tn_dmn" ).val() == 2){
+        //volume dimension cubic feet
+        if(start >= 1){start = 2}
+        /*
+        for(f = (Math.floor(3.28084 * start)) ; f < (Math.floor(3.28084 * end)) +nrm_step ; f = f + nrm_step) {
+            fixed_f = f.toFixed(nrm_after_dot);
+            addOption(tmp_div, fixed_f, Math.floor(fixed_f * 0.3048) , false, fixed_f-1 == (Math.floor(3.28084 * selected_elm)));
+        }
+        */
+        for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+            fixed_f = f.toFixed(nrm_after_dot);
+            addOption (tmp_div, (Math.ceil(3.28084 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
+        }
+    }
   htmls_id.appendChild(tmp_div);
 }
 //Special changes for custom class changes only for level time option
 function create_option_tm(htmls_id , opt_id , start , end , selected_elm , nrm_step , nrm_after_dot){
-  
+
   htmls_id = document.getElementById(htmls_id);
   tmp_div = document.createElement('select');
   tmp_div.setAttribute("id", opt_id);
   tmp_div.setAttribute("name", opt_id);
   tmp_div.setAttribute("class", "lvl_option_time_style");
-  
+
   for(f = start ; f < end +nrm_step ; f = f + nrm_step){
     fixed_f = f.toFixed(nrm_after_dot);
     addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);

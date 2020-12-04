@@ -1,5 +1,5 @@
 
-//Function created table whit different columns,rows and any plooace inside your HTML
+//Function created table whit different columns,rows and any place inside your HTML
 //TableId - HTML id for your table will be placed
 //tableHeaderData - header data for your table
 //Example array test_a = [["HEAD 1, HEAD 1", "HEAD, HEAD 2"]];
@@ -108,21 +108,53 @@ function upd_price() {
         if(price_cur_option_current == 4){
             var price_val = plan_lng("tn_price_dls_name_rouble");
         }
-
-        price_body.push([coms_final_arr[c].Mix, coms_final_arr[c].Сonsumption , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
+        //liters
+        if($( "#tn_dmn" ).val() == 1){
+            price_body.push([coms_final_arr[c].Mix, coms_final_arr[c].Сonsumption , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
+        }
+        //cubic foot
+        if($( "#tn_dmn" ).val() == 2){
+            price_body.push([coms_final_arr[c].Mix, (0.0353147 * coms_final_arr[c].Сonsumption).toFixed(2) , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
+        }
 
         if(parseFloat((price_mix_oxy + price_mix_he).toFixed(2)) > 0){
-            price_chart.push(
-                {
-                    name : coms_final_arr[c].Mix,
-                    y: parseFloat((price_mix_oxy + price_mix_he).toFixed(2))
+
+            if($( "#tn_plan_ccr" ).val() == 1){
+                //OC
+                price_chart.push(
+                    {
+                        name : coms_final_arr[c].Mix,
+                        y: parseFloat((price_mix_oxy + price_mix_he).toFixed(2))
+                    }
+                );
+            }
+            else{
+                //CCR
+                if(opt_blt_dln == 1){
+                    //Bailout
+                    price_chart.push(
+                        {
+                            name : coms_final_arr[c].Mix,
+                            y: parseFloat((price_mix_oxy + price_mix_he).toFixed(2))
+                        }
+                    );
                 }
-            );
+                else{
+                    //Diluent
+                }
+            }
         }
 
         price_mix_total = (price_mix_total + (price_mix_oxy + price_mix_he));
 
     }
+    //add to chart topping price
+    price_chart.push(
+        {
+            name : plan_lng("ch_price_top_total"),
+            y: parseFloat((price_top_total).toFixed(2))
+        }
+    );
 
     //build table footer final total price for selected currency
     var tableFooter = [];
@@ -140,9 +172,71 @@ function upd_price() {
     if(price_cur_option_current == 4){
         var price_val_chart = "₽";
     }
+
+
+
     //create circle 3d chart
     del_html_elem("t_price_chart");
-    Highcharts.chart("t_price_chart", {
+    price_3d_chart("t_price_chart" , price_val_chart , price_chart);
+
+    //Delete old table if exist and build final table
+    del_html_elem("t_price_main");
+
+    if($( "#tn_plan_ccr" ).val() == 1){
+        //OC
+        createTable("t_price_main" , price_header , price_body , tableFooter, "tn_price_table_total_style");
+    }
+    else{
+        //CCR
+        if(opt_blt_dln == 1){
+            //Bailout
+            createTable("t_price_main" , price_header , price_body , tableFooter, "tn_price_table_total_style");
+        }
+        else{
+            //Diluent
+            price_mix_total = 0;
+        }
+    }
+
+    //build total price by every currency
+    price_header = price_body = [];
+
+    //if dollars selected
+    if(price_cur_option_current == 1){
+        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+    }
+    //euros
+    if(price_cur_option_current == 2){
+        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+    }
+    //pounds
+    if(price_cur_option_current == 3){
+        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+    }
+
+    if(price_cur_option_current == 4){
+        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
+    }
+
+    del_html_elem("t_price_total");
+    createTable("t_price_total" , price_header , price_body, tableFooter , "tn_price_table_total_style");
+}
+
+//Build circle 3d chart
+function price_3d_chart(price_chart_id , price_val_chart , price_chart){
+    Highcharts.chart( price_chart_id, {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
@@ -179,45 +273,4 @@ function upd_price() {
             data: price_chart
         }]
     });
-
-    //Delete old table if exist and build final table
-    del_html_elem("t_price_main");
-    createTable("t_price_main" , price_header , price_body , tableFooter, "tn_price_table_total_style");
-
-    //build total price by every currency
-    price_header = price_body = [];
-
-    //if dollars selected
-    if(price_cur_option_current == 1){
-        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
-    }
-    //euros
-    if(price_cur_option_current == 2){
-        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
-    }
-    //pounds
-    if(price_cur_option_current == 3){
-        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
-    }
-
-    if(price_cur_option_current == 4){
-        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
-        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
-    }
-
-    del_html_elem("t_price_total");
-    createTable("t_price_total" , price_header , price_body, tableFooter , "tn_price_table_total_style");
-
-    //create circle 3d chart
 }

@@ -4387,4 +4387,4 @@ SOFTWARE.
 
 },{"./rgbcolor.js":10,"SvgPath":1,"cssesc":8,"font-family":9}]},{},[11])(11)
 });
-//# sourceMappingURL=svg2pdf.js.map
+
