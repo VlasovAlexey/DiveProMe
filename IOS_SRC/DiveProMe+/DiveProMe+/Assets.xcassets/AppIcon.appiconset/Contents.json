@@ -1,0 +1,272 @@
+{
+  "images" : [
+    {
+      "filename" : "Logo40AndroidStore-2.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Logo60AndroidStore.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Logo58AndroidStore-2.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo87AndroidStore-1.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo80AndroidStore-2.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Logo120AndroidStore-1.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Logo120AndroidStore-2.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Logo180AndroidStore-1.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Logo20AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Logo40AndroidStore-1.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Logo29AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo58AndroidStore-1.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo40AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Logo80AndroidStore-1.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Logo76AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "Logo152AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "Logo167AndroidStore.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "83.5x83.5"
+    },
+    {
+      "filename" : "Logo1024AndroidStore-2.png",
+      "idiom" : "ios-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    },
+    {
+      "filename" : "Logo120AndroidStore.png",
+      "idiom" : "car",
+      "scale" : "2x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Logo180AndroidStore.png",
+      "idiom" : "car",
+      "scale" : "3x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Logo48AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "notificationCenter",
+      "scale" : "2x",
+      "size" : "24x24",
+      "subtype" : "38mm"
+    },
+    {
+      "filename" : "Logo55AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "notificationCenter",
+      "scale" : "2x",
+      "size" : "27.5x27.5",
+      "subtype" : "42mm"
+    },
+    {
+      "filename" : "Logo58AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "companionSettings",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo87AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "companionSettings",
+      "scale" : "3x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Logo80AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "appLauncher",
+      "scale" : "2x",
+      "size" : "40x40",
+      "subtype" : "38mm"
+    },
+    {
+      "filename" : "Logo88AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "appLauncher",
+      "scale" : "2x",
+      "size" : "44x44",
+      "subtype" : "40mm"
+    },
+    {
+      "filename" : "Logo100AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "appLauncher",
+      "scale" : "2x",
+      "size" : "50x50",
+      "subtype" : "44mm"
+    },
+    {
+      "filename" : "Logo172AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "quickLook",
+      "scale" : "2x",
+      "size" : "86x86",
+      "subtype" : "38mm"
+    },
+    {
+      "filename" : "Logo196AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "quickLook",
+      "scale" : "2x",
+      "size" : "98x98",
+      "subtype" : "42mm"
+    },
+    {
+      "filename" : "Logo216AndroidStore.png",
+      "idiom" : "watch",
+      "role" : "quickLook",
+      "scale" : "2x",
+      "size" : "108x108",
+      "subtype" : "44mm"
+    },
+    {
+      "filename" : "Logo1024AndroidStore-1.png",
+      "idiom" : "watch-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    },
+    {
+      "filename" : "Logo16AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "Logo32AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "16x16"
+    },
+    {
+      "filename" : "Logo32AndroidStore-1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "Logo64AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "32x32"
+    },
+    {
+      "filename" : "Logo128AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "Logo256AndroidStore-1.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "128x128"
+    },
+    {
+      "filename" : "Logo256AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "Logo512AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "256x256"
+    },
+    {
+      "filename" : "Logo512AndroidStore-1.png",
+      "idiom" : "mac",
+      "scale" : "1x",
+      "size" : "512x512"
+    },
+    {
+      "filename" : "Logo1024AndroidStore.png",
+      "idiom" : "mac",
+      "scale" : "2x",
+      "size" : "512x512"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
