@@ -231,6 +231,10 @@
                 ".tn_donat_header" : "",
                 ".btn_msg" : "How to make a Donation",
                 ".btn_tel" : "Make Call to Developers",
+
+                ".btn_ios_msg" : "How to make a Donation",
+                ".btn_ios_tel" : "Make Call to Developers",
+
                 ".tn_donat_header_founder" : "Founders Donation Section",
                 ".tn_donat_header_gold" : "Gold Donation Section",
                 ".tn_donat_header_silver" : "Silver Donation Section",
@@ -406,6 +410,10 @@
                 ".tn_donat_header" : "",
                 ".btn_msg" : "Как сделать пожертвование",
                 ".btn_tel" : "Сделать звонок разработчикам",
+
+                ".btn_ios_msg" : "Как сделать пожертвование",
+                ".btn_ios_tel" : "Сделать звонок разработчикам",
+
                 ".tn_donat_header_founder" : "Секция основателей",
                 ".tn_donat_header_gold" : "Золотая секция",
                 ".tn_donat_header_silver" : "Серебряная секция",
@@ -576,6 +584,10 @@
                 ".tn_donat_header" : "",
                 ".btn_msg" : "Cómo hacer una Donación",
                 ".btn_tel" : "Hacer una Llamada al Desarrollador",
+
+                ".btn_ios_msg" : "Cómo hacer una Donación",
+                ".btn_ios_tel" : "Hacer una Llamada al Desarrollador",
+
                 ".tn_donat_header_founder" : "Sección de Fundadores",
                 ".tn_donat_header_gold" : "Sección de Oro",
                 ".tn_donat_header_silver" : "Sección de Plata",

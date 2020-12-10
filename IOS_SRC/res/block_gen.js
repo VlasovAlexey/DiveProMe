@@ -24,20 +24,23 @@ function Slider(selector, currentId) {
 
 		}
 
-		Slider.prototype.open = function(i,e){
+		/*Slider.prototype.open = function(i,e){
 			if (this.current === i) return false;
 			if (this.current>-1) {
-				this.body.eq(this.current).slideUp(this.duration);
+				//this.body.eq(this.current).slideUp(this.duration);
 			}
 
 			this.current = i;
-			//,function(){e.currentTarget.scrollIntoView(true)} added for move header to top of the page
-			    this.body.eq(this.current).slideDown(this.duration,function(){(e.currentTarget.scrollIntoView(true)) + 30});
-            //this.body.eq(this.current).slideDown(this.duration);
+
+			//this.body.eq(this.current).slideDown(this.duration,function(){(e.currentTarget.scrollIntoView(true)) + 30});
+            this.body.eq(this.current).slideDown(this.duration);
 
 		};
+		*/
+Slider.prototype.open = function (i, e) {
+	this.body.eq(i).slideToggle(this.duration);
+};
 
-
-		$(function() {
-			new Slider('#slider', 0);
-		});
+$(function() {
+	new Slider('#slider', 0);
+});

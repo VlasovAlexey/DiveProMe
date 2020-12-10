@@ -363,7 +363,9 @@ select
 .btn_msg,
 .btn_tel,
 .btn_bailout,
-.btn_diluent
+.btn_diluent,
+.btn_ios_msg,
+.btn_ios_tel
 {
 
     margin-top: 10px;
@@ -397,7 +399,9 @@ select
 .btn_msg:hover,
 .btn_tel:hover,
 .btn_bailout:hover,
-.btn_diluent:hover
+.btn_diluent:hover,
+.btn_ios_msg:hover,
+.btn_ios_tel:hover
 {
     background: #eeeeee;
     color: #424242;
@@ -415,7 +419,9 @@ select
 .btn_msg:active,
 .btn_tel:active,
 .btn_bailout:active,
-.btn_diluent:active
+.btn_diluent:active,
+.btn_ios_msg:active,
+.btn_ios_tel:active
 {
     top: 1px;
     background: #424242;
@@ -435,7 +441,9 @@ select
 }
 
 .btn_msg,
-.btn_tel
+.btn_tel,
+.btn_ios_msg,
+.btn_ios_tel
 {
     background: linear-gradient(-45deg, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C);
     background-size: 1000% 1000%;

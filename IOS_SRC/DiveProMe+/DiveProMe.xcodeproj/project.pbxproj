@@ -99,6 +99,7 @@
 		8418678D24FE74C20085E44A /* calc_learn.js in Resources */ = {isa = PBXBuildFile; fileRef = 8418673924FE74C00085E44A /* calc_learn.js */; };
 		8418678E24FE74C20085E44A /* style_hide_download_section.css in Resources */ = {isa = PBXBuildFile; fileRef = 8418673A24FE74C10085E44A /* style_hide_download_section.css */; };
 		8418679124FE75DB0085E44A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8418679024FE75DB0085E44A /* WebKit.framework */; };
+		84434CF12582BB28005D4C82 /* ios_fn.js in Resources */ = {isa = PBXBuildFile; fileRef = 84434CF02582BB28005D4C82 /* ios_fn.js */; };
 		849C0A38257BFCFA009AE2E3 /* cup_bronze.png in Resources */ = {isa = PBXBuildFile; fileRef = 849C0A34257BFCFA009AE2E3 /* cup_bronze.png */; };
 		849C0A39257BFCFA009AE2E3 /* cup_silver.png in Resources */ = {isa = PBXBuildFile; fileRef = 849C0A35257BFCFA009AE2E3 /* cup_silver.png */; };
 		849C0A3A257BFCFA009AE2E3 /* cup_gold.png in Resources */ = {isa = PBXBuildFile; fileRef = 849C0A36257BFCFA009AE2E3 /* cup_gold.png */; };
@@ -200,6 +201,7 @@
 		8418673924FE74C00085E44A /* calc_learn.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = calc_learn.js; path = ../../res/calc_learn.js; sourceTree = "<group>"; };
 		8418673A24FE74C10085E44A /* style_hide_download_section.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style_hide_download_section.css; path = ../../res/style_hide_download_section.css; sourceTree = "<group>"; };
 		8418679024FE75DB0085E44A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		84434CF02582BB28005D4C82 /* ios_fn.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ios_fn.js; sourceTree = "<group>"; };
 		849C0A34257BFCFA009AE2E3 /* cup_bronze.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_bronze.png; sourceTree = "<group>"; };
 		849C0A35257BFCFA009AE2E3 /* cup_silver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_silver.png; sourceTree = "<group>"; };
 		849C0A36257BFCFA009AE2E3 /* cup_gold.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cup_gold.png; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				8418672224FE74B80085E44A /* jquery.mCustomScrollbar.js */,
 				841866ED24FE74A80085E44A /* jquery.mousewheel-3.0.6.js */,
 				8418673624FE74BE0085E44A /* jquery.mousewheel.js */,
+				84434CF02582BB28005D4C82 /* ios_fn.js */,
 				8418670C24FE74B30085E44A /* jspdf.plugin.autotable.js */,
 				8418673424FE74BB0085E44A /* jspdf.src.js */,
 				841866EF24FE74A90085E44A /* jszip.js */,
@@ -450,6 +453,7 @@
 				8418675E24FE74C10085E44A /* os_lnx_light.svg in Resources */,
 				8418675124FE74C10085E44A /* index.html in Resources */,
 				8418675624FE74C10085E44A /* katex.js in Resources */,
+				84434CF12582BB28005D4C82 /* ios_fn.js in Resources */,
 				8418676424FE74C10085E44A /* canvg.min.js in Resources */,
 				8418675C24FE74C10085E44A /* promo_label+.jpg in Resources */,
 				8418677B24FE74C20085E44A /* os_win_dark.svg in Resources */,
@@ -659,9 +663,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 358GFLQAQR;
 				INFOPLIST_FILE = "DiveProMe+/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -669,10 +673,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.06;
-				PRODUCT_BUNDLE_IDENTIFIER = "AlexeyVlasov.DiveProMe-";
+				MARKETING_VERSION = 9.08;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diveprome.alexeyvlasov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Main;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -683,9 +687,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGNING_ALLOWED = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 358GFLQAQR;
 				INFOPLIST_FILE = "DiveProMe+/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -693,10 +697,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.06;
-				PRODUCT_BUNDLE_IDENTIFIER = "AlexeyVlasov.DiveProMe-";
+				MARKETING_VERSION = 9.08;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diveprome.alexeyvlasov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = Main;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

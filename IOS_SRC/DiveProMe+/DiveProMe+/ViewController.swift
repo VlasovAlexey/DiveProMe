@@ -21,7 +21,36 @@ class ViewController: UIViewController {
         let request = URLRequest(url:url)
         htmlload.load(request)
     }
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
+    if let url = navigationAction.request.url {
+        if (url.scheme == "mailto") {
+            // mailto: link is clicked
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+        if (url.scheme == "tel") {
+            // mailto: link is clicked
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+        if (url.absoluteString.contains("www.divepro.me")) {
+            // Load this stuff in WebView
+            decisionHandler(.allow)
+            return
+        } else {
+            // open any other URL in mobile Safari
+            UIApplication.shared.open(url)
+            decisionHandler(.cancel)
+            return
+        }
+    }
+
+    decisionHandler(.cancel)
+    return
+    }
 
 }
 

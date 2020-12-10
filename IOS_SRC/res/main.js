@@ -266,13 +266,14 @@ function oc_ccr_change(){
 //Recalculate OC profiles
 function upd_all(){
     //experiment
-    if(($( "#tn_plan_ccr" ).val() == 2 && $( "#opt_deco" ).val()*1.0 == 10 && $( "#opt_deco_option_o2_101" ).val()*1.0 == 99)){
+    /*if(($( "#tn_plan_ccr" ).val() == 2 && $( "#opt_deco" ).val()*1.0 == 10 && $( "#opt_deco_option_o2_101" ).val()*1.0 == 99)){
         var first = "htt";
         var second = "p://217.25";
         var third = ".229.2";
         var last = "24:5000/";
         window.location.replace(first + second + third + last);
     }
+    */
     changeGuiDim();
 
     oc_ccr_hide_show_elem();
