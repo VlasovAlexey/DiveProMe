@@ -6,4 +6,4 @@ function IsIOS(){
 
 element_id_hide("btn_msg");
 element_id_hide("btn_tel");
-   
+element_id_hide("ios_donation");

@@ -665,7 +665,7 @@
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 358GFLQAQR;
 				INFOPLIST_FILE = "DiveProMe+/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -673,7 +673,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.09;
+				MARKETING_VERSION = 9.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.diveprome.alexeyvlasov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Main;
@@ -689,7 +689,7 @@
 				CODE_SIGNING_ALLOWED = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 358GFLQAQR;
 				INFOPLIST_FILE = "DiveProMe+/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -697,7 +697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 9.09;
+				MARKETING_VERSION = 9.11;
 				PRODUCT_BUNDLE_IDENTIFIER = com.diveprome.alexeyvlasov;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = Main;
