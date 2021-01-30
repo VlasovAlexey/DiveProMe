@@ -251,15 +251,83 @@
       return body.replaceChild(newTable, firstTable);
     }
   }
+
+  //Return current water density in kg at 20 Celsius
+  function water_density(){
+      tn_water_g = document.getElementById("tn_water");
+      tn_water_g_idx = tn_water_g.options[tn_water_g.selectedIndex].value;
+
+      if (tn_water_g_idx == 1){
+          return 1030; // atlantic
+      }
+
+      if (tn_water_g_idx == 2){
+          return 1000; // fresh
+      }
+      if (tn_water_g_idx == 3){
+          return 1015; // baltic
+      }
+      if (tn_water_g_idx == 4){
+          return 1040; // red sea
+      }
+      if (tn_water_g_idx == 5){
+          return 1150; // great salt lake
+      }
+      if (tn_water_g_idx == 6){
+          return 1330; // Dead sea
+      }
+      if (tn_water_g_idx == 7){
+          return 1024; // Pacific
+      }
+      return false;
+  }
+//fresh water temperature correction from zero to 50 celsius. Return multiplier
+//only number allowed from zero to 50 by 2
+//example: 0,2,4,...48,50
+  function water_density_temperature_correction(){
+
+      var temperature_correction = [
+          0.9987, //zero Celsius
+          0.9997,
+          1.0, //4 Celsius
+          0.9997,
+          0.9988,
+          0.9973,
+          0.9953,
+          0.9927,
+          0.9897,
+          0.9862,
+          0.9823,
+          0.9780,//22 Celsius by default
+          0.9733,
+          0.9681,
+          0.9626,
+          0.9568,
+          0.9506,
+          0.9440,
+          0.9372,
+          0.9300,
+          0.9225,
+          0.9147,
+          0.907,
+          0.898,
+          0.890,
+          0.881 //50 Celsius
+      ];
+      var opt_celsus_t = document.getElementById("opt_celsus");
+      var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
+      return temperature_correction[opt_celsus_t_idx * 0.5];
+  }
+
+
   //Build PP table
   function dplan_press_arr(tmp_arr){
     del_html_elem("t_press");
+
+
     
     //tmp_arr.splice(0,5);
     dec_table = tmp_arr;
-
-    //console.log(dec_table);
-
 
     body = document.getElementById("t_press");
     columns = 5;
@@ -322,8 +390,6 @@
           if(j === 0){
             depth = depth_from_name_arr(dec_table[tick+1]);
             time_add = time_to_dec_time(dec_table[tick+2]);
-            //console.log(time_add);
-              // console.log(time_base);
 
             depth_start = depth[0];
             if(depth.length > 1){
@@ -335,8 +401,20 @@
             }
             o2_fr = gass_from_name_arr(dec_table[tick+4]);
             o2_fr = o2_fr[0];
-            o2_fr_start = ((o2_fr*(depth_start+10)*0.001)).toFixed(2);
-            o2_fr_end = ((o2_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  //include water density, altitude correction and water temperature correction
+                  o2_fr_start = ((water_density_temperature_correction() * water_density()*0.001*(o2_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * o2_fr))).toFixed(2);
+                  o2_fr_end = ((water_density_temperature_correction() * water_density()*0.001*(o2_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * o2_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  o2_fr_start = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(o2_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * o2_fr)))).toFixed(1);
+                  o2_fr_end = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(o2_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * o2_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(o2_fr_start);
                 ppo2_array.push([1*(time_base).toFixed(1) , 1*parseFloat(o2_fr_start).toFixed(2)]);
@@ -365,8 +443,20 @@
             
             n2_fr = gass_from_name_arr(dec_table[tick+3]);
             n2_fr = n2_fr[1];
-            n2_fr_start = ((n2_fr*(depth_start+10)*0.001)).toFixed(2);
-            n2_fr_end = ((n2_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  //include water density, altitude correction and water temperature correction
+                  n2_fr_start = ((water_density_temperature_correction() * water_density()*0.001*(n2_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * n2_fr))).toFixed(2);
+                  n2_fr_end = ((water_density_temperature_correction() * water_density()*0.001*(n2_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * n2_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  n2_fr_start = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(n2_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * n2_fr)))).toFixed(1);
+                  n2_fr_end = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(n2_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * n2_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(n2_fr_start);
                 ppn2_array.push([1*(time_base).toFixed(1) , 1*parseFloat(n2_fr_start).toFixed(2)]);
@@ -393,8 +483,20 @@
             
             he_fr = gass_from_name_arr(dec_table[tick+2]);
             he_fr = he_fr[2];
-            he_fr_start = ((he_fr*(depth_start+10)*0.001)).toFixed(2);
-            he_fr_end = ((he_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  //include water density, altitude correction and water temperature correction
+                  he_fr_start = ((water_density_temperature_correction() * water_density()*0.001*(he_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * he_fr))).toFixed(2);
+                  he_fr_end = ((water_density_temperature_correction() * water_density()*0.001*(he_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * he_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  he_fr_start = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(he_fr*(depth_start+10)*0.001)) - ((1 - height_to_bar())*(0.01 * he_fr)))).toFixed(1);
+                  he_fr_end = (14.5037738 * ((water_density_temperature_correction() * water_density()*0.001*(he_fr*(depth_end+10)*0.001)) - ((1 - height_to_bar())*(0.01 * he_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(he_fr_start);
                 pphe_array.push([1*(time_base).toFixed(1) , 1*parseFloat(he_fr_start).toFixed(2)]);
@@ -637,11 +739,14 @@
             time1 = time_to_dec_time(dec_table[tick]);
             
             if (i-2 < (lvl_arr.length/3)*2){
-              coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
+
+                //((water_density_temperature_correction() * water_density() * (your_computation) - ((1 - height_to_bar())*(0.01 * n2_fr)))
+                //include water density, altitude correction and water temperature correction
+                coms = Math.ceil((time1) * ((water_density_temperature_correction() * (water_density() * 0.001) * (((depth_end + depth_start) * 0.5) * 0.1 + 1)) - (1 - height_to_bar())) * opt_rmv_bt_idx);
             }
             else
-            {
-              coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
+            {   //include water density, altitude correction and water temperature correction
+                coms = Math.ceil((time1) * ((water_density_temperature_correction() * (water_density() * 0.001) * (((depth_end + depth_start) * 0.5) * 0.1 + 1)) - (1 - height_to_bar())) * opt_rmv_deco_idx);
             }
               //liters
               if($( "#tn_dmn" ).val() == 1){
@@ -1058,12 +1163,17 @@ function total_cns_otu(tmp_arr) {
       time1 = time_to_dec_time(dec_table[tick].Time);
       
       //select consumption rate deco or bottom
+
       if (i-1 < (lvl_arr.length/3)*2){
-        coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
+          //include water density, altitude correction and water temperature correction
+          coms = Math.ceil((time1) * ((water_density_temperature_correction() * (water_density() * 0.001) * (((depth_end + depth_start) * 0.5) * 0.1 + 1)) - (1 - height_to_bar())) * opt_rmv_bt_idx);
+        //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
       }
       else
       {
-        coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
+          //include water density, altitude correction and water temperature correction
+          coms = Math.ceil((time1) * ((water_density_temperature_correction() * (water_density() * 0.001) * (((depth_end + depth_start) * 0.5) * 0.1 + 1)) - (1 - height_to_bar())) * opt_rmv_deco_idx);
+        //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
       }
       
       coms_ttl_arr.push(
@@ -1124,7 +1234,7 @@ function total_cns_otu(tmp_arr) {
             }
         }
 
-        //CCR dive belaut dive. Remove first row from
+        //CCR dive beilaut dive. Remove first row from
 
         //Build Final Table
         body = document.getElementById("t_total_cons");

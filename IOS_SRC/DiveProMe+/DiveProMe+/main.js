@@ -55,19 +55,27 @@ function upd_deco_list(){
   fix_dup_mix_arr(deco_mix_arr,mix_deco_idx);
   
   a = 0;
-  for(c = 0 ; c < mix_deco_idx ; c++){
-    create_html_text("tr_deco_option" , "tr_deco_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" %O<sub><small>2</small></sub>\\He");
+  var c_counter = 0;
+  for(var c = 0 ; c < mix_deco_idx ; c++){
+      create_html_text("tr_deco_option" , "tr_deco_mix_name_"+((c+1).toString()) , mix_lng() + ((c+1).toString()) + " O<sub><small>2</small></sub>, % / He, % / " + plan_lng("dmn_mod") + lng_meters);
     
-    create_option("tr_deco_option", "opt_deco_option_o2_"+(c+1).toString()+"1", 1, 100, deco_mix_arr[a], 1 , 0 , "none");
-    deco_watcher[a] = document.getElementById("opt_deco_option_o2_"+(c+1).toString()+"1");
-    deco_watcher[a].addEventListener('change', upd_deco_gas_list);
-    deco_watcher[a].addEventListener('change', upd_all);
+      create_option("tr_deco_option", "opt_deco_option_o2_"+(c+1).toString()+"1", 1, 100, deco_mix_arr[a], 1 , 0 , "none");
+      deco_watcher[a] = document.getElementById("opt_deco_option_o2_"+(c+1).toString()+"1");
+      deco_watcher[a].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[a].addEventListener('change', upd_all);
     
-    create_option("tr_deco_option", "opt_deco_option_he_"+(c+1).toString()+"2", 0, 99, deco_mix_arr[a+1], 1 , 0 , "none");
-    deco_watcher[a+1] = document.getElementById("opt_deco_option_he_"+(c+1).toString()+"2");
-    deco_watcher[a+1].addEventListener('change', upd_deco_gas_list);
-    deco_watcher[a+1].addEventListener('change', upd_all);
-    a = a + 2;
+      create_option("tr_deco_option", "opt_deco_option_he_"+(c+1).toString()+"2", 0, 99, deco_mix_arr[a+1], 1 , 0 , "none");
+      deco_watcher[a+1] = document.getElementById("opt_deco_option_he_"+(c+1).toString()+"2");
+      deco_watcher[a+1].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[a+1].addEventListener('change', upd_all);
+
+      create_option("tr_deco_option", "opt_deco_option_mod_" + (c + 1).toString() + "3", 6, 300, deco_mix_depth_arr[c_counter], 3 , 0 , "depth_mod");
+      deco_watcher[c_counter] = document.getElementById("opt_deco_option_mod_"+(c + 1).toString() + "3");
+      deco_watcher[c_counter].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[c_counter].addEventListener('change', upd_all);
+
+      a = a + 2;
+      c_counter = c_counter + 1;
   }
 }
 upd_deco_list();
@@ -81,7 +89,7 @@ function upd_travel_list(){
   
   a = 0;
   for(c = 0 ; c < mix_travel_idx ; c++){
-    create_html_text("tr_travel_option" , "tr_travel_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" %O<sub><small>2</small></sub>\\He");
+    create_html_text("tr_travel_option" , "tr_travel_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" O<sub><small>2</small></sub>, % / He, %");
     
     create_option("tr_travel_option", "opt_travel_option_o2_"+(c+1).toString()+"1", 1, 100, travel_mix_arr[a], 1 , 0 , "none");
     travel_watcher[a] = document.getElementById("opt_travel_option_o2_"+(c+1).toString()+"1");
@@ -265,17 +273,7 @@ function oc_ccr_change(){
 
 //Recalculate OC profiles
 function upd_all(){
-    //experiment
-    /*if(($( "#tn_plan_ccr" ).val() == 2 && $( "#opt_deco" ).val()*1.0 == 10 && $( "#opt_deco_option_o2_101" ).val()*1.0 == 99)){
-        var first = "htt";
-        var second = "p://217.25";
-        var third = ".229.2";
-        var last = "24:5000/";
-        window.location.replace(first + second + third + last);
-    }
-    */
     changeGuiDim();
-
     oc_ccr_hide_show_elem();
     //console.log(opt_blt_dln);
 

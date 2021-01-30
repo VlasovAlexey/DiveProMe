@@ -72,6 +72,7 @@ function upd_price() {
     var price_pound = (($("#opt_calc_cur_ex_rate_pence option:selected").val()) * 0.01) + ($("#opt_calc_cur_ex_rate_pound option:selected").val() * 1.0);
     var price_euro = (($("#opt_calc_cur_ex_rate_eucents option:selected").val()) * 0.01) + ($("#opt_calc_cur_ex_rate_euro option:selected").val() * 1.0);
     var price_rouble = (($("#opt_calc_cur_ex_rate_kopek option:selected").val()) * 0.01) + ($("#opt_calc_cur_ex_rate_rub option:selected").val() * 1.0);
+    var price_yuan = (($("#opt_calc_cur_ex_rate_fyn option:selected").val()) * 0.01) + ($("#opt_calc_cur_ex_rate_yuan option:selected").val() * 1.0);
 
     //build table header
     var price_header = [[plan_lng("price_gas"),plan_lng("ch_gas_d"),plan_lng("price_price"),plan_lng("price_currency")]];
@@ -108,13 +109,16 @@ function upd_price() {
         if(price_cur_option_current == 4){
             var price_val = plan_lng("tn_price_dls_name_rouble");
         }
+        if(price_cur_option_current == 5){
+            var price_val = plan_lng("tn_price_dls_name_yuan");
+        }
         //liters
         if($( "#tn_dmn" ).val() == 1){
-            price_body.push([coms_final_arr[c].Mix, coms_final_arr[c].Сonsumption , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
+            price_body.push([lng_cng(coms_final_arr[c].Mix), coms_final_arr[c].Сonsumption , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
         }
         //cubic foot
         if($( "#tn_dmn" ).val() == 2){
-            price_body.push([coms_final_arr[c].Mix, (0.0353147 * coms_final_arr[c].Сonsumption).toFixed(2) , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
+            price_body.push([lng_cng(coms_final_arr[c].Mix), (0.0353147 * coms_final_arr[c].Сonsumption).toFixed(2) , (price_mix_oxy + price_mix_he).toFixed(2) , price_val]);
         }
 
         if(parseFloat((price_mix_oxy + price_mix_he).toFixed(2)) > 0){
@@ -123,7 +127,7 @@ function upd_price() {
                 //OC
                 price_chart.push(
                     {
-                        name : coms_final_arr[c].Mix,
+                        name : lng_cng(coms_final_arr[c].Mix),
                         y: parseFloat((price_mix_oxy + price_mix_he).toFixed(2))
                     }
                 );
@@ -134,7 +138,7 @@ function upd_price() {
                     //Bailout
                     price_chart.push(
                         {
-                            name : coms_final_arr[c].Mix,
+                            name : lng_cng(coms_final_arr[c].Mix),
                             y: parseFloat((price_mix_oxy + price_mix_he).toFixed(2))
                         }
                     );
@@ -172,8 +176,9 @@ function upd_price() {
     if(price_cur_option_current == 4){
         var price_val_chart = "₽";
     }
-
-
+    if(price_cur_option_current == 5){
+        var price_val_chart = "元";
+    }
 
     //create circle 3d chart
     del_html_elem("t_price_chart");
@@ -207,6 +212,7 @@ function upd_price() {
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) * price_yuan).toFixed(2) , plan_lng("tn_price_dls_name_yuan")]);
     }
     //euros
     if(price_cur_option_current == 2){
@@ -214,6 +220,7 @@ function upd_price() {
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_euro * price_yuan).toFixed(2) , plan_lng("tn_price_dls_name_yuan")]);
     }
     //pounds
     if(price_cur_option_current == 3){
@@ -221,6 +228,7 @@ function upd_price() {
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_pound * price_yuan).toFixed(2) , plan_lng("tn_price_dls_name_yuan")]);
     }
 
     if(price_cur_option_current == 4){
@@ -228,10 +236,32 @@ function upd_price() {
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
         tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_rouble * price_yuan).toFixed(2) , plan_lng("tn_price_dls_name_yuan")]);
+    }
+
+    if(price_cur_option_current == 5){
+        tableFooter.push([plan_lng("price_gas_total") , (price_mix_total + price_top_total).toFixed(2) , price_val]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_yuan).toFixed(2) , plan_lng("tn_price_dls_name_dollars")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_yuan * price_euro).toFixed(2) , plan_lng("tn_price_dls_name_euro")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_yuan * price_pound).toFixed(2) , plan_lng("tn_price_dls_name_pound")]);
+        tableFooter.push([plan_lng("price_gas_total") , ((price_mix_total + price_top_total) / price_yuan * price_rouble).toFixed(2) , plan_lng("tn_price_dls_name_rouble")]);
     }
 
     del_html_elem("t_price_total");
     createTable("t_price_total" , price_header , price_body, tableFooter , "tn_price_table_total_style");
+}
+
+//Change lang mix names for 3d Chart
+function lng_cng(mix_name){
+    var result = mix_name;
+
+    if(mix_name == "Air"){
+        result = plan_lng("Air");
+    }
+    if(mix_name == "OXY"){
+        result = plan_lng("OXY");
+    }
+    return result;
 }
 
 //Build circle 3d chart

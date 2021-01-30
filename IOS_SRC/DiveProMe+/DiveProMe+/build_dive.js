@@ -6,9 +6,9 @@ function build_dive(){
   tmp_lvl_mix_arr = [];
 
   var rate_asc = document.getElementById("opt_rate_asc");
-  var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
+  //var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
   var rate_dsc = document.getElementById("opt_rate_dsc");
-  var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
+  //var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
 
   //calculate ascending numbers for potentialy deco stops
   for (i = 0; i < lvl_arr.length/3; i++) {
@@ -67,7 +67,7 @@ function build_dive(){
     b9 = b9 + 2;
   }
 
-  //if last last segment above 7 meters. This code does`t work korect with no deco segments and
+  //if last last segment above 7 meters. This code does`t work correct with no deco segments and
   //zacominchen:))
   if(tmp_lvl_arr[tmp_lvl_arr.length -2]*1.0 < 7){
 
@@ -211,7 +211,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
       plan.addBottomGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
 
       //add bottom gass as deco gass !!!_need_deep_test_!!!
-      plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
+      //plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
 
       aaa = aaa + 2;
     }
@@ -220,16 +220,27 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     var mix_deco = document.getElementById("opt_deco");
     var mix_deco_idx = mix_deco.options[mix_deco.selectedIndex].value;
     aaa = 0;
+
+    mix_mod_arr = [];
+    var counter = 0;
+
     for(c = 0 ; c < mix_deco_idx ; c++){
-      tmp3 =[deco_mix_arr[aaa],deco_mix_arr[aaa+1]];
+      tmp3 = [deco_mix_arr[aaa],deco_mix_arr[aaa+1]];
 
       //!!! If Dive is CCR and no Bailout then disable deco gases. Build Diluent profile
       if(opt_blt_dln == 1){
           plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+          mix_mod_arr.push(
+              {
+                  mix : mix_to_txt_arr(tmp3),
+                  mod : deco_mix_depth_arr[counter]
+              });
       }
       //as Bottom/Travel gases, for lvl compatibility
       plan.addBottomGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
-      aaa=aaa+2;
+      counter = counter + 1;
+      aaa = aaa + 2;
+
     }
 
     //Add lvl changes
@@ -321,8 +332,9 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     //if changing mix time === 0 we need add some time for property dive plan computation.
     if(tn_cng_time_idx === 0)
     {
-        //!!!need deep test! changed from 0.01 to 0 after v9.0
-      tn_cng_time_idx = 0;
+        //!!!need deep test! changed from 0.0 to 0.0001 after v9.11
+        //it is important. if 0.0 then crash app. need more testing and resolve this strange work
+      tn_cng_time_idx = 0.0001;
     }
 
     for(c = 1 ; c < output.length ; c++){
@@ -484,20 +496,39 @@ function upd_lvl_opt_arr(){
   upd_all();
 }
 
-// Compute altitude in meters to preassure in bars
+// Compute altitude in meters to pressure in bars
 function height_to_bar(){
-  sea_lvl_merc = 750.062;
+    var radius_of_earth, acceleration_of_gravity, molecular_weight_of_air, gas_constant_r, temp_at_sea_level, pressure_at_sea_level_msw, temp_gradient, gmr_factor, altitude_meters, altitude_kilometers, pressure_at_sea_level, geopotential_altitude, temp_at_geopotential_altitude, barometric_pressure;
+    radius_of_earth = 6369;
+    acceleration_of_gravity = 9.80665;
+    molecular_weight_of_air = 28.9644;
+    gas_constant_r = 8.31432;
 
-  tn_celsus1 = document.getElementById("opt_celsus");
-  t_celsus = parseFloat(tn_celsus1.options[tn_celsus1.selectedIndex].value);
-  tn_slevel1 = document.getElementById("opt_slevel");
-  height_mtr = parseFloat(tn_slevel1.options[tn_slevel1.selectedIndex].value);
+    //get celsius selected value from interface
+    var opt_celsus_t = document.getElementById("opt_celsus");
+    var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
 
-  t_kelvin = 273.15 + (t_celsus);
-  prs_mercury = (Math.pow(2.7182818 , (((0.02896*9.807)/(8.3143*t_kelvin)*-1)*(height_mtr))))*(sea_lvl_merc);
-  //alert(prs_mercury);
-  prs_bars = prs_mercury*0.00133322;
-  return prs_bars;
+    temp_at_sea_level = (273.15 + (opt_celsus_t_idx * 1.0));  //Kelvin
+
+    pressure_at_sea_level_msw = 101.6;
+    temp_gradient = -6.5;
+    gmr_factor = acceleration_of_gravity * molecular_weight_of_air / gas_constant_r;
+
+    //get altitude selected value from interface
+    var opt_slevel_t = document.getElementById("opt_slevel");
+    var opt_slevel_t_idx = opt_slevel_t.options[opt_slevel_t.selectedIndex].value;
+
+    altitude_meters = opt_slevel_t_idx * 1.0;
+    altitude_kilometers = altitude_meters / 1000;
+    pressure_at_sea_level = pressure_at_sea_level_msw;
+
+    geopotential_altitude = altitude_kilometers * radius_of_earth / (altitude_kilometers + radius_of_earth);
+    temp_at_geopotential_altitude = temp_at_sea_level + temp_gradient * geopotential_altitude;
+    barometric_pressure = pressure_at_sea_level * Math.exp(Math.log(temp_at_sea_level / temp_at_geopotential_altitude) * gmr_factor / temp_gradient);
+
+    //convert to bars
+    //0.4 is fixes for more precession result compared with real world tables. if you want classic barometric formula simply remove 0.4
+    return (barometric_pressure-0.4)*0.01;
 }
 
 

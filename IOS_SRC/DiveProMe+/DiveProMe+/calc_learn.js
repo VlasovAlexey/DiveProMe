@@ -274,15 +274,15 @@ function calc_pp_disp (){
     //get actual value from Dive Settings
     var a = [];
     $.each($(".opt_ppo2_bottom option:selected"), function(){
-        a.push($(this).val());
+        a.push($(this).text());
     });
     var b = [];
     $.each($(".opt_ppo2_min option:selected"), function(){
-        b.push($(this).val());
+        b.push($(this).text());
     });
     var c = [];
     $.each($(".opt_ppn2_max option:selected"), function(){
-        c.push($(this).val());
+        c.push($(this).text());
     });
 
     //remove old values

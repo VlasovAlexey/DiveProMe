@@ -6,9 +6,10 @@ deleteCookie("lvl_mix_usr1");
 deleteCookie("mdls_usr1");
 */
 var deco_mix_arr = [50,0,100,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35];
+deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
 var travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
 
-var lvl_arr = [1,40,9];
+var lvl_arr = [1,39,20];
 var lvl_mix_arr = [21,0];
 
 var gf_arr = [20,80];
@@ -37,7 +38,7 @@ var opt_rmv_bt_usr = 20;
 var opt_cng_time_usr = 0;
 var opt_lst_stop_usr = 3;
 var opt_slevel_usr = 0;
-var opt_celsus_usr = 21;
+var opt_celsus_usr = 22;
 
 //New dim
 var opt_wrn_ibcd_lip_usr = 2;
@@ -80,6 +81,9 @@ var opt_calc_cur_ex_rate_eucents_usr = 90;
 var opt_calc_cur_ex_rate_rub_usr = 65;
 var opt_calc_cur_ex_rate_kopek_usr = 5;
 
+var opt_calc_cur_ex_rate_yuan_usr = 6;
+var opt_calc_cur_ex_rate_fyn_usr = 45;
+
 //new3_0
 var plan_style_usr = 1;
 var plan_ccr_usr = 1;
@@ -102,8 +106,9 @@ var opt_blt_dln_usr = 2;
 
 function default_set(){
     deco_mix_arr = [50,0,100,0,20,30,18,45,15,55,12,60,10,70,21,35,30,30,60,0];
+    deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
     travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
-    lvl_arr = [1,40,9];
+    lvl_arr = [1,39,20];
     lvl_mix_arr = [21,0];
     gf_arr = [20,80];
     mdls_usr = 2;
@@ -130,7 +135,7 @@ function default_set(){
     opt_cng_time_usr = 0;
     opt_lst_stop_usr = 3;
     opt_slevel_usr = 0;
-    opt_celsus_usr = 21;
+    opt_celsus_usr = 22;
 
     //New dim
     opt_wrn_ibcd_lip_usr = 2;
@@ -173,6 +178,9 @@ function default_set(){
     opt_calc_cur_ex_rate_rub_usr = 65;
     opt_calc_cur_ex_rate_kopek_usr = 5;
 
+    opt_calc_cur_ex_rate_yuan_usr = 6;
+    opt_calc_cur_ex_rate_fyn_usr = 45;
+
     //new3_0
     plan_style_usr = 1;
     plan_ccr_usr = 1;
@@ -213,6 +221,12 @@ var price_main_arr = [
     {
         text: "Russian Ruble",
         id: "tn_price_rf",
+        isdisable: "enabled"
+    }
+    ,
+    {
+        text: "Chinese Yuan",
+        id: "tn_price_cn",
         isdisable: "enabled"
     }];
 var wrn_ibcd_lip_arr = [
@@ -283,9 +297,22 @@ var lng_arr = [
     },
     {
         text: "Español",
-        id: "tn_espanol",
+        id: "tn_portuguese",
         isdisable: "enabled"
-    }];
+    }
+    ,
+    {
+        text: "Português",
+        id: "tn_port",
+        isdisable: "enabled"
+    }
+    ,
+    {
+        text: "中文",
+        id: "tn_china",
+        isdisable: "enabled"
+    }
+    ];
 var dmns_arr = [
     {
         text: "Meters/Liters/Bar.",
@@ -293,7 +320,7 @@ var dmns_arr = [
         isdisable: "enabled"
     },
     {
-        text: "Feet/Cu.Feet/Bar.",
+        text: "Feet/Cu.Feet/PSI",
         id: "tn_dmn_imp",
         isdisable: "enabled"
     }];
@@ -338,6 +365,12 @@ var water_ph_arr = [
         text: "Dead Sea",
         id: "tn_water_deadsea",
         isdisable: "enabled"
+    }
+    ,
+    {
+        text: "Pacific",
+        id: "tn_water_pacific",
+        isdisable: "enabled"
     }];
 
 var plan_style_arr = [
@@ -361,7 +394,7 @@ var plan_ccr_arr = [
     {
         text: "CCR",
         id: "tn_plan_ccr",
-        isdisable: "enabled"
+        isdisable: "disabled"
     }];
 var airbr_time_reset_arr = [
     {
@@ -395,18 +428,52 @@ function nrm_to_txt_arr(tmp_arr){
 
         if (tmp_arr[a]*1.0 == 21){
             if(tmp_arr[a+1]*1.0 === 0){
-                txt="Air";
+                txt = lng_cng_mix("Air");
             }
         }
         if (tmp_arr[a]*1.0 == 100){
             if(tmp_arr[a+1]*1.0 === 0){
-                txt="OXY";
+                txt = lng_cng_mix("OXY");
             }
         }
         mix_text_arr.push(txt);
         a=a+2;
     }
     return mix_text_arr;
+}
+//rename text to selected language
+function lng_cng_mix(mix_name){
+
+    var lng_opt_mix = document.getElementById("tn_lng");
+    var td_lng = lng_opt_mix.options[lng_opt_mix.selectedIndex].value;
+
+    //Eng
+    if(td_lng == 1){
+        if(mix_name == "Air"){mix_name = "Air"}
+        if(mix_name == "OXY"){mix_name = "Oxygen"}
+    }
+    //Rus
+    if(td_lng == 2){
+        if(mix_name == "Air"){mix_name = "Воздух"}
+        if(mix_name == "OXY"){mix_name = "Кислород"}
+    }
+    //Spa
+    if(td_lng == 3){
+        if(mix_name == "Air"){mix_name = "Aire"}
+        if(mix_name == "OXY"){mix_name = "Oxígeno"}
+    }
+    //Prt
+    if(td_lng == 4){
+        if(mix_name == "Air"){mix_name = "Ar"}
+        if(mix_name == "OXY"){mix_name = "Oxigênio"}
+    }
+    //China
+    if(td_lng == 5){
+        if(mix_name == "Air"){mix_name = "空气"}
+        if(mix_name == "OXY"){mix_name = "氧气"}
+    }
+
+    return mix_name;
 }
 
 //create list of used gases for air breaks menu
@@ -432,6 +499,19 @@ function airbr_mix_arr (){
         });
     }
     return fin_arr;
+}
+
+//Change lang mix names for 3d Chart
+function lng_cng(mix_name){
+    var result = mix_name;
+
+    if(mix_name == "Air"){
+        result = plan_lng("Air");
+    }
+    if(mix_name == "OXY"){
+        result = plan_lng("OXY");
+    }
+    return result;
 }
 
 //reset current list of air breaks gases and update whit new
@@ -480,7 +560,9 @@ function deleteCookie(name) {
 }
 function write_cookie(){
     setCookie("decomix_usr1", deco_mix_arr.join(","));
+    setCookie("decomixdepth_usr1", deco_mix_depth_arr.join(","));
     setCookie("travelmix_usr1", travel_mix_arr.join(","));
+
     setCookie("lvl_usr1", lvl_arr.join(","));
     setCookie("lvl_mix_usr1", lvl_mix_arr.join(","));
 
@@ -553,6 +635,9 @@ function write_cookie(){
     setCookie("opt_calc_cur_ex_rate_rub_usr1", return_idx("opt_calc_cur_ex_rate_rub"));
     setCookie("opt_calc_cur_ex_rate_kopek_usr1", return_idx("opt_calc_cur_ex_rate_kopek"));
 
+    setCookie("opt_calc_cur_ex_rate_yuan_usr1", return_idx("opt_calc_cur_ex_rate_yuan"));
+    setCookie("opt_calc_cur_ex_rate_fyn_usr1", return_idx("opt_calc_cur_ex_rate_fyn"));
+
     //new3_0
     setCookie("plan_style_usr1", return_idx("tn_plan_style"));
     setCookie("plan_ccr_usr1", return_idx("tn_plan_ccr"));
@@ -577,7 +662,9 @@ function write_cookie(){
 
 function read_cookie(){
     deco_mix_arr = split_fn_to_int("decomix_usr1");
+    deco_mix_depth_arr = split_fn_to_int("decomixdepth_usr1");
     travel_mix_arr = split_fn_to_int("travelmix_usr1");
+
     lvl_arr = split_fn_to_int("lvl_usr1");
     lvl_mix_arr = split_fn_to_int("lvl_mix_usr1");
 
@@ -652,6 +739,9 @@ function read_cookie(){
     opt_calc_cur_ex_rate_rub_usr = parseInt(getCookie("opt_calc_cur_ex_rate_rub_usr1"));
     opt_calc_cur_ex_rate_kopek_usr = parseInt(getCookie("opt_calc_cur_ex_rate_kopek_usr1"));
 
+    opt_calc_cur_ex_rate_yuan_usr = parseInt(getCookie("opt_calc_cur_ex_rate_yuan_usr1"));
+    opt_calc_cur_ex_rate_fyn_usr = parseInt(getCookie("opt_calc_cur_ex_rate_fyn_usr1"));
+
     //new3_0
     plan_style_usr = parseInt(getCookie("plan_style_usr1"));
     plan_ccr_usr = parseInt(getCookie("plan_ccr_usr1"));
@@ -680,7 +770,7 @@ function return_idx(html_ids){
     return idx_me;
 }
 //settings doesn`t saved ad it is first start. it will be saved now
-if(getCookie("opt_blt_dln_usr1") == null){
+if(getCookie("opt_calc_cur_ex_rate_fyn_usr1") == null){
     //need explanation for me. If uncomment below line all is don`t work on Android
     //upd_all();
     //console.log("cookie not found!");
@@ -786,6 +876,9 @@ function dim_cng(){
 
     opt_calc_cur_ex_rate_rub_usr = $( "#opt_calc_cur_ex_rate_rub" ).val();
     opt_calc_cur_ex_rate_kopek_usr = $( "#opt_calc_cur_ex_rate_kopek" ).val();
+
+    opt_calc_cur_ex_rate_yuan_usr = $( "#opt_calc_cur_ex_rate_yuan" ).val();
+    opt_calc_cur_ex_rate_fyn_usr = $( "#opt_calc_cur_ex_rate_fyn" ).val();
     //new3_0
     plan_style_usr = $( "#tn_plan_style" ).val();
     plan_ccr_usr = $( "#tn_plan_ccr" ).val();
@@ -839,20 +932,20 @@ function create_html(){
 
 //and other options
     del_html_elem("tr_ppo2_deco");
-    create_option("tr_ppo2_deco", "opt_ppo2_deco", 0.8, 3.19, opt_ppo2_deco_usr , 0.01 , 2 , "none");
+    create_option("tr_ppo2_deco", "opt_ppo2_deco", 0.8, 3.19, opt_ppo2_deco_usr , 0.01 , 2 , "press");
     del_html_elem("tr_ppo2_bottom");
-    create_option("tr_ppo2_bottom", "opt_ppo2_bottom", 0.8, 3.19, opt_ppo2_bottom_usr , 0.01 , 2 , "none");
+    create_option("tr_ppo2_bottom", "opt_ppo2_bottom", 0.8, 3.19, opt_ppo2_bottom_usr , 0.01 , 2 , "press");
     del_html_elem("tr_ppo2_min");
-    create_option("tr_ppo2_min", "opt_ppo2_min", 0.1, 0.4, opt_ppo2_min_usr , 0.01 , 2 , "none");
+    create_option("tr_ppo2_min", "opt_ppo2_min", 0.1, 0.4, opt_ppo2_min_usr , 0.01 , 2 , "press");
     del_html_elem("tr_ppn2_max");
-    create_option("tr_ppn2_max", "opt_ppn2_max", 0.9, 9, opt_ppn2_max_usr , 0.01 , 2 , "none");
+    create_option("tr_ppn2_max", "opt_ppn2_max", 0.9, 9, opt_ppn2_max_usr , 0.01 , 2 , "press");
     del_html_elem("tr_ppn2_max_deco");
-    create_option("tr_ppn2_max_deco", "opt_ppn2_max_deco", 0.9, 9, opt_ppn2_max_deco_usr , 0.01 , 2 , "none");
+    create_option("tr_ppn2_max_deco", "opt_ppn2_max_deco", 0.9, 9, opt_ppn2_max_deco_usr , 0.01 , 2 , "press");
 
     del_html_elem("tr_ibcd_ppn2");
-    create_option("tr_ibcd_ppn2", "opt_ibcd_ppn2", 0.5, 3.5, opt_ibcd_ppn2_usr , 0.1 , 1 , "none");
+    create_option("tr_ibcd_ppn2", "opt_ibcd_ppn2", 0.5, 3.5, opt_ibcd_ppn2_usr , 0.1 , 1 , "press");
     del_html_elem("tr_ibcd_pphe");
-    create_option("tr_ibcd_pphe", "opt_ibcd_pphe", 0.5, 3.5, opt_ibcd_pphe_usr , 0.1 , 1 , "none");
+    create_option("tr_ibcd_pphe", "opt_ibcd_pphe", 0.5, 3.5, opt_ibcd_pphe_usr , 0.1 , 1 , "press");
 
     del_html_elem("tn_rate_dsc");
     create_option("tn_rate_dsc", "opt_rate_dsc", 1, 60, opt_rate_dsc_usr , 1 , 0 , "depth");
@@ -871,9 +964,9 @@ function create_html(){
     del_html_elem("tn_lst_stop");
     create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
     del_html_elem("tn_slevel");
-    create_option("tn_slevel", "opt_slevel", 0, 6500, opt_slevel_usr , 100 , 0 , "depth");
+    create_option("tn_slevel", "opt_slevel", 0, 4000, opt_slevel_usr , 100 , 0 , "depth");
     del_html_elem("tn_celsus");
-    create_option("tn_celsus", "opt_celsus", -40, 45, opt_celsus_usr , 1 , 0 , "none");
+    create_option("tn_celsus", "opt_celsus", 0, 50, opt_celsus_usr , 2 , 0 , "temper");
 
     //create new
     del_html_elem("tr_wrn_ibcd_lip");
@@ -950,6 +1043,11 @@ function create_html(){
     del_html_elem("tr_calc_cur_ex_rate_kopek");
     create_option("tr_calc_cur_ex_rate_kopek", "opt_calc_cur_ex_rate_kopek", 0, 99 , opt_calc_cur_ex_rate_kopek_usr , 1 , 0 , "none");
 
+    del_html_elem("tr_calc_cur_ex_rate_yuan");
+    create_option("tr_calc_cur_ex_rate_yuan", "opt_calc_cur_ex_rate_yuan", 0, 199 , opt_calc_cur_ex_rate_yuan_usr , 1 , 0 , "none");
+    del_html_elem("tr_calc_cur_ex_rate_fyn");
+    create_option("tr_calc_cur_ex_rate_fyn", "opt_calc_cur_ex_rate_fyn", 0, 99 , opt_calc_cur_ex_rate_fyn_usr , 1 , 0 , "none");
+
     //new3_0
     del_html_elem("tn_plan_style_sel");
     create_custom_option_arr("tn_plan_style_sel" , "tn_plan_style" , plan_style_usr , plan_style_arr);
@@ -958,11 +1056,11 @@ function create_html(){
 
     //new4_0
     del_html_elem("tn_setpoint_start");
-    create_option("tn_setpoint_start", "opt_setpoint_start", 0.6, 1.2, opt_setpoint_start_usr , 0.01 , 2 , "none");
+    create_option("tn_setpoint_start", "opt_setpoint_start", 0.6, 1.2, opt_setpoint_start_usr , 0.01 , 2 , "press");
     del_html_elem("tn_setpoint_bottom");
-    create_option("tn_setpoint_bottom", "opt_setpoint_bottom", 1.0, 1.6, opt_setpoint_bottom_usr , 0.01 , 2 , "none");
+    create_option("tn_setpoint_bottom", "opt_setpoint_bottom", 1.0, 1.6, opt_setpoint_bottom_usr , 0.01 , 2 , "press");
     del_html_elem("tn_setpoint_deco");
-    create_option("tn_setpoint_deco", "opt_setpoint_deco", 1.0, 1.6, opt_setpoint_deco_usr , 0.01 , 2 , "none");
+    create_option("tn_setpoint_deco", "opt_setpoint_deco", 1.0, 1.6, opt_setpoint_deco_usr , 0.01 , 2 , "press");
 
     //new5_0
     del_html_elem("tn_airbr_depth");
@@ -1152,6 +1250,11 @@ function create_html(){
     calc_cur_ex_rate_kopek = document.getElementById("tr_calc_cur_ex_rate_kopek");
     calc_cur_ex_rate_kopek.addEventListener('change', upd_price);
 
+    calc_cur_ex_rate_yuan = document.getElementById("tr_calc_cur_ex_rate_yuan");
+    calc_cur_ex_rate_yuan.addEventListener('change', upd_price);
+    calc_cur_ex_rate_fyn = document.getElementById("tr_calc_cur_ex_rate_fyn");
+    calc_cur_ex_rate_fyn.addEventListener('change', upd_price);
+
     //new3_0
     plan_style_opt = document.getElementById("tn_plan_style");
     plan_style_opt.addEventListener('change', upd_all);
@@ -1194,13 +1297,13 @@ create_custom_option_arr("tn_ifc_set" , "tn_color" , color_usr , color_arr);
 create_custom_option_arr("tn_water_set" , "tn_water" , water_ph_usr , water_ph_arr);
 create_option("tr_deco", "opt_deco", 0, 10, opt_deco_usr , 1 , 0, "none");
 create_option("tr_travel", "opt_travel", 1, 10, opt_travel_usr , 1 , 0, "none");
-create_option("tr_ppo2_deco", "opt_ppo2_deco", 0.8, 3.19, opt_ppo2_deco_usr , 0.01 , 2, "none");
-create_option("tr_ppo2_bottom", "opt_ppo2_bottom", 0.8, 3.19, opt_ppo2_bottom_usr , 0.01 , 2, "none");
-create_option("tr_ppo2_min", "opt_ppo2_min", 0.1, 0.4, opt_ppo2_min_usr , 0.01 , 2, "none");
-create_option("tr_ppn2_max", "opt_ppn2_max", 0.9, 9, opt_ppn2_max_usr , 0.01 , 2, "none");
-create_option("tr_ppn2_max_deco", "opt_ppn2_max_deco", 0.9, 9, opt_ppn2_max_deco_usr , 0.01 , 2, "none");
-create_option("tr_ibcd_ppn2", "opt_ibcd_ppn2", 0.5, 3.5, opt_ibcd_ppn2_usr , 0.1 , 1, "none");
-create_option("tr_ibcd_pphe", "opt_ibcd_pphe", 0.5, 3.5, opt_ibcd_pphe_usr , 0.1 , 1, "none");
+create_option("tr_ppo2_deco", "opt_ppo2_deco", 0.8, 3.19, opt_ppo2_deco_usr , 0.01 , 2, "press");
+create_option("tr_ppo2_bottom", "opt_ppo2_bottom", 0.8, 3.19, opt_ppo2_bottom_usr , 0.01 , 2, "press");
+create_option("tr_ppo2_min", "opt_ppo2_min", 0.1, 0.4, opt_ppo2_min_usr , 0.01 , 2, "press");
+create_option("tr_ppn2_max", "opt_ppn2_max", 0.9, 9, opt_ppn2_max_usr , 0.01 , 2, "press");
+create_option("tr_ppn2_max_deco", "opt_ppn2_max_deco", 0.9, 9, opt_ppn2_max_deco_usr , 0.01 , 2, "press");
+create_option("tr_ibcd_ppn2", "opt_ibcd_ppn2", 0.5, 3.5, opt_ibcd_ppn2_usr , 0.1 , 1, "press");
+create_option("tr_ibcd_pphe", "opt_ibcd_pphe", 0.5, 3.5, opt_ibcd_pphe_usr , 0.1 , 1, "press");
 create_option("tn_rate_dsc", "opt_rate_dsc", 1, 60, opt_rate_dsc_usr , 1 , 0, "depth");
 create_option("tn_rate_asc", "opt_rate_asc", 1, 40, opt_rate_asc_usr , 1 , 0, "depth");
 create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0, "depth");
@@ -1208,8 +1311,8 @@ create_option("tn_rmv_deco", "opt_rmv_deco", 3, 60, opt_rmv_deco_usr , 1 , 0, "v
 create_option("tn_rmv_bt", "opt_rmv_bt", 3, 60, opt_rmv_bt_usr , 1 , 0 , "vol");
 create_option("tn_cng_time","opt_cng_time", 0, 3, opt_cng_time_usr , 1 , 0 , "none");
 create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
-create_option("tn_slevel", "opt_slevel", 0, 6500, opt_slevel_usr , 100 , 0 , "depth");
-create_option("tn_celsus", "opt_celsus", -40, 45, opt_celsus_usr , 1 , 0 , "none");
+create_option("tn_slevel", "opt_slevel", 0, 4000, opt_slevel_usr , 100 , 0 , "depth");
+create_option("tn_celsus", "opt_celsus", 0, 50, opt_celsus_usr , 2 , 0 , "temper");
 
 //new
 create_custom_option_arr("tr_wrn_ibcd_lip" , "opt_wrn_ibcd_lip" , opt_wrn_ibcd_lip_usr , wrn_ibcd_lip_arr);
@@ -1255,14 +1358,17 @@ create_option("tr_calc_cur_ex_rate_eucents", "opt_calc_cur_ex_rate_eucents", 0, 
 create_option("tr_calc_cur_ex_rate_rub", "opt_calc_cur_ex_rate_rub", 0, 2000 , opt_calc_cur_ex_rate_rub_usr , 1 , 0 , "none");
 create_option("tr_calc_cur_ex_rate_kopek", "opt_calc_cur_ex_rate_kopek", 0, 99 , opt_calc_cur_ex_rate_kopek_usr , 1 , 0 , "none");
 
+create_option("tr_calc_cur_ex_rate_yuan", "opt_calc_cur_ex_rate_yuan", 0, 2000 , opt_calc_cur_ex_rate_yuan_usr , 1 , 0 , "none");
+create_option("tr_calc_cur_ex_rate_fyn", "opt_calc_cur_ex_rate_fyn", 0, 99 , opt_calc_cur_ex_rate_fyn_usr , 1 , 0 , "none");
+
 //new3_0
 create_custom_option_arr("tn_plan_style_sel" , "tn_plan_style" , plan_style_usr , plan_style_arr);
 create_custom_option_arr("tn_plan_ccr_sel" , "tn_plan_ccr" , plan_ccr_usr , plan_ccr_arr);
 
 //new4_0
-create_option("tn_setpoint_start", "opt_setpoint_start", 0.6, 1.2, opt_setpoint_start_usr , 0.01 , 2 , "none");
-create_option("tn_setpoint_bottom", "opt_setpoint_bottom", 0.9, 1.6, opt_setpoint_bottom_usr , 0.01 , 2 , "none");
-create_option("tn_setpoint_deco", "opt_setpoint_deco", 1.0, 1.6, opt_setpoint_deco_usr , 0.01 , 2 , "none");
+create_option("tn_setpoint_start", "opt_setpoint_start", 0.6, 1.2, opt_setpoint_start_usr , 0.01 , 2 , "press");
+create_option("tn_setpoint_bottom", "opt_setpoint_bottom", 0.9, 1.6, opt_setpoint_bottom_usr , 0.01 , 2 , "press");
+create_option("tn_setpoint_deco", "opt_setpoint_deco", 1.0, 1.6, opt_setpoint_deco_usr , 0.01 , 2 , "press");
 
 //new5_0
 create_option("tn_airbr_depth", "opt_airbr_depth", 3, 21, opt_airbr_depth_usr , 1 , 0 , "depth");
@@ -1456,6 +1562,11 @@ function init_global(){
     calc_cur_ex_rate_kopek = document.getElementById("tr_calc_cur_ex_rate_kopek");
     calc_cur_ex_rate_kopek.addEventListener('change', upd_price);
 
+    calc_cur_ex_rate_yuan = document.getElementById("tr_calc_cur_ex_rate_yuan");
+    calc_cur_ex_rate_yuan.addEventListener('change', upd_price);
+    calc_cur_ex_rate_fyn = document.getElementById("tr_calc_cur_ex_rate_fyn");
+    calc_cur_ex_rate_fyn.addEventListener('change', upd_price);
+
     //new3_0
     plan_style_opt = document.getElementById("tn_plan_style");
     plan_style_opt.addEventListener('change', upd_all);
@@ -1487,3 +1598,5 @@ function init_global(){
     opt_airbr_time_reset = document.getElementById("opt_airbr_time_reset");
     opt_airbr_time_reset.addEventListener('change', upd_airbr);
 }
+
+
