@@ -7,6 +7,7 @@ function addOption (oListbox, text, value, isDefaultSelected, isSelected)
   oOption.appendChild(document.createTextNode(text));
   oOption.setAttribute("value", value);
   oOption.setAttribute("id", value);
+
   if (isDefaultSelected) oOption.defaultSelected = true;
   else if (isSelected) oOption.selected = true;
 
@@ -48,6 +49,7 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
   tmp_div.setAttribute("name", opt_id);
   tmp_div.setAttribute("class", opt_id);
 
+
   //not specified dimension e.g. time or partial pressures
   if(dmn_type === "none"){
       for(f = start ; f < end +nrm_step ; f = f + nrm_step){
@@ -55,7 +57,8 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
           addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
       }
   }
-    //meters\liters\bars
+
+    //meters and liters
     if($( "#tn_dmn" ).val() == 1){
         if(dmn_type === "vol" || dmn_type === "depth"){
             for(f = start ; f < end +nrm_step ; f = f + nrm_step){
@@ -63,15 +66,47 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
                 addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
             }
         }
+        //bar
+        if(dmn_type === "press"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+        //Celsius
+        if(dmn_type === "temper"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+        //Depth for MOD, meters
+        if(dmn_type === "depth_mod"){
+
+            //Add first element "Auto"
+            addOption (tmp_div, plan_lng("tn_deco_mod") , 0 , false , 0 == selected_elm);
+            //And all other
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, fixed_f , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
     }
 
-    //feet\cubic feet\bar
+    //feet\cubic feet\PSI
     if($( "#tn_dmn" ).val() == 2){
         //volume dimension cubic feet
         if(dmn_type === "vol"){
             for(f = start ; f < end +nrm_step ; f = f + nrm_step){
                 fixed_f = f.toFixed(nrm_after_dot);
-                addOption (tmp_div, (Math.ceil(0.0353147 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
+                if(nrm_step > 1){
+                    addOption (tmp_div, ((0.0353147 * fixed_f).toFixed(0)) , fixed_f , false , fixed_f == selected_elm);
+                }
+                else
+                {
+                    addOption (tmp_div, ((0.0353147 * fixed_f).toFixed(2)) , fixed_f , false , fixed_f == selected_elm);
+                }
+
             }
         }
         //long dimension feet
@@ -81,9 +116,31 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
                 addOption (tmp_div, (Math.ceil(3.28084 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
             }
         }
+        //PSI
+        if(dmn_type === "press"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, ((14.5037738 * fixed_f).toFixed(1)), fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+        //Fahrenheit
+        if(dmn_type === "temper"){
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, (Math.floor((9 / 5) * fixed_f + 32)) , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
+        //Depth for MOD, feet
+        if(dmn_type === "depth_mod"){
+            //Add first element "Auto"
+            addOption (tmp_div, plan_lng("tn_deco_mod") , 0 , false , 0 == selected_elm);
+            for(f = start ; f < end +nrm_step ; f = f + nrm_step){
+                fixed_f = f.toFixed(nrm_after_dot);
+                addOption (tmp_div, (Math.ceil(3.28084 * fixed_f)) , fixed_f , false , fixed_f == selected_elm);
+            }
+        }
     }
-
-  htmls_id.appendChild(tmp_div);
+    htmls_id.appendChild(tmp_div);
 }
 
 function create_option_arr(htmls_id , opt_id , selected_elm, tmp_arr){

@@ -156,7 +156,7 @@ select
 }
 .tn_dmn
 {
-    width: 220px;
+    width: 275px;
 }
 .tn_lng,
 .tn_mdl,
@@ -828,5 +828,71 @@ a#windowControlMinimize{
     font-weight: bold;
     color: #000000;
     background: #abd2e3;
+}
+.opt_deco_option_o2_11,
+.opt_deco_option_o2_21,
+.opt_deco_option_o2_31,
+.opt_deco_option_o2_41,
+.opt_deco_option_o2_51,
+.opt_deco_option_o2_61,
+.opt_deco_option_o2_71,
+.opt_deco_option_o2_81,
+.opt_deco_option_o2_91,
+.opt_deco_option_o2_101,
+.opt_deco_option_he_12,
+.opt_deco_option_he_22,
+.opt_deco_option_he_32,
+.opt_deco_option_he_42,
+.opt_deco_option_he_52,
+.opt_deco_option_he_62,
+.opt_deco_option_he_72,
+.opt_deco_option_he_82,
+.opt_deco_option_he_92,
+.opt_deco_option_he_102,
+.opt_deco_option_mod_13,
+.opt_deco_option_mod_23,
+.opt_deco_option_mod_33,
+.opt_deco_option_mod_43,
+.opt_deco_option_mod_53,
+.opt_deco_option_mod_63,
+.opt_deco_option_mod_73,
+.opt_deco_option_mod_83,
+.opt_deco_option_mod_93,
+.opt_deco_option_mod_103
+{
+    width: 80px;
+}
+.opt_travel_option_o2_11,
+.opt_travel_option_o2_21,
+.opt_travel_option_o2_31,
+.opt_travel_option_o2_41,
+.opt_travel_option_o2_51,
+.opt_travel_option_o2_61,
+.opt_travel_option_o2_71,
+.opt_travel_option_o2_81,
+.opt_travel_option_o2_91,
+.opt_travel_option_o2_101,
+.opt_travel_option_he_12,
+.opt_travel_option_he_22,
+.opt_travel_option_he_32,
+.opt_travel_option_he_42,
+.opt_travel_option_he_52,
+.opt_travel_option_he_62,
+.opt_travel_option_he_72,
+.opt_travel_option_he_82,
+.opt_travel_option_he_92,
+.opt_travel_option_he_102,
+.opt_travel_option_mod_13,
+.opt_travel_option_mod_23,
+.opt_travel_option_mod_33,
+.opt_travel_option_mod_43,
+.opt_travel_option_mod_53,
+.opt_travel_option_mod_63,
+.opt_travel_option_mod_73,
+.opt_travel_option_mod_83,
+.opt_travel_option_mod_93,
+.opt_travel_option_mod_103
+{
+    width: 80px;
 }
 

@@ -6,19 +6,28 @@ function upd_deco_gas_list(){
   
   //make array with new options values 
   for(c = 0 ; c < mix_deco_idx ; c++){
-    tmp = document.getElementById("opt_deco_option_o2_"+(c+1).toString()+"1");
-    mix_deco_o2 = tmp.options[tmp.selectedIndex].value;
+      tmp = document.getElementById("opt_deco_option_o2_" + (c + 1).toString()+"1");
+      mix_deco_o2 = tmp.options[tmp.selectedIndex].value;
     
-    tmp = document.getElementById("opt_deco_option_he_"+(c+1).toString()+"2");
-    mix_deco_he = tmp.options[tmp.selectedIndex].value;
-    
-    new_mx_arr.push(mix_deco_o2 , mix_deco_he);
+      tmp = document.getElementById("opt_deco_option_he_" + (c + 1).toString()+"2");
+      mix_deco_he = tmp.options[tmp.selectedIndex].value;
+
+      new_mx_arr.push(mix_deco_o2 , mix_deco_he);
+
+      //update deco MOD array if changed
+      var tmp = document.getElementById("opt_deco_option_mod_" + (c + 1).toString()+"3");
+      var mix_deco_mod = tmp.options[tmp.selectedIndex].value;
+      deco_mix_depth_arr[c] = mix_deco_mod;
   }
   
   //Comparing old and new array and find what the idx changed
   a = 0;
   o_idx = NaN;
   he_idx = NaN;
+  start = 0;
+  o_fr = 0;
+  he_fr = 0;
+
   for(c = 0 ; c < mix_deco_idx ; c++){
     if(new_mx_arr[a]!=deco_mix_arr[a]){
       o_fr = new_mx_arr[a];
@@ -38,7 +47,7 @@ function upd_deco_gas_list(){
   }
   
   //Comparing old options value and if found inside identical
-  //fix it droping values to old option values.
+  //fix it dropping values to old option values.
   a = 0;
   for(c = 0 ; c < mix_deco_idx ; c++){
     if(a != start){
@@ -119,6 +128,11 @@ function upd_travel_gas_list(){
     mix_travel_he = tmp.options[tmp.selectedIndex].value;
     
     new_mx_arr.push(mix_travel_o2 , mix_travel_he);
+
+      //update travel MOD array if changed
+      var tmp = document.getElementById("opt_travel_option_mod_" + (c + 1).toString()+"3");
+      var mix_travel_mod = tmp.options[tmp.selectedIndex].value;
+      travel_mix_depth_arr[c] = mix_travel_mod;
 
   }
   

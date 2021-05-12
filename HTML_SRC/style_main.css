@@ -160,7 +160,7 @@ select
 }
 .tn_dmn
 {
-    width: 220px;
+    width: 275px;
 }
 .tn_lng,
 .tn_mdl,
@@ -363,7 +363,9 @@ select
 .btn_msg,
 .btn_tel,
 .btn_bailout,
-.btn_diluent
+.btn_diluent,
+.btn_ios_msg,
+.btn_ios_tel
 {
 
     margin-top: 10px;
@@ -397,7 +399,9 @@ select
 .btn_msg:hover,
 .btn_tel:hover,
 .btn_bailout:hover,
-.btn_diluent:hover
+.btn_diluent:hover,
+.btn_ios_msg:hover,
+.btn_ios_tel:hover
 {
     background: #eeeeee;
     color: #424242;
@@ -415,7 +419,9 @@ select
 .btn_msg:active,
 .btn_tel:active,
 .btn_bailout:active,
-.btn_diluent:active
+.btn_diluent:active,
+.btn_ios_msg:active,
+.btn_ios_tel:active
 {
     top: 1px;
     background: #424242;
@@ -435,7 +441,9 @@ select
 }
 
 .btn_msg,
-.btn_tel
+.btn_tel,
+.btn_ios_msg,
+.btn_ios_tel
 {
     background: linear-gradient(-45deg, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C, #BF953F, #d6cf8e, #B38728, #d6cf8e, #AA771C);
     background-size: 1000% 1000%;
@@ -858,6 +866,72 @@ a#windowControlMinimize{
     font-weight: bold;
     color: #ffffff;
     background: #132331;
+}
+.opt_deco_option_o2_11,
+.opt_deco_option_o2_21,
+.opt_deco_option_o2_31,
+.opt_deco_option_o2_41,
+.opt_deco_option_o2_51,
+.opt_deco_option_o2_61,
+.opt_deco_option_o2_71,
+.opt_deco_option_o2_81,
+.opt_deco_option_o2_91,
+.opt_deco_option_o2_101,
+.opt_deco_option_he_12,
+.opt_deco_option_he_22,
+.opt_deco_option_he_32,
+.opt_deco_option_he_42,
+.opt_deco_option_he_52,
+.opt_deco_option_he_62,
+.opt_deco_option_he_72,
+.opt_deco_option_he_82,
+.opt_deco_option_he_92,
+.opt_deco_option_he_102,
+.opt_deco_option_mod_13,
+.opt_deco_option_mod_23,
+.opt_deco_option_mod_33,
+.opt_deco_option_mod_43,
+.opt_deco_option_mod_53,
+.opt_deco_option_mod_63,
+.opt_deco_option_mod_73,
+.opt_deco_option_mod_83,
+.opt_deco_option_mod_93,
+.opt_deco_option_mod_103
+{
+    width: 80px;
+}
+.opt_travel_option_o2_11,
+.opt_travel_option_o2_21,
+.opt_travel_option_o2_31,
+.opt_travel_option_o2_41,
+.opt_travel_option_o2_51,
+.opt_travel_option_o2_61,
+.opt_travel_option_o2_71,
+.opt_travel_option_o2_81,
+.opt_travel_option_o2_91,
+.opt_travel_option_o2_101,
+.opt_travel_option_he_12,
+.opt_travel_option_he_22,
+.opt_travel_option_he_32,
+.opt_travel_option_he_42,
+.opt_travel_option_he_52,
+.opt_travel_option_he_62,
+.opt_travel_option_he_72,
+.opt_travel_option_he_82,
+.opt_travel_option_he_92,
+.opt_travel_option_he_102,
+.opt_travel_option_mod_13,
+.opt_travel_option_mod_23,
+.opt_travel_option_mod_33,
+.opt_travel_option_mod_43,
+.opt_travel_option_mod_53,
+.opt_travel_option_mod_63,
+.opt_travel_option_mod_73,
+.opt_travel_option_mod_83,
+.opt_travel_option_mod_93,
+.opt_travel_option_mod_103
+{
+    width: 80px;
 }
 
 

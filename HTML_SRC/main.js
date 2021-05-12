@@ -2,6 +2,7 @@
 var dive = require("/dive_comp.js");
 init_global();
 
+
 function upd_altitide(){
   abs_press[0] = height_to_bar();
   del_lvl_list();
@@ -54,20 +55,28 @@ function upd_deco_list(){
   
   fix_dup_mix_arr(deco_mix_arr,mix_deco_idx);
   
-  a = 0;
-  for(c = 0 ; c < mix_deco_idx ; c++){
-    create_html_text("tr_deco_option" , "tr_deco_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" %O<sub><small>2</small></sub>\\He");
+  var a = 0;
+  var c_counter = 0;
+  for(var c = 0 ; c < mix_deco_idx ; c++){
+      create_html_text("tr_deco_option" , "tr_deco_mix_name_"+((c+1).toString()) , mix_lng() + ((c+1).toString()) + " O<sub><small>2</small></sub>, % / He, % / " + plan_lng("dmn_mod") + lng_meters);
     
-    create_option("tr_deco_option", "opt_deco_option_o2_"+(c+1).toString()+"1", 1, 100, deco_mix_arr[a], 1 , 0 , "none");
-    deco_watcher[a] = document.getElementById("opt_deco_option_o2_"+(c+1).toString()+"1");
-    deco_watcher[a].addEventListener('change', upd_deco_gas_list);
-    deco_watcher[a].addEventListener('change', upd_all);
+      create_option("tr_deco_option", "opt_deco_option_o2_"+(c+1).toString()+"1", 1, 100, deco_mix_arr[a], 1 , 0 , "none");
+      deco_watcher[a] = document.getElementById("opt_deco_option_o2_"+(c+1).toString()+"1");
+      deco_watcher[a].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[a].addEventListener('change', upd_all);
     
-    create_option("tr_deco_option", "opt_deco_option_he_"+(c+1).toString()+"2", 0, 99, deco_mix_arr[a+1], 1 , 0 , "none");
-    deco_watcher[a+1] = document.getElementById("opt_deco_option_he_"+(c+1).toString()+"2");
-    deco_watcher[a+1].addEventListener('change', upd_deco_gas_list);
-    deco_watcher[a+1].addEventListener('change', upd_all);
-    a = a + 2;
+      create_option("tr_deco_option", "opt_deco_option_he_"+(c+1).toString()+"2", 0, 99, deco_mix_arr[a+1], 1 , 0 , "none");
+      deco_watcher[a+1] = document.getElementById("opt_deco_option_he_"+(c+1).toString()+"2");
+      deco_watcher[a+1].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[a+1].addEventListener('change', upd_all);
+
+      create_option("tr_deco_option", "opt_deco_option_mod_" + (c + 1).toString() + "3", 6, 400, deco_mix_depth_arr[c_counter], 3 , 0 , "depth_mod");
+      deco_watcher[c_counter] = document.getElementById("opt_deco_option_mod_"+(c + 1).toString() + "3");
+      deco_watcher[c_counter].addEventListener('change', upd_deco_gas_list);
+      deco_watcher[c_counter].addEventListener('change', upd_all);
+
+      a = a + 2;
+      c_counter = c_counter + 1;
   }
 }
 upd_deco_list();
@@ -79,33 +88,61 @@ function upd_travel_list(){
   
   fix_dup_mix_arr(travel_mix_arr,mix_travel_idx);
   
-  a = 0;
+  var a = 0;
+  var c_counter = 0;
   for(c = 0 ; c < mix_travel_idx ; c++){
-    create_html_text("tr_travel_option" , "tr_travel_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" %O<sub><small>2</small></sub>\\He");
+    create_html_text("tr_travel_option" , "tr_travel_mix_name_"+((c+1).toString()) , mix_lng()+((c+1).toString())+" O<sub><small>2</small></sub>, % / He, % / " + plan_lng("dmn_mod") + lng_meters);
     
     create_option("tr_travel_option", "opt_travel_option_o2_"+(c+1).toString()+"1", 1, 100, travel_mix_arr[a], 1 , 0 , "none");
     travel_watcher[a] = document.getElementById("opt_travel_option_o2_"+(c+1).toString()+"1");
-    
     travel_watcher[a].addEventListener('change', upd_travel_gas_list);
-
+    travel_watcher[a].addEventListener('change', del_lvl_list);
     //!!!_need_deep_test_!!! return if got errors on travel and bottom mix change
     //travel_watcher[a].addEventListener('change', upd_all);
-
-    travel_watcher[a].addEventListener('change', del_lvl_list);
     
     create_option("tr_travel_option", "opt_travel_option_he_"+(c+1).toString()+"2", 0, 99, travel_mix_arr[a+1], 1 , 0 , "none");
     travel_watcher[a+1] = document.getElementById("opt_travel_option_he_"+(c+1).toString()+"2");
-    
     travel_watcher[a+1].addEventListener('change', upd_travel_gas_list);
-
+    travel_watcher[a+1].addEventListener('change', del_lvl_list);
     //!!!_need_deep_test_!!! return if got errors on travel and bottom mix change
     //travel_watcher[a+1].addEventListener('change', upd_all);
 
-    travel_watcher[a+1].addEventListener('change', del_lvl_list);
+      create_option("tr_travel_option", "opt_travel_option_mod_" + (c + 1).toString() + "3", 6, 400, travel_mix_depth_arr[c_counter], 1 , 0 , "depth_mod");
+      travel_watcher[c_counter] = document.getElementById("opt_travel_option_mod_"+(c + 1).toString() + "3");
+      travel_watcher[c_counter].addEventListener('change', upd_travel_gas_list);
+      travel_watcher[c_counter].addEventListener('change', del_lvl_list);
+
     a = a + 2;
+    c_counter = c_counter + 1;
   }
 }
 upd_travel_list();
+
+//Return filtered mix array by PPO2 Max\Min\Deco END for selected depth OC
+function GetDecoMODinMeters(o2_fr, he_fr) {
+    var ppo2_deco = document.getElementById("opt_ppo2_deco");
+    var ppn2_max_deco = document.getElementById("opt_ppn2_max_deco");
+
+    var ppo2_deco_idx = ppo2_deco.options[ppo2_deco.selectedIndex].value;
+    var ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
+
+    var mod = 0.0;
+
+    //calculation of correction without altitude above sea level
+    var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+    var dp_o2_max = (WaterDensTempCompensation * (ppo2_deco_idx / (o2_fr * 0.01) * 10)) - (10 * height_to_bar()) + 1;//+1m fixing rounding to standard
+    var dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_deco_idx / ((100 - o2_fr - he_fr) * 0.01) * 10)) - (10 * height_to_bar()) + 1;//+1m fixing rounding to standard
+
+    if(dp_o2_max > dp_ppn2_max){
+        mod = dp_ppn2_max;
+    }
+    else{
+        mod =  dp_o2_max;
+    }
+    return mod;
+}
+//console.log(GetDecoMODinMeters(12 , 60));
 
 //Return filtered mix array by PPO2 Max\Min\Deco END for selected depth OC
 function get_working_mix_idx(wrk_dp, tmp_mix_arr){
@@ -120,19 +157,35 @@ function get_working_mix_idx(wrk_dp, tmp_mix_arr){
   var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
   
   tmp_arr=[];
-  a=0;
+  var a = 0;
+  var c_counter = 0;
   for(c = 0 ; c < mix_travel_idx ; c++){
-    dp_o2_max = (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
+      //check current Mix MOD status
+      if(travel_mix_depth_arr[c_counter] == 0){
+          //Auto
+          //calculation of correction with altitude above sea level
+          //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+          //calculation of correction without altitude above sea level
+          var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
 
-      //new calculation need DEEP TEST!
-      dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
-      //Old calculation
-      // dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10 - (10*height_to_bar()))*1.0;
-    if(dp_o2_min < 1){dp_o2_min = 1;}
-    if(dp_o2_min == Infinity){dp_o2_min = 1;}
-    dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
+          dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
 
-    //alert(depth_max);
+          //new calculation need DEEP TEST!
+          dp_o2_min = (WaterDensTempCompensation * (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar());
+          //Old calculation
+          // dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10 - (10*height_to_bar()))*1.0;
+          if(dp_o2_min < 1){dp_o2_min = 1;}
+          if(dp_o2_min == Infinity){dp_o2_min = 1;}
+          dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+      }
+      else
+      {
+          //Manual
+          dp_o2_max = travel_mix_depth_arr[c_counter] * 1.0;
+          dp_o2_min = 1.0;//Always start from surface
+          dp_ppn2_max = travel_mix_depth_arr[c_counter] * 1.0;
+      }
+
     if (wrk_dp <= dp_o2_max){
       if (wrk_dp >= dp_o2_min){
         if (wrk_dp <= dp_ppn2_max){
@@ -141,7 +194,8 @@ function get_working_mix_idx(wrk_dp, tmp_mix_arr){
         }
       }
     }
-    a=a+2;
+    a = a + 2;
+    c_counter = c_counter + 1;
   }
   return tmp_arr;
 }
@@ -155,19 +209,39 @@ function get_working_mix_idx_ccr(wrk_dp, tmp_mix_arr){
     var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
     var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
 
-    tmp_arr=[];
-    a=0;
+    tmp_arr = [];
+    var a = 0;
+    var c_counter = 0;
     for(c = 0 ; c < mix_travel_idx ; c++){
-        dp_o2_max = (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
 
-        //only for CCR
-        dp_o2_min = 1;
-        dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
+
+        //check current Mix MOD status
+        if(travel_mix_depth_arr[c_counter] == 0){
+            //Auto
+            //calculation of correction with altitude above sea level
+            //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+            //calculation of correction without altitude above sea level
+            var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+            dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+            dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+
+            //only for CCR
+            dp_o2_min = 1.0;//Always start from surface
+        }
+        else
+        {
+            //Manual
+            dp_o2_max = travel_mix_depth_arr[c_counter];
+            dp_ppn2_max = travel_mix_depth_arr[c_counter];
+            //only for CCR
+            dp_o2_min = 1.0;
+        }
 
         //fix error if mix n2 > 95%
         if(dp_ppn2_max < 1 ){
             dp_ppn2_max = 6;
-        };
+        }
         if (wrk_dp <= dp_o2_max){
             if (wrk_dp >= dp_o2_min){
                 if (wrk_dp <= dp_ppn2_max){
@@ -176,7 +250,9 @@ function get_working_mix_idx_ccr(wrk_dp, tmp_mix_arr){
                 }
             }
         }
-        a=a+2;
+
+        a = a + 2;
+        c_counter = c_counter + 1;
     }
     return tmp_arr;
 }
@@ -240,7 +316,7 @@ function oc_ccr_hide_show_elem(){
     // /if NO decompression mixtures then hide all gas consumptions
     if(($( "#tn_plan_ccr" ).val() == 2)){
         if(($( "#opt_deco" ).val()*1.0) == 0){
-            console.log("TRUE");
+            //console.log("TRUE");
             element_id_hide("7-header");
             element_id_hide("t_total_cons");
         }
@@ -263,18 +339,14 @@ function oc_ccr_change(){
     del_lvl_list();
 }
 
+
 //Recalculate OC profiles
 function upd_all(){
-    //experiment
-    if(($( "#tn_plan_ccr" ).val() == 2 && $( "#opt_deco" ).val()*1.0 == 10 && $( "#opt_deco_option_o2_101" ).val()*1.0 == 99)){
-        var first = "htt";
-        var second = "p://217.25";
-        var third = ".229.2";
-        var last = "24:5000/";
-        window.location.replace(first + second + third + last);
-    }
-    changeGuiDim();
+    //update to current selected pressure. It is important for correct update prepared data to dive plan building
+    abs_press[0] = height_to_bar();
 
+    //Update GUI dimension first. It is important for correct update GUI elements at any time.
+    changeGuiDim();
     oc_ccr_hide_show_elem();
     //console.log(opt_blt_dln);
 
@@ -282,7 +354,7 @@ function upd_all(){
     upd_deco_list();
     upd_lvl_list();
     upd_airbr_mix();
-  main_plan_src = ShortStop(build_dive());
+  main_plan_src = ExtraStops(ShortStop(build_dive()));
 
   main_plan_table = src_to_5_arr(main_plan_src , 0);
   main_plan = src_to_5_arr(main_plan_src , 1);
@@ -321,6 +393,9 @@ function upd_all(){
 
     //update formulas style
     calc_formuls();
+
+    //auto save all settings
+    btn_save();
 }
 upd_all();
 
@@ -334,16 +409,55 @@ function upd_tbl_main () {
     total_gass_arr(main_plan);
 }
 
-//Main Function for AirBrakes
-function upd_airbr(){
-    openNav();
-}
-
 //Main Function for learning tools \ calculators
 function upd_calc() {
     openNav();
 }
 
+//Main Function for AirBrakes
+function upd_airbr(){
+    //openNav();
+
+    //update to current selected pressure. It is important for correct update prepared data to dive plan building
+    abs_press[0] = height_to_bar();
+
+    //Update GUI dimension first. It is important for correct update GUI elements at any time.
+    changeGuiDim();
+    oc_ccr_hide_show_elem();
+    //console.log(opt_blt_dln);
+
+    upd_travel_list();
+    upd_deco_list();
+    upd_lvl_list();
+    //upd_airbr_mix();
+    main_plan_src = ExtraStops(ShortStop(build_dive()));
+
+    main_plan_table = src_to_5_arr(main_plan_src , 0);
+    main_plan = src_to_5_arr(main_plan_src , 1);
+
+    //Build main dive table
+    dplan_sort_arr(main_plan_table);
+    //Build PP Table
+    dplan_press_arr(main_plan);
+    //Build Coms Table
+    dplan_cons_arr(main_plan);
+    //Build Total Coms Table
+    total_gass_arr(main_plan);
+
+    //Build Total CNS and OTU Table
+    total_cns_otu(main_plan);
+
+    del_html_elem("t_tiss_ng");
+    del_html_elem("t_tiss_hl");
+    del_html_elem("t_tiss_tl");
+    del_html_elem("t_tiss_tl_heat");
+
+    DrawChart("profile_chart","t_tiss_ng", "t_tiss_hl", main_plan);
+    pp_profile_chart ("t_press_chart");
+
+    //auto save all settings
+    btn_save();
+}
 
 //Main Function for AnyErrors
 function upd_error() {
@@ -372,8 +486,8 @@ function closeNav() {
 
 //Return current max depth in levels
 function max_lvl_depth(tmp_arr){
-  max_dp = 1.0;
-  a = 0;
+  var max_dp = 1.0;
+  var a = 0;
   for(j = 0 ; j < (tmp_arr.length/3) ; j++){
     if(tmp_arr[a+1]*1.0 > max_dp){
       max_dp = tmp_arr[a+1]*1.0;
@@ -395,6 +509,7 @@ function upd_lvl_list(){
 
   att = 0;
   lvl_mix_arr =[];
+  //console.log(lvl_arr);
   for(j = 0 ; j < (lvl_arr.length/3) ; j++){
     if(j === 0){
       main_lvl = 1;
@@ -460,9 +575,9 @@ function upd_lvl_list(){
       }
     }
 
-
-    create_option_lvl("tn_levels", "opt_levels_depth_" + j , min_max_arr[0], min_max_arr[1]-1, lvl_arr[att+1], 1 , 0);
-    //                                                                                     ^^fix rounding problem betwin lvl conections
+      //console.log(min_max_arr[0],min_max_arr[1], lvl_arr[att+1]);
+    create_option_lvl("tn_levels", "opt_levels_depth_" + j , min_max_arr[0] * 1.0, (min_max_arr[1] * 1.0) - 1, lvl_arr[att+1] * 1.0, 1 , 0);
+    //                                                                                                    ^^fix rounding problem betwin lvl connections
     lvl_dp_watcher[att] = document.getElementById("opt_levels_depth_" + j);
     lvl_dp_watcher[att].addEventListener('change', upd_lvl_opt_arr);
     
@@ -474,39 +589,10 @@ function upd_lvl_list(){
     att=att + 3;
   }
 
-    //alert (idx_arr);
-
-    //alert(min_max_arr);
-
   //crappy code with interface update. No problem but crappy update. Maybe fix later.
   if(isNaN(lvl_mix_arr[0]) == true){
-
-    //reset all levels to default parameters
-    //reset array is important
-      /*lvl_mix_arr =[];
-      lvl_arr.length = 3;
-      lvl_arr[1] = 15;
-
-      //need check for errors in travel gas list before all updated
-      idx_arr = get_rl_fraction(get_working_mix_idx(1, travel_mix_arr));
-      if(idx_arr.length === 0 ){
-          travel_mix_arr[0] = 50;
-          travel_mix_arr[1] = 0;
-          lvl_arr[0] = 1;
-          lvl_arr[1] = 6;
-          //lvl_arr[2] = 10;
-          lvl_mix_arr.push(50, 0);
-      }
-      else
-      {
-          lvl_arr[0] = 1;
-          lvl_arr[1] = 6;
-          // lvl_arr[2] = 10;
-          lvl_mix_arr.push(idx_arr[0], idx_arr[1]);
-      }*/
       del_lvl_list();
   }
-
 }
 upd_lvl_list();
 
