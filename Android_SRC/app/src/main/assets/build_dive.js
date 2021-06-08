@@ -6,12 +6,13 @@ function build_dive(){
   tmp_lvl_mix_arr = [];
 
   var rate_asc = document.getElementById("opt_rate_asc");
-  var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
+  //var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
   var rate_dsc = document.getElementById("opt_rate_dsc");
-  var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
+  //var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
 
   //calculate ascending numbers for potentialy deco stops
   for (i = 0; i < lvl_arr.length/3; i++) {
+
     if(i > 0){
         //console.log("all_as_fine_ASCENT");
       //if ascend you need build potentialy deco levels
@@ -67,7 +68,7 @@ function build_dive(){
     b9 = b9 + 2;
   }
 
-  //if last last segment above 7 meters. This code does`t work korect with no deco segments and
+  //if last last segment above 7 meters. This code does`t work correct with no deco segments and
   //zacominchen:))
   if(tmp_lvl_arr[tmp_lvl_arr.length -2]*1.0 < 7){
 
@@ -78,12 +79,14 @@ function build_dive(){
   {
     //compute regular dive under 6 meters last lvl
     output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
-
+    output = (GasBreakInsert(LastStopUpd(output)));
   }
+
+  //console.log(output);
   return output;
 }
 //main function to build any dive segment
-function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm_dive){
+function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
   var rate_asc = document.getElementById("opt_rate_asc");
   var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
@@ -94,6 +97,14 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
 
     if(max_lvl_depth(levels_segment_arr) < 7){
       //Not Deco Dive Segment
+
+        if($( "#tn_plan_ccr" ).val()*1.0 == 2){
+            //CCR dive and we need hide consumption
+            element_id_hide("t_total_cons");
+            element_id_hide("7-header");
+            element_id_hide("7-content");
+            //console.log("true");
+        }
 
       tmp_arr = [];
       tmp_end_depth = levels_segment_arr[1];
@@ -145,7 +156,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
             {
               tmp_time = (tt_time*1.0/rate_asc_idx);
             }
-            //retirn char mix name
+            //return char mix name
             tmp_mx_arr =[];
             tmp_mx_arr.push(levels_mix_segment_arr[b3],levels_mix_segment_arr[b3+1]);
             tmp_gass_name = mix_to_txt_arr(tmp_mx_arr);
@@ -180,6 +191,15 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
 
     //Deco Dive_Segment! 
     {
+        if($( "#tn_plan_ccr" ).val()*1.0 == 1){
+
+            //OC dive and we need hide consumption
+            element_id_show("t_total_cons");
+            element_id_show("7-header");
+            element_id_show("7-content");
+
+        }
+
         //reset compartment info array every graph rebuild
         comp_tiss_arr =[];
 
@@ -211,7 +231,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
       plan.addBottomGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
 
       //add bottom gass as deco gass !!!_need_deep_test_!!!
-      plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
+      //plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
 
       aaa = aaa + 2;
     }
@@ -220,16 +240,57 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     var mix_deco = document.getElementById("opt_deco");
     var mix_deco_idx = mix_deco.options[mix_deco.selectedIndex].value;
     aaa = 0;
-    for(c = 0 ; c < mix_deco_idx ; c++){
-      tmp3 =[deco_mix_arr[aaa],deco_mix_arr[aaa+1]];
 
-      //!!! If Dive is CCR and no Bailout then disable deco gases. Build Diluent profile
+    mix_mod_arr = [];
+    var counter = 0;
+
+    for(c = 0 ; c < mix_deco_idx ; c++){
+      tmp3 = [deco_mix_arr[aaa],deco_mix_arr[aaa+1]];
+
+      //This CCR Bailout Dive or OC Dive and deco gases is enable
       if(opt_blt_dln == 1){
-          plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+          if(deco_mix_depth_arr[counter] != 0){
+              //Manual MOD set for current deco mix
+              var curMixMOD = deco_mix_depth_arr[counter];
+          }
+          else{
+              ////Auto MOD set for current deco mix
+              var curMixMOD = GetDecoMODinMeters(deco_mix_arr[aaa], deco_mix_arr[aaa+1]);
+          }
+
+          //Do a curMixMOD multiple of three
+          curMixMOD = (3 * ((curMixMOD / 3).toFixed(0)));
+          if($( "#opt_lst_stop" ).val() == 6){
+            //console.log(curMixMOD);
+           //6 meters last stop. Check current mix MOD and if less that 6 meters does`t add to the deco gas list
+              if(curMixMOD >= 6){
+                  plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+                  mix_mod_arr.push(
+                      {
+                          mix : mix_to_txt_arr(tmp3),
+                          mod : deco_mix_depth_arr[counter]
+                      });
+              }
+          }
+          else
+          {
+              //3 meters last stop. Do nothing. Simply add deco gases to the list
+              plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
+              mix_mod_arr.push(
+                  {
+                      mix : mix_to_txt_arr(tmp3),
+                      mod : deco_mix_depth_arr[counter]
+                  });
+          }
+      }
+      else{
+          //it is CCR Diluent Dive and no Bailout(Deco gases add) dive
       }
       //as Bottom/Travel gases, for lvl compatibility
       plan.addBottomGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa]*0.01, deco_mix_arr[aaa+1]*0.01);
-      aaa=aaa+2;
+      counter = counter + 1;
+      aaa = aaa + 2;
+
     }
 
     //Add lvl changes
@@ -272,14 +333,19 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     }
     //compute END for specific lib param
     var ppn2_max_deco = document.getElementById("opt_ppn2_max_deco");
-    ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
-    mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
+    var ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
 
+        //OLD!
+        //var mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
+
+        //NEW!
+        var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+        var mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10 * height_to_bar() * WaterDensTempCompensation;
+        //console.log(mxis_end, WaterDensTempCompensation, height_to_bar());
 
     output = plan.calculateDecompression(false, gf_arr[0]*0.01, gf_arr[1]*0.01, ppo2_deco_idx*1.0, mxis_end);
 
     }
-    //console.log(output);
     //fix ascent error on very short dives
     for(c = 0 ; c < output.length ; c++){
       if(output[c].endDepth < 0){
@@ -294,106 +360,96 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
         );
       }
     }
-    /*for(c = 1 ; c < output.length ; c++){
-      
-      
-      if(output[c].startDepth == 6 && output[c].endDepth === 0){
-        
-      console.log(output[c].startDepth);
-      console.log(output);
-      output[c].endDepth = 3;
-      output[c].time = output[c].time/2;
-          output.push(
-          {
-            endDepth: 0,
-            startDepth: 3,
-            time: output[c].time,
-            gasName: output[c].gasName
-          }  
-        );
-      
-    }
-    }*/
-    //ADD extra stops for gas changing
-    tn_cng_time = document.getElementById("opt_cng_time");
-    tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
 
-    //if changing mix time === 0 we need add some time for property dive plan computation.
-    if(tn_cng_time_idx === 0)
-    {
-        //!!!need deep test! changed from 0.01 to 0 after v9.0
-      tn_cng_time_idx = 0;
-    }
-
-    for(c = 1 ; c < output.length ; c++){
-      if(output[c].gasName != output[c-1].gasName){
-        output.splice(c,0,
-          {
-            endDepth: output[c].startDepth,
-            startDepth: output[c].startDepth,
-            time: tn_cng_time_idx,
-            gasName: output[c].gasName
-          }
-        );
-      }
-    }
-    //console.log(output);
     return output;
   }
 
 //from idx filtered array make only fraction o2\he from real travel gases array
 function get_rl_fraction(idx_arr){
-  var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
-  tmp_arr=[];
-  a=0;
-  b=0;
+    var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
+  var tmp_arr=[];
+  var a = 0;
+  var b = 0;
   for(c = 0 ; c < mix_travel_idx ; c++){
     if(c == idx_arr[a]){
       tmp_arr.push(travel_mix_arr[b],travel_mix_arr[b+1]);
-      a=a+1;
+      a = a + 1;
     }
-    b=b+2;
+    b = b + 2;
   }
   return tmp_arr;
 }
+//get from fraction proper MOD idx
+function ret_mix_mod_idx(o2_fr , he_fr){
+    var idx_me = 0;
+    for(var cnt = 0 ; cnt < travel_mix_arr.length - 1 ; cnt++){
+
+        if(travel_mix_arr[cnt] == o2_fr && travel_mix_arr[cnt+1] == he_fr ){
+            break;
+        }
+        idx_me = idx_me + 1;
+    }
+    return cnt/2;
+}
+
 //return depth range, for selected by idx, mix array. Only two min max number for OC
 function ret_mix_range_oc(idx , tmp_mix_arr){
 
-  var ppo2_bottom = document.getElementById("opt_ppo2_bottom");
-  var ppo2_min = document.getElementById("opt_ppo2_min");
-  var ppn2_max = document.getElementById("opt_ppn2_max");
+    var ppo2_bottom = document.getElementById("opt_ppo2_bottom");
+    var ppo2_min = document.getElementById("opt_ppo2_min");
+    var ppn2_max = document.getElementById("opt_ppn2_max");
 
-  var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
-  var ppo2_min_idx = ppo2_min.options[ppo2_min.selectedIndex].value;
-  var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
-  tmp_arr=[];
-  a = 0;
-  for(c = 0 ; c < tmp_mix_arr.length ; c++){
-    if(c+1 == idx){
-      dp_o2_max = (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
+    var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
+    var ppo2_min_idx = ppo2_min.options[ppo2_min.selectedIndex].value;
+    var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
+    var tmp_arr = [];
+    var a = 0;
+    for(c = 0 ; c < tmp_mix_arr.length ; c++){
 
 
 
-      dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10 - (10*height_to_bar()))*1.0;
-      if(dp_o2_min < 1){dp_o2_min = 1;}
-      if(dp_o2_min == Infinity){dp_o2_min = 1;}
-      dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
+        if(c + 1 == idx){
+            //get current mod for selected mix
+            var depth_cur_mod = travel_mix_depth_arr[ret_mix_mod_idx(tmp_mix_arr[a] , tmp_mix_arr[a+1])] * 1.0;
 
-      tmp_arr.push(dp_o2_min);
-      if (dp_ppn2_max >= dp_o2_max){
-        tmp_arr.push(dp_o2_max);
-      }
-      else
-      {
-        tmp_arr.push(dp_ppn2_max);
-      }
-      break;
+            //check current Mix MOD status
+            if(depth_cur_mod == 0){
+                //Auto
+                //calculation of correction with altitude above sea level
+                //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+                //calculation of correction without altitude above sea level
+                var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+                dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10 * height_to_bar()) + 1;//+1m fixing rounding to standard
+                dp_o2_min = (WaterDensTempCompensation * (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar());
+                if(dp_o2_min < 1){dp_o2_min = 1;}
+                if(dp_o2_min == Infinity){dp_o2_min = 1;}
+                dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+            }
+            else{
+                //Manual
+                dp_o2_max = depth_cur_mod + 1;
+                dp_o2_min = 1.0;//Always from one meter depth
+                dp_ppn2_max = depth_cur_mod + 1;
+
+            }
+
+            tmp_arr.push(dp_o2_min);
+            if (dp_ppn2_max >= dp_o2_max){
+                tmp_arr.push(dp_o2_max);
+            }
+            else
+            {
+                tmp_arr.push(dp_ppn2_max);
+            }
+            break;
+        }
+        a = a + 2;
     }
-    a=a+2;
-  }
 
-  return tmp_arr;
+    return tmp_arr;
 }
+
 //return depth range, for selected by idx, mix array. Only two min max number for CCR
 function ret_mix_range_ccr(idx , tmp_mix_arr){
 
@@ -405,18 +461,36 @@ function ret_mix_range_ccr(idx , tmp_mix_arr){
 
     var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
     var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
-    tmp_arr=[];
-    a = 0;
+    var tmp_arr = [];
+    var a = 0;
     for(c = 0 ; c < tmp_mix_arr.length ; c++){
-        if(c+1 == idx){
-            dp_o2_max = (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10) - (10*height_to_bar())*1.0;
-            dp_o2_min = 1;
-            dp_ppn2_max = (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10) - (10*height_to_bar())*1.0;
+        if(c + 1 == idx){
+            //get current mod for selected mix
+            var depth_cur_mod = travel_mix_depth_arr[ret_mix_mod_idx(tmp_mix_arr[a] , tmp_mix_arr[a+1])] * 1.0;
 
-            //fix error if mix n2 > 95%
-            if(dp_ppn2_max < 1 ){
-                dp_ppn2_max = 6;
-            };
+            //check current Mix MOD status
+            if(depth_cur_mod == 0) {
+                //Auto
+                //calculation of correction with altitude above sea level
+                //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+                //calculation of correction without altitude above sea level
+                var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+                dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx / (tmp_mix_arr[a] * 0.01) * 10)) - (10 * height_to_bar()) + 1;//+1m fixing rounding to standard
+                dp_o2_min = 1;
+                dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx / ((100 - tmp_mix_arr[a] - tmp_mix_arr[a + 1]) * 0.01) * 10)) - (10 * height_to_bar()) + 1;//+1m fixing rounding to standard
+
+                //fix error if mix n2 > 95%
+                if (dp_ppn2_max < 1) {
+                    dp_ppn2_max = 6;
+                }
+            }
+            else{
+                //Manual
+                dp_o2_max = depth_cur_mod + 1;
+                dp_o2_min = 1.0;//Always from one meter depth
+                dp_ppn2_max = depth_cur_mod + 1;
+            }
 
             tmp_arr.push(dp_o2_min);
 
@@ -429,7 +503,7 @@ function ret_mix_range_ccr(idx , tmp_mix_arr){
             }
             break;
         }
-        a=a+2;
+        a = a + 2;
     }
     //tmp_arr[0] = 1;
     return tmp_arr;
@@ -484,21 +558,7 @@ function upd_lvl_opt_arr(){
   upd_all();
 }
 
-// Compute altitude in meters to preassure in bars
-function height_to_bar(){
-  sea_lvl_merc = 750.062;
 
-  tn_celsus1 = document.getElementById("opt_celsus");
-  t_celsus = parseFloat(tn_celsus1.options[tn_celsus1.selectedIndex].value);
-  tn_slevel1 = document.getElementById("opt_slevel");
-  height_mtr = parseFloat(tn_slevel1.options[tn_slevel1.selectedIndex].value);
-
-  t_kelvin = 273.15 + (t_celsus);
-  prs_mercury = (Math.pow(2.7182818 , (((0.02896*9.807)/(8.3143*t_kelvin)*-1)*(height_mtr))))*(sea_lvl_merc);
-  //alert(prs_mercury);
-  prs_bars = prs_mercury*0.00133322;
-  return prs_bars;
-}
 
 
 
@@ -530,12 +590,12 @@ function src_to_5_arr(tmp_arr, flag_full){
   test_dp = depth_from_name_arr(dec_table[dec_table.length - 9]);
 
 
-  //fix gass swich error on exit for very short dive plans
+  //fix gas switch error on exit for very short dive plans
   dec_table[(dec_table.length-1)] = dec_table[(dec_table.length-6)];
   return dec_table;
 }
 
-  //remove_zero time levels from plan. It is normal because user can asign lvl same depth
+  //remove_zero time levels from plan. It is normal because user can assign lvl same depth
   function zero_lvl_arr(tmp_arr){
     for (i = 0; i < tmp_arr.length; i++){
       if(tmp_arr[i].time <= 0.001){
@@ -641,7 +701,7 @@ function src_to_5_arr(tmp_arr, flag_full){
     return dec_table;
   }
 
-//very crappy code. copy of slightly modifed function before. add table different info but don`t use "classic" fixes view. it is keep all other (exclude main table) safety
+//very crappy code. copy of slightly modified function before. add table different info but don`t use "classic" fixes view. it is keep all other (exclude main table) safety
 function to_5_column_arr_full(tmp_arr){
     dec_table = ["Action" , "Depth" , "Time" , "RunTime" , "Mix"];
 
@@ -696,20 +756,177 @@ function ShortStop(mn_plan){
 
     for (var i = 0; i < mn_plan.length; i++) {
         //only for stops or flat segments
-        if(mn_plan[i].startDepth === mn_plan[i].endDepth){
+        if(mn_plan[i].startDepth == mn_plan[i].endDepth){
             //only for non integer time
-            if(mn_plan[i].time !== Math.floor(mn_plan[i].time)){
+            if(mn_plan[i].time != Math.floor(mn_plan[i].time)){
 
                 var rep = {
                     gasName : mn_plan[i].gasName,
                     startDepth : mn_plan[i].startDepth,
                     endDepth : mn_plan[i].endDepth,
                     //fix not integer time if present
-                    time : Math.ceil(mn_plan[i].time)
+                    time : Math.floor(mn_plan[i].time)
+                    //time : Math.ceil(mn_plan[i].time)
                 };
                 mn_plan.splice(i,1,rep);
             }
         }
     }
+
     return mn_plan;
+}
+//Recombine plan if last stop changed from 3 meters to 6 meters
+//post changes
+function LastStopUpd (plan){
+    for (var i = 0; i < plan.length; i++) {
+
+    }
+
+
+    if($( "#opt_lst_stop" ).val() == 6){
+
+        //plan is 6 meters las stop. We need some magic
+            var add_time = plan[plan.length - 2].time + plan[plan.length - 4].time;
+            var new_end_time = 2.0 * plan[plan.length - 1].time;
+            plan[plan.length - 4].time = add_time;
+            plan.splice(plan.length - 3 , 3);
+            plan.push({
+                gasName : plan[plan.length - 1].gasName,
+                startDepth : plan[plan.length - 1].endDepth,
+                endDepth : 0,
+                time : new_end_time
+            });
+    }
+    else{
+        //last stop is 3 meters and nothing will be changed
+    }
+    return plan;
+}
+//Insert gas break in to the plan
+function GasBreakInsert(main_arr) {
+
+    var gb_DepthStart =  $("#opt_airbr_depth").val() * 1.0;
+    var gb_MixMore =  $("#opt_airbr_o2").val() * 1.0;
+    var gb_Mix =  $("#opt_airbr_mix option:selected").text();
+    var gb_MinAfter =  $("#opt_airbr_time_after").val() * 1.0;
+    var gb_Break =  $("#opt_airbr_time").val() * 1.0;
+    var gb_Enable =  $("#opt_airbr_time_reset").val() * 1.0;
+
+    var TotalTime = 0;
+
+    var LvlMaxDepth = PlanMaxDepth(lvl_arr);
+    if(gb_DepthStart > LvlMaxDepth){
+        gb_DepthStart = LvlMaxDepth;
+    }
+    //Gas breaks enabled and it is NO CCR plan
+    if(gb_Enable == 2 && $( "#tn_plan_ccr" ).val()*1.0 != 2){
+        for(var j = 0 ; j < main_arr.length ; j++){
+            var dp_start = main_arr[j].startDepth * 1.0;
+            var dp_end = main_arr[j].endDepth * 1.0;
+
+            //flat level
+            if(dp_start === dp_end){
+
+                var cr_gas_level_o2fr = (gass_from_name_arr(main_arr[j].gasName))[0];
+
+                //level depth less or equal than break start depth
+                //if(gb_DepthStart >= dp_start || cr_gas_level_o2fr >= gb_MixMore){
+                if(gb_DepthStart >= dp_start){
+                    //current level less than maximum plan depth
+                    if(dp_start < LvlMaxDepth){
+                        if(gb_LevelReset = 1){
+                            //reset time on current level
+                            TotalTime = 0;
+                            if(main_arr[j].time >= (gb_MinAfter + gb_Break)){
+
+                                var gb_end_time = main_arr[j].time - ((gb_MinAfter + gb_Break) * Math.floor(main_arr[j].time /(gb_MinAfter + gb_Break))) ;
+
+                                var gb_total_time = main_arr[j].time;
+                                var gb_mix_total = main_arr[j].gasName;
+                                var gb_startDepth_total = main_arr[j].startDepth;
+                                var gb_endDepth_total = main_arr[j].endDepth;
+
+                                main_arr.splice(j , 1);
+
+                                for(var s = 0 ; s < (Math.floor(gb_total_time / (gb_MinAfter + gb_Break))) ; s++){
+                                    //console.log(s);
+
+                                    main_arr.splice(j , 0, {
+                                        gasName : gb_Mix,
+                                        startDepth : gb_startDepth_total,
+                                        endDepth : gb_endDepth_total,
+                                        time : gb_Break
+                                    });
+                                    main_arr.splice(j , 0, {
+                                        gasName : gb_mix_total,
+                                        startDepth : gb_startDepth_total,
+                                        endDepth : gb_endDepth_total,
+                                        time : gb_MinAfter
+                                    });
+
+                                }
+                                main_arr.splice(j + (s * 2) , 0, {
+                                    //gasName : gb_mix_total,
+                                    gasName : gb_mix_total,
+                                    startDepth : gb_startDepth_total,
+                                    endDepth : gb_endDepth_total,
+                                    time : gb_end_time
+                                });
+                            }
+
+                        }
+                        else{
+                            //or add to counter
+                            TotalTime = TotalTime + main_arr[j].time;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return main_arr;
+}
+
+//ADD extra stops for gas changing
+function ExtraStops(output) {
+    var tn_cng_time = document.getElementById("opt_cng_time");
+    var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
+
+//if changing mix time === 0 we need add some time for property dive plan computation.
+    if(tn_cng_time_idx === 0)
+    {
+        //!!!need deep test! changed from 0.0 to 0.0001 after v9.11
+        //it is important. if 0.0 then crash app. need more testing and resolve this strange work
+        tn_cng_time_idx = 0.0001;
+    }
+
+    for(c = 1 ; c < output.length ; c++){
+        if(output[c].gasName != output[c-1].gasName){
+            output.splice(c,0,
+                {
+                    endDepth: output[c].startDepth,
+                    startDepth: output[c].startDepth,
+                    time: tn_cng_time_idx,
+                    gasName: output[c].gasName
+                }
+            );
+        }
+    }
+    return output;
+//console.log(output);
+}
+
+
+
+//return max depth in meters from lvl list array
+function PlanMaxDepth(plan_array){
+    var a = 0;
+    var max_dp = 1.0;
+    for(j = 0 ; j < (plan_array.length/3) ; j++){
+        if(plan_array[a+1]*1.0 > max_dp){
+            max_dp = plan_array[a+1]*1.0;
+        }
+        a = a + 3;
+    }
+    return max_dp;
 }

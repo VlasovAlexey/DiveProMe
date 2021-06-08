@@ -2,11 +2,11 @@
 //Make from SINGLE fraction array text gases array
 function mix_to_txt_arr(tmp_arr){
 
-    a = 0;
-    mix_text_arr=[];
-    txt = "";
+    var a = 0;
+    var mix_text_arr=[];
+    var txt = "";
 
-    if (tmp_arr[a]*1.0 > 21){
+    if (tmp_arr[a]*1.0 != 21){
         if(tmp_arr[a+1]*1.0 === 0){
             txt="EAN"+tmp_arr[a];
         }

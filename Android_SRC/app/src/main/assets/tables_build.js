@@ -251,15 +251,18 @@
       return body.replaceChild(newTable, firstTable);
     }
   }
+
+
+
+
   //Build PP table
   function dplan_press_arr(tmp_arr){
     del_html_elem("t_press");
+
+
     
     //tmp_arr.splice(0,5);
     dec_table = tmp_arr;
-
-    //console.log(dec_table);
-
 
     body = document.getElementById("t_press");
     columns = 5;
@@ -318,12 +321,15 @@
         }
         
         if(i > 0){
+            //include water density, altitude correction and water temperature correction
+            //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001) - ((1 - height_to_bar()))));
+            //calculation of correction without altitude above sea level
+            var WaterDensTempCompensation = ((water_density_temperature_correction() * water_density() * 0.001));
+
           //for oxygen
           if(j === 0){
             depth = depth_from_name_arr(dec_table[tick+1]);
             time_add = time_to_dec_time(dec_table[tick+2]);
-            //console.log(time_add);
-              // console.log(time_base);
 
             depth_start = depth[0];
             if(depth.length > 1){
@@ -335,8 +341,19 @@
             }
             o2_fr = gass_from_name_arr(dec_table[tick+4]);
             o2_fr = o2_fr[0];
-            o2_fr_start = ((o2_fr*(depth_start+10)*0.001)).toFixed(2);
-            o2_fr_end = ((o2_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  o2_fr_start = ((WaterDensTempCompensation * (o2_fr*(depth_start)*0.001)) + (height_to_bar()*(0.01 * o2_fr))).toFixed(2);
+                  o2_fr_end = ((WaterDensTempCompensation * (o2_fr*(depth_end)*0.001)) + (height_to_bar()*(0.01 * o2_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  o2_fr_start = (14.5037738 * ((WaterDensTempCompensation * (o2_fr*(depth_start)*0.001)) + ((height_to_bar())*(0.01 * o2_fr)))).toFixed(1);
+                  o2_fr_end = (14.5037738 * ((WaterDensTempCompensation * (o2_fr*(depth_end)*0.001)) + ((height_to_bar())*(0.01 * o2_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(o2_fr_start);
                 ppo2_array.push([1*(time_base).toFixed(1) , 1*parseFloat(o2_fr_start).toFixed(2)]);
@@ -365,8 +382,20 @@
             
             n2_fr = gass_from_name_arr(dec_table[tick+3]);
             n2_fr = n2_fr[1];
-            n2_fr_start = ((n2_fr*(depth_start+10)*0.001)).toFixed(2);
-            n2_fr_end = ((n2_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  //include water density, altitude correction and water temperature correction
+                  n2_fr_start = ((WaterDensTempCompensation * (n2_fr*(depth_start)*0.001)) + ((height_to_bar())*(0.01 * n2_fr))).toFixed(2);
+                  n2_fr_end = ((WaterDensTempCompensation * (n2_fr*(depth_end)*0.001)) + ((height_to_bar())*(0.01 * n2_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  n2_fr_start = (14.5037738 * ((WaterDensTempCompensation * (n2_fr*(depth_start)*0.001)) + ((height_to_bar())*(0.01 * n2_fr)))).toFixed(1);
+                  n2_fr_end = (14.5037738 * ((WaterDensTempCompensation * (n2_fr*(depth_end)*0.001)) + ((height_to_bar())*(0.01 * n2_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(n2_fr_start);
                 ppn2_array.push([1*(time_base).toFixed(1) , 1*parseFloat(n2_fr_start).toFixed(2)]);
@@ -393,8 +422,20 @@
             
             he_fr = gass_from_name_arr(dec_table[tick+2]);
             he_fr = he_fr[2];
-            he_fr_start = ((he_fr*(depth_start+10)*0.001)).toFixed(2);
-            he_fr_end = ((he_fr*(depth_end+10)*0.001)).toFixed(2);
+
+              //bar
+              if($( "#tn_dmn" ).val() == 1){
+                  //include water density, altitude correction and water temperature correction
+                  he_fr_start = ((WaterDensTempCompensation * (he_fr*(depth_start)*0.001)) + ((height_to_bar())*(0.01 * he_fr))).toFixed(2);
+                  he_fr_end = ((WaterDensTempCompensation * (he_fr*(depth_end)*0.001)) + ((height_to_bar())*(0.01 * he_fr))).toFixed(2);
+              }
+              //psi
+              if($( "#tn_dmn" ).val() == 2){
+                  //include water density, altitude correction and water temperature correction
+                  he_fr_start = (14.5037738 * ((WaterDensTempCompensation * (he_fr*(depth_start)*0.001)) + ((height_to_bar())*(0.01 * he_fr)))).toFixed(1);
+                  he_fr_end = (14.5037738 * ((WaterDensTempCompensation * (he_fr*(depth_end)*0.001)) + ((height_to_bar())*(0.01 * he_fr)))).toFixed(1);
+              }
+
             if(depth_start == depth_end){
                 text = document.createTextNode(he_fr_start);
                 pphe_array.push([1*(time_base).toFixed(1) , 1*parseFloat(he_fr_start).toFixed(2)]);
@@ -550,9 +591,10 @@
     tick = 0;
     clr = 0;
 
-
-
-
+      //include water density, altitude correction and water temperature correction
+      // console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001) - ((1 - height_to_bar()))));
+      //calculation of correction without altitude above sea level
+      var WaterDensTempCompensation = ((water_density_temperature_correction() * water_density() * 0.001));
 
     for (i = 0; i < rows; i++) {
       tr = document.createElement("tr");
@@ -637,11 +679,14 @@
             time1 = time_to_dec_time(dec_table[tick]);
             
             if (i-2 < (lvl_arr.length/3)*2){
-              coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
+
+
+                //include water density, altitude correction and water temperature correction
+                coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_bt_idx);
             }
             else
-            {
-              coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
+            {   //include water density, altitude correction and water temperature correction
+                coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_deco_idx);
             }
               //liters
               if($( "#tn_dmn" ).val() == 1){
@@ -773,7 +818,7 @@ function depth_from_name_arr(tmp_arr){
     if(tmp_time.charAt(f) == ":"){
       mins = parseFloat(tmp_time.substr(0, f));
       seconds = parseFloat(tmp_time.substr(f+1, (tmp_time.length - f - 1)));
-      tmp_time =parseFloat( mins + ((seconds/60*100)*0.01));
+      tmp_time = parseFloat( mins + ((seconds/60*100)*0.01));
       break;
       }
     }
@@ -848,6 +893,9 @@ function total_cns_otu(tmp_arr) {
         var depth = depth_from_name_arr(dec_table[tick].Depth);
         var time = time_to_dec_time(dec_table[tick].Time);
         var mix = gass_from_name_arr(dec_table[tick].Mix);
+
+
+
         //O2 only to fraction
         mix = mix[0]*0.01;
 
@@ -868,6 +916,7 @@ function total_cns_otu(tmp_arr) {
                 //if ppo2 from depth1 >= 0.5 and ppo2 from depth 2 >=0.5
                 if(ppo2_1 >= 0.5 && ppo2_2 >= 0.5){
                     otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+
                 }
 
               //if ppo2 from depth1 < 0.5
@@ -879,12 +928,15 @@ function total_cns_otu(tmp_arr) {
               }
                 //if ppo2 from depth2 < 0.5
                 if(ppo2_2 < 0.5){
-                    ppo2_2 = 0.5;
+                    //NaN fixed after changed from0.5 to 0.5000001
+                    ppo2_2 = 0.500000001;
                     //recompute time for segment higher ppo2 >0.5 only
                     time = (time*(ppo2_1 - 0.5)/(ppo2_1 - mix));
-                    otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+                    otu_current = (((3/11*time)/(ppo2_2 - ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+
                 }
             }
+
             //CNS computation
             var depth_lo = 0;
             if(depth1 < depth2){
@@ -911,11 +963,13 @@ function total_cns_otu(tmp_arr) {
             //OTU computation
             //if po2 lower 0.5 computations don`t apply for current segment and OTU=0
             if((mix*((depth + 10) / 10)) > 0.5){
-                otu_current = time*Math.pow((0.5/((mix*((depth + 10) / 10)) - 0.5)) , (-5.0/6.0));
+
+                otu_current = time * Math.pow((0.5/((mix*((depth + 10) / 10)) - 0.5)) , (-5.0/6.0));
+
             }
             else
             {
-              otu_current = 0;
+              otu_current = 0.0;
             }
 
             //CNS computation
@@ -923,6 +977,8 @@ function total_cns_otu(tmp_arr) {
             //console.log("flat",mix, time, mix*((depth + 10) / 10), ppo2_to_cns(mix*((depth + 10) / 10)),cns_current);
         }
         //Compute final OTU
+        //console.log(depth,time);
+        //console.log(otu_current);
         otu_final = otu_final + otu_current;
 
         //ComputeFinal CNS
@@ -998,7 +1054,10 @@ function total_cns_otu(tmp_arr) {
       tmp_arr.splice(0,5);
       //console.log(tmp_arr);
 
-
+      //include water density, altitude correction and water temperature correction
+      // console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001) - ((1 - height_to_bar()))));
+      //calculation of correction without altitude above sea level
+      var WaterDensTempCompensation = ((water_density_temperature_correction() * water_density() * 0.001));
 
       columns = 5;
       rows = ((tmp_arr.length)-1)/columns;
@@ -1058,12 +1117,17 @@ function total_cns_otu(tmp_arr) {
       time1 = time_to_dec_time(dec_table[tick].Time);
       
       //select consumption rate deco or bottom
+
       if (i-1 < (lvl_arr.length/3)*2){
-        coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
+          //include water density, altitude correction and water temperature correction
+          coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_bt_idx);
+        //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
       }
       else
       {
-        coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
+          //include water density, altitude correction and water temperature correction
+          coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_deco_idx);
+        //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
       }
       
       coms_ttl_arr.push(
@@ -1083,11 +1147,15 @@ function total_cns_otu(tmp_arr) {
         if($( "#tn_plan_ccr" ).val() == 2){
 
             //current diluent on
-            if(opt_blt_dln == 1 && $( "#opt_deco" ).val()*1.0 != 0){
-                //show consumptions if hide
-                element_id_show("7-header");
-                element_id_show("t_total_cons");
-        }}
+            if(opt_blt_dln == 1){
+                //deco mixes present
+                if($( "#opt_deco" ).val()*1.0 != 0){
+                    //show consumptions if hide
+                    //element_id_show("7-header");
+                    //element_id_show("t_total_cons");
+                }
+            }
+        }
 
 
 
@@ -1124,7 +1192,7 @@ function total_cns_otu(tmp_arr) {
             }
         }
 
-        //CCR dive belaut dive. Remove first row from
+        //CCR dive beilaut dive. Remove first row from
 
         //Build Final Table
         body = document.getElementById("t_total_cons");

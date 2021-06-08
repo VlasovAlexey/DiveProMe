@@ -12,6 +12,7 @@ function build_dive(){
 
   //calculate ascending numbers for potentialy deco stops
   for (i = 0; i < lvl_arr.length/3; i++) {
+
     if(i > 0){
         //console.log("all_as_fine_ASCENT");
       //if ascend you need build potentialy deco levels
@@ -80,11 +81,12 @@ function build_dive(){
     output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
     output = (GasBreakInsert(LastStopUpd(output)));
   }
+
   //console.log(output);
   return output;
 }
 //main function to build any dive segment
-function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm_dive){
+function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
   var rate_asc = document.getElementById("opt_rate_asc");
   var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
@@ -95,6 +97,14 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
 
     if(max_lvl_depth(levels_segment_arr) < 7){
       //Not Deco Dive Segment
+
+        if($( "#tn_plan_ccr" ).val()*1.0 == 2){
+            //CCR dive and we need hide consumption
+            element_id_hide("t_total_cons");
+            element_id_hide("7-header");
+            element_id_hide("7-content");
+            //console.log("true");
+        }
 
       tmp_arr = [];
       tmp_end_depth = levels_segment_arr[1];
@@ -181,6 +191,15 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
 
     //Deco Dive_Segment! 
     {
+        if($( "#tn_plan_ccr" ).val()*1.0 == 1){
+
+            //OC dive and we need hide consumption
+            element_id_show("t_total_cons");
+            element_id_show("7-header");
+            element_id_show("7-content");
+
+        }
+
         //reset compartment info array every graph rebuild
         comp_tiss_arr =[];
 
@@ -314,9 +333,15 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
     }
     //compute END for specific lib param
     var ppn2_max_deco = document.getElementById("opt_ppn2_max_deco");
-    ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
-    mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
+    var ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
 
+        //OLD!
+        //var mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
+
+        //NEW!
+        var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+        var mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10 * height_to_bar() * WaterDensTempCompensation;
+        //console.log(mxis_end, WaterDensTempCompensation, height_to_bar());
 
     output = plan.calculateDecompression(false, gf_arr[0]*0.01, gf_arr[1]*0.01, ppo2_deco_idx*1.0, mxis_end);
 
@@ -341,16 +366,16 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr, lst_sgm
 
 //from idx filtered array make only fraction o2\he from real travel gases array
 function get_rl_fraction(idx_arr){
-  var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
-  tmp_arr=[];
-  a=0;
-  b=0;
+    var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
+  var tmp_arr=[];
+  var a = 0;
+  var b = 0;
   for(c = 0 ; c < mix_travel_idx ; c++){
     if(c == idx_arr[a]){
       tmp_arr.push(travel_mix_arr[b],travel_mix_arr[b+1]);
-      a=a+1;
+      a = a + 1;
     }
-    b=b+2;
+    b = b + 2;
   }
   return tmp_arr;
 }
@@ -533,40 +558,7 @@ function upd_lvl_opt_arr(){
   upd_all();
 }
 
-// Compute altitude in meters to pressure in bars
-function height_to_bar(){
-    var radius_of_earth, acceleration_of_gravity, molecular_weight_of_air, gas_constant_r, temp_at_sea_level, pressure_at_sea_level_msw, temp_gradient, gmr_factor, altitude_meters, altitude_kilometers, pressure_at_sea_level, geopotential_altitude, temp_at_geopotential_altitude, barometric_pressure;
-    radius_of_earth = 6369;
-    acceleration_of_gravity = 9.80665;
-    molecular_weight_of_air = 28.9644;
-    gas_constant_r = 8.31432;
 
-    //get celsius selected value from interface
-    var opt_celsus_t = document.getElementById("opt_celsus");
-    var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
-
-    temp_at_sea_level = (273.15 + (opt_celsus_t_idx * 1.0));  //Kelvin
-
-    pressure_at_sea_level_msw = 101.6;
-    temp_gradient = -6.5;
-    gmr_factor = acceleration_of_gravity * molecular_weight_of_air / gas_constant_r;
-
-    //get altitude selected value from interface
-    var opt_slevel_t = document.getElementById("opt_slevel");
-    var opt_slevel_t_idx = opt_slevel_t.options[opt_slevel_t.selectedIndex].value;
-
-    altitude_meters = opt_slevel_t_idx * 1.0;
-    altitude_kilometers = altitude_meters / 1000;
-    pressure_at_sea_level = pressure_at_sea_level_msw;
-
-    geopotential_altitude = altitude_kilometers * radius_of_earth / (altitude_kilometers + radius_of_earth);
-    temp_at_geopotential_altitude = temp_at_sea_level + temp_gradient * geopotential_altitude;
-    barometric_pressure = pressure_at_sea_level * Math.exp(Math.log(temp_at_sea_level / temp_at_geopotential_altitude) * gmr_factor / temp_gradient);
-
-    //convert to bars
-    //0.4 is fixes for more precession result compared with real world tables. if you want classic barometric formula simply remove 0.4
-    return (barometric_pressure-0.4)*0.01;
-}
 
 
 
@@ -598,7 +590,7 @@ function src_to_5_arr(tmp_arr, flag_full){
   test_dp = depth_from_name_arr(dec_table[dec_table.length - 9]);
 
 
-  //fix gass swich error on exit for very short dive plans
+  //fix gas switch error on exit for very short dive plans
   dec_table[(dec_table.length-1)] = dec_table[(dec_table.length-6)];
   return dec_table;
 }
@@ -826,8 +818,8 @@ function GasBreakInsert(main_arr) {
     if(gb_DepthStart > LvlMaxDepth){
         gb_DepthStart = LvlMaxDepth;
     }
-    //Gas breaks enabled
-    if(gb_Enable == 2){
+    //Gas breaks enabled and it is NO CCR plan
+    if(gb_Enable == 2 && $( "#tn_plan_ccr" ).val()*1.0 != 2){
         for(var j = 0 ; j < main_arr.length ; j++){
             var dp_start = main_arr[j].startDepth * 1.0;
             var dp_end = main_arr[j].endDepth * 1.0;

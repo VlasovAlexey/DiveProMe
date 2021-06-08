@@ -144,122 +144,11 @@ function GetDecoMODinMeters(o2_fr, he_fr) {
 }
 //console.log(GetDecoMODinMeters(12 , 60));
 
-//Return filtered mix array by PPO2 Max\Min\Deco END for selected depth OC
-function get_working_mix_idx(wrk_dp, tmp_mix_arr){
-  var mix_travel = document.getElementById("opt_travel");
-  var ppo2_bottom = document.getElementById("opt_ppo2_bottom");
-  var ppo2_min = document.getElementById("opt_ppo2_min");
-  var ppn2_max = document.getElementById("opt_ppn2_max");
 
-  var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
-  var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
-  var ppo2_min_idx = ppo2_min.options[ppo2_min.selectedIndex].value;
-  var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
-  
-  tmp_arr=[];
-  var a = 0;
-  var c_counter = 0;
-  for(c = 0 ; c < mix_travel_idx ; c++){
-      //check current Mix MOD status
-      if(travel_mix_depth_arr[c_counter] == 0){
-          //Auto
-          //calculation of correction with altitude above sea level
-          //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
-          //calculation of correction without altitude above sea level
-          var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
-
-          dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
-
-          //new calculation need DEEP TEST!
-          dp_o2_min = (WaterDensTempCompensation * (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar());
-          //Old calculation
-          // dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10 - (10*height_to_bar()))*1.0;
-          if(dp_o2_min < 1){dp_o2_min = 1;}
-          if(dp_o2_min == Infinity){dp_o2_min = 1;}
-          dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
-      }
-      else
-      {
-          //Manual
-          dp_o2_max = travel_mix_depth_arr[c_counter] * 1.0;
-          dp_o2_min = 1.0;//Always start from surface
-          dp_ppn2_max = travel_mix_depth_arr[c_counter] * 1.0;
-      }
-
-    if (wrk_dp <= dp_o2_max){
-      if (wrk_dp >= dp_o2_min){
-        if (wrk_dp <= dp_ppn2_max){
-          tmp_arr.push(c);
-          
-        }
-      }
-    }
-    a = a + 2;
-    c_counter = c_counter + 1;
-  }
-  return tmp_arr;
-}
-//Return filtered mix array by PPO2 Max\Min\Deco END for selected depth CCR
-function get_working_mix_idx_ccr(wrk_dp, tmp_mix_arr){
-    var mix_travel = document.getElementById("opt_travel");
-    var ppo2_bottom = document.getElementById("opt_setpoint_bottom");
-    var ppn2_max = document.getElementById("opt_ppn2_max");
-
-    var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
-    var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
-    var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
-
-    tmp_arr = [];
-    var a = 0;
-    var c_counter = 0;
-    for(c = 0 ; c < mix_travel_idx ; c++){
-
-
-        //check current Mix MOD status
-        if(travel_mix_depth_arr[c_counter] == 0){
-            //Auto
-            //calculation of correction with altitude above sea level
-            //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
-            //calculation of correction without altitude above sea level
-            var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
-
-            dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
-            dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
-
-            //only for CCR
-            dp_o2_min = 1.0;//Always start from surface
-        }
-        else
-        {
-            //Manual
-            dp_o2_max = travel_mix_depth_arr[c_counter];
-            dp_ppn2_max = travel_mix_depth_arr[c_counter];
-            //only for CCR
-            dp_o2_min = 1.0;
-        }
-
-        //fix error if mix n2 > 95%
-        if(dp_ppn2_max < 1 ){
-            dp_ppn2_max = 6;
-        }
-        if (wrk_dp <= dp_o2_max){
-            if (wrk_dp >= dp_o2_min){
-                if (wrk_dp <= dp_ppn2_max){
-                    tmp_arr.push(c);
-
-                }
-            }
-        }
-
-        a = a + 2;
-        c_counter = c_counter + 1;
-    }
-    return tmp_arr;
-}
 
 //hide\show OC or CCR html elements
 function oc_ccr_hide_show_elem(){
-    if($( "#tn_plan_ccr" ).val() == 1){
+    if($( "#tn_plan_ccr" ).val()*1.0 == 1){
 
         opt_blt_dln = 1;
 
@@ -275,7 +164,11 @@ function oc_ccr_hide_show_elem(){
 
         element_id_show("7-header");
         element_id_show("t_total_cons");
-        //element_id_show("7-content");
+        element_id_show("7-content");
+
+        element_id_show("tr_gasbreak_block");
+        element_id_show("tr_pp");
+
     }
     else{
         //ccr plan!
@@ -283,6 +176,8 @@ function oc_ccr_hide_show_elem(){
         element_id_hide("btn_del_lvl");
 
         element_id_show("tr_setpoint_block");
+
+        element_id_hide("tr_gasbreak_block");
 
         //warning about interface demo mode
         openNav();
@@ -296,7 +191,9 @@ function oc_ccr_hide_show_elem(){
 
             element_id_show("7-header");
             element_id_show("t_total_cons");
-            //element_id_show("7-content");
+            element_id_show("7-content");
+
+            element_id_show("tr_pp");
 
         }
         else{
@@ -308,13 +205,13 @@ function oc_ccr_hide_show_elem(){
 
             element_id_hide("7-header");
             element_id_hide("t_total_cons");
+            element_id_hide("7-content");
 
-
-            //element_id_hide("7-content");
+            element_id_hide("tr_pp");
         }
     }
     // /if NO decompression mixtures then hide all gas consumptions
-    if(($( "#tn_plan_ccr" ).val() == 2)){
+    if(($( "#tn_plan_ccr" ).val()*1.0 == 2)){
         if(($( "#opt_deco" ).val()*1.0) == 0){
             //console.log("TRUE");
             element_id_hide("7-header");
@@ -350,10 +247,17 @@ function upd_all(){
     oc_ccr_hide_show_elem();
     //console.log(opt_blt_dln);
 
+
+
     upd_travel_list();
     upd_deco_list();
     upd_lvl_list();
+
+    //Main Function for AirBrakes
+    airbr_mix_arr();
     upd_airbr_mix();
+
+    //upd_airbr();
   main_plan_src = ExtraStops(ShortStop(build_dive()));
 
   main_plan_table = src_to_5_arr(main_plan_src , 0);
@@ -409,13 +313,14 @@ function upd_tbl_main () {
     total_gass_arr(main_plan);
 }
 
+
 //Main Function for learning tools \ calculators
 function upd_calc() {
     openNav();
 }
 
 //Main Function for AirBrakes
-function upd_airbr(){
+/*function upd_airbr(){
     //openNav();
 
     //update to current selected pressure. It is important for correct update prepared data to dive plan building
@@ -424,12 +329,15 @@ function upd_airbr(){
     //Update GUI dimension first. It is important for correct update GUI elements at any time.
     changeGuiDim();
     oc_ccr_hide_show_elem();
-    //console.log(opt_blt_dln);
+
+    airbr_mix_arr();
 
     upd_travel_list();
     upd_deco_list();
     upd_lvl_list();
-    //upd_airbr_mix();
+
+    upd_airbr_mix();
+
     main_plan_src = ExtraStops(ShortStop(build_dive()));
 
     main_plan_table = src_to_5_arr(main_plan_src , 0);
@@ -458,7 +366,7 @@ function upd_airbr(){
     //auto save all settings
     btn_save();
 }
-
+*/
 //Main Function for AnyErrors
 function upd_error() {
     openNav();
@@ -524,7 +432,7 @@ function upd_lvl_list(){
         //main_lvl = lvl_arr[att+1];
 
     }
-      //get propertly mix list for selected level/ Sort\arr etc and make option
+      //get properly mix list for selected level/ Sort\arr etc and make option
       idx_arr = [];
       //make properly mix list for OC(1) or CCR(2) type plan
       if($( "#tn_plan_ccr" ).val() == 1){

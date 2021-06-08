@@ -61,13 +61,23 @@
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 6){
                 lng_bar = ", бар";
-                lng_meters = ", метрри";
+                lng_meters = ", метри";
                 lng_meters_min = ", м/мин";
                 lng_ltr_min = ", л/мин";
                 lng_min = ", мин";
                 lng_ltr = ", литри";
                 lng_temper = ", <sup><small>o</small></sup>C"
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 7){
+                lng_bar = ", bar";
+                lng_meters = ", metres";
+                lng_meters_min = ", m/min";
+                lng_ltr_min = ", l/min";
+                lng_min = ", min";
+                lng_ltr = ", litres";
+                lng_temper = ", <sup><small>o</small></sup>C"
+            }
+
         }
         else
         {
@@ -125,6 +135,16 @@
                 lng_ltr = ", фт<sup><small>3</small></sup>";
                 lng_temper = ", <sup><small>o</small></sup>F"
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 7){
+                lng_bar = ", psi";
+                lng_meters = ", ft";
+                lng_meters_min = ", ft/min";
+                lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
+                lng_min = ", min";
+                lng_ltr = ", ft<sup><small>3</small></sup>";
+                lng_temper = ", <sup><small>o</small></sup>F"
+            }
+
         }
         AssignLng();
     }
@@ -307,7 +327,7 @@
                 ".tn_donat_header_bronze" : "Bronze Donation Section",
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
             },
@@ -490,7 +510,7 @@
                 ".tn_donat_header_bronze" : "Бронзовая секция",
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
             },
@@ -668,7 +688,7 @@
                 ".tn_donat_header_bronze" : "Sección de Bronce",
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
             },
@@ -843,7 +863,7 @@
                 ".tn_donat_header_bronze" : "Doações Bronze",
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
 
@@ -1021,7 +1041,7 @@
                 ".tn_donat_header_bronze" : "青铜级土豪爸爸",
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
             },
@@ -1170,10 +1190,160 @@
                 ".tn_donat_header_silver" : " Секция за дарение сребърна ",
                 ".tn_donat_header_bronze" : " Секция за дарение  ",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
-            }
+            },
+            7: {
+                //Eng
+                ".btn_bailout" : "Bailout",
+                ".btn_diluent" : "Diluant",
+                ".tn_plan_oc" : "Circuit ouvert",
+                ".tr_plan_ccr" : "Type de planning",
+                ".tr_plan_style" : "Style de plan",
+                ".tn_plan_detailed" : "en détail",
+                ".tn_plan_short" : "Classique",
+                ".tn_download_local" : "Télécharger la version local",
+                ".tn_btn_tiss" : "Construire les tableaux",
+                ".td_copyright" : "Copyright © 2020 Alexey Vlasov. Sous licence Apache License 2.0",
+                ".btn_save" : "Enregistrer les données actuelles",
+                ".btn_restore" : "Restorer les données",
+                ".tr_ifc_set" : "Style d’interface",
+                ".tn_color_dark" : "Thème foncé",
+                ".tn_color_light" : "Thème Clair",
+                ".tn_water_baltic" : "Mer Baltique",
+                ".tn_water_redsea" : "Mer Rouge",
+                ".tn_water_glake" : "Les grands lacs Utah",
+                ".tn_water_deadsea" : "Mer Morte",
+                ".tn_water_pacific" : "Pacifique",
+                ".tn_water_salt" : "Atlantique",
+                ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub>Max Deco" + lng_bar,
+                ".tr_celsus" : "Temperature de surface environnante" + lng_temper,
+                ".tr_levels" : "Mix / Profondeur" + lng_meters + " / Temps" + lng_min,
+                ".btn_add_lvl" : "Ajouter niveau",
+                ".btn_del_lvl" : "Effacer niveau",
+                ".tr_rate_dsc" : "Vitesse de descente" + lng_meters_min,
+                ".tr_rate_asc" : "Vitesse de remonter" + lng_meters_min,
+                ".tr_rate_asc_deco" : "Vitesse de remontée en deco" + lng_meters_min,
+                ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
+                ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
+                ".tr_cng_time" : "Temps de changement de gaz" + lng_min,
+                ".tr_lst_stop" : "Dernier Stop" + lng_meters,
+                ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> Deco" + lng_bar,
+                ".tn_ppo2_bottom" : "PPO<sub><small>2</small></sub> Fond" + lng_bar,
+                ".tn_ppo2_min" : "PPO<sub><small>2</small></sub> Min" + lng_bar,
+                ".tn_ppn2_max" : "PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_ppn2" : "ICD PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_pphe" : "ICD PPHelium Max" + lng_bar,
+                ".tn_dmn_mtr" : "Metres/Litres/Bar/Celsius",
+                ".tn_dmn_imp" : "Feet/Cu.Feet/PSI/Fahrenheit",
+                ".tr_mdl" : "Model de Décompression",
+                ".tr_water" : "Salinité de l’eau",
+                ".tn_water_fresh" : "Douce",
+                ".tr_gf" : "Facteur du gradien, %",
+                ".tr_slevel" : "Altitude de plongée" + lng_meters,
+                ".tn_travel" : "Total Travel/Fond/Diluent mélangé ",
+                ".tn_deco" : "Total Déco/Bailout mélangé",
+                ".header0" : "Réglages généraux",
+                ".header1" : "Réglages de plongée",
+                ".header2" : "Alertes de plongée",
+                ".header3" : "Gaz de plongée",
+                ".header4" : "Construire profile de plongée",
+                ".header5" : "Pression partiel du gaz" + lng_bar,
+                ".header6" : "Tension des Gaz dans les compartiments des tissues",
+                ".header7" : "Consommation de gaz",
+                ".header8" : "Prix du gaz",
+                //".header9" : "Gaz mélangé",
+                ".header9" : "Outils d’apprentissage",
+                ".tr_lng" : "Langue",
+                ".tr_dmn" : "Unité",
+                ".td_warn" : " ATTENTION! IL Y A TOUJOURS UN RISQUE DE MALADIE DE DÉCOMPRESSION (ADD) POUR TOUT PROFIL DE PLONGÉE MÊME SI VOUS SUIVEZ LE PLAN DE PLONGÉE PRESCRIT PAR LES TABLES DE PLONGÉE. AUCUNE PROCÉDURE OU TABLEAU DE PLONGÉE N'ÉVITERA LA POSSIBILITÉ D'ACCIDENT DE DECOMPRESSION OU DE TOXICITÉ D’OXYGÈNE! La composition physiologique d’un individu peut varier d’un jour à l’autre. Il est fortement conseillé de bien rester dans les limites d'exposition fournies par le planificateur pour minimiser le risque de ADD.",
+                ".tn_wrn_ibcd_lip" : "Considerez la réponse lipidique",
+                ".tn_wrn_btm_mix" :"Mélange fond plus que" + lng_ltr,
+                ".tn_wrn_deco_mix49" :"Mélange Déco jusqu’à 49%" + lng_ltr,
+                ".tn_wrn_deco_mix50" :"Mélange Déco de 50 à 99%" + lng_ltr,
+                ".tn_wrn_deco_mix100" :"Déco O<sub><small>2</small></sub>plus" + lng_ltr,
+                ".tn_ibcd_lip_yes" :"Oui",
+                ".tn_ibcd_lip_no" :"Non",
+                //".tn_blnd_temp" :"Température du gaz C<sup><small>o</small></sup>",
+                //".tn_blnd_temp_mode" :"Model de gas",
+                //".tn_blend_mix_first" :"Ajoutez le premier gas",
+                //".tn_blend_press_start" :"Pression du mélange de départ",
+                //".tn_blend_press_end" :"Nouvelle pression de départ",
+                //".tn_blend_he_start" :"Pourcentage du mélange de départ d’Helium",
+                //".tn_blend_o2_start" :"O<sub><small>2</small></sub>Pourcentage du mélange de départ",
+                //".tn_blend_he_end" :"Nouveau pourcentage de melange d’Helium",
+                //".tn_blend_o2_end" :"Oxygene<sub><small>2</small></sub>Nouveau pourcentage de mélange",
+                ".tn_calc_depth" :"Profondeur maximum d’opération" + lng_meters,
+                ".tn_calc_o2" :"Oxygene%",
+                ".tn_calc_he" :"Helium%",
+                ".tn_calc_depth_lo" :"Profondeur minimum d’opération " + lng_meters,
+                //".tn_blnd_temp_mode_ideal" :"Modèle Ideal",
+                //".tn_blnd_temp_mode_vdv" :"Modèle Van Der Waals",
+                //".tn_mix_first_he" :"Helium",
+                //".tn_mix_first_o2" :"Oxygene<sub><small>2</small></sub>",
+                ".tn_price_cur" :"Selection de la Devise",
+                ".tn_price_top" :"Meilleur prix des gas",
+                ".tn_price_he" :"Prix de l’helium par unité",
+                ".tn_price_o2" :"O<sub><small>2</small></sub>Prix par unité ",
+                ".tn_price_us" :"US Dollar",
+                ".tn_price_eu" :"Euro",
+                ".tn_price_uk" :"British Pound",
+                ".tn_price_rf" :"Russian Ruble",
+                ".tn_price_cn" :"Chinese Yuan",
+                ".btn_export_pdf_profile" :"Export PDF",
+                ".btn_export_pdf_pp" :"Export PDF",
+                ".tn_btn_overlay" :"Fermer",
+                ".btn_export_xls" :"Exporter la table en XLS",
+                ".btn_tbl_pdf" :"Exporter la table en PDF",
+                ".tn_calc_ead" :"EAD:&nbsp;",
+                ".tn_calc_end" :"END:&nbsp;",
+                ".tn_calc_o2max" : "&nbsp;PPOxygene<sub><small>2</small></sub>Fond&nbsp;" + lng_bar,
+                ".tn_calc_o2min" : "&nbsp;PPOxygene<sub><small>2</small></sub> Min&nbsp;" + lng_bar,
+                ".tn_calc_n2max" : "&nbsp;PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_calc_f_app" :"Formule et calculation",
+                ".tn_calc_f_mod" :"Profondeur maximum d’opération" + lng_meters,
+                ".tn_calc_f_ead" :"Profondeur d’air équivalente" + lng_meters,
+                ".tn_calc_f_ead2" :"Seulement N<sub><small>2</small></sub> Narcotic",
+                ".tn_calc_f_end" :"Profondeur narcotique équivalente " + lng_meters,
+                ".tn_calc_f_end2" :"Azote<sub><small>2</small></sub>et O<sub><small>2</small></sub>Narcose",
+                ".tn_calc_cur_ex_rate" :"Taux de change du dollar",
+                ".tn_calc_cur_ex_rate_pound" :"Pounds",
+                ".tn_calc_cur_ex_rate_pence" :"Pence",
+                ".tn_calc_cur_ex_rate_euro" :"Euro",
+                ".tn_calc_cur_ex_rate_eucents" :"Cents",
+                ".tn_calc_cur_ex_rate_rub" :"Roubles",
+                ".tn_calc_cur_ex_rate_kopek" :"Kopeks",
+                ".tn_calc_cur_ex_rate_yuan" :"Yuan",
+                ".tn_calc_cur_ex_rate_fyn" :"Fyn",
+                ".tr_setpoint_start":"CCR Entrez Point de départ" + lng_bar,
+                ".tr_setpoint_bottom":"CCR Entrez point du fond" + lng_bar,
+                ".tr_setpoint_deco":"CCR Entrez point de Deco" + lng_bar,
+                ".tr_airbr_header" : "Pause gaz",
+                ".tr_airbr_depth" : "Si la profondeur est plus que" + lng_meters,
+                ".tr_airbr_o2" : "Déco Oxygène est plus que " + ", %",
+                ".tr_airbr_mix" : "Pause mélange",
+                ".tr_airbr_time_after" : "Pause après" + lng_min,
+                ".tr_airbr_time" : "Temps de pause" + lng_min,
+                ".tr_airbr_time_reset" : "Activé",
+                ".tn_airbr_time_reset_yes" : "Oui",
+                ".tn_airbr_time_reset_no" : "Non",
+                ".header10" : "Temple de la Donation ",
+                ".tn_donat_header" : "",
+                ".btn_msg" : " Comment faire un don ",
+                ".btn_tel" : " Appelez les développeurs ",
+                ".btn_ios_msg" : " Comment faire un don ",
+                ".btn_ios_tel" : " Appelez les développeurs ",
+                ".tn_donat_header_founder" : " Section des dons des fondateurs ",
+                ".tn_donat_header_gold" : " Section OR des dons ",
+                ".tn_donat_header_silver" : " Section Argent des dons",
+                ".tn_donat_header_bronze" : " Section Bronze des dons",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+            },
+
         };
     }
     AssignLng();
@@ -1211,7 +1381,10 @@
       if(td_lng == 6){
           return "Микс";
       }
-	}
+      if(td_lng == 6){
+          return "Mélange";
+      }
+    }
 
   function plan_lng(val){
       if (force_lng == 1){var td_lng = 1}
@@ -1742,7 +1915,7 @@
               val = "пнHe"
           }
           if (val == "tab_tr_coms") {
-              val = "Конст."
+              val = "Конс."
           }
           if (val == "tab_tr_mix") {
               val = "Микс"
@@ -1942,7 +2115,248 @@
               val = "Авто"
           }
       }
-    return (val.toString());
+      if(td_lng == 7) {
+          if (val == "t_diluent") {
+              val = "Diluent "
+          }
+          if (val == "t_zoom") {
+              val = "Zoom a Zero"
+          }
+          if (val == "tab_tr_OTU") {
+              val = "OTU"
+          }
+          if (val == "tab_tr_CNS") {
+              val = "CNS%"
+          }
+          if (val == "ld_tis") {
+              val = "Leading Tissue"
+          }
+          if (val == "amb_pres") {
+              val = "Pression ambiante"
+          }
+          if (val == "t_tiss_wrn") {
+              val = "Ce plan n'a pas de stop de décompression. Les compartiments de tissus ne seront pas apparents."
+          }
+          if (val == "t_tiss_nt") {
+              val = "Compartiments de tissus d'azote"
+          }
+          if (val == "t_tiss_hl") {
+              val = "Compartiments de tissus d’Helium"
+          }
+          if (val == "t_tiss_tl") {
+              val = "Total des Compartiments de tissus d'azote et d'hélium"
+          }
+          if (val == "tab_tr_o2") {
+              val = "PPOxygene<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_n2") {
+              val = "PPAzote<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_he") {
+              val = "PPHelium"
+          }
+          if (val == "tab_tr_coms") {
+              val = "Consommation."
+          }
+          if (val == "tab_tr_mix") {
+              val = "Mélange"
+          }
+          if (val == "tab_dmn_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "Litres"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied3"
+              }
+          }
+          if (val == "Level") {
+              val = "Niveau"
+          }
+          if (val == "Ascent") {
+              val = "Remonté"
+          }
+          if (val == "Descent") {
+              val = "Descente"
+          }
+          if (val == "Stop") {
+              val = "Stop"
+          }
+          if (val == "Mix") {
+              val = "Mélange"
+          }
+          if (val == "RunTime") {
+              val = "Temps de fonctionnement"
+          }
+          if (val == "Time") {
+              val = "Temps"
+          }
+          if (val == "Depth") {
+              val = "Profondeur"
+          }
+          if (val == "Action") {
+              val = "Action"
+          }
+          if (val == "Air") {
+              val = "Air"
+          }
+          if (val == "OXY") {
+              val = "Oxygen"
+          }
+          if (val == "tab_tr_dmn") {
+              val = "Volume"
+          }
+          if (val == "tab_tr_time") {
+              val = "Temps"
+          }
+          if(val == "ch_gas_d"){
+              val = "Consommation de gaz"
+          }
+          if (val == "ch_gas_amnt") {
+              val = "Montant"
+          }
+          if (val == "ch_time") {
+              val = "Temps"
+          }
+          if (val == "ch_gas_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "Litre."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied<sup><small>3</small></sup>"
+              }
+          }
+          if (val == "ch_depth") {
+              val = "Profondeur Maximum"
+          }
+          if (val == "ch_source") {
+              val = "Source"
+          }
+          if (val == "ch_bottom") {
+              val = "fond"
+          }
+          if (val == "ch_mtr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "m."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied."
+              }
+          }
+          if (val == "ch_tmx") {
+              val = "min."
+          }
+          if (val == "ch_mix") {
+              val = "Changement de mélange"
+          }
+          if (val == "ch_pp") {
+              val = "Pression Partielle"
+          }
+          if (val == "ch_n2") {
+              val = "PPAzote2"
+          }
+          if (val == "ch_o2") {
+              val = "PPOxygen2"
+          }
+          if (val == "ch_he") {
+              val = "PPHelium"
+          }
+          if (val == "ch_pp_l") {
+              val = "Pression"
+          }
+          if (val == "ch_mix_pp") {
+              val = "Mélange utilisé"
+          }
+          if (val == "ch_ata") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "bar"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "psi"
+              }
+          }
+          if (val == "ch_Tissue") {
+              val = "Tissue"
+          }
+          if (val == "ch_UnderDev") {
+              val = "ATTENTION!<br> Cet outil est en développement. Cette interface graphique montre uniquement les travaux en cours.<br>Merci de votre comprehension!<br>"
+          }
+          if (val == "ch_tbl_name") {
+              val = "Table de décompression"
+          }
+          if (val == "ch_tbl_cons") {
+              val = "Table de consommation de gaz"
+          }
+          if (val == "dmn_air") {
+              val = "Air"
+          }
+          if (val == "dmn_mod") {
+              val = "MOD"
+          }
+          if (val == "dmn_ead") {
+              val = "EAD"
+          }
+          if (val == "dmn_end") {
+              val = "END"
+          }
+          if (val == "dmn_msw") {
+              val = "msw"
+          }
+          if (val == "dmn_fsw") {
+              val = "fsw"
+          }
+          if (val == "dmn_bar") {
+              val = "bar"
+          }
+          if (val == "dmn_ata") {
+              val = "bar"
+          }
+          if (val == "tn_price_dls_name_dollars") {
+              val = "Dollars"
+          }
+          if (val == "tn_price_dls_name_cents") {
+              val = "Cents"
+          }
+          if (val == "tn_price_dls_name_euro") {
+              val = "Euros"
+          }
+          if (val == "tn_price_dls_name_pound") {
+              val = "Pounds"
+          }
+          if (val == "tn_price_dls_name_pence") {
+              val = "Pence"
+          }
+          if (val == "tn_price_dls_name_rouble") {
+              val = "Roubles"
+          }
+          if (val == "tn_price_dls_name_kopek") {
+              val = "Kopeks"
+          }
+          if (val == "tn_price_dls_name_yuan") {
+              val = "Yuan"
+          }
+          if (val == "tn_price_dls_name_fyn") {
+              val = "Fyn"
+          }
+          if (val == "price_price") {
+              val = "Prix"
+          }
+          if (val == "price_currency") {
+              val = "Monnaie"
+          }
+          if (val == "price_gas") {
+              val = "Gaz"
+          }
+          if (val == "price_gas_total") {
+              val = "Prix Total:"
+          }
+          if (val == "ch_price_top_total") {
+              val = "Meilleur prix du Gas"
+          }
+          if (val == "tn_deco_mod") {
+              val = "Auto"
+          }
+      }
+          return (val.toString());
   }
 
     function price_lng_cur_upd(){

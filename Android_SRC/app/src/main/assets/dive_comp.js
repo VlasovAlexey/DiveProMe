@@ -1,4 +1,4 @@
-var abs_press =[1.0];
+var abs_press = [1.0];
 var comp_tiss_arr =[];
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;
 if(!u&&a)return a(o,!0);
@@ -53,35 +53,14 @@ return s})({"/dive_comp.js":[function(require,module,exports){
       
         fresh: {
             density: function () {
-                return $self.density(1000, 1); // 1000kg / m3 at 0C / 32F (standard conditions for measurements)
+                //diveprome interface selector
+                return $self.density(water_density(), 1);
             }
         },
         salt: {
             density: function () {
-                
                 //diveprome interface selector
-                tn_water_g = document.getElementById("tn_water");
-                tn_water_g_idx = tn_water_g.options[tn_water_g.selectedIndex].value;
-                
-                if (tn_water_g_idx == 1){
-                  return $self.density(1030, 1); // average
-                }
-                
-                if (tn_water_g_idx == 2){
-                  return $self.density(1000, 1); // fresh
-                }
-                if (tn_water_g_idx == 3){
-                  return $self.density(1015, 1); // baltic
-                }
-                if (tn_water_g_idx == 4){
-                  return $self.density(1040, 1); // red sea
-                }
-                if (tn_water_g_idx == 5){
-                  return $self.density(1150, 1); // great salt lake
-                }
-                if (tn_water_g_idx == 6){
-                  return $self.density(1330, 1); // Dead sea
-                }
+                return $self.density(water_density(), 1);
             }
         },
         mercury: {
@@ -535,7 +514,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
         /// <param name="pGas" type="Number">Partial pressure of inert gas at CURRENT depth (not target depth - but starting depth where change begins.)</param>
         /// <param name="pBegin" type="Number">Initial compartment inert gas pressure.</param>
         /// <returns>The end compartment inert gas pressure in bar.</returns>
-        var timeConstant = Math.log(2)/halfTime
+        var timeConstant = Math.log(2)/halfTime;
         return (pGas + (gasRate * (time - (1.0/timeConstant))) - ((pGas - pBegin - (gasRate / timeConstant)) * Math.exp(-timeConstant * time)));
     };
 
@@ -546,7 +525,16 @@ return s})({"/dive_comp.js":[function(require,module,exports){
         gas.fN2 = (1 - (gas.fO2 + gas.fHe));
 
         gas.modInMeters = function(ppO2, isFreshWater) {
-            return $self.barToDepthInMeters(ppO2 / this.fO2, isFreshWater);
+            //return $self.barToDepthInMeters(ppO2 / this.fO2, isFreshWater);
+
+            //diveprome interface
+            var val = $self.barToDepthInMeters(ppO2 / this.fO2, isFreshWater);
+            var result = 0;
+            //do the depth multiples of 3
+            result = (3 * ((val / 3).toFixed(0)));
+            return result;
+
+
         };
 
         gas.endInMeters = function(depth, isFreshWater) {
@@ -557,7 +545,14 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             var bars = $self.depthInMetersToBars(depth, isFreshWater);
             var equivalentBars = bars * narcIndex;
             //console.log("Depth: " + depth + " Bars:" + bars + "Relation: " + narcIndex + " Equivalent Bars:" +equivalentBars);
-            return  $self.barToDepthInMeters(equivalentBars, isFreshWater);
+            //return  $self.barToDepthInMeters(equivalentBars, isFreshWater);
+
+            //diveprome interface
+            var val = $self.barToDepthInMeters(equivalentBars, isFreshWater);
+            var result = 0;
+            //do the depth multiples of 3
+            result = (3 * ((val / 3).toFixed(0)));
+            return result;
         };
 
         gas.eadInMeters = function(depth, isFreshWater) {
@@ -586,6 +581,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
     //In a single pass, collapses adjacent flat segments together.
     $self.collapseSegments = function (segments) {
+
         var collapsed = true;
         while (collapsed) {
             collapsed = false;
@@ -843,7 +839,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                 ceiling++;
             }
             //!!!_problem with time
-            // wor now corect only if las stop is 3!
+            // for now correct only if las stop is 3!
             return ceiling;
         };
 
@@ -880,7 +876,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
             var gfDiff = gfHigh-gfLow; //find variance in gradient factor
             var distanceToSurface = fromDepth;
-            var gfChangePerMeter = gfDiff/distanceToSurface
+            var gfChangePerMeter = gfDiff/distanceToSurface;
             if (!maintainTissues) {
                 var origTissues = JSON.stringify(this.tissues);
             }
@@ -976,8 +972,32 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             var winnerName;
             for (var gasName in this.decoGasses) {
                 var candidateGas = this.decoGasses[gasName];
-                var mod = Math.round(candidateGas.modInMeters(maxppO2, this.isFreshWater));
-                var end = Math.round(candidateGas.endInMeters(depth, this.isFreshWater));
+                var mod = 0;
+                var end = 0;
+                //diveprome interface
+
+
+                var mix_current_mod = 0;
+                for( var c = 0 ; c < mix_mod_arr.length ; c++){
+
+                    //finding compared gas MOD with current candidate Gas
+                    if(gasName == mix_mod_arr[c].mix){
+                        mix_current_mod = parseInt(mix_mod_arr[c].mod);
+                        break;
+                    }
+                }
+
+                if(mix_current_mod == 0){
+                    //automatic MOD and END detection
+                    mod = Math.round(candidateGas.modInMeters(maxppO2, this.isFreshWater));
+                    end = Math.round(candidateGas.endInMeters(depth, this.isFreshWater));
+                }
+                else{
+                    //manual MOD and END selection
+                    mod = mix_current_mod;
+                    end = mix_current_mod;
+                }
+
                 //console.log("Found candidate deco gas " + gasName + ": " + (candidateGas.fO2) + "/" + (candidateGas.fHe) + " with mod " + mod + " and END " + end);
                 if (depth <= mod && end <= maxEND) {
                     //console.log("Candidate " + gasName + " fits within MOD and END limits.");
@@ -990,6 +1010,8 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
                 }
             }
+
+
             return winnerName;
         }
 

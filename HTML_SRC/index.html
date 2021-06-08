@@ -74,7 +74,16 @@
             background: repeating-linear-gradient(45deg, #3986d9 , #efc96d, #c9411a);
             background: repeating-linear-gradient(45deg, #3d203e, #b90037);
             background: repeating-radial-gradient(#aaaaaa, #ffffff);
-            
+            background: repeating-linear-gradient(45deg, #2193b0, #6dd5ed);
+
+            background: repeating-linear-gradient(0deg, #43cea2, #185a9d);
+            background: repeating-linear-gradient(0deg, #ff9966, #ff5e62);
+            background: repeating-linear-gradient(0deg, #4ca1af, #c4e0e5);
+            background: repeating-linear-gradient(0deg, #36d1dc, #5b86e5);
+            background: repeating-linear-gradient(0deg, #141e30, #243b55);
+
+            background: repeating-linear-gradient(45deg, #000428, #004e92);
+
             background-size: 400% 400%;
             animation: gradient 4s ease infinite;
 
@@ -91,7 +100,7 @@
             }
             50% {
 
-                background-size: 400% 400%;
+                background-size: 100% 200%;
             }
             100% {
                 
@@ -141,15 +150,127 @@
             50%{background-size:500% 100%}
             100%{  background-size: 100% 200%}
         }
-        @keyframes load {
-            0%{
-                opacity: 0.08;
-                filter: blur(5px);
-                letter-spacing: 3px;
-            }
-            100%{
-            }
+
+        .circles{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
+
+        .circles li{
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: animate 4s linear infinite;
+            bottom: -150px;
+
+        }
+
+        .circles li:nth-child(1){
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 1s;
+            animation-duration: 11s;
+        }
+
+
+        .circles li:nth-child(2){
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+            animation-duration: 6s;
+        }
+
+        .circles li:nth-child(3){
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 1s;
+            animation-duration: 11s;
+        }
+
+        .circles li:nth-child(4){
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 9s;
+        }
+
+        .circles li:nth-child(5){
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 1s;
+            animation-duration: 7s;
+        }
+
+        .circles li:nth-child(6){
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        .circles li:nth-child(7){
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 1s;
+            animation-duration: 11s;
+        }
+
+        .circles li:nth-child(8){
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 1s;
+            animation-duration: 10s;
+        }
+
+        .circles li:nth-child(9){
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 0s;
+            animation-duration: 15s;
+        }
+
+        .circles li:nth-child(10){
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 1s;
+            animation-duration: 5s;
+        }
+
+
+
+        @keyframes animate {
+
+            0%{
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 50%;
+            }
+
+            100%{
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+
+        }
+
 
     </style>
     <div id="preloader">
@@ -1080,7 +1201,7 @@
                 animation-timing-function: cubic-bezier(0, 0, 1, 1)
             }
             #el_rz7tHbOMg6 {
-                fill: rgb(20, 20, 20);
+                fill: rgb(240, 240, 240);
                 stroke-width: 0
             }
             #el_EbNU3yuF99_an_IK9FIRUv0 {
@@ -1114,7 +1235,7 @@
                 animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1)
             }
             #el_w6ntYuYtIk {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_w6ntYuYtIk_an_3ZG69i7T_ {
                 -webkit-animation-fill-mode: backwards;
@@ -1127,7 +1248,7 @@
                 animation-timing-function: cubic-bezier(0, 0, 1, 1)
             }
             #el_MCnocE1d6a {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_MCnocE1d6a_an_rtzTFwkth {
                 -webkit-animation-fill-mode: backwards;
@@ -1140,19 +1261,19 @@
                 animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1)
             }
             #el_si6Z_ytFVg {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_vOBz1ffml9Y {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_DO7rlw1dzaz {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_9kGQGCYeiQZ {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_heHYgtpKoH {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_heHYgtpKoH_an_HuVyL9h7y {
                 -webkit-animation-fill-mode: backwards;
@@ -1225,43 +1346,43 @@
                 animation-timing-function: cubic-bezier(0, 0, 1, 1)
             }
             #el_R-G10-Iqjs {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_INEuwdrwFt9 {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_qTkdGwmilZ {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_Ciav5XJdN9z {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_xujhRz6zArK {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_tHx_egAn9- {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_qouwIiyYjY {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_EbNU3yuF99 {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_I3f1lXc0ZO {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_jO1PX_-DV5 {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_nvdyXC9kdN {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_9D2u7gYA38 {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }
             #el_8svBNo0iNlw {
-                fill: rgb(20, 20, 20)
+                fill: rgb(240, 240, 240)
             }</style><style/>
  <defs>
 
@@ -1291,10 +1412,25 @@
   <g id="el_INEuwdrwFt9_an_rlS58nC9Z" data-animator-group="true" data-animator-type="0"><g id="el_INEuwdrwFt9_an_53RUdoerP" data-animator-group="true" data-animator-type="2"><circle cx="32.0264" cy="18.5673" r="3.18105" id="el_INEuwdrwFt9"/></g></g>
  </g>
 </svg>
-            <div style="color: #202020">Copyright © 2021 Alexey Vlasov<br/>
-            Version 10.3</div>
+            <div style="color: #eeeeee">Copyright © 2021 Alexey Vlasov<br/>
+            Version 10.5</div>
         </div>
+        <div class="area" >
+            <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div >
     </div>
+
 
   <title>DiveProMe+ Decompression Planner Software</title>
   
@@ -1369,7 +1505,7 @@
                   <table class="tr_download_me" id="tr_download_me">
                       <tr class="tr_download_me">
                           <th class="tr_download_win">
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v10.0.zip?v124134">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v10.5.zip?v124134">
                                   <img src="download_me.png">
                               </a>
                           </th>
@@ -1384,12 +1520,12 @@
                               </a>
                           </th>
                           <th class="tr_download_andr" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_10.0.apk?v12434">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_10.5.apk?v12434">
                                   <img src="download_me.png">
                               </a>
                           </th>
                           <th class="tr_download_lnx" >
-                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v10.0.zip?v12434">
+                              <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v10.5.zip?v12434">
                                   <img src="download_me.png">
                               </a>
                           </th>
@@ -1430,7 +1566,7 @@
           </div>
           <div class="header" id="1-header"><div class="header1"></div></div>
           <div class="content" id="1-content">
-              <div class="div_block">
+              <div class="div_block" id="tr_pp">
                   <div id="tn_ppo2_bottom" class="tn_ppo2_bottom"></div>
                   <div id="tr_ppo2_bottom"></div>
                   <div id="tn_ppo2_deco" class="tn_ppo2_deco"></div>
@@ -1470,7 +1606,7 @@
                   <div id="tr_lst_stop" class="tr_lst_stop"></div>
                   <div id="tn_lst_stop" class="tn_lst_stop"></div>
               </div>
-              <div class="div_block">
+              <div class="div_block" id="tr_gasbreak_block">
                   <div id="tr_airbr_header" class="tr_airbr_header"></div>
                   <div id="tr_airbr_time_reset" class="tr_airbr_time_reset"></div>
                   <div id="tn_airbr_time_reset" class="tn_airbr_time_reset"></div>
@@ -1862,41 +1998,41 @@
 
   <script src="highstock.js?v0.1867" charset="UTF-8"></script>
   <script src="exporting.src.js?v0.1618159257" charset="UTF-8"></script>
-  <script src="offline-exporting.src.js?v0.167181925" charset="UTF-8"></script>
-  <script src="cns_table.js?v0.181562357"></script>
+  <script src="offline-exporting.src.js?v0.1671819215" charset="UTF-8"></script>
+  <script src="cns_table.js?v0.1815623571"></script>
 
-  <script src="html_new_gen_main.js?v0.118641184154923457" charset="UTF-8"></script>
+  <script src="html_new_gen_main.js?v0.1186411841154923457" charset="UTF-8"></script>
 
 
-  <script src="android_fn.js?v0.2841841591623457" charset="UTF-8"></script>
+  <script src="android_fn.js?v0.28418415916234517" charset="UTF-8"></script>
 
-  <script src="cookie_settings.js?v0.281183644152679123457" charset="UTF-8"></script>
-  <script src="lng_fn.js?v0.10267"charset="UTF-8"></script>
-  <script src="dive_comp.js?0.8462841519123457"charset="UTF-8"></script>
-  <script src="block_gen.js?v0.82685159123457" charset="UTF-8"></script>
+  <script src="cookie_settings.js?v0.2811836441521679123457wa123" charset="UTF-8"></script>
+  <script src="lng_fn.js?v0.10267wa112"charset="UTF-8"></script>
+  <script src="dive_comp.js?0.84628411519123457"charset="UTF-8"></script>
+  <script src="block_gen.js?v0.826851519123457" charset="UTF-8"></script>
 
-  <script src="gases_list_gen.js?v0.8716143159123457" charset="UTF-8"></script>
-  <script src="build_dive.js?v0.11506337" charset="UTF-8"></script>
-  <script src="tables_build.js?v0.872648415912345" charset="UTF-8"></script>
-  <script src="gf_option.js?v0.884247165912345" charset="UTF-8"></script>
-  <script src="chart_theme.js?v0.824874615912345" charset="UTF-8"></script>
-  <script src="chart_profile.js?v0.828746415912345" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.81327468415912345" charset="UTF-8"></script>
+  <script src="gases_list_gen.js?v0.87116143159123457" charset="UTF-8"></script>
+  <script src="build_dive.js?v0.115063137" charset="UTF-8"></script>
+  <script src="tables_build.js?v0.8726418415912345w1" charset="UTF-8"></script>
+  <script src="gf_option.js?v0.8842471651912345" charset="UTF-8"></script>
+  <script src="chart_theme.js?v0.8248746115912345" charset="UTF-8"></script>
+  <script src="chart_profile.js?v0.8287464115912345" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.813274681415912345" charset="UTF-8"></script>
 
-  <script src="ios_fn.js?v0.01236745" charset="UTF-8"></script>
+  <script src="ios_fn.js?v0.012136745" charset="UTF-8"></script>
 
-  <script src="calc_learn.js?v0.8167284415912345" charset="UTF-8"></script>
+  <script src="calc_learn.js?v0.81671284415912345w" charset="UTF-8"></script>
 
 <!-- Very important place only here node js check functions! -->
-<script src="nodejs_fn.js?v0.8824456175912345" charset="UTF-8"></script>
+<script src="nodejs_fn.js?v0.88244561175912345" charset="UTF-8"></script>
 
-  <script src="price_calc.js?v0.8842671415912345" charset="UTF-8"></script>
+  <script src="price_calc.js?v0.88426711415912345" charset="UTF-8"></script>
 
-  <script src="main.js?v0.8812454115659172345" charset="UTF-8"></script>
+  <script src="main.js?v0.88124541156591172345aw" charset="UTF-8"></script>
 
 
-  <script src="lvl_functions.js?v0.8246781415912345" charset="UTF-8"></script>
-  <script src="style_manager.js?v0.8841627415912345" charset="UTF-8"></script>
+  <script src="lvl_functions.js?v0.82467181415912345" charset="UTF-8"></script>
+  <script src="style_manager.js?v0.88416217415912345" charset="UTF-8"></script>
 
   <!-- Preloader Info Wait when all Page Loaded-->
   <script type="text/javascript">
@@ -1905,8 +2041,8 @@
             document.getElementById("preloader").style.opacity = "0";
             setTimeout(function() {
                 document.getElementById("preloader").style.display = "none";
-            }, 1000);
-          }, 1000);
+            }, 2500);
+          }, 2500);
       };
   </script>
   <!--<Preloader_End>-->

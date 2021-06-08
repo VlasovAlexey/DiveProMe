@@ -252,72 +252,7 @@
     }
   }
 
-  //Return current water density in kg at 20 Celsius
-  function water_density(){
-      tn_water_g = document.getElementById("tn_water");
-      tn_water_g_idx = tn_water_g.options[tn_water_g.selectedIndex].value;
 
-      if (tn_water_g_idx == 1){
-          return 1030; // atlantic
-      }
-
-      if (tn_water_g_idx == 2){
-          return 1000; // fresh
-      }
-      if (tn_water_g_idx == 3){
-          return 1015; // baltic
-      }
-      if (tn_water_g_idx == 4){
-          return 1040; // red sea
-      }
-      if (tn_water_g_idx == 5){
-          return 1150; // great salt lake
-      }
-      if (tn_water_g_idx == 6){
-          return 1330; // Dead sea
-      }
-      if (tn_water_g_idx == 7){
-          return 1024; // Pacific
-      }
-      return false;
-  }
-//fresh water temperature correction from zero to 50 celsius. Return multiplier
-//only number allowed from zero to 50 by 2
-//example: 0,2,4,...48,50
-  function water_density_temperature_correction(){
-
-      var temperature_correction = [
-          0.9987, //zero Celsius
-          0.9997,
-          1.0, //4 Celsius
-          0.9997,
-          0.9988,
-          0.9973,
-          0.9953,
-          0.9927,
-          0.9897,
-          0.9862,
-          0.9823,
-          0.9780,//22 Celsius by default
-          0.9733,
-          0.9681,
-          0.9626,
-          0.9568,
-          0.9506,
-          0.9440,
-          0.9372,
-          0.9300,
-          0.9225,
-          0.9147,
-          0.907,
-          0.898,
-          0.890,
-          0.881 //50 Celsius
-      ];
-      var opt_celsus_t = document.getElementById("opt_celsus");
-      var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
-      return temperature_correction[opt_celsus_t_idx * 0.5];
-  }
 
 
   //Build PP table
@@ -883,7 +818,7 @@ function depth_from_name_arr(tmp_arr){
     if(tmp_time.charAt(f) == ":"){
       mins = parseFloat(tmp_time.substr(0, f));
       seconds = parseFloat(tmp_time.substr(f+1, (tmp_time.length - f - 1)));
-      tmp_time =parseFloat( mins + ((seconds/60*100)*0.01));
+      tmp_time = parseFloat( mins + ((seconds/60*100)*0.01));
       break;
       }
     }
@@ -958,6 +893,9 @@ function total_cns_otu(tmp_arr) {
         var depth = depth_from_name_arr(dec_table[tick].Depth);
         var time = time_to_dec_time(dec_table[tick].Time);
         var mix = gass_from_name_arr(dec_table[tick].Mix);
+
+
+
         //O2 only to fraction
         mix = mix[0]*0.01;
 
@@ -978,6 +916,7 @@ function total_cns_otu(tmp_arr) {
                 //if ppo2 from depth1 >= 0.5 and ppo2 from depth 2 >=0.5
                 if(ppo2_1 >= 0.5 && ppo2_2 >= 0.5){
                     otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+
                 }
 
               //if ppo2 from depth1 < 0.5
@@ -989,12 +928,15 @@ function total_cns_otu(tmp_arr) {
               }
                 //if ppo2 from depth2 < 0.5
                 if(ppo2_2 < 0.5){
-                    ppo2_2 = 0.5;
+                    //NaN fixed after changed from0.5 to 0.5000001
+                    ppo2_2 = 0.500000001;
                     //recompute time for segment higher ppo2 >0.5 only
                     time = (time*(ppo2_1 - 0.5)/(ppo2_1 - mix));
-                    otu_current = (((3/11*time)/(ppo2_2-ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+                    otu_current = (((3/11*time)/(ppo2_2 - ppo2_1))*((Math.pow((ppo2_2-0.5)/0.5,(11/6)))-(Math.pow((ppo2_1-0.5)/0.5,(11/6)))));
+
                 }
             }
+
             //CNS computation
             var depth_lo = 0;
             if(depth1 < depth2){
@@ -1021,11 +963,13 @@ function total_cns_otu(tmp_arr) {
             //OTU computation
             //if po2 lower 0.5 computations don`t apply for current segment and OTU=0
             if((mix*((depth + 10) / 10)) > 0.5){
-                otu_current = time*Math.pow((0.5/((mix*((depth + 10) / 10)) - 0.5)) , (-5.0/6.0));
+
+                otu_current = time * Math.pow((0.5/((mix*((depth + 10) / 10)) - 0.5)) , (-5.0/6.0));
+
             }
             else
             {
-              otu_current = 0;
+              otu_current = 0.0;
             }
 
             //CNS computation
@@ -1033,6 +977,8 @@ function total_cns_otu(tmp_arr) {
             //console.log("flat",mix, time, mix*((depth + 10) / 10), ppo2_to_cns(mix*((depth + 10) / 10)),cns_current);
         }
         //Compute final OTU
+        //console.log(depth,time);
+        //console.log(otu_current);
         otu_final = otu_final + otu_current;
 
         //ComputeFinal CNS
@@ -1201,11 +1147,15 @@ function total_cns_otu(tmp_arr) {
         if($( "#tn_plan_ccr" ).val() == 2){
 
             //current diluent on
-            if(opt_blt_dln == 1 && $( "#opt_deco" ).val()*1.0 != 0){
-                //show consumptions if hide
-                element_id_show("7-header");
-                element_id_show("t_total_cons");
-        }}
+            if(opt_blt_dln == 1){
+                //deco mixes present
+                if($( "#opt_deco" ).val()*1.0 != 0){
+                    //show consumptions if hide
+                    //element_id_show("7-header");
+                    //element_id_show("t_total_cons");
+                }
+            }
+        }
 
 
 

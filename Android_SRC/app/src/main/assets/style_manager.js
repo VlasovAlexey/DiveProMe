@@ -57,23 +57,6 @@ function ZoomButtonChangeStyle(){
     }
 }
 
-function element_id_show(id) {
-    var x = document.getElementById(id);
-    x.style.display = "block";
-}
-function element_id_show_inline(id) {
-    var x = document.getElementById(id);
-    x.style.display = "inline-block";
-}
-function element_id_hide(id) {
-    var x = document.getElementById(id);
-    x.style.display = "none";
-}
-
-//Hide temporary last stop because now is not working smoothly
-element_id_hide("tr_lst_stop");
-element_id_hide("tn_lst_stop");
-
 //hide node js OS control icons and toolbar because not work smoothly
 CSSLoad("style_hide_window_control_section.css?v153");
 

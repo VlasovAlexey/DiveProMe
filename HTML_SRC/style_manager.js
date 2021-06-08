@@ -57,20 +57,6 @@ function ZoomButtonChangeStyle(){
     }
 }
 
-function element_id_show(id) {
-    var x = document.getElementById(id);
-    x.style.display = "block";
-}
-function element_id_show_inline(id) {
-    var x = document.getElementById(id);
-    x.style.display = "inline-block";
-}
-function element_id_hide(id) {
-    var x = document.getElementById(id);
-    x.style.display = "none";
-}
-
-
 //hide node js OS control icons and toolbar because not work smoothly
 CSSLoad("style_hide_window_control_section.css?v153");
 

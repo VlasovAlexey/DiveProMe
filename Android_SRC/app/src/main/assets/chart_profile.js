@@ -307,9 +307,16 @@ function btn_build_tiss(){
 
         var dp_arr = [];
         //add start ambient pressure in bars
-        dp_arr.push(1.01);
-
-
+        //bar
+        if($( "#tn_dmn" ).val() == 1){
+            //include water density, altitude correction and water temperature correction
+            dp_arr.push((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())));
+        }
+        //psi
+        if($( "#tn_dmn" ).val() == 2){
+            //include water density, altitude correction and water temperature correction
+            dp_arr.push(14.5037738 * ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())))).toFixed(2);
+        }
 
         //process all other values
         for(j = 0 ; j < comp_tiss_arr.length/17 ; j++) {
@@ -318,9 +325,21 @@ function btn_build_tiss(){
             tiss_cat_arr.push(time_dec_to_time(b));
 
             //Add absolute pressure array
-            dp_arr.push(
-                +(((comp_tiss_arr[a].EndDepthL/10)+1) * 1.01325).toFixed(2)
-            );
+            //bar
+            if($( "#tn_dmn" ).val() == 1){
+                dp_arr.push(
+                    //include water density, altitude correction and water temperature correction
+                    +((water_density_temperature_correction() * water_density() * 0.001 * ((comp_tiss_arr[a].EndDepthL/10)+1)) - (1 - height_to_bar())).toFixed(2)
+                );
+            }
+            //psi
+            if($( "#tn_dmn" ).val() == 2){
+                dp_arr.push(
+                    //include water density, altitude correction and water temperature correction
+                    +(14.5037738 * ((water_density_temperature_correction() * water_density() * 0.001 * ((comp_tiss_arr[a].EndDepthL/10)+1)) - (1 - height_to_bar()))).toFixed(2)
+                );
+            }
+
             a = a + 17;
         }
 
@@ -343,17 +362,40 @@ function btn_build_tiss(){
                 tmp = comp_tiss_arr[aa_a + bb_b].NitroLoad;
                 tmp.toFixed(2);
                 if(tmp < 0.01){tmp = 0.0}
-                tiss_val_arr_ng.push(tmp);
+                //bars
+                if($( "#tn_dmn" ).val() == 1){
+                    tiss_val_arr_ng.push(tmp);
+                }
+                //psi
+                if($( "#tn_dmn" ).val() == 2){
+                    tiss_val_arr_ng.push((14.5037738 * tmp));
+                }
 
                 tmp = comp_tiss_arr[aa_a + bb_b].HeliumLoad;
                 tmp.toFixed(2);
                 if(tmp < 0.01){tmp = 0.0}
-                tiss_val_arr_hl.push(tmp);
+                //tiss_val_arr_hl.push(tmp);
+                //bars
+                if($( "#tn_dmn" ).val() == 1){
+                    tiss_val_arr_hl.push(tmp);
+                }
+                //psi
+                if($( "#tn_dmn" ).val() == 2){
+                    tiss_val_arr_hl.push((14.5037738 * tmp));
+                }
 
                 tmp = comp_tiss_arr[aa_a + bb_b].TotalLoad;
                 tmp.toFixed(2);
                 if(tmp < 0.01){tmp = 0.0}
-                tiss_val_arr_tl.push(tmp);
+                //tiss_val_arr_tl.push(tmp);
+                //bars
+                if($( "#tn_dmn" ).val() == 1){
+                    tiss_val_arr_tl.push(tmp);
+                }
+                //psi
+                if($( "#tn_dmn" ).val() == 2){
+                    tiss_val_arr_tl.push((14.5037738 * tmp));
+                }
                 aa_a = aa_a + 17;
             }
 
