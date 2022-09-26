@@ -33,7 +33,7 @@ function mix_to_txt_arr(tmp_arr){
 
 
 
-// Create / update round slider and optios for oxy and depth lo with custom parameters
+// Create / update round slider and option for oxy and depth lo with custom parameters
 function learn_slider_upd(){
     //compute oxy min value based on PPO2 current or changed settings
     //max depth is 400 meters and can`t be changed

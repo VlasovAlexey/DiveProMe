@@ -9,10 +9,10 @@ function IsAndroid(){
     if(isAndroid) {
         //we under Android :) simply but some times does`t work
         //fix later if you work lover lollipop
-        return true
+        return false;
     }
     //web View class not present
-    return false
+    return false;
 }
 
 //Color Button about 30 sed

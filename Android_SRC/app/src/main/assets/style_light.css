@@ -232,7 +232,8 @@ select
 }
 .header7,
 .header8,
-.header9
+.header9,
+.header11
 {
     width: 91%;
     border: 2px solid #00aefe;
@@ -254,7 +255,8 @@ select
 .header7:hover,
 .header8:hover,
 .header9:hover,
-.header10:hover
+.header10:hover,
+.header11:hover
 {
     color: #0080fc;
     background: #ffffff;
@@ -270,7 +272,8 @@ select
 .header7:active,
 .header8:active,
 .header9:active,
-.header10:active
+.header10:active,
+.header11:active
 {
     color: #ffffff;
     background: #0080fc;
@@ -344,7 +347,12 @@ select
 .btn_msg,
 .btn_tel,
 .btn_bailout,
-.btn_diluent
+.btn_diluent,
+
+.tn_btn_price,
+.tn_btn_learn,
+.tn_btn_pp_profile_chart,
+.tn_btn_cons
 {
     border: 10px;
     margin-top: 10px;
@@ -378,7 +386,12 @@ select
 .btn_msg:hover,
 .btn_tel:hover,
 .btn_bailout:hover,
-.btn_diluent:hover
+.btn_diluent:hover,
+
+.tn_btn_price:hover,
+.tn_btn_learn:hover,
+.tn_btn_pp_profile_chart:hover,
+.tn_btn_cons:hover
 {
     background: #ffffff;
     color: #0080fc;
@@ -396,7 +409,12 @@ select
 .btn_msg:active,
 .btn_tel:active,
 .btn_bailout:active,
-.btn_diluent:active
+.btn_diluent:active,
+
+.tn_btn_price:active,
+.tn_btn_learn:active,
+.tn_btn_pp_profile_chart:active,
+.tn_btn_cons:active
 {
     top: 1px;
     background: #ffffff;
@@ -895,4 +913,86 @@ a#windowControlMinimize{
 {
     width: 80px;
 }
+.opt_saul_res_type
+{
+    width: 320px;
+}
 
+.tn_saul_cap_percent,
+.tn_saul_time_max,
+.opt_saul_cap_percent
+{
+    font-size: 60px;
+    font-family: Sans-Serif;
+    font-weight: 600;
+    animation-name: saul_large_txt_anim;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes saul_large_txt_anim
+{
+    0%   {color: #ff0037;}
+    50%  {color: #953a48;}
+    100% {color: #ff0037;}
+}
+.tr_saul_link
+{
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+.tr_saul_time_max_dim
+{
+    font-size:12px;
+}
+
+.overlay_progress {
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0, 0.0);
+    overflow-y: hidden;
+    opacity:0;
+    -webkit-transition: opacity 200ms ease-in-out;
+    -moz-transition: opacity 200ms ease-in-out;
+    transition: opacity 200ms ease-in-out;
+}
+.overlay-content-progress
+{
+    position: absolute;
+    width: 50%;
+    background: rgba(0,0,0, 0.0);
+    text-align: center;
+    text-align-last: center;
+    top: 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 15px;
+}
+.overlay_progress div,
+.overlay .tn_overlay_text_progress
+{
+    padding: 8px;
+    background: rgba(27, 30, 48, 0);
+    color: #ffffff;
+    font-family: FirstFont;
+    font-size: 16px;
+    cursor: pointer;
+    -khtml-user-select: none;
+    user-select: none;
+    text-align-last: center;
+    display: block;
+
+}
+
+.shadow
+{
+    -webkit-filter: drop-shadow( 0px 5px 10px rgba(20, 20, 20, 1));
+    filter: drop-shadow( 0px 5px 10px rgba(20, 20, 20, 1));
+}

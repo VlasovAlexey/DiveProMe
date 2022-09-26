@@ -105,9 +105,9 @@ function btn_export_tbl_plan_pdf(){
             fillColor: "#ff89a9"
         }
         ,
-        head: [[pdf_table_otu_cns_arr[0] , pdf_table_otu_cns_arr[1]]],
+        head: [[pdf_table_otu_cns_arr[0] , pdf_table_otu_cns_arr[1] , pdf_table_otu_cns_arr[2]]],
 
-        body: [[pdf_table_otu_cns_arr[2] , pdf_table_otu_cns_arr[3]]]
+        body: [[pdf_table_otu_cns_arr[3] , pdf_table_otu_cns_arr[4] , pdf_table_otu_cns_arr[5]]]
     });
 
     //Save build to pdf file

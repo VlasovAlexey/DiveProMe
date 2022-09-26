@@ -105,6 +105,13 @@ var opt_airbr_time_reset_usr = 1;
 //new6_0
 var opt_blt_dln_usr = 2;
 
+//new7_0
+var opt_saul_mix_usr = 1;
+var opt_saul_res_type_usr = 1;
+var opt_saul_depth_usr = 12;
+var opt_saul_btime_usr = 30;
+var opt_saul_percent_usr = 0.3;
+
 function default_set(){
     deco_mix_arr = [50,0,100,0,20,30,18,45,15,55,12,60,10,70,21,35,30,30,60,0];
     deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
@@ -202,6 +209,14 @@ function default_set(){
 
     //new6_0
     opt_blt_dln_usr = 2;
+
+    //new7_0
+    opt_saul_mix_usr = 1;
+    opt_saul_res_type_usr = 1;
+    opt_saul_depth_usr = 12;
+    opt_saul_btime_usr = 30;
+    opt_saul_percent_usr = 0.3;
+
 }
 
 var price_main_arr = [
@@ -301,29 +316,30 @@ var lng_arr = [
         text: "Español",
         id: "tn_portuguese",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "Português",
         id: "tn_port",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "中文",
         id: "tn_china",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "Български",
         id: "tn_bu",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "Français",
         id: "tn_fr",
+        isdisable: "enabled"
+    },
+    {
+        text: "한국어",
+        id: "tn_kr",
         isdisable: "enabled"
     }
     ];
@@ -422,6 +438,29 @@ var airbr_time_reset_arr = [
         isdisable: "enabled"
     }];
 
+var saul_mix_arr = [
+    {
+        text: "Air",
+        id: "tn_saul_mix_arr_air",
+        isdisable: "enable"
+    },
+    {
+        text: "EAN32",
+        id: "tn_saul_mix_arr_ean32",
+        isdisable: "enabled"
+    }];
+
+var saul_res_type_arr = [
+    {
+        text: "%(DCS) for a selected Bottom Time",
+        id: "tn_saul_res_type_arr_forward",
+        isdisable: "enable"
+    },
+    {
+        text: "Bottom Time for an acceptable %(DCS)",
+        id: "tn_saul_res_type_arr_reverse",
+        isdisable: "enabled"
+    }];
 
 //Make from fraction array text gases array
 function nrm_to_txt_arr(tmp_arr){
@@ -464,42 +503,47 @@ function lng_cng_mix(mix_name){
 
     //Eng
     if(td_lng == 1){
-        if(mix_name == "Air"){mix_name = "Air"}
-        if(mix_name == "OXY"){mix_name = "Oxygen"}
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
     }
     //Rus
     if(td_lng == 2){
-        if(mix_name == "Air"){mix_name = "Воздух"}
-        if(mix_name == "OXY"){mix_name = "Кислород"}
+        if(mix_name == "Air"){mix_name = "Воздух";}
+        if(mix_name == "OXY"){mix_name = "Кислород";}
     }
     //Spa
     if(td_lng == 3){
-        if(mix_name == "Air"){mix_name = "Aire"}
-        if(mix_name == "OXY"){mix_name = "Oxígeno"}
+        if(mix_name == "Air"){mix_name = "Aire";}
+        if(mix_name == "OXY"){mix_name = "Oxígeno";}
     }
     //Prt
     if(td_lng == 4){
-        if(mix_name == "Air"){mix_name = "Ar"}
-        if(mix_name == "OXY"){mix_name = "Oxigênio"}
+        if(mix_name == "Air"){mix_name = "Ar";}
+        if(mix_name == "OXY"){mix_name = "Oxigênio";}
     }
     //China
     if(td_lng == 5){
-        if(mix_name == "Air"){mix_name = "空气"}
-        if(mix_name == "OXY"){mix_name = "氧气"}
+        if(mix_name == "Air"){mix_name = "空气";}
+        if(mix_name == "OXY"){mix_name = "氧气";}
     }
 
     //Bulgarian
     if(td_lng == 6){
-        if(mix_name == "Air"){mix_name = "Въздух"}
-        if(mix_name == "OXY"){mix_name = "Кислород"}
+        if(mix_name == "Air"){mix_name = "Въздух";}
+        if(mix_name == "OXY"){mix_name = "Кислород";}
     }
 
     //Français
     if(td_lng == 7){
-        if(mix_name == "Air"){mix_name = "Air"}
-        if(mix_name == "OXY"){mix_name = "Oxygen"}
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
     }
 
+    //Korean
+    if(td_lng == 8){
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
+    }
 
     return mix_name;
 }
@@ -743,7 +787,7 @@ function airbr_mix_arr (){
     //remove unusable mixes on selected depth by max ppO2 and ppN2 plan settings
     var idx_arr = get_working_mix_idx(max_gbr_depth, mix_arr_not_filtered);
 
-    //build final list by removing unaceptable mixes by ID array
+    //build final list by removing unacceptable mixes by ID array
     var tmp_arr = [];
     var a = 0;
     var b = 0;
@@ -754,10 +798,6 @@ function airbr_mix_arr (){
         }
         b = b + 2;
     }
-
-    //console.log(mix_arr_not_filtered);
-    //console.log(tmp_arr);
-
     var fin_arr = [];
     for( var loop = 0 ; loop < tmp_arr.length/2 ; loop++){
 
@@ -976,6 +1016,12 @@ function write_cookie(){
     //new6_0
     setCookie("opt_blt_dln_usr1", opt_blt_dln);
 
+    //new7_0
+    setCookie("opt_saul_mix_usr1", return_idx("opt_saul_mix"));
+    setCookie("opt_saul_res_type_usr1", return_idx("opt_saul_res_type"));
+    setCookie("opt_saul_depth_usr1", return_idx("opt_saul_depth"));
+    setCookie("opt_saul_btime_usr1", return_idx("opt_saul_btime"));
+    setCookie("opt_saul_percent_usr1", return_idx("opt_saul_percent"));
 }
 
 function read_cookie(){
@@ -1081,6 +1127,12 @@ function read_cookie(){
     //new6_0
     opt_blt_dln_usr = parseInt(getCookie("opt_blt_dln_usr1"));
 
+    //new7_0
+    opt_saul_mix_usr = parseInt(getCookie("opt_saul_mix_usr1"));
+    opt_saul_res_type_usr = parseInt(getCookie("opt_saul_res_type_usr1"));
+    opt_saul_depth_usr = parseInt(getCookie("opt_saul_depth_usr1"));
+    opt_saul_btime_usr = parseInt(getCookie("opt_saul_btime_usr1"));
+    opt_saul_percent_usr = parseFloat(getCookie("opt_saul_percent_usr1"));
 }
 function return_idx(html_ids){
     tmp4 = document.getElementById(html_ids);
@@ -1095,10 +1147,11 @@ if(getCookie("travelmixdepth_usr1") == null){
     //console.log("cookie not found!");
 }
 else
-// read if exist but it is secod start
+// read if exist but it is second start
 {
     read_cookie();
 }
+
 
 function split_fn_to_int(arr){
     tmp_arr = getCookie(arr).split(",");
@@ -1126,6 +1179,11 @@ function btn_restore(){
     changeGuiDim();
     changeLang();
     assign_css_style();
+
+    //upd_saul_depth();
+    upd_saul_time();
+    upd_saul();
+
     write_cookie();
 
     upd_all();
@@ -1214,6 +1272,12 @@ function dim_cng(){
     opt_airbr_time_reset_usr = $( "#opt_airbr_time_reset" ).val();
     //new6_0
     opt_blt_dln_usr = opt_blt_dln;
+    //new7_0
+    opt_saul_mix_usr = $( "#opt_saul_mix" ).val();
+    opt_saul_res_type_usr = $( "#opt_saul_res_type" ).val();
+    opt_saul_depth_usr = $( "#opt_saul_depth" ).val();
+    opt_saul_btime_usr = $( "#opt_saul_btime" ).val();
+    opt_saul_percent_usr  = $( "#opt_saul_percent" ).val();
 
     create_html();
     init_global();
@@ -1222,6 +1286,9 @@ function dim_cng(){
     assign_css_style();
 
     upd_all();
+
+    upd_saul_depth();
+    upd_saul();
 
 }
 
@@ -1397,6 +1464,18 @@ function create_html(){
 
     //new6_0
     opt_blt_dln = opt_blt_dln_usr;
+
+    //new7_0
+    del_html_elem("tn_saul_mix");
+    create_custom_option_arr("tn_saul_mix" , "opt_saul_mix" , opt_saul_mix_usr , saul_mix_arr);
+    del_html_elem("tn_saul_res_type");
+    create_custom_option_arr("tn_saul_res_type" , "opt_saul_res_type" , opt_saul_res_type_usr , saul_res_type_arr);
+    del_html_elem("tn_saul_depth");
+    create_option("tn_saul_depth", "opt_saul_depth", 12, 57, opt_saul_depth_usr , 1 , 0 , "depth");
+    del_html_elem("tn_saul_btime");
+    create_option("tn_saul_btime", "opt_saul_btime", 5, 60, opt_saul_btime_usr , 1 , 0 , "none");
+    del_html_elem("tn_saul_percent");
+    create_option("tn_saul_percent", "opt_saul_percent", 0.0, 0.98, opt_saul_percent_usr , 0.01 , 2 , "none");
 
     //Re create watchers for changes
     tn_gf_lo = document.getElementById("tn_gf_lo_opt");
@@ -1607,6 +1686,19 @@ function create_html(){
     opt_airbr_time.addEventListener('change', upd_all);
     opt_airbr_time_reset = document.getElementById("opt_airbr_time_reset");
     opt_airbr_time_reset.addEventListener('change', upd_all);
+
+    //new7_0
+    opt_saul_mix = document.getElementById("opt_saul_mix");
+    opt_saul_mix.addEventListener('change', upd_saul_depth);
+    opt_saul_res_type = document.getElementById("opt_saul_res_type");
+    opt_saul_res_type.addEventListener('change', upd_saul_type);
+    opt_saul_depth = document.getElementById("opt_saul_depth");
+    opt_saul_depth.addEventListener('change', upd_saul_time);
+    opt_saul_btime = document.getElementById("opt_saul_btime");
+    opt_saul_btime.addEventListener('change', upd_saul);
+    opt_saul_percent = document.getElementById("opt_saul_percent");
+    opt_saul_percent.addEventListener('change', upd_saul);
+
 }
 
 create_option("tn_gf", "tn_gf_lo_opt", 0, 100, gf_arr[0] , 1 , 0, "none");
@@ -1702,6 +1794,13 @@ create_custom_option_arr("tn_airbr_time_reset" , "opt_airbr_time_reset" , opt_ai
 
 //new6_0
 opt_blt_dln = opt_blt_dln_usr;
+
+//new7_0
+create_custom_option_arr("tn_saul_mix" , "opt_saul_mix" , opt_saul_mix_usr , saul_mix_arr);
+create_custom_option_arr("tn_saul_res_type" , "opt_saul_res_type" , opt_saul_res_type_usr , saul_res_type_arr);
+create_option("tn_saul_depth", "opt_saul_depth", 12, 57, opt_saul_depth_usr , 1 , 0 , "depth");
+create_option("tn_saul_btime", "opt_saul_btime", 5, 60, opt_saul_btime_usr , 1 , 0 , "none");
+create_option("tn_saul_percent", "opt_saul_percent", 0.0, 0.98, opt_saul_percent_usr , 0.01 , 2 , "none");
 
 function init_global(){
     //if you want force language to eng you change to 1
@@ -1922,6 +2021,58 @@ function init_global(){
     opt_airbr_time.addEventListener('change', upd_all);
     opt_airbr_time_reset = document.getElementById("opt_airbr_time_reset");
     opt_airbr_time_reset.addEventListener('change', upd_all);
+
+    //new7_0
+    opt_saul_mix = document.getElementById("opt_saul_mix");
+    opt_saul_mix.addEventListener('change', upd_saul_depth);
+    opt_saul_res_type = document.getElementById("opt_saul_res_type");
+    opt_saul_res_type.addEventListener('change', upd_saul_type);
+    opt_saul_depth = document.getElementById("opt_saul_depth");
+    opt_saul_depth.addEventListener('change', upd_saul_time);
+    opt_saul_btime = document.getElementById("opt_saul_btime");
+    opt_saul_btime.addEventListener('change', upd_saul);
+    opt_saul_percent = document.getElementById("opt_saul_percent");
+    opt_saul_percent.addEventListener('change', upd_saul);
 }
 
+/*
+var tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+var tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+tn_gf_lo.addEventListener('change', upd_gf);
+tn_gf_hi.addEventListener('change', upd_gf);
 
+//gradient factor functions for update interface and values
+
+function upd_gf(){
+  mdl = document.getElementById("tn_mdl");
+  mdl_idx = mdl.options[mdl.selectedIndex].value;
+
+    tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+    tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+    tn_gf_lo_idx = tn_gf_lo.options[tn_gf_lo.selectedIndex].value;
+    tn_gf_hi_idx = tn_gf_hi.options[tn_gf_hi.selectedIndex].value;
+  
+    del_html_elem("tn_gf");
+    if(tn_gf_lo_idx*1.0 != gf_arr[0]){
+      gf_arr[0] = tn_gf_lo_idx*1.0;
+      if(tn_gf_lo_idx*1.0 >= gf_arr[1]){
+         gf_arr[0] = gf_arr[1]-1;
+      }
+    }
+    if(tn_gf_hi_idx*1.0 != gf_arr[1]){
+      gf_arr[1] = tn_gf_hi_idx*1.0;
+      if(tn_gf_hi_idx*1.0 <= gf_arr[0]){
+         gf_arr[1] = gf_arr[0]+1;
+      }
+    }
+    create_option("tn_gf", "tn_gf_lo_opt", 0, 100, gf_arr[0], 1 , 0 , "none");
+    create_option("tn_gf", "tn_gf_hi_opt", 0, 100, gf_arr[1], 1 , 0 , "none");
+  
+    tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+    tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+    tn_gf_lo.addEventListener('change', upd_gf);
+    tn_gf_hi.addEventListener('change', upd_gf);
+
+  upd_all();
+}
+*/

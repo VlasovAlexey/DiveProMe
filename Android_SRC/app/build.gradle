@@ -3,18 +3,20 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 29
+    compileSdkVersion 30
     defaultConfig {
         applicationId "com.diveprome.avlasov.diveprome"
         minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 14
-        versionName '10.5'
+        targetSdkVersion 30
+        versionCode 20
+        versionName '12.8'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
         release {
-
+            ndk {
+                debugSymbolLevel 'SYMBOL_TABLE'
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -31,6 +33,8 @@ dependencies {
     testImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     api 'com.google.android.gms:play-services-analytics:10.2.4'
+    //classpath 'com.android.tools.build:gradle:4.1.2'
+
     //classpath 'com.google.gms:google-services:4.3.3'
     //compile 'com.google.android.gms:play-services-analytics:17.0.0'
 }
