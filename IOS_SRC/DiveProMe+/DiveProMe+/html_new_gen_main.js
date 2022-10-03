@@ -7,6 +7,7 @@ function addOption (oListbox, text, value, isDefaultSelected, isSelected)
   oOption.appendChild(document.createTextNode(text));
   oOption.setAttribute("value", value);
   oOption.setAttribute("id", value);
+
   if (isDefaultSelected) oOption.defaultSelected = true;
   else if (isSelected) oOption.selected = true;
 
@@ -47,6 +48,7 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
   tmp_div.setAttribute("id", opt_id);
   tmp_div.setAttribute("name", opt_id);
   tmp_div.setAttribute("class", opt_id);
+
 
   //not specified dimension e.g. time or partial pressures
   if(dmn_type === "none"){
@@ -138,8 +140,7 @@ function create_option(htmls_id , opt_id , start , end , selected_elm , nrm_step
             }
         }
     }
-
-  htmls_id.appendChild(tmp_div);
+    htmls_id.appendChild(tmp_div);
 }
 
 function create_option_arr(htmls_id , opt_id , selected_elm, tmp_arr){

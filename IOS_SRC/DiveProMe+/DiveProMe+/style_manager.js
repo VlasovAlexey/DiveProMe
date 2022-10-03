@@ -24,11 +24,11 @@ function assign_css_style(){
     }); */
 
     if(tn_color_idx*1.0 === 1){
-        CSSLoad("style_main.css?v0148345");
+        CSSLoad("style_main.css?v01148111111345");
         CSSLoad("roundslider_main.css");
     }
     if(tn_color_idx*1.0 === 2){
-        CSSLoad("style_light.css?v504113");
+        CSSLoad("style_light.css?v51111041131113");
         CSSLoad("roundslider_light.css");
     }
     ZoomButtonChangeStyle();
@@ -56,23 +56,6 @@ function ZoomButtonChangeStyle(){
         ColorZoobButtonStrokeHover = "#0080fc";
     }
 }
-
-function element_id_show(id) {
-    var x = document.getElementById(id);
-    x.style.display = "block";
-}
-function element_id_show_inline(id) {
-    var x = document.getElementById(id);
-    x.style.display = "inline-block";
-}
-function element_id_hide(id) {
-    var x = document.getElementById(id);
-    x.style.display = "none";
-}
-
-//Hide temporary last stop because now is not working smoothly
-element_id_hide("tr_lst_stop");
-element_id_hide("tn_lst_stop");
 
 //hide node js OS control icons and toolbar because not work smoothly
 CSSLoad("style_hide_window_control_section.css?v153");

@@ -1,5 +1,6 @@
 var abs_press = [1.0];
 var comp_tiss_arr =[];
+
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;
 if(!u&&a)return a(o,!0);
 if(i)return i(o,!0);
@@ -526,6 +527,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
         gas.modInMeters = function(ppO2, isFreshWater) {
             //return $self.barToDepthInMeters(ppO2 / this.fO2, isFreshWater);
+
             //diveprome interface
             var val = $self.barToDepthInMeters(ppO2 / this.fO2, isFreshWater);
             var result = 0;

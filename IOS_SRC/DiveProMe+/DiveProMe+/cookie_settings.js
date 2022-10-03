@@ -6,10 +6,11 @@ deleteCookie("lvl_mix_usr1");
 deleteCookie("mdls_usr1");
 */
 var deco_mix_arr = [50,0,100,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35];
-deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
+var deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
+var travel_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
 var travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
 
-var lvl_arr = [1,39,20];
+var lvl_arr = [1,40,20];
 var lvl_mix_arr = [21,0];
 
 var gf_arr = [20,80];
@@ -94,7 +95,7 @@ var opt_setpoint_bottom_usr = 1.30;
 var opt_setpoint_deco_usr = 1.50;
 
 //new5_0
-var opt_airbr_depth_usr = 2;
+var opt_airbr_depth_usr = 6;
 var opt_airbr_o2_usr = 100;
 var opt_airbr_mix_usr = 1;
 var opt_airbr_time_after_usr = 20;
@@ -104,9 +105,17 @@ var opt_airbr_time_reset_usr = 1;
 //new6_0
 var opt_blt_dln_usr = 2;
 
+//new7_0
+var opt_saul_mix_usr = 1;
+var opt_saul_res_type_usr = 1;
+var opt_saul_depth_usr = 12;
+var opt_saul_btime_usr = 30;
+var opt_saul_percent_usr = 0.3;
+
 function default_set(){
     deco_mix_arr = [50,0,100,0,20,30,18,45,15,55,12,60,10,70,21,35,30,30,60,0];
     deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
+    travel_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
     travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
     lvl_arr = [1,39,20];
     lvl_mix_arr = [21,0];
@@ -191,7 +200,7 @@ function default_set(){
     opt_setpoint_deco_usr = 1.50;
 
     //new5_0
-    opt_airbr_depth_usr = 2;
+    opt_airbr_depth_usr = 6;
     opt_airbr_o2_usr = 100;
     opt_airbr_mix_usr = 1;
     opt_airbr_time_after_usr = 20;
@@ -200,6 +209,14 @@ function default_set(){
 
     //new6_0
     opt_blt_dln_usr = 2;
+
+    //new7_0
+    opt_saul_mix_usr = 1;
+    opt_saul_res_type_usr = 1;
+    opt_saul_depth_usr = 12;
+    opt_saul_btime_usr = 30;
+    opt_saul_percent_usr = 0.3;
+
 }
 
 var price_main_arr = [
@@ -299,17 +316,30 @@ var lng_arr = [
         text: "Español",
         id: "tn_portuguese",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "Português",
         id: "tn_port",
         isdisable: "enabled"
-    }
-    ,
+    },
     {
         text: "中文",
         id: "tn_china",
+        isdisable: "enabled"
+    },
+    {
+        text: "Български",
+        id: "tn_bu",
+        isdisable: "enabled"
+    },
+    {
+        text: "Français",
+        id: "tn_fr",
+        isdisable: "enabled"
+    },
+    {
+        text: "한국어",
+        id: "tn_kr",
         isdisable: "enabled"
     }
     ];
@@ -394,18 +424,42 @@ var plan_ccr_arr = [
     {
         text: "CCR",
         id: "tn_plan_ccr",
-        isdisable: "disabled"
+        isdisable: "enabled"
     }];
 var airbr_time_reset_arr = [
-    {
-        text: "Yes",
-        id: "tn_airbr_time_reset_yes",
-        isdisable: "enabled"
-    },
     {
         text: "No",
         id: "tn_airbr_time_reset_no",
         isdisable: "enable"
+    },
+    {
+        text: "Yes",
+        id: "tn_airbr_time_reset_yes",
+        isdisable: "enabled"
+    }];
+
+var saul_mix_arr = [
+    {
+        text: "Air",
+        id: "tn_saul_mix_arr_air",
+        isdisable: "enable"
+    },
+    {
+        text: "EAN32",
+        id: "tn_saul_mix_arr_ean32",
+        isdisable: "enabled"
+    }];
+
+var saul_res_type_arr = [
+    {
+        text: "%(DCS) for a selected Bottom Time",
+        id: "tn_saul_res_type_arr_forward",
+        isdisable: "enable"
+    },
+    {
+        text: "Bottom Time for an acceptable %(DCS)",
+        id: "tn_saul_res_type_arr_reverse",
+        isdisable: "enabled"
     }];
 
 //Make from fraction array text gases array
@@ -449,31 +503,270 @@ function lng_cng_mix(mix_name){
 
     //Eng
     if(td_lng == 1){
-        if(mix_name == "Air"){mix_name = "Air"}
-        if(mix_name == "OXY"){mix_name = "Oxygen"}
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
     }
     //Rus
     if(td_lng == 2){
-        if(mix_name == "Air"){mix_name = "Воздух"}
-        if(mix_name == "OXY"){mix_name = "Кислород"}
+        if(mix_name == "Air"){mix_name = "Воздух";}
+        if(mix_name == "OXY"){mix_name = "Кислород";}
     }
     //Spa
     if(td_lng == 3){
-        if(mix_name == "Air"){mix_name = "Aire"}
-        if(mix_name == "OXY"){mix_name = "Oxígeno"}
+        if(mix_name == "Air"){mix_name = "Aire";}
+        if(mix_name == "OXY"){mix_name = "Oxígeno";}
     }
     //Prt
     if(td_lng == 4){
-        if(mix_name == "Air"){mix_name = "Ar"}
-        if(mix_name == "OXY"){mix_name = "Oxigênio"}
+        if(mix_name == "Air"){mix_name = "Ar";}
+        if(mix_name == "OXY"){mix_name = "Oxigênio";}
     }
     //China
     if(td_lng == 5){
-        if(mix_name == "Air"){mix_name = "空气"}
-        if(mix_name == "OXY"){mix_name = "氧气"}
+        if(mix_name == "Air"){mix_name = "空气";}
+        if(mix_name == "OXY"){mix_name = "氧气";}
+    }
+
+    //Bulgarian
+    if(td_lng == 6){
+        if(mix_name == "Air"){mix_name = "Въздух";}
+        if(mix_name == "OXY"){mix_name = "Кислород";}
+    }
+
+    //Français
+    if(td_lng == 7){
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
+    }
+
+    //Korean
+    if(td_lng == 8){
+        if(mix_name == "Air"){mix_name = "Air";}
+        if(mix_name == "OXY"){mix_name = "Oxygen";}
     }
 
     return mix_name;
+}
+
+//Return current water density in kg at 20 Celsius
+function water_density(){
+    tn_water_g = document.getElementById("tn_water");
+    tn_water_g_idx = tn_water_g.options[tn_water_g.selectedIndex].value;
+
+    if (tn_water_g_idx == 1){
+        return 1030; // atlantic
+    }
+
+    if (tn_water_g_idx == 2){
+        return 1000; // fresh
+    }
+    if (tn_water_g_idx == 3){
+        return 1015; // baltic
+    }
+    if (tn_water_g_idx == 4){
+        return 1040; // red sea
+    }
+    if (tn_water_g_idx == 5){
+        return 1150; // great salt lake
+    }
+    if (tn_water_g_idx == 6){
+        return 1330; // Dead sea
+    }
+    if (tn_water_g_idx == 7){
+        return 1024; // Pacific
+    }
+    return false;
+}
+//fresh water temperature correction from zero to 50 celsius. Return multiplier
+//only number allowed from zero to 50 by 2
+//example: 0,2,4,...48,50
+function water_density_temperature_correction(){
+
+    var temperature_correction = [
+        0.9987, //zero Celsius
+        0.9997,
+        1.0, //4 Celsius
+        0.9997,
+        0.9988,
+        0.9973,
+        0.9953,
+        0.9927,
+        0.9897,
+        0.9862,
+        0.9823,
+        0.9780,//22 Celsius by default
+        0.9733,
+        0.9681,
+        0.9626,
+        0.9568,
+        0.9506,
+        0.9440,
+        0.9372,
+        0.9300,
+        0.9225,
+        0.9147,
+        0.907,
+        0.898,
+        0.890,
+        0.881 //50 Celsius
+    ];
+    var opt_celsus_t = document.getElementById("opt_celsus");
+    var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
+    return temperature_correction[opt_celsus_t_idx * 0.5];
+}
+
+// Compute altitude in meters to pressure in bars
+function height_to_bar(){
+    var radius_of_earth, acceleration_of_gravity, molecular_weight_of_air, gas_constant_r, temp_at_sea_level, pressure_at_sea_level_msw, temp_gradient, gmr_factor, altitude_meters, altitude_kilometers, pressure_at_sea_level, geopotential_altitude, temp_at_geopotential_altitude, barometric_pressure;
+    radius_of_earth = 6369;
+    acceleration_of_gravity = 9.80665;
+    molecular_weight_of_air = 28.9644;
+    gas_constant_r = 8.31432;
+
+    //get celsius selected value from interface
+    var opt_celsus_t = document.getElementById("opt_celsus");
+    var opt_celsus_t_idx = opt_celsus_t.options[opt_celsus_t.selectedIndex].value;
+
+    temp_at_sea_level = (273.15 + (opt_celsus_t_idx * 1.0));  //Kelvin
+
+    pressure_at_sea_level_msw = 101.6;
+    temp_gradient = -6.5;
+    gmr_factor = acceleration_of_gravity * molecular_weight_of_air / gas_constant_r;
+
+    //get altitude selected value from interface
+    var opt_slevel_t = document.getElementById("opt_slevel");
+    var opt_slevel_t_idx = opt_slevel_t.options[opt_slevel_t.selectedIndex].value;
+
+    altitude_meters = opt_slevel_t_idx * 1.0;
+    altitude_kilometers = altitude_meters / 1000;
+    pressure_at_sea_level = pressure_at_sea_level_msw;
+
+    geopotential_altitude = altitude_kilometers * radius_of_earth / (altitude_kilometers + radius_of_earth);
+    temp_at_geopotential_altitude = temp_at_sea_level + temp_gradient * geopotential_altitude;
+    barometric_pressure = pressure_at_sea_level * Math.exp(Math.log(temp_at_sea_level / temp_at_geopotential_altitude) * gmr_factor / temp_gradient);
+
+    //convert to bars
+    //0.4 is fixes for more precession result compared with real world tables. if you want classic barometric formula simply remove 0.4
+    return (barometric_pressure-0.4)*0.01;
+}
+
+//Return filtered mix array by PPO2 Max\Min\Deco END for selected depth OC
+function get_working_mix_idx(wrk_dp, tmp_mix_arr){
+
+    var mix_travel = document.getElementById("opt_travel");
+    var ppo2_bottom = document.getElementById("opt_ppo2_bottom");
+    var ppo2_min = document.getElementById("opt_ppo2_min");
+    var ppn2_max = document.getElementById("opt_ppn2_max");
+
+    //var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
+    var mix_travel_idx = tmp_mix_arr.length;
+    var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
+    var ppo2_min_idx = ppo2_min.options[ppo2_min.selectedIndex].value;
+    var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
+
+    tmp_arr=[];
+    var a = 0;
+    var c_counter = 0;
+    for(c = 0 ; c < mix_travel_idx ; c++){
+        //check current Mix MOD status
+        if(travel_mix_depth_arr[c_counter] == 0){
+            //Auto
+            //calculation of correction with altitude above sea level
+            //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+            //calculation of correction without altitude above sea level
+            var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+            dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+
+            //new calculation need DEEP TEST!
+            dp_o2_min = (WaterDensTempCompensation * (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar());
+            //Old calculation
+            // dp_o2_min = (ppo2_min_idx/(tmp_mix_arr[a]*0.01)*10 - (10*height_to_bar()))*1.0;
+            if(dp_o2_min < 1){dp_o2_min = 1;}
+            if(dp_o2_min == Infinity){dp_o2_min = 1;}
+            dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+        }
+        else
+        {
+            //Manual
+            dp_o2_max = travel_mix_depth_arr[c_counter] * 1.0;
+            dp_o2_min = 1.0;//Always start from surface
+            dp_ppn2_max = travel_mix_depth_arr[c_counter] * 1.0;
+        }
+
+        if (wrk_dp <= dp_o2_max){
+            if (wrk_dp >= dp_o2_min){
+                if (wrk_dp <= dp_ppn2_max){
+                    tmp_arr.push(c);
+
+                }
+            }
+        }
+        a = a + 2;
+        c_counter = c_counter + 1;
+    }
+    return tmp_arr;
+
+
+}
+//Return filtered mix array by PPO2 Max\Min\Deco END for selected depth CCR
+function get_working_mix_idx_ccr(wrk_dp, tmp_mix_arr){
+
+    var mix_travel = document.getElementById("opt_travel");
+    var ppo2_bottom = document.getElementById("opt_setpoint_bottom");
+    var ppn2_max = document.getElementById("opt_ppn2_max");
+
+    //var mix_travel_idx = mix_travel.options[mix_travel.selectedIndex].value;
+    var mix_travel_idx = tmp_mix_arr.length;
+    var ppo2_bottom_idx = ppo2_bottom.options[ppo2_bottom.selectedIndex].value;
+    var ppn2_max_idx = ppn2_max.options[ppn2_max.selectedIndex].value;
+
+    tmp_arr = [];
+    var a = 0;
+    var c_counter = 0;
+    for(c = 0 ; c < mix_travel_idx ; c++){
+
+
+        //check current Mix MOD status
+        if(travel_mix_depth_arr[c_counter] == 0){
+            //Auto
+            //calculation of correction with altitude above sea level
+            //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar()))));
+            //calculation of correction without altitude above sea level
+            var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
+
+            dp_o2_max = (WaterDensTempCompensation * (ppo2_bottom_idx/(tmp_mix_arr[a]*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+            dp_ppn2_max = (WaterDensTempCompensation * (ppn2_max_idx/((100-tmp_mix_arr[a]-tmp_mix_arr[a+1])*0.01)*10)) - (10*height_to_bar()) + 1;//+1m fixing rounding to standard
+
+            //only for CCR
+            dp_o2_min = 1.0;//Always start from surface
+        }
+        else
+        {
+            //Manual
+            dp_o2_max = travel_mix_depth_arr[c_counter];
+            dp_ppn2_max = travel_mix_depth_arr[c_counter];
+            //only for CCR
+            dp_o2_min = 1.0;
+        }
+
+        //fix error if mix n2 > 95%
+        if(dp_ppn2_max < 1 ){
+            dp_ppn2_max = 6;
+        }
+        if (wrk_dp <= dp_o2_max){
+            if (wrk_dp >= dp_o2_min){
+                if (wrk_dp <= dp_ppn2_max){
+                    tmp_arr.push(c);
+
+                }
+            }
+        }
+
+        a = a + 2;
+        c_counter = c_counter + 1;
+    }
+    return tmp_arr;
 }
 
 //create list of used gases for air breaks menu
@@ -486,17 +779,61 @@ function airbr_mix_arr (){
     var deco_arr = deco_mix_arr.slice();
     deco_arr.length = ($( "#opt_deco" ).val()*2);
 
+    var max_gbr_depth = ($( "#opt_airbr_depth" ).val()*1.0);
+    //console.log(max_gbr_depth);
 
-    var tmp_arr = travel_arr.concat(deco_arr);
+    var mix_arr_not_filtered = travel_arr.concat(deco_arr);
 
+    //remove unusable mixes on selected depth by max ppO2 and ppN2 plan settings
+    var idx_arr = get_working_mix_idx(max_gbr_depth, mix_arr_not_filtered);
+
+    //build final list by removing unacceptable mixes by ID array
+    var tmp_arr = [];
+    var a = 0;
+    var b = 0;
+    for(var c = 0 ; c < mix_arr_not_filtered.length ; c++){
+        if(c == idx_arr[a]){
+            tmp_arr.push(mix_arr_not_filtered[b],mix_arr_not_filtered[b+1]);
+            a = a + 1;
+        }
+        b = b + 2;
+    }
     var fin_arr = [];
     for( var loop = 0 ; loop < tmp_arr.length/2 ; loop++){
-        var a = [tmp_arr[loop*2] , tmp_arr[loop*2+1]];
+
+        //check mix O2 percentage. If higher 21% mix will be removed from list
+        if(tmp_arr[loop*2] <= 21){
+
+            //add mix to the list
+            var a = [tmp_arr[loop*2] , tmp_arr[loop*2+1]];
+            fin_arr.push({
+                text: nrm_to_txt_arr(a),
+                id: "tn_airbr_mix_" + loop,
+                isdisable: "enabled"
+            });
+        }
+    }
+
+    //if nothing, add at least one default mix
+    if(fin_arr.length == 0){
+        var tmp_arr_gas = [travel_mix_arr[0],travel_mix_arr[1]];
+        //console.log(tmp_arr_gas);
+        //$("#opt_airbr_time_reset").val("1");
+        //$("#opt_airbr_time_reset").val("1").prop("selected", true);
+
+        $("#opt_airbr_time_reset").val("1").attr("disabled",true);
+
         fin_arr.push({
-            text: nrm_to_txt_arr(a),
-            id: "tn_airbr_mix_" + loop,
+            text: "",
+            //text: nrm_to_txt_arr(tmp_arr_gas),
+            id: "tn_airbr_mix_0",
             isdisable: "enabled"
         });
+
+        //element_id_hide("tr_gasbreak_block");
+    }
+    else{
+        $("#opt_airbr_time_reset").attr("disabled",false);
     }
     return fin_arr;
 }
@@ -514,12 +851,32 @@ function lng_cng(mix_name){
     return result;
 }
 
+//Show\Hide HTML elements
+function element_id_show(id) {
+    var x = document.getElementById(id);
+    x.style.display = "block";
+}
+function element_id_show_inline(id) {
+    var x = document.getElementById(id);
+    x.style.display = "inline-block";
+}
+function element_id_hide(id) {
+    var x = document.getElementById(id);
+    x.style.display = "none";
+}
+
 //reset current list of air breaks gases and update whit new
 function upd_airbr_mix(){
+
+    //store old value
+    var tmp_val = ($( "#opt_airbr_mix" ).val()*1.0);
+
+
     del_html_elem("tn_airbr_mix");
-    create_custom_option_arr("tn_airbr_mix" , "opt_airbr_mix" , opt_airbr_mix_usr , airbr_mix_arr());
+    create_custom_option_arr("tn_airbr_mix" , "opt_airbr_mix" , tmp_val , airbr_mix_arr());
+
     opt_airbr_mix = document.getElementById("opt_airbr_mix");
-    opt_airbr_mix.addEventListener('change', upd_airbr);
+    opt_airbr_mix.addEventListener('change', upd_all);
 }
 
 function setCookie(name, value) {
@@ -561,6 +918,7 @@ function deleteCookie(name) {
 function write_cookie(){
     setCookie("decomix_usr1", deco_mix_arr.join(","));
     setCookie("decomixdepth_usr1", deco_mix_depth_arr.join(","));
+    setCookie("travelmixdepth_usr1", travel_mix_depth_arr.join(","));
     setCookie("travelmix_usr1", travel_mix_arr.join(","));
 
     setCookie("lvl_usr1", lvl_arr.join(","));
@@ -658,11 +1016,18 @@ function write_cookie(){
     //new6_0
     setCookie("opt_blt_dln_usr1", opt_blt_dln);
 
+    //new7_0
+    setCookie("opt_saul_mix_usr1", return_idx("opt_saul_mix"));
+    setCookie("opt_saul_res_type_usr1", return_idx("opt_saul_res_type"));
+    setCookie("opt_saul_depth_usr1", return_idx("opt_saul_depth"));
+    setCookie("opt_saul_btime_usr1", return_idx("opt_saul_btime"));
+    setCookie("opt_saul_percent_usr1", return_idx("opt_saul_percent"));
 }
 
 function read_cookie(){
     deco_mix_arr = split_fn_to_int("decomix_usr1");
     deco_mix_depth_arr = split_fn_to_int("decomixdepth_usr1");
+    travel_mix_depth_arr = split_fn_to_int("travelmixdepth_usr1");
     travel_mix_arr = split_fn_to_int("travelmix_usr1");
 
     lvl_arr = split_fn_to_int("lvl_usr1");
@@ -762,6 +1127,12 @@ function read_cookie(){
     //new6_0
     opt_blt_dln_usr = parseInt(getCookie("opt_blt_dln_usr1"));
 
+    //new7_0
+    opt_saul_mix_usr = parseInt(getCookie("opt_saul_mix_usr1"));
+    opt_saul_res_type_usr = parseInt(getCookie("opt_saul_res_type_usr1"));
+    opt_saul_depth_usr = parseInt(getCookie("opt_saul_depth_usr1"));
+    opt_saul_btime_usr = parseInt(getCookie("opt_saul_btime_usr1"));
+    opt_saul_percent_usr = parseFloat(getCookie("opt_saul_percent_usr1"));
 }
 function return_idx(html_ids){
     tmp4 = document.getElementById(html_ids);
@@ -770,16 +1141,17 @@ function return_idx(html_ids){
     return idx_me;
 }
 //settings doesn`t saved ad it is first start. it will be saved now
-if(getCookie("opt_calc_cur_ex_rate_fyn_usr1") == null){
+if(getCookie("travelmixdepth_usr1") == null){
     //need explanation for me. If uncomment below line all is don`t work on Android
     //upd_all();
     //console.log("cookie not found!");
 }
 else
-// read if exist but it is secod start
+// read if exist but it is second start
 {
     read_cookie();
 }
+
 
 function split_fn_to_int(arr){
     tmp_arr = getCookie(arr).split(",");
@@ -807,6 +1179,11 @@ function btn_restore(){
     changeGuiDim();
     changeLang();
     assign_css_style();
+
+    //upd_saul_depth();
+    upd_saul_time();
+    upd_saul();
+
     write_cookie();
 
     upd_all();
@@ -895,6 +1272,12 @@ function dim_cng(){
     opt_airbr_time_reset_usr = $( "#opt_airbr_time_reset" ).val();
     //new6_0
     opt_blt_dln_usr = opt_blt_dln;
+    //new7_0
+    opt_saul_mix_usr = $( "#opt_saul_mix" ).val();
+    opt_saul_res_type_usr = $( "#opt_saul_res_type" ).val();
+    opt_saul_depth_usr = $( "#opt_saul_depth" ).val();
+    opt_saul_btime_usr = $( "#opt_saul_btime" ).val();
+    opt_saul_percent_usr  = $( "#opt_saul_percent" ).val();
 
     create_html();
     init_global();
@@ -903,6 +1286,9 @@ function dim_cng(){
     assign_css_style();
 
     upd_all();
+
+    upd_saul_depth();
+    upd_saul();
 
 }
 
@@ -1064,7 +1450,7 @@ function create_html(){
 
     //new5_0
     del_html_elem("tn_airbr_depth");
-    create_option("tn_airbr_depth", "opt_airbr_depth", 3, 21, opt_airbr_depth_usr , 1 , 0 , "depth");
+    create_option("tn_airbr_depth", "opt_airbr_depth", 3, 60, opt_airbr_depth_usr , 3 , 0 , "depth");
     del_html_elem("tn_airbr_o2");
     create_option("tn_airbr_o2", "opt_airbr_o2", 80, 100, opt_airbr_o2_usr , 1 , 0 , "none");
     del_html_elem("tn_airbr_mix");
@@ -1078,6 +1464,18 @@ function create_html(){
 
     //new6_0
     opt_blt_dln = opt_blt_dln_usr;
+
+    //new7_0
+    del_html_elem("tn_saul_mix");
+    create_custom_option_arr("tn_saul_mix" , "opt_saul_mix" , opt_saul_mix_usr , saul_mix_arr);
+    del_html_elem("tn_saul_res_type");
+    create_custom_option_arr("tn_saul_res_type" , "opt_saul_res_type" , opt_saul_res_type_usr , saul_res_type_arr);
+    del_html_elem("tn_saul_depth");
+    create_option("tn_saul_depth", "opt_saul_depth", 12, 57, opt_saul_depth_usr , 1 , 0 , "depth");
+    del_html_elem("tn_saul_btime");
+    create_option("tn_saul_btime", "opt_saul_btime", 5, 60, opt_saul_btime_usr , 1 , 0 , "none");
+    del_html_elem("tn_saul_percent");
+    create_option("tn_saul_percent", "opt_saul_percent", 0.0, 0.98, opt_saul_percent_usr , 0.01 , 2 , "none");
 
     //Re create watchers for changes
     tn_gf_lo = document.getElementById("tn_gf_lo_opt");
@@ -1108,7 +1506,10 @@ function create_html(){
     tn_lst_stop.addEventListener('change', upd_all);
 
     tn_water_g = document.getElementById("tn_water");
-    tn_water_g.addEventListener('change', upd_all);
+
+    //update trough delete all levels and set to default
+    //it is important for properly update all values
+    tn_water_g.addEventListener('change', del_lvl_list);
 
     rate_asc = document.getElementById("opt_rate_asc");
     rate_dsc = document.getElementById("opt_rate_dsc");
@@ -1274,17 +1675,30 @@ function create_html(){
 
     //new5_0
     opt_airbr_depth = document.getElementById("opt_airbr_depth");
-    opt_airbr_depth.addEventListener('change', upd_airbr);
+    opt_airbr_depth.addEventListener('change', upd_all);
     opt_airbr_o2 = document.getElementById("opt_airbr_o2");
-    opt_airbr_o2.addEventListener('change', upd_airbr);
+    opt_airbr_o2.addEventListener('change', upd_all);
     opt_airbr_mix = document.getElementById("opt_airbr_mix");
-    opt_airbr_mix.addEventListener('change', upd_airbr);
+    opt_airbr_mix.addEventListener('change', upd_all);
     opt_airbr_time_after = document.getElementById("opt_airbr_time_after");
-    opt_airbr_time_after.addEventListener('change', upd_airbr);
+    opt_airbr_time_after.addEventListener('change', upd_all);
     opt_airbr_time = document.getElementById("opt_airbr_time");
-    opt_airbr_time.addEventListener('change', upd_airbr);
+    opt_airbr_time.addEventListener('change', upd_all);
     opt_airbr_time_reset = document.getElementById("opt_airbr_time_reset");
-    opt_airbr_time_reset.addEventListener('change', upd_airbr);
+    opt_airbr_time_reset.addEventListener('change', upd_all);
+
+    //new7_0
+    opt_saul_mix = document.getElementById("opt_saul_mix");
+    opt_saul_mix.addEventListener('change', upd_saul_depth);
+    opt_saul_res_type = document.getElementById("opt_saul_res_type");
+    opt_saul_res_type.addEventListener('change', upd_saul_type);
+    opt_saul_depth = document.getElementById("opt_saul_depth");
+    opt_saul_depth.addEventListener('change', upd_saul_time);
+    opt_saul_btime = document.getElementById("opt_saul_btime");
+    opt_saul_btime.addEventListener('change', upd_saul);
+    opt_saul_percent = document.getElementById("opt_saul_percent");
+    opt_saul_percent.addEventListener('change', upd_saul);
+
 }
 
 create_option("tn_gf", "tn_gf_lo_opt", 0, 100, gf_arr[0] , 1 , 0, "none");
@@ -1371,7 +1785,7 @@ create_option("tn_setpoint_bottom", "opt_setpoint_bottom", 0.9, 1.6, opt_setpoin
 create_option("tn_setpoint_deco", "opt_setpoint_deco", 1.0, 1.6, opt_setpoint_deco_usr , 0.01 , 2 , "press");
 
 //new5_0
-create_option("tn_airbr_depth", "opt_airbr_depth", 3, 21, opt_airbr_depth_usr , 1 , 0 , "depth");
+create_option("tn_airbr_depth", "opt_airbr_depth", 3, 60, opt_airbr_depth_usr , 3 , 0 , "depth");
 create_option("tn_airbr_o2", "opt_airbr_o2", 80, 100, opt_airbr_o2_usr , 1 , 0 , "none");
 create_custom_option_arr("tn_airbr_mix" , "opt_airbr_mix" , opt_airbr_mix_usr , airbr_mix_arr());
 create_option("tn_airbr_time_after", "opt_airbr_time_after", 20, 45, opt_airbr_time_after_usr , 1 , 0 , "none");
@@ -1380,6 +1794,13 @@ create_custom_option_arr("tn_airbr_time_reset" , "opt_airbr_time_reset" , opt_ai
 
 //new6_0
 opt_blt_dln = opt_blt_dln_usr;
+
+//new7_0
+create_custom_option_arr("tn_saul_mix" , "opt_saul_mix" , opt_saul_mix_usr , saul_mix_arr);
+create_custom_option_arr("tn_saul_res_type" , "opt_saul_res_type" , opt_saul_res_type_usr , saul_res_type_arr);
+create_option("tn_saul_depth", "opt_saul_depth", 12, 57, opt_saul_depth_usr , 1 , 0 , "depth");
+create_option("tn_saul_btime", "opt_saul_btime", 5, 60, opt_saul_btime_usr , 1 , 0 , "none");
+create_option("tn_saul_percent", "opt_saul_percent", 0.0, 0.98, opt_saul_percent_usr , 0.01 , 2 , "none");
 
 function init_global(){
     //if you want force language to eng you change to 1
@@ -1432,7 +1853,10 @@ function init_global(){
     tn_lst_stop.addEventListener('change', upd_all);
 
     tn_water_g = document.getElementById("tn_water");
-    tn_water_g.addEventListener('change', upd_all);
+
+    //update trough delete all levels and set to default
+    //it is important for properly update all values
+    tn_water_g.addEventListener('change', del_lvl_list);
 
     rate_asc = document.getElementById("opt_rate_asc");
     rate_dsc = document.getElementById("opt_rate_dsc");
@@ -1453,7 +1877,7 @@ function init_global(){
     ibcd_ppn2 = document.getElementById("opt_ibcd_ppn2");
     ibcd_pphe = document.getElementById("opt_ibcd_pphe");
 
-    slevel = document.getElementById("opt_slevel");
+    //slevel = document.getElementById("opt_slevel");
 
     mix_deco.addEventListener('change', upd_deco_list);
     mix_travel.addEventListener('change', upd_travel_list);
@@ -1586,17 +2010,69 @@ function init_global(){
 
     //new5_0
     opt_airbr_depth = document.getElementById("opt_airbr_depth");
-    opt_airbr_depth.addEventListener('change', upd_airbr);
+    opt_airbr_depth.addEventListener('change', upd_all);
     opt_airbr_o2 = document.getElementById("opt_airbr_o2");
-    opt_airbr_o2.addEventListener('change', upd_airbr);
+    opt_airbr_o2.addEventListener('change', upd_all);
     opt_airbr_mix = document.getElementById("opt_airbr_mix");
-    opt_airbr_mix.addEventListener('change', upd_airbr);
+    opt_airbr_mix.addEventListener('change', upd_all);
     opt_airbr_time_after = document.getElementById("opt_airbr_time_after");
-    opt_airbr_time_after.addEventListener('change', upd_airbr);
+    opt_airbr_time_after.addEventListener('change', upd_all);
     opt_airbr_time = document.getElementById("opt_airbr_time");
-    opt_airbr_time.addEventListener('change', upd_airbr);
+    opt_airbr_time.addEventListener('change', upd_all);
     opt_airbr_time_reset = document.getElementById("opt_airbr_time_reset");
-    opt_airbr_time_reset.addEventListener('change', upd_airbr);
+    opt_airbr_time_reset.addEventListener('change', upd_all);
+
+    //new7_0
+    opt_saul_mix = document.getElementById("opt_saul_mix");
+    opt_saul_mix.addEventListener('change', upd_saul_depth);
+    opt_saul_res_type = document.getElementById("opt_saul_res_type");
+    opt_saul_res_type.addEventListener('change', upd_saul_type);
+    opt_saul_depth = document.getElementById("opt_saul_depth");
+    opt_saul_depth.addEventListener('change', upd_saul_time);
+    opt_saul_btime = document.getElementById("opt_saul_btime");
+    opt_saul_btime.addEventListener('change', upd_saul);
+    opt_saul_percent = document.getElementById("opt_saul_percent");
+    opt_saul_percent.addEventListener('change', upd_saul);
 }
 
+/*
+var tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+var tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+tn_gf_lo.addEventListener('change', upd_gf);
+tn_gf_hi.addEventListener('change', upd_gf);
 
+//gradient factor functions for update interface and values
+
+function upd_gf(){
+  mdl = document.getElementById("tn_mdl");
+  mdl_idx = mdl.options[mdl.selectedIndex].value;
+
+    tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+    tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+    tn_gf_lo_idx = tn_gf_lo.options[tn_gf_lo.selectedIndex].value;
+    tn_gf_hi_idx = tn_gf_hi.options[tn_gf_hi.selectedIndex].value;
+  
+    del_html_elem("tn_gf");
+    if(tn_gf_lo_idx*1.0 != gf_arr[0]){
+      gf_arr[0] = tn_gf_lo_idx*1.0;
+      if(tn_gf_lo_idx*1.0 >= gf_arr[1]){
+         gf_arr[0] = gf_arr[1]-1;
+      }
+    }
+    if(tn_gf_hi_idx*1.0 != gf_arr[1]){
+      gf_arr[1] = tn_gf_hi_idx*1.0;
+      if(tn_gf_hi_idx*1.0 <= gf_arr[0]){
+         gf_arr[1] = gf_arr[0]+1;
+      }
+    }
+    create_option("tn_gf", "tn_gf_lo_opt", 0, 100, gf_arr[0], 1 , 0 , "none");
+    create_option("tn_gf", "tn_gf_hi_opt", 0, 100, gf_arr[1], 1 , 0 , "none");
+  
+    tn_gf_lo = document.getElementById("tn_gf_lo_opt");
+    tn_gf_hi = document.getElementById("tn_gf_hi_opt");
+    tn_gf_lo.addEventListener('change', upd_gf);
+    tn_gf_hi.addEventListener('change', upd_gf);
+
+  upd_all();
+}
+*/

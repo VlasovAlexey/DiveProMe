@@ -21,7 +21,7 @@
                 lng_ltr_min = ", l/min";
                 lng_min = ", min";
                 lng_ltr = ", liters";
-                lng_temper = ", <sup><small>o</small></sup>C"
+                lng_temper = ", <sup><small>o</small></sup>C";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 2){
                 lng_bar = ", бар";
@@ -30,7 +30,7 @@
                 lng_ltr_min = " (л/мин)";
                 lng_min = ", мин.";
                 lng_ltr = ", литры";
-                lng_temper = ", <sup><small>o</small></sup>C"
+                lng_temper = ", <sup><small>o</small></sup>C";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 3){
                 lng_bar = ", bar";
@@ -39,7 +39,7 @@
                 lng_ltr_min = ", l/min";
                 lng_min = ", min";
                 lng_ltr = ", l";
-                lng_temper = ", <sup><small>o</small></sup>C"
+                lng_temper = ", <sup><small>o</small></sup>C";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 4){
                 lng_bar = ", bar";
@@ -48,7 +48,7 @@
                 lng_ltr_min = ", l/min";
                 lng_min = ", min";
                 lng_ltr = ", l";
-                lng_temper = ", <sup><small>o</small></sup>C"
+                lng_temper = ", <sup><small>o</small></sup>C";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 5){
                 lng_bar = ", bar";
@@ -57,8 +57,36 @@
                 lng_ltr_min = ", 升/分钟";
                 lng_min = ", 分钟";
                 lng_ltr = ", 升";
-                lng_temper = ", <sup><small>o</small></sup>C"
+                lng_temper = ", <sup><small>o</small></sup>C";
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 6){
+                lng_bar = ", бар";
+                lng_meters = ", метри";
+                lng_meters_min = ", м/мин";
+                lng_ltr_min = ", л/мин";
+                lng_min = ", мин";
+                lng_ltr = ", литри";
+                lng_temper = ", <sup><small>o</small></sup>C";
+            }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 7){
+                lng_bar = ", bar";
+                lng_meters = ", metres";
+                lng_meters_min = ", m/min";
+                lng_ltr_min = ", l/min";
+                lng_min = ", min";
+                lng_ltr = ", litres";
+                lng_temper = ", <sup><small>o</small></sup>C";
+            }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 8){
+                lng_bar = ", bar";
+                lng_meters = ", meters";
+                lng_meters_min = ", m/min";
+                lng_ltr_min = ", l/min";
+                lng_min = ", min";
+                lng_ltr = ", liters";
+                lng_temper = ", <sup><small>o</small></sup>C";
+            }
+
         }
         else
         {
@@ -69,7 +97,7 @@
                 lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
                 lng_min = ", min";
                 lng_ltr = ", ft<sup><small>3</small></sup>";
-                lng_temper = ", <sup><small>o</small></sup>F"
+                lng_temper = ", <sup><small>o</small></sup>F";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 2){
                 lng_bar = ", psi";
@@ -78,7 +106,7 @@
                 lng_ltr_min = " (футов<sup><small>3</small></sup>/мин)";
                 lng_min = ", мин.";
                 lng_ltr = ", футы<sup><small>3</small></sup>";
-                lng_temper = ", <sup><small>o</small></sup>F"
+                lng_temper = ", <sup><small>o</small></sup>F";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 3) {
                 lng_bar = ", psi";
@@ -87,7 +115,7 @@
                 lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
                 lng_min = ", min";
                 lng_ltr = ", ft<sup><small>3</small></sup>";
-                lng_temper = ", <sup><small>o</small></sup>F"
+                lng_temper = ", <sup><small>o</small></sup>F";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 4) {
                 lng_bar = ", psi";
@@ -96,7 +124,7 @@
                 lng_ltr_min = ", pés<sup><small>3</small></sup>/min";
                 lng_min = ", min";
                 lng_ltr = ", pés<sup><small>3</small></sup>";
-                lng_temper = ", <sup><small>o</small></sup>F"
+                lng_temper = ", <sup><small>o</small></sup>F";
             }
             if(lng_opt.options[lng_opt.selectedIndex].value == 5) {
                 lng_bar = ", psi";
@@ -105,8 +133,36 @@
                 lng_ltr_min = ", 英尺<sup><small>3</small></sup>/分钟";
                 lng_min = ", 分钟";
                 lng_ltr = ", 英尺<sup><small>3</small></sup>";
-                lng_temper = ", <sup><small>o</small></sup>F"
+                lng_temper = ", <sup><small>o</small></sup>F";
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 6){
+                lng_bar = ", пси";
+                lng_meters = ", фт";
+                lng_meters_min = ", фт/мин";
+                lng_ltr_min = ", фт<sup><small>3</small></sup>/мин";
+                lng_min = ", мин";
+                lng_ltr = ", фт<sup><small>3</small></sup>";
+                lng_temper = ", <sup><small>o</small></sup>F";
+            }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 7){
+                lng_bar = ", psi";
+                lng_meters = ", ft";
+                lng_meters_min = ", ft/min";
+                lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
+                lng_min = ", min";
+                lng_ltr = ", ft<sup><small>3</small></sup>";
+                lng_temper = ", <sup><small>o</small></sup>F";
+            }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 8){
+                lng_bar = ", psi";
+                lng_meters = ", ft";
+                lng_meters_min = ", ft/min";
+                lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
+                lng_min = ", min";
+                lng_ltr = ", ft<sup><small>3</small></sup>";
+                lng_temper = ", <sup><small>o</small></sup>F";
+            }
+
         }
         AssignLng();
     }
@@ -130,7 +186,13 @@
 
                 ".tn_download_local" : "Download Local Version",
                 ".tn_btn_tiss" : "Build Charts",
-                ".td_copyright" : "Copyright © 2020 Alexey Vlasov. Licensed under the Apache License 2.0",
+
+                ".tn_btn_price" : "Build Charts",
+                ".tn_btn_learn" : "Build Charts",
+                ".tn_btn_pp_profile_chart" : "Build Charts",
+                ".tn_btn_cons" : "Build Charts",
+                
+                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licensed under the Apache License 2.0",
                 ".btn_save" : "Save Current Settings",
                 ".btn_restore" : "Restore Defaults",
                 ".tr_ifc_set" : "Interface Style",
@@ -270,7 +332,7 @@
                 ".tr_airbr_mix" : "Break Mix",
                 ".tr_airbr_time_after" : "Break After" + lng_min,
                 ".tr_airbr_time" : "Break Time" + lng_min,
-                ".tr_airbr_time_reset" : "Reset Break Time on New Level",
+                ".tr_airbr_time_reset" : "Enable",
 
                 ".tn_airbr_time_reset_yes" : "Yes",
                 ".tn_airbr_time_reset_no" : "No",
@@ -288,10 +350,25 @@
                 ".tn_donat_header_silver" : "Silver Donation Section",
                 ".tn_donat_header_bronze" : "Bronze Donation Section",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
-                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. Recreational Dive Planner",
+                ".tr_saul_mix" : "Mix",
+                ".tr_saul_res_type" : "Calculation Type",
+                ".tr_saul_depth" : "Depth" + lng_meters,
+                ".tr_saul_btime" : "Bottom Time" + lng_min,
+                ".tn_saul_mix_arr_air" : "Air",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(DCS) for a selected Bottom Time",
+                ".tn_saul_res_type_arr_reverse" : "Bottom Time for an acceptable %(DCS)",
+
+                ".tr_saul_cap_percent" : "Your DCS Risk is:",
+                ".tr_saul_time_max" : "Your Maximum Bottom Time is:",
+                ".tr_saul_time_max_dim" : "Copyright © 2021 Dr. Saul Goldman, Professor Emeritus, University of Guelph",
+                ".tr_saul_percent" : "DCS Acceptable Probability, %"
             },
 
             //Rus
@@ -307,7 +384,13 @@
 
                 ".tn_download_local" : "Скачать локальную версию",
                 ".tn_btn_tiss" : "Построить диаграммы",
-                ".td_copyright" : "Все права защищены © 2020 Алексей Власов. Использование в соответствии с Apache 2.0 лицензией.",
+
+                ".tn_btn_price" : "Построить диаграммы",
+                ".tn_btn_learn" : "Построить диаграммы",
+                ".tn_btn_pp_profile_chart" : "Построить диаграммы",
+                ".tn_btn_cons" : "Построить диаграммы",
+
+                ".td_copyright" : "Все права защищены © 2022 Алексей Власов. Использование в соответствии с Apache 2.0 лицензией",
                 ".btn_save" : "Сохранить текущие настройки",
                 ".btn_restore" : "Настройки по умолчанию",
                 ".tr_ifc_set" : "Стиль интерфейса",
@@ -453,7 +536,7 @@
                 ".tr_airbr_mix" : "Смесь на перерыве",
                 ".tr_airbr_time_after" : "Перерыв после" + lng_min,
                 ".tr_airbr_time" : "Время перерыва" + lng_min,
-                ".tr_airbr_time_reset" : "Обнулить время перерыва при смене глубины",
+                ".tr_airbr_time_reset" : "Включить",
 
                 ".tn_airbr_time_reset_yes" : "Да",
                 ".tn_airbr_time_reset_no" : "Нет",
@@ -471,10 +554,25 @@
                 ".tn_donat_header_silver" : "Серебряная секция",
                 ".tn_donat_header_bronze" : "Бронзовая секция",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
-                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. Рекриационный планировщик риска погружений",
+                ".tr_saul_mix" : "Смесь",
+                ".tr_saul_res_type" : "Метод расчета",
+                ".tr_saul_depth" : "Глубина" + lng_meters,
+                ".tr_saul_btime" : "Донное время" + lng_min,
+                ".tn_saul_mix_arr_air" : "Воздух",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(ДКБ) для выбранной глубины",
+                ".tn_saul_res_type_arr_reverse" : "Донное время для премлемого %(ДКБ)",
+
+                ".tr_saul_cap_percent" : "Ваш риск ДКБ составляет:",
+                ".tr_saul_time_max" : "Ваше максимальное время на дне составляет:",
+                ".tr_saul_time_max_dim" : "Все права защищены © 2021 Сол Гольдман, почетный профессор, Гвельфский университет",
+                ".tr_saul_percent" : "Допускаемая вероятность ДКБ, %"
             },
 
             //Spa
@@ -490,7 +588,13 @@
 
                 ".tn_download_local" : "Descargar Versión Local",
                 ".tn_btn_tiss" : "Crear Gráficos",
-                ".td_copyright" : "Copyright © 2020 Alexey Vlasov. Bajo licencia Apache 2.0",
+
+                ".tn_btn_price" : "Crear Gráficos",
+                ".tn_btn_learn" : "Crear Gráficos",
+                ".tn_btn_pp_profile_chart" : "Crear Gráficos",
+                ".tn_btn_cons" : "Crear Gráficos",
+
+                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Bajo licencia Apache 2.0",
                 ".btn_save" : "Guardar Configuración Actual",
                 ".btn_restore" : "Restaurar Valores Predeterminados",
                 ".tr_ifc_set" : "Estilo Pantalla",
@@ -631,7 +735,7 @@
                 ".tr_airbr_mix" : "Gases de Pausa",
                 ".tr_airbr_time_after" : "Después de" + lng_min,
                 ".tr_airbr_time" : "Pausa por" + lng_min,
-                ".tr_airbr_time_reset" : "Reiniciar en Nuevo Nivel",
+                ".tr_airbr_time_reset" : "Permitir",
 
                 ".tn_airbr_time_reset_yes" : "Sí",
                 ".tn_airbr_time_reset_no" : "No",
@@ -649,10 +753,25 @@
                 ".tn_donat_header_silver" : "Sección de Plata",
                 ".tn_donat_header_bronze" : "Sección de Bronce",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
-                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. Planificador de Buceo Recreativo",
+                ".tr_saul_mix" : "Mezcla",
+                ".tr_saul_res_type" : "Tipo de Cálculo",
+                ".tr_saul_depth" : "Profundidad" + lng_meters,
+                ".tr_saul_btime" : "Tiempo del Fondo" + lng_min,
+                ".tn_saul_mix_arr_air" : "Aire",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "% (ED) Para Una Hora Inferior Seleccionada",
+                ".tn_saul_res_type_arr_reverse" : "Tiempo Inferior Para Aceptable %(ED)",
+
+                ".tr_saul_cap_percent" : "Su Riesgo de (ED) es:",
+                ".tr_saul_time_max" : "El Tiempo Máximo de la Parte Inferior es:",
+                ".tr_saul_time_max_dim" : "Copyright © 2021 Dr. Saul Goldman, Profesor Emérito, Universidad de Guelph",
+                ".tr_saul_percent" : "DC Probabilidad Aceptable, %"
             },
             4: {
                 //Prt
@@ -667,7 +786,13 @@
 
                 ".tn_download_local" : "Descarregue a Versão Local",
                 ".tn_btn_tiss" : "Gerar Tabelas",
-                ".td_copyright" : "Copyright © 2020 Alexey Vlasov. Licenciado por Apache License 2.0",
+                
+                ".tn_btn_price" : "Gerar Tabelas",
+                ".tn_btn_learn" : "Gerar Tabelas",
+                ".tn_btn_pp_profile_chart" : "Gerar Tabelas",
+                ".tn_btn_cons" : "Gerar Tabelas",
+
+                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licenciado por Apache License 2.0",
                 ".btn_save" : "Guardar Definições Atuais",
                 ".btn_restore" : "Restaurar Originais",
                 ".tr_ifc_set" : "Estilo do Interface",
@@ -806,7 +931,7 @@
                 ".tr_airbr_mix" : "Break Mistura",
                 ".tr_airbr_time_after" : "Pausa Após" + lng_min,
                 ".tr_airbr_time" : "Tempo de Pausa" + lng_min,
-                ".tr_airbr_time_reset" : "Reiniciar Tempo de Pausa no Novo Nível",
+                ".tr_airbr_time_reset" : "Permitir",
 
                 ".tn_airbr_time_reset_yes" : "Sim",
                 ".tn_airbr_time_reset_no" : "Não",
@@ -824,10 +949,26 @@
                 ".tn_donat_header_silver" : "Doações Prata",
                 ".tn_donat_header_bronze" : "Doações Bronze",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
-                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+
+                ".header11" : "S.A.U.L. Planificador de Mergulho Recreativo",
+                ".tr_saul_mix" : "Mistura",
+                ".tr_saul_res_type" : "Tipo de Cálculo",
+                ".tr_saul_depth" : "Profundidade" + lng_meters,
+                ".tr_saul_btime" : "Tempo de Fundo" + lng_min,
+                ".tn_saul_mix_arr_air" : "Ar",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(DCS) para um determinado tempo de fundo",
+                ".tn_saul_res_type_arr_reverse" : "Tempo de fundo para um probabilidade aceitável de %(DCS)",
+
+                ".tr_saul_cap_percent" : "O Seu Risco de DCS é:",
+                ".tr_saul_time_max" : "O Seu Tempo Máximo de Fundo é:",
+                ".tr_saul_time_max_dim" : "Todos os direitos reservados © 2021 Dr. Saul Goldman, Professor Emeritus, Universidade de Guelph",
+                ".tr_saul_percent" : "DCS probabilidade aceitável, %"
 
             },
             5 : {
@@ -844,7 +985,13 @@
 
                 ".tn_download_local" : "下载各系统平台对应的本地版本",
                 ".tn_btn_tiss" : "建立图表",
-                ".td_copyright" : " 版权所有© 2020 Alexey Vlasov. 根据Apache 2.0许可证授权",
+
+                ".tn_btn_price" : "建立图表",
+                ".tn_btn_learn" : "建立图表",
+                ".tn_btn_pp_profile_chart" : "建立图表",
+                ".tn_btn_cons" : "建立图表",
+
+                ".td_copyright" : " 版权所有© 2022 Alexey Vlasov. 根据Apache 2.0许可证授权",
                 ".btn_save" : "保存当前设定",
                 ".btn_restore" : "恢复默认设置",
                 ".tr_ifc_set" : "界面风格",
@@ -984,7 +1131,7 @@
                 ".tr_airbr_mix" : "Break期间气体比例",
                 ".tr_airbr_time_after" : "多久时间开始 Break" + lng_min,
                 ".tr_airbr_time" : "Break 时间" + lng_min,
-                ".tr_airbr_time_reset" : "在新的深度重置Break时间",
+                ".tr_airbr_time_reset" : "启用",
 
                 ".tn_airbr_time_reset_yes" : "是",
                 ".tn_airbr_time_reset_no" : "否",
@@ -1002,10 +1149,536 @@
                 ".tn_donat_header_silver" : "白银级土豪爸爸",
                 ".tn_donat_header_bronze" : "青铜级土豪爸爸",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）",
-                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
-                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul"
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. 休闲潜水计划工具软件",
+                ".tr_saul_mix" : "Mix",
+                ".tr_saul_res_type" : "计算类型",
+                ".tr_saul_depth" : "深度" + lng_meters,
+                ".tr_saul_btime" : "底部时间" + lng_min,
+                ".tn_saul_mix_arr_air" : "空气",
+                ".tn_saul_mix_arr_ean32" : "EAN32高氧",
+                ".tn_saul_res_type_arr_forward" : "已选择的底部时间所面临的DCS风险概率%",
+                ".tn_saul_res_type_arr_reverse" : "可接受的DCS风险概率% 对应的底部时间",
+
+                ".tr_saul_cap_percent" : "你面临的减压病风险:",
+                ".tr_saul_time_max" : "你的最大底部时间:",
+                ".tr_saul_time_max_dim" : "版权所有 © 2021 Saul Goldman博士, Guelph大学名誉教授 ",
+                ".tr_saul_percent" : "可接受的DCS减压病风险概率, %"
+
+            },
+            6 : {
+                //Bulgarian
+                ".btn_bailout" : "Аварийна",
+                ".btn_diluent" : "Смесителна",
+                ".tn_plan_oc" : "Отворен цикъл",
+                ".tr_plan_ccr" : "Тип на планиране",
+                ".tr_plan_style" : "Стил на планиране",
+                ".tn_plan_detailed" : "Детайлно",
+                ".tn_plan_short" : "Класически",
+                ".tn_download_local" : "Изтеглете локалната версия",
+                ".tn_btn_tiss" : "Изграждане на диаграми",
+                
+                ".tn_btn_price" : "Изграждане на диаграми",
+                ".tn_btn_learn" : "Изграждане на диаграми",
+                ".tn_btn_pp_profile_chart" : "Изграждане на диаграми",
+                ".tn_btn_cons" : "Изграждане на диаграми",
+
+                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licensed under the Apache License 2.0",
+                ".btn_save" : "Запазване на текущите настройки",
+                ".btn_restore" : "Възстанови фабричните настройки",
+                ".tr_ifc_set" : "Стил на интерфейса",
+                ".tn_color_dark" : "Нощна тема",
+                ".tn_color_light" : "Дневна тема",
+                ".tn_water_baltic" : "Балтийско море",
+                ".tn_water_redsea" : "Червено море",
+                ".tn_water_glake" : "Великото езеро Юта",
+                ".tn_water_deadsea" : "Мъртво море",
+                ".tn_water_pacific" : "Тихи океан",
+                ".tn_water_salt" : "Атлантически океан",
+                ".tn_ppn2_max_deco" : "пнN<sub><small>2</small></sub> Макс Деко" + lng_bar,
+                ".tr_celsus" : "Температура на повърхноста" + lng_temper,
+                ".tr_levels" : "Смес / Дълбочина" + lng_meters + " / Време" + lng_min,
+                ".btn_add_lvl" : "Добави ниво",
+                ".btn_del_lvl" : "Изтрий ниво",
+                ".tr_rate_dsc" : "Скорост на спускане" + lng_meters_min,
+                ".tr_rate_asc" : "Скорост на изкачване" + lng_meters_min,
+                ".tr_rate_asc_deco" : "Скорост на изкачване-деко" + lng_meters_min,
+                ".tr_rmv_deco" : "Деко RMV" + lng_ltr_min,
+                ".tr_rmv_bt" : "Дънно RMV" + lng_ltr_min,
+                ".tr_cng_time" : "Допълнително време за смяна на газа" + lng_min,
+                ".tr_lst_stop" : "Последен стоп" + lng_meters,
+                ".tn_ppo2_deco" : "пнO<sub><small>2</small></sub> Деко" + lng_bar,
+                ".tn_ppo2_bottom" : "пнO<sub><small>2</small></sub> Дъно" + lng_bar,
+                ".tn_ppo2_min" : "пнO<sub><small>2</small></sub> Минимум" + lng_bar,
+                ".tn_ppn2_max" : "пнN<sub><small>2</small></sub> Макс" + lng_bar,
+                ".tn_ibcd_ppn2" : "ИКД пнN<sub><small>2</small></sub> Макс" + lng_bar,
+                ".tn_ibcd_pphe" : "ИКД пнHe Макс" + lng_bar,
+                ".tn_dmn_mtr" : "Метри/Литри/Бар/Целзий",
+                ".tn_dmn_imp" : "Фут/куб.Фут/ПСИ/Фаренхайт",
+                ".tr_mdl" : "Деко модел",
+                ".tr_water" : "Соленост на водата",
+                ".tn_water_fresh" : "Прясна",
+                ".tr_gf" : "Градиент фактор, %",
+                ".tr_slevel" : "Височинен дайв" + lng_meters,
+                ".tn_travel" : "Общо Транспортна/Дънна/Смесителна газ",
+                ".tn_deco" : "Общо Деко/Аварийна газ",
+                ".header0" : "Общи настройки",
+                ".header1" : "Настройки на дайва",
+                ".header2" : "Аларми",
+                ".header3" : "Дайв газове",
+                ".header4" : "Изградете профила на дайва",
+                ".header5" : "Парциално налягане на газа" + lng_bar,
+                ".header6" : "Напрежение на газа в тъканните групи",
+                ".header7" : "Разход на газа",
+                ".header8" : "Цена на газа",
+                //".header9" : "Миксиране на газа",
+                ".header9" : "Инструменти за обучение",
+                ".tr_lng" : "Език",
+                ".tr_dmn" : "Единица",
+                ".td_warn" : "ВНИМАНИЕ! ПРИ ВСЕКИ ПРОФИЛ НА ГМУРКАНЕ НЕЗАВИСИМО ДАЛИ Е СЪЗДАДЕН С ПОМОЩТА НА КОМПЮТЪР ИЛИ ТАБЛИЦИ.ВИНАГИ СЪЩЕСТВУВА РИСК ОТ ДЕКОМПРЕСИОННА БОЛЕСТ- ДКБ. НЯМА ПРОЦЕДУРИ ИЛИ ТАБЛИЦИ, КОИТО МОГАТ ДА ВИ ГАРАНТИРАТ, ЧЕ ДКБ ИЛИ КОСЛОРОДНО ОТРАВЯНЕ ЩЕ БЪДАТ ИЗБЕГНАТИ! Физиологията на човека е индивидуална и може да варира дори и в рамките на един ден. Затова горещо ви препоръчваме да спазвате стриктно плана, който сте създали с помощта на планера, дори с добавка на допълнителен консерватизъм с цел, да се минимализира риска от ДКБ и кислородно отравяне! ",
+                ".tn_wrn_ibcd_lip" : "С отчитане влиянието на мазнините",
+                ".tn_wrn_btm_mix" :"Дънна газ още" + lng_ltr,
+                ".tn_wrn_deco_mix49" :"Деко газ до 49 Още" + lng_ltr,
+                ".tn_wrn_deco_mix50" :"Деко газ от 50 до 99% Още" + lng_ltr,
+                ".tn_wrn_deco_mix100" :"Деко О<sub><small>2</small></sub> Още" + lng_ltr,
+                ".tn_ibcd_lip_yes" :"Да",
+                ".tn_ibcd_lip_no" :"Не",
+                //".tn_blnd_temp" :"Температура на газа C<sup><small>o</small></sup>",
+                //".tn_blnd_temp_mode" :"Газов модел",
+                //".tn_blend_mix_first" :"Добави първия газ",
+                //".tn_blend_press_start" :"Начално налягане на сместа",
+                //".tn_blend_press_end" :"Ново налягане на сместа",
+                //".tn_blend_he_start" :"He Mix Start Percents",
+                //".tn_blend_o2_start" :"O<sub><small>2</small></sub> Начален процент на сместа",
+                //".tn_blend_he_end" :"Процент на He в новата смес",
+                //".tn_blend_o2_end" :"O<sub><small>2</small></sub> Процент на новата смес",
+                ".tn_calc_depth" :"Максимална оперативна дълбочина" + lng_meters,
+                ".tn_calc_o2" :"Кислород%",
+                ".tn_calc_he" :"Хелий%",
+                ".tn_calc_depth_lo" :"Минимална оперативна дълбочина" + lng_meters,
+                //".tn_blnd_temp_mode_ideal" :"Идеален модел",
+                //".tn_blnd_temp_mode_vdv" :"Van Der Waals модел",
+                //".tn_mix_first_he" :"Hе",
+                //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+                ".tn_price_cur" :"Избор на валута",
+                ".tn_price_top" :"Цена на газа",
+                ".tn_price_he" :"Цена на He за единица",
+                ".tn_price_o2" :"O<sub><small>2</small></sub> Цена за единица",
+                ".tn_price_us" :"САЩ долар",
+                ".tn_price_eu" :"Евро",
+                ".tn_price_uk" :"Английски паунд",
+                ".tn_price_rf" :"Руска рубла",
+                ".tn_price_cn" :"Китайски Юан",
+                ".btn_export_pdf_profile" :"PDF експорт",
+                ".btn_export_pdf_pp" :"PDF експорт",
+                ".tn_btn_overlay" :"Затвори",
+                ".btn_export_xls" :"Експорт XLS таблица",
+                ".btn_tbl_pdf" :"Експорт PDF таблица",
+                ".tn_calc_ead" :"ЕВД:&nbsp;",
+                ".tn_calc_end" :"ЕНД:&nbsp;",
+                ".tn_calc_o2max" : "&nbsp;пнO<sub><small>2</small></sub> Дъно&nbsp;" + lng_bar,
+                ".tn_calc_o2min" : "&nbsp;пнO<sub><small>2</small></sub> Мин&nbsp;" + lng_bar,
+                ".tn_calc_n2max" : "&nbsp;пнN<sub><small>2</small></sub> Макс" + lng_bar,
+                ".tn_calc_f_app" :"Формули и изчисления",
+                ".tn_calc_f_mod" :"Максимална оперативна дълбочина" + lng_meters,
+                ".tn_calc_f_ead" :"Еквивалентна въздушна дълбочина" + lng_meters,
+                ".tn_calc_f_ead2" :"Само N<sub><small>2</small></sub> Narcotic",
+                ".tn_calc_f_end" :"Еквивалентна наркотична дълбочина" + lng_meters,
+                ".tn_calc_f_end2" :"N<sub><small>2</small></sub> и O<sub><small>2</small></sub> Наркотичност",
+                ".tn_calc_cur_ex_rate" :"Курс за един долар",
+                ".tn_calc_cur_ex_rate_pound" :"Паунда",
+                ".tn_calc_cur_ex_rate_pence" :"Пенс",
+                ".tn_calc_cur_ex_rate_euro" :"Евро",
+                ".tn_calc_cur_ex_rate_eucents" :"Цент",
+                ".tn_calc_cur_ex_rate_rub" :"Рубли",
+                ".tn_calc_cur_ex_rate_kopek" :"Копейки",
+                ".tn_calc_cur_ex_rate_yuan" :"Юан",
+                ".tn_calc_cur_ex_rate_fyn" :"Фин",
+                ".tr_setpoint_start":"CCR Зададена точка Старт" + lng_bar,
+                ".tr_setpoint_bottom":"CCR зададена точка  дъно" + lng_bar,
+                ".tr_setpoint_deco":"CCR Зададена точка Деко" + lng_bar,
+                ".tr_airbr_header" : "Газова почивка",
+                ".tr_airbr_depth" : "Дълбочина повече от" + lng_meters,
+                ".tr_airbr_o2" : "Деко на кислород повече от" + ", %",
+                ".tr_airbr_mix" : "Микс газова почивка",
+                ".tr_airbr_time_after" : "Почивка след" + lng_min,
+                ".tr_airbr_time" : "Време на почивката" + lng_min,
+                ".tr_airbr_time_reset" : "Активация",
+                ".tn_airbr_time_reset_yes" : "Да",
+                ".tn_airbr_time_reset_no" : "Не",
+                ".header10" : "Зала на славата - дарения",
+                ".tn_donat_header" : "",
+                ".btn_msg" : "Как да направя дарение",
+                ".btn_tel" : "Обадете се на разработчика",
+                ".btn_ios_msg" : "Как да направя дарение",
+                ".btn_ios_tel" : "Обадете се на разработчика",
+                ".tn_donat_header_founder" : "Секция за дарения основатели",
+                ".tn_donat_header_gold" : "Секция за дарение златна",
+                ".tn_donat_header_silver" : " Секция за дарение сребърна ",
+                ".tn_donat_header_bronze" : " Секция за дарение  ",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. Recreational Dive Planner",
+                ".tr_saul_mix" : "Микс",
+                ".tr_saul_res_type" : "Вид калкулация",
+                ".tr_saul_depth" : "Дълбочина" + lng_meters,
+                ".tr_saul_btime" : "Дънно време" + lng_min,
+                ".tn_saul_mix_arr_air" : "Въздух",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(DCS) за избраното дънно време",
+                ".tn_saul_res_type_arr_reverse" : "Дънно време с приемлив %(DCS)",
+
+                ".tr_saul_cap_percent" : "Вашия риск за DCS е :",
+                ".tr_saul_time_max" : "Вашето максимално дънно време е:",
+                ".tr_saul_time_max_dim" : "Copyright © 2021 Dr. Saul Goldman, Professor Emeritus, University of Guelph",
+                ".tr_saul_percent" : "DCS Приемлива вероятност, %"
+            },
+            7: {
+                //Eng
+                ".btn_bailout" : "Bailout",
+                ".btn_diluent" : "Diluant",
+                ".tn_plan_oc" : "Circuit ouvert",
+                ".tr_plan_ccr" : "Type de planning",
+                ".tr_plan_style" : "Style de plan",
+                ".tn_plan_detailed" : "en détail",
+                ".tn_plan_short" : "Classique",
+                ".tn_download_local" : "Télécharger la version local",
+                ".tn_btn_tiss" : "Construire les tableaux",
+                
+                ".tn_btn_price" : "Construire les tableaux",
+                ".tn_btn_learn" : "Construire les tableaux",
+                ".tn_btn_pp_profile_chart" : "Construire les tableaux",
+                ".tn_btn_cons" : "Construire les tableaux",
+
+                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Sous licence Apache License 2.0",
+                ".btn_save" : "Enregistrer les données actuelles",
+                ".btn_restore" : "Restorer les données",
+                ".tr_ifc_set" : "Style d’interface",
+                ".tn_color_dark" : "Thème foncé",
+                ".tn_color_light" : "Thème Clair",
+                ".tn_water_baltic" : "Mer Baltique",
+                ".tn_water_redsea" : "Mer Rouge",
+                ".tn_water_glake" : "Les grands lacs Utah",
+                ".tn_water_deadsea" : "Mer Morte",
+                ".tn_water_pacific" : "Pacifique",
+                ".tn_water_salt" : "Atlantique",
+                ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub>Max Deco" + lng_bar,
+                ".tr_celsus" : "Temperature de surface environnante" + lng_temper,
+                ".tr_levels" : "Mix / Profondeur" + lng_meters + " / Temps" + lng_min,
+                ".btn_add_lvl" : "Ajouter niveau",
+                ".btn_del_lvl" : "Effacer niveau",
+                ".tr_rate_dsc" : "Vitesse de descente" + lng_meters_min,
+                ".tr_rate_asc" : "Vitesse de remonter" + lng_meters_min,
+                ".tr_rate_asc_deco" : "Vitesse de remontée en deco" + lng_meters_min,
+                ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
+                ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
+                ".tr_cng_time" : "Temps de changement de gaz" + lng_min,
+                ".tr_lst_stop" : "Dernier Stop" + lng_meters,
+                ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> Deco" + lng_bar,
+                ".tn_ppo2_bottom" : "PPO<sub><small>2</small></sub> Fond" + lng_bar,
+                ".tn_ppo2_min" : "PPO<sub><small>2</small></sub> Min" + lng_bar,
+                ".tn_ppn2_max" : "PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_ppn2" : "ICD PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_pphe" : "ICD PPHelium Max" + lng_bar,
+                ".tn_dmn_mtr" : "Metres/Litres/Bar/Celsius",
+                ".tn_dmn_imp" : "Feet/Cu.Feet/PSI/Fahrenheit",
+                ".tr_mdl" : "Model de Décompression",
+                ".tr_water" : "Salinité de l’eau",
+                ".tn_water_fresh" : "Douce",
+                ".tr_gf" : "Facteur du gradien, %",
+                ".tr_slevel" : "Altitude de plongée" + lng_meters,
+                ".tn_travel" : "Total Travel/Fond/Diluent mélangé ",
+                ".tn_deco" : "Total Déco/Bailout mélangé",
+                ".header0" : "Réglages généraux",
+                ".header1" : "Réglages de plongée",
+                ".header2" : "Alertes de plongée",
+                ".header3" : "Gaz de plongée",
+                ".header4" : "Construire profile de plongée",
+                ".header5" : "Pression partiel du gaz" + lng_bar,
+                ".header6" : "Tension des Gaz dans les compartiments des tissues",
+                ".header7" : "Consommation de gaz",
+                ".header8" : "Prix du gaz",
+                //".header9" : "Gaz mélangé",
+                ".header9" : "Outils d’apprentissage",
+                ".tr_lng" : "Langue",
+                ".tr_dmn" : "Unité",
+                ".td_warn" : " ATTENTION! IL Y A TOUJOURS UN RISQUE DE MALADIE DE DÉCOMPRESSION (ADD) POUR TOUT PROFIL DE PLONGÉE MÊME SI VOUS SUIVEZ LE PLAN DE PLONGÉE PRESCRIT PAR LES TABLES DE PLONGÉE. AUCUNE PROCÉDURE OU TABLEAU DE PLONGÉE N'ÉVITERA LA POSSIBILITÉ D'ACCIDENT DE DECOMPRESSION OU DE TOXICITÉ D’OXYGÈNE! La composition physiologique d’un individu peut varier d’un jour à l’autre. Il est fortement conseillé de bien rester dans les limites d'exposition fournies par le planificateur pour minimiser le risque de ADD.",
+                ".tn_wrn_ibcd_lip" : "Considerez la réponse lipidique",
+                ".tn_wrn_btm_mix" :"Mélange fond plus que" + lng_ltr,
+                ".tn_wrn_deco_mix49" :"Mélange Déco jusqu’à 49%" + lng_ltr,
+                ".tn_wrn_deco_mix50" :"Mélange Déco de 50 à 99%" + lng_ltr,
+                ".tn_wrn_deco_mix100" :"Déco O<sub><small>2</small></sub>plus" + lng_ltr,
+                ".tn_ibcd_lip_yes" :"Oui",
+                ".tn_ibcd_lip_no" :"Non",
+                //".tn_blnd_temp" :"Température du gaz C<sup><small>o</small></sup>",
+                //".tn_blnd_temp_mode" :"Model de gas",
+                //".tn_blend_mix_first" :"Ajoutez le premier gas",
+                //".tn_blend_press_start" :"Pression du mélange de départ",
+                //".tn_blend_press_end" :"Nouvelle pression de départ",
+                //".tn_blend_he_start" :"Pourcentage du mélange de départ d’Helium",
+                //".tn_blend_o2_start" :"O<sub><small>2</small></sub>Pourcentage du mélange de départ",
+                //".tn_blend_he_end" :"Nouveau pourcentage de melange d’Helium",
+                //".tn_blend_o2_end" :"Oxygene<sub><small>2</small></sub>Nouveau pourcentage de mélange",
+                ".tn_calc_depth" :"Profondeur maximum d’opération" + lng_meters,
+                ".tn_calc_o2" :"Oxygene%",
+                ".tn_calc_he" :"Helium%",
+                ".tn_calc_depth_lo" :"Profondeur minimum d’opération " + lng_meters,
+                //".tn_blnd_temp_mode_ideal" :"Modèle Ideal",
+                //".tn_blnd_temp_mode_vdv" :"Modèle Van Der Waals",
+                //".tn_mix_first_he" :"Helium",
+                //".tn_mix_first_o2" :"Oxygene<sub><small>2</small></sub>",
+                ".tn_price_cur" :"Selection de la Devise",
+                ".tn_price_top" :"Meilleur prix des gas",
+                ".tn_price_he" :"Prix de l’helium par unité",
+                ".tn_price_o2" :"O<sub><small>2</small></sub>Prix par unité ",
+                ".tn_price_us" :"US Dollar",
+                ".tn_price_eu" :"Euro",
+                ".tn_price_uk" :"British Pound",
+                ".tn_price_rf" :"Russian Ruble",
+                ".tn_price_cn" :"Chinese Yuan",
+                ".btn_export_pdf_profile" :"Export PDF",
+                ".btn_export_pdf_pp" :"Export PDF",
+                ".tn_btn_overlay" :"Fermer",
+                ".btn_export_xls" :"Exporter la table en XLS",
+                ".btn_tbl_pdf" :"Exporter la table en PDF",
+                ".tn_calc_ead" :"EAD:&nbsp;",
+                ".tn_calc_end" :"END:&nbsp;",
+                ".tn_calc_o2max" : "&nbsp;PPOxygene<sub><small>2</small></sub>Fond&nbsp;" + lng_bar,
+                ".tn_calc_o2min" : "&nbsp;PPOxygene<sub><small>2</small></sub> Min&nbsp;" + lng_bar,
+                ".tn_calc_n2max" : "&nbsp;PPAzote<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_calc_f_app" :"Formule et calculation",
+                ".tn_calc_f_mod" :"Profondeur maximum d’opération" + lng_meters,
+                ".tn_calc_f_ead" :"Profondeur d’air équivalente" + lng_meters,
+                ".tn_calc_f_ead2" :"Seulement N<sub><small>2</small></sub> Narcotic",
+                ".tn_calc_f_end" :"Profondeur narcotique équivalente " + lng_meters,
+                ".tn_calc_f_end2" :"Azote<sub><small>2</small></sub>et O<sub><small>2</small></sub>Narcose",
+                ".tn_calc_cur_ex_rate" :"Taux de change du dollar",
+                ".tn_calc_cur_ex_rate_pound" :"Pounds",
+                ".tn_calc_cur_ex_rate_pence" :"Pence",
+                ".tn_calc_cur_ex_rate_euro" :"Euro",
+                ".tn_calc_cur_ex_rate_eucents" :"Cents",
+                ".tn_calc_cur_ex_rate_rub" :"Roubles",
+                ".tn_calc_cur_ex_rate_kopek" :"Kopeks",
+                ".tn_calc_cur_ex_rate_yuan" :"Yuan",
+                ".tn_calc_cur_ex_rate_fyn" :"Fyn",
+                ".tr_setpoint_start":"CCR Entrez Point de départ" + lng_bar,
+                ".tr_setpoint_bottom":"CCR Entrez point du fond" + lng_bar,
+                ".tr_setpoint_deco":"CCR Entrez point de Deco" + lng_bar,
+                ".tr_airbr_header" : "Pause gaz",
+                ".tr_airbr_depth" : "Si la profondeur est plus que" + lng_meters,
+                ".tr_airbr_o2" : "Déco Oxygène est plus que " + ", %",
+                ".tr_airbr_mix" : "Pause mélange",
+                ".tr_airbr_time_after" : "Pause après" + lng_min,
+                ".tr_airbr_time" : "Temps de pause" + lng_min,
+                ".tr_airbr_time_reset" : "Activé",
+                ".tn_airbr_time_reset_yes" : "Oui",
+                ".tn_airbr_time_reset_no" : "Non",
+                ".header10" : "Temple de la Donation ",
+                ".tn_donat_header" : "",
+                ".btn_msg" : " Comment faire un don ",
+                ".btn_tel" : " Appelez les développeurs ",
+                ".btn_ios_msg" : " Comment faire un don ",
+                ".btn_ios_tel" : " Appelez les développeurs ",
+                ".tn_donat_header_founder" : " Section des dons des fondateurs ",
+                ".tn_donat_header_gold" : " Section OR des dons ",
+                ".tn_donat_header_silver" : " Section Argent des dons",
+                ".tn_donat_header_bronze" : " Section Bronze des dons",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. Planificateur de plongée récréative",
+                ".tr_saul_mix" : "Mélange",
+                ".tr_saul_res_type" : "Type de Calcul",
+                ".tr_saul_depth" : "Profondeur" + lng_meters,
+                ".tr_saul_btime" : "Temps au fond" + lng_min,
+                ".tn_saul_mix_arr_air" : "Air",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(d’accident de décompression) pour un temps au fond sélectionné",
+                ".tn_saul_res_type_arr_reverse" : "Temps au fond pour un %(d’accident de décompression) acceptable",
+
+                ".tr_saul_cap_percent" : "Votre Risque d’accident de décompression est de:",
+                ".tr_saul_time_max" : "Votre temps maximum au fond est de:",
+                ".tr_saul_time_max_dim" : "Copyright © 2021 Dr. Saul Goldman, Professor Emeritus, University of Guelph",
+                ".tr_saul_percent" : "Probabilité acceptable d’accident de décompression, %"
+            },
+            8: {
+                //Korean
+                ".btn_bailout" : "Bailout",
+                ".btn_diluent" : "Diluent",
+                ".tn_plan_oc" : "Open Circuit",
+                ".tr_plan_ccr" : "계획 유형",
+                ".tr_plan_style" : "계획 스타일",
+                ".tn_plan_detailed" : "상세한",
+                ".tn_plan_short" : "클레식",
+                ".tn_download_local" : "로컬 버전 다운로드",
+                ".tn_btn_tiss" : "차트 작성",
+
+                ".tn_btn_price" : "차트 작성",
+                ".tn_btn_learn" : "차트 작성",
+                ".tn_btn_pp_profile_chart" : "차트 작성",
+                ".tn_btn_cons" : "차트 작성",
+
+                ".td_copyright" : "저작권 © 2022 알렉세이 블라소프. Licensed under the Apache License 2.0",
+                ".btn_save" : "현재 설정 저장",
+                ".btn_restore" : "기본값으로 복원",
+                ".tr_ifc_set" : "인터페이스 스타일",
+                ".tn_color_dark" : "어두운 테마",
+                ".tn_color_light" : "밝은 테마",
+                ".tn_water_baltic" : "발트 해",
+                ".tn_water_redsea" : "홍해",
+                ".tn_water_glake" : "그레이트 레이크 유타",
+                ".tn_water_deadsea" : "사해",
+                ".tn_water_pacific" : "태평양",
+                ".tn_water_salt" : "대서양",
+                ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
+                ".tr_celsus" : "표면 환경 온도" + lng_temper,
+                ".tr_levels" : "기체 / 수심" + lng_meters + " / 타임" + lng_min,
+                ".btn_add_lvl" : "바닥 추가",
+                ".btn_del_lvl" : "바닥 삭제",
+                ".tr_rate_dsc" : "하강률" + lng_meters_min,
+                ".tr_rate_asc" : "상승률" + lng_meters_min,
+                ".tr_rate_asc_deco" : "상승 데코 비율" + lng_meters_min,
+                ".tr_rmv_deco" : "데코 RMV" + lng_ltr_min,
+                ".tr_rmv_bt" : "바텀 RMV" + lng_ltr_min,
+                ".tr_cng_time" : "기체 체인지 추가 시간" + lng_min,
+                ".tr_lst_stop" : "Last Stop" + lng_meters,
+                ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> 데코" + lng_bar,
+                ".tn_ppo2_bottom" : "PPO<sub><small>2</small></sub> 바텀" + lng_bar,
+                ".tn_ppo2_min" : "PPO<sub><small>2</small></sub> Min" + lng_bar,
+                ".tn_ppn2_max" : "PPN<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_ppn2" : "ICD PPN<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_ibcd_pphe" : "ICD PPHe Max" + lng_bar,
+                ".tn_dmn_mtr" : "Meters/Liters/Bar/Celsius",
+                ".tn_dmn_imp" : "Feet/Cu.Feet/PSI/Fahrenheit",
+                ".tr_mdl" : "데코 모델",
+                ".tr_water" : "물 염분",
+                ".tn_water_fresh" : "민물",
+                ".tr_gf" : "Gradient Factor, %",
+                ".tr_slevel" : "다이빙 고도" + lng_meters,
+                ".tn_travel" : "Total Travel/Bottom/Diluent Mixes",
+                ".tn_deco" : "Total Deco/Bailout Mixes",
+                ".header0" : "전역 설정",
+                ".header1" : "다이빙 설정",
+                ".header2" : "다이빙 경고",
+                ".header3" : "다이빙 기체",
+                ".header4" : "다이빙 프로필 작성",
+                ".header5" : "가스 부분 압력" + lng_bar,
+                ".header6" : "조직 구획의 기체 장력",
+                ".header7" : "가스 소비",
+                ".header8" : "기체 금액 계산",
+                ".header9" : "기체 혼합",
+                //".header9" : "Learning Tools",
+                ".tr_lng" : "언어",
+                ".tr_dmn" : "단위",
+                ".td_warn" : "경고! 다이빙 테이블에 명시된 다이빙 계획을 따르더라도 모든 다이빙 프로필에는 항상 감압병(DCS)의 위험이 있습니다. 어떤 절차나 다이브 테이블도 DCS 또는 산소 독성의 가능성을 방지할 수 없습니다! 개인의 생리적 구성은 매일 다를 수 있습니다. DCS의 위험을 최소화하기 위해 계획자가 제공한 노출 한도 내에서 잘 유지하는 것이 좋습니다..",
+                ".tn_wrn_ibcd_lip" : "지질 반응을 고려",
+                ".tn_wrn_btm_mix" :"Bottom Mix More" + lng_ltr,
+                ".tn_wrn_deco_mix49" :"Deco Mix Up 49% More" + lng_ltr,
+                ".tn_wrn_deco_mix50" :"Deco Mix 50 to 99% More" + lng_ltr,
+                ".tn_wrn_deco_mix100" :"Deco O<sub><small>2</small></sub> More" + lng_ltr,
+                ".tn_ibcd_lip_yes" :"Yes",
+                ".tn_ibcd_lip_no" :"No",
+                //".tn_blnd_temp" :"기체 온도 C<sup><small>o</small></sup>",
+                //".tn_blnd_temp_mode" :"가스 모델",
+                //".tn_blend_mix_first" :"첫 번째 기체 추가",
+                //".tn_blend_press_start" :"혼합 시작 비율",
+                //".tn_blend_press_end" :"새로운 혼합 비율",
+                //".tn_blend_he_start" :"He 혼합 시작 비율",
+                //".tn_blend_o2_start" :"O<sub><small>2</small></sub> 혼합 시작 비율",
+                //".tn_blend_he_end" :"He 혼합 시작 비율",
+                //".tn_blend_o2_end" :"O<sub><small>2</small></sub> 새로운 혼합 비율",
+                ".tn_calc_depth" :"최대 다이빙 수심" + lng_meters,
+                ".tn_calc_o2" :"Oxygen%",
+                ".tn_calc_he" :"Helium%",
+                ".tn_calc_depth_lo" :"최소 다이빙 수심" + lng_meters,
+                //".tn_blnd_temp_mode_ideal" :”이상적인 모델",
+                //".tn_blnd_temp_mode_vdv" :"반 데르 발스 모델",
+                //".tn_mix_first_he" :"He",
+                //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+                ".tn_price_cur" :"통화 선택",
+                ".tn_price_top" :"가스 최고 가격",
+                ".tn_price_he" :"He 단위 당 가격",
+                ".tn_price_o2" :"O<sub><small>2</small></sub> 단위 당 가격",
+                ".tn_price_us" :"US 달러",
+                ".tn_price_eu" :"유로",
+                ".tn_price_uk" :"영국 파운드",
+                ".tn_price_rf" :"러시아 루블",
+                ".tn_price_cn" :"중국 위안",
+                ".btn_export_pdf_profile" :"PDF 로 내보내기",
+                ".btn_export_pdf_pp" :"PDF 로 내보내기",
+                ".tn_btn_overlay" :"닫다",
+                ".btn_export_xls" :"XLS 테이블 내보내기",
+                ".btn_tbl_pdf" :"PDF 표 내보내기",
+                ".tn_calc_ead" :"EAD:&nbsp;",
+                ".tn_calc_end" :"END:&nbsp;",
+                ".tn_calc_o2max" : "&nbsp;PPO<sub><small>2</small></sub> Bottom&nbsp;" + lng_bar,
+                ".tn_calc_o2min" : "&nbsp;PPO<sub><small>2</small></sub> Min&nbsp;" + lng_bar,
+                ".tn_calc_n2max" : "&nbsp;PPN<sub><small>2</small></sub> Max" + lng_bar,
+                ".tn_calc_f_app" :"공식 및 계산",
+                ".tn_calc_f_mod" :"최대 다이빙 수심" + lng_meters,
+                ".tn_calc_f_ead" :"등가 공기 수심" + lng_meters,
+                ".tn_calc_f_ead2" :"Only N<sub><small>2</small></sub> Narcotic",
+                ".tn_calc_f_end" :"등가 마취 수심" + lng_meters,
+                ".tn_calc_f_end2" :"N<sub><small>2</small></sub> and O<sub><small>2</small></sub> 마취",
+                ".tn_calc_cur_ex_rate" :"1달러 환율",
+                ".tn_calc_cur_ex_rate_pound" :"파운드",
+                ".tn_calc_cur_ex_rate_pence" :"펜스",
+                ".tn_calc_cur_ex_rate_euro" :"유로",
+                ".tn_calc_cur_ex_rate_eucents" :"센트",
+                ".tn_calc_cur_ex_rate_rub" :"루블",
+                ".tn_calc_cur_ex_rate_kopek" :"코펙스",
+                ".tn_calc_cur_ex_rate_yuan" :"원",
+                ".tn_calc_cur_ex_rate_fyn" :"핀",
+                ".tr_setpoint_start":"CCR 설정값 시작" + lng_bar,
+                ".tr_setpoint_bottom":"CCR 설정값 바텀" + lng_bar,
+                ".tr_setpoint_deco":"CCR 설정값 데코" + lng_bar,
+                ".tr_airbr_header" : "가스 브레이크",
+                ".tr_airbr_depth" : "Depth is more than" + lng_meters,
+                ".tr_airbr_o2" : "Deco Oxygen은 그 이상입니다" + ", %",
+                ".tr_airbr_mix" : "Break Mix",
+                ".tr_airbr_time_after" : "Break After" + lng_min,
+                ".tr_airbr_time" : "Break Time" + lng_min,
+                ".tr_airbr_time_reset" : "설정",
+                ".tn_airbr_time_reset_yes" : "Yes",
+                ".tn_airbr_time_reset_no" : "No",
+                ".header10" : "기부 명예의 전당",
+                ".tn_donat_header" : "",
+                ".btn_msg" : "기부 방법",
+                ".btn_tel" : "개발자에게 전화 걸기",
+                ".btn_ios_msg" : "기부 방법",
+                ".btn_ios_tel" : "개발자에게 전화 걸기",
+                ".tn_donat_header_founder" : "설립자 기부 섹션",
+                ".tn_donat_header_gold" : "금 기부 섹션",
+                ".tn_donat_header_silver" : "은 기부 섹션",
+                ".tn_donat_header_bronze" : "동 기부 섹션",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+
+                ".header11" : "S.A.U.L. 레크리에이션 다이빙 플래너",
+                ".tr_saul_mix" : "기체",
+                ".tr_saul_res_type" : "계산 유형",
+                ".tr_saul_depth" : "수심" + lng_meters,
+                ".tr_saul_btime" : "바텀 시간" + lng_min,
+                ".tn_saul_mix_arr_air" : "Air",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(DCS) 선택된 바텀 시간",
+                ".tn_saul_res_type_arr_reverse" : "선택 가능한 바텀 시간 %(DCS)",
+
+                ".tr_saul_cap_percent" : "귀하의 DCS 위험은 다음과 같습니다",
+                ".tr_saul_time_max" : "귀하의 최대 바텀 시간은 다음과 같습니다",
+                ".tr_saul_time_max_dim" : "저작권 © 2021 Dr. Saul Goldman, Professor Emeritus, 대학교 명예교수",
+                ".tr_saul_percent" : "DCS 허용 확률, %"
             }
         };
     }
@@ -1019,6 +1692,7 @@
         }
 
         price_lng_cur_upd();
+
     }
 
 	lng_opt.addEventListener('change', changeLang);
@@ -1041,7 +1715,16 @@
       if(td_lng == 5){
           return "混合气体";
       }
-	}
+      if(td_lng == 6){
+          return "Микс";
+      }
+      if(td_lng == 7){
+          return "Mélange";
+      }
+      if(td_lng == 8){
+	    return "기체";
+	  }
+    }
 
   function plan_lng(val){
       if (force_lng == 1){var td_lng = 1}
@@ -1050,7 +1733,8 @@
           var td_lng = lng_opt.options[lng_opt.selectedIndex].value
       };
       if(td_lng == 1){
-
+        
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluent "}
 
           if(val  == "t_zoom"){val = "Reset Zoom"}
@@ -1153,6 +1837,7 @@
 
     }
     if(td_lng == 2){
+        if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Дилуэнт "}
         if(val  == "t_zoom"){val = "Сбросить масштаб"}
 
@@ -1255,6 +1940,7 @@
 
     }
     if(td_lng == 3){
+        if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Diluyente "}
         if(val  == "t_zoom"){val = "Reinicializar Acercamiento"}
         if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -1355,6 +2041,7 @@
         if(val == "tn_deco_mod"){val = "Auto"}
     }
       if(td_lng == 4){
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluente "}
           if(val  == "t_zoom"){val = "Reset Zoom"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -1443,6 +2130,7 @@
           if(val == "tn_deco_mod"){val = "Auto"}
       }
       if(td_lng == 5){
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "稀释气 "}
           if(val  == "t_zoom"){val = "重置缩放"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -1531,6 +2219,579 @@
           if(val == "tn_deco_mod"){val = "自动"}
 
       }
+      if(td_lng == 6) {
+          if(val  == "tab_tr_TTS"){val = "ТТС"}
+          if (val == "t_diluent") {
+              val = "Смесител "
+          }
+          if (val == "t_zoom") {
+              val = "Нулиране на мащаба"
+          }
+          if (val == "tab_tr_OTU") {
+              val = "ЕКТ"
+          }
+          if (val == "tab_tr_CNS") {
+              val = "ЦНС%"
+          }
+          if (val == "ld_tis") {
+              val = "Водеща тъкан"
+          }
+          if (val == "amb_pres") {
+              val = "Околно налягане"
+          }
+          if (val == "t_tiss_wrn") {
+              val = "В този план няма деко . Тъканните групи няма да са видими"
+          }
+          if (val == "t_tiss_nt") {
+              val = "Азот - тъканни групи"
+          }
+          if (val == "t_tiss_hl") {
+              val = "Хелий - тъканни групи"
+          }
+          if (val == "t_tiss_tl") {
+              val = "Общо азот и хелий - тъканни групи"
+          }
+          if (val == "tab_tr_o2") {
+              val = "пнO<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_n2") {
+              val = "пнN<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_he") {
+              val = "пнHe"
+          }
+          if (val == "tab_tr_coms") {
+              val = "Конс."
+          }
+          if (val == "tab_tr_mix") {
+              val = "Микс"
+          }
+          if (val == "tab_dmn_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "Литри"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Кубичен фут"
+              }
+          }
+          if (val == "Level") {
+              val = "Ниво"
+          }
+          if (val == "Ascent") {
+              val = "Изкачване"
+          }
+          if (val == "Descent") {
+              val = "Спускане"
+          }
+          if (val == "Stop") {
+              val = "Стоп"
+          }
+          if (val == "Mix") {
+              val = "Микс"
+          }
+          if (val == "RunTime") {
+              val = "Текущо време"
+          }
+          if (val == "Time") {
+              val = "Време"
+          }
+          if (val == "Depth") {
+              val = "Дълбочина"
+          }
+          if (val == "Action") {
+              val = "Действие"
+          }
+          if (val == "Air") {
+              val = "Въздух"
+          }
+          if (val == "OXY") {
+              val = "Кислород"
+          }
+          if (val == "tab_tr_dmn") {
+              val = "Обем"
+          }
+          if (val == "tab_tr_time") {
+              val = "Време"
+          }
+          if (val == "ch_gas_d") {
+              val = "Разход на газ"
+          }
+          if (val == "ch_gas_amnt") {
+              val = "Количество"
+          }
+          if (val == "ch_time") {
+              val = "Време"
+          }
+          if (val == "ch_gas_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "л."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "фт<sup><small>3</small></sup>"
+              }
+          }
+          if (val == "ch_depth") {
+              val = "Макс. дълбочина"
+          }
+          if (val == "ch_source") {
+              val = "Източник"
+          }
+          if (val == "ch_bottom") {
+              val = "Дъно"
+          }
+          if (val == "ch_mtr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "м."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "фт."
+              }
+          }
+          if (val == "ch_tmx") {
+              val = "мин."
+          }
+          if (val == "ch_mix") {
+              val = "Смяна на газа"
+          }
+          if (val == "ch_pp") {
+              val = "Парциално налягане"
+          }
+          if (val == "ch_n2") {
+              val = "пнN2"
+          }
+          if (val == "ch_o2") {
+              val = "пнO2"
+          }
+          if (val == "ch_he") {
+              val = "пнHe"
+          }
+          if (val == "ch_pp_l") {
+              val = "Налягане"
+          }
+          if (val == "ch_mix_pp") {
+              val = "Използвана газ"
+          }
+          if (val == "ch_ata") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "бар"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "пси"
+              }
+          }
+          if (val == "ch_Tissue") {
+              val = "Тъкан"
+          }
+          if (val == "ch_UnderDev") {
+              val = "Внимание!<br>Този инструмент е в разработка.<br>Благодаря Ви!<br>"
+          }
+          if (val == "ch_tbl_name") {
+              val = "Деко таблица"
+          }
+          if (val == "ch_tbl_cons") {
+              val = "Таблица за консумация на газа"
+          }
+          if (val == "dmn_air") {
+              val = "Въздух"
+          }
+          if (val == "dmn_mod") {
+              val = "МОД"
+          }
+          if (val == "dmn_ead") {
+              val = "ЕАД"
+          }
+          if (val == "dmn_end") {
+              val = "ЕНД"
+          }
+          if (val == "dmn_msw") {
+              val = "мвстм"
+          }
+          if (val == "dmn_fsw") {
+              val = "фтвстм"
+          }
+          if (val == "dmn_bar") {
+              val = "бар"
+          }
+          if (val == "dmn_ata") {
+              val = "бар"
+          }
+          if (val == "tn_price_dls_name_dollars") {
+              val = "Долари"
+          }
+          if (val == "tn_price_dls_name_cents") {
+              val = "Цента"
+          }
+          if (val == "tn_price_dls_name_euro") {
+              val = "Евро"
+          }
+          if (val == "tn_price_dls_name_pound") {
+              val = "Паунд"
+          }
+          if (val == "tn_price_dls_name_pence") {
+              val = "Пенс"
+          }
+          if (val == "tn_price_dls_name_rouble") {
+              val = "Рубли"
+          }
+          if (val == "tn_price_dls_name_kopek") {
+              val = "Копейки"
+          }
+          if (val == "tn_price_dls_name_yuan") {
+              val = "Юан"
+          }
+          if (val == "tn_price_dls_name_fyn") {
+              val = "Фин"
+          }
+          if (val == "price_price") {
+              val = "Цена"
+          }
+          if (val == "price_currency") {
+              val = "Валута"
+          }
+          if (val == "price_gas") {
+              val = "Газ"
+          }
+          if (val == "price_gas_total") {
+              val = "Обща цена:"
+          }
+          if (val == "ch_price_top_total") {
+              val = "Цена на газа"
+          }
+          if (val == "tn_deco_mod") {
+              val = "Авто"
+          }
+      }
+      if(td_lng == 7) {
+          if(val  == "tab_tr_TTS"){val = "TTS"}
+          if (val == "t_diluent") {
+              val = "Diluent "
+          }
+          if (val == "t_zoom") {
+              val = "Zoom a Zero"
+          }
+          if (val == "tab_tr_OTU") {
+              val = "OTU"
+          }
+          if (val == "tab_tr_CNS") {
+              val = "CNS%"
+          }
+          if (val == "ld_tis") {
+              val = "Leading Tissue"
+          }
+          if (val == "amb_pres") {
+              val = "Pression ambiante"
+          }
+          if (val == "t_tiss_wrn") {
+              val = "Ce plan n'a pas de stop de décompression. Les compartiments de tissus ne seront pas apparents."
+          }
+          if (val == "t_tiss_nt") {
+              val = "Compartiments de tissus d'azote"
+          }
+          if (val == "t_tiss_hl") {
+              val = "Compartiments de tissus d’Helium"
+          }
+          if (val == "t_tiss_tl") {
+              val = "Total des Compartiments de tissus d'azote et d'hélium"
+          }
+          if (val == "tab_tr_o2") {
+              val = "PPOxygene<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_n2") {
+              val = "PPAzote<sub><small>2</small></sub>"
+          }
+          if (val == "tab_tr_he") {
+              val = "PPHelium"
+          }
+          if (val == "tab_tr_coms") {
+              val = "Consommation."
+          }
+          if (val == "tab_tr_mix") {
+              val = "Mélange"
+          }
+          if (val == "tab_dmn_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "Litres"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied3"
+              }
+          }
+          if (val == "Level") {
+              val = "Niveau"
+          }
+          if (val == "Ascent") {
+              val = "Remonté"
+          }
+          if (val == "Descent") {
+              val = "Descente"
+          }
+          if (val == "Stop") {
+              val = "Stop"
+          }
+          if (val == "Mix") {
+              val = "Mélange"
+          }
+          if (val == "RunTime") {
+              val = "Temps de fonctionnement"
+          }
+          if (val == "Time") {
+              val = "Temps"
+          }
+          if (val == "Depth") {
+              val = "Profondeur"
+          }
+          if (val == "Action") {
+              val = "Action"
+          }
+          if (val == "Air") {
+              val = "Air"
+          }
+          if (val == "OXY") {
+              val = "Oxygen"
+          }
+          if (val == "tab_tr_dmn") {
+              val = "Volume"
+          }
+          if (val == "tab_tr_time") {
+              val = "Temps"
+          }
+          if(val == "ch_gas_d"){
+              val = "Consommation de gaz"
+          }
+          if (val == "ch_gas_amnt") {
+              val = "Montant"
+          }
+          if (val == "ch_time") {
+              val = "Temps"
+          }
+          if (val == "ch_gas_ltr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "Litre."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied<sup><small>3</small></sup>"
+              }
+          }
+          if (val == "ch_depth") {
+              val = "Profondeur Maximum"
+          }
+          if (val == "ch_source") {
+              val = "Source"
+          }
+          if (val == "ch_bottom") {
+              val = "fond"
+          }
+          if (val == "ch_mtr") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "m."
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "Pied."
+              }
+          }
+          if (val == "ch_tmx") {
+              val = "min."
+          }
+          if (val == "ch_mix") {
+              val = "Changement de mélange"
+          }
+          if (val == "ch_pp") {
+              val = "Pression Partielle"
+          }
+          if (val == "ch_n2") {
+              val = "PPAzote2"
+          }
+          if (val == "ch_o2") {
+              val = "PPOxygen2"
+          }
+          if (val == "ch_he") {
+              val = "PPHelium"
+          }
+          if (val == "ch_pp_l") {
+              val = "Pression"
+          }
+          if (val == "ch_mix_pp") {
+              val = "Mélange utilisé"
+          }
+          if (val == "ch_ata") {
+              if ($("#tn_dmn").val() == 1) {
+                  val = "bar"
+              }
+              if ($("#tn_dmn").val() == 2) {
+                  val = "psi"
+              }
+          }
+          if (val == "ch_Tissue") {
+              val = "Tissue"
+          }
+          if (val == "ch_UnderDev") {
+              val = "ATTENTION!<br> Cet outil est en développement. Cette interface graphique montre uniquement les travaux en cours.<br>Merci de votre comprehension!<br>"
+          }
+          if (val == "ch_tbl_name") {
+              val = "Table de décompression"
+          }
+          if (val == "ch_tbl_cons") {
+              val = "Table de consommation de gaz"
+          }
+          if (val == "dmn_air") {
+              val = "Air"
+          }
+          if (val == "dmn_mod") {
+              val = "MOD"
+          }
+          if (val == "dmn_ead") {
+              val = "EAD"
+          }
+          if (val == "dmn_end") {
+              val = "END"
+          }
+          if (val == "dmn_msw") {
+              val = "msw"
+          }
+          if (val == "dmn_fsw") {
+              val = "fsw"
+          }
+          if (val == "dmn_bar") {
+              val = "bar"
+          }
+          if (val == "dmn_ata") {
+              val = "bar"
+          }
+          if (val == "tn_price_dls_name_dollars") {
+              val = "Dollars"
+          }
+          if (val == "tn_price_dls_name_cents") {
+              val = "Cents"
+          }
+          if (val == "tn_price_dls_name_euro") {
+              val = "Euros"
+          }
+          if (val == "tn_price_dls_name_pound") {
+              val = "Pounds"
+          }
+          if (val == "tn_price_dls_name_pence") {
+              val = "Pence"
+          }
+          if (val == "tn_price_dls_name_rouble") {
+              val = "Roubles"
+          }
+          if (val == "tn_price_dls_name_kopek") {
+              val = "Kopeks"
+          }
+          if (val == "tn_price_dls_name_yuan") {
+              val = "Yuan"
+          }
+          if (val == "tn_price_dls_name_fyn") {
+              val = "Fyn"
+          }
+          if (val == "price_price") {
+              val = "Prix"
+          }
+          if (val == "price_currency") {
+              val = "Monnaie"
+          }
+          if (val == "price_gas") {
+              val = "Gaz"
+          }
+          if (val == "price_gas_total") {
+              val = "Prix Total:"
+          }
+          if (val == "ch_price_top_total") {
+              val = "Meilleur prix du Gas"
+          }
+          if (val == "tn_deco_mod") {
+              val = "Auto"
+          }
+        }
+        if(td_lng == 8){
+            if(val  == "tab_tr_TTS"){val = "TTS"}
+            if(val  == "t_diluent"){val = "Diluent "}
+            if(val  == "t_zoom"){val = "줌 재설정"}
+            if(val  == "tab_tr_OTU"){val = "OTU"}
+            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "ld_tis"){val = "선도 조직"}
+            if(val  == "amb_pres"){val = "주변 압력"}
+            if(val  == "t_tiss_wrn"){val = "이 계획에는 감압 정지가 없습니다. 조직 구획이 숨겨집니다."}
+            if(val  == "t_tiss_nt"){val = "질소 조직 구획"}
+            if(val  == "t_tiss_hl"){val = "헬륨 조직 구획"}
+            if(val  == "t_tiss_tl"){val = "총 질소 및 헬륨 조직 구획"}
+            if(val == "tab_tr_o2"){val = "PPO<sub><small>2</small></sub>"}
+            if(val == "tab_tr_n2"){val = "PPN<sub><small>2</small></sub>"}
+            if(val == "tab_tr_he"){val = "PPHe"}
+            if(val == "tab_tr_coms"){val = "기체 소비."}
+            if(val == "tab_tr_mix"){val = "기체"}
+            if(val == "tab_dmn_ltr"){
+                if($( "#tn_dmn" ).val() == 1){val = "리터"}
+                if($( "#tn_dmn" ).val() == 2){val = "입방 피트"}
+            }
+            if(val == "Level"){val = "바닥"}
+            if(val == "Ascent"){val = "상승"}
+            if(val == "Descent"){val = "하강"}
+            if(val == "Stop"){val = "스탑"}
+            if(val == "Mix"){val = "가스"}
+            if(val == "RunTime"){val = "런타임"}
+            if(val == "Time"){val = "타임"}
+            if(val == "Depth"){val = "수심"}
+            if(val == "Action"){val = "절차"}
+            if(val == "Air"){val = "Air"}
+            if(val == "OXY"){val = "Oxygen"}
+            if(val == "tab_tr_dmn"){val = "용량"}
+            if(val == "tab_tr_time"){val = "타임"}
+            if(val == "ch_gas_d"){val = "가스 소비"}
+            if(val == "ch_gas_amnt"){val = "총양"}
+            if(val == "ch_time"){val = "타임"}
+            if(val == "ch_gas_ltr"){
+                if($( "#tn_dmn" ).val() == 1){val = "Ltr."}
+                if($( "#tn_dmn" ).val() == 2){val = "Ft<sup><small>3</small></sup>"}
+            }
+            if(val == "ch_depth"){val = "최대 수심"}
+            if(val == "ch_source"){val = "Source"}
+            if(val == "ch_bottom"){val = "바텀"}
+            if(val == "ch_mtr"){
+                if($( "#tn_dmn" ).val() == 1){val = "m."}
+                if($( "#tn_dmn" ).val() == 2){val = "ft."}
+            }
+            if(val == "ch_tmx"){val = "min."}
+            if(val == "ch_mix"){val = "기체 체인지"}
+            if(val == "ch_pp"){val = "부분 압"}
+            if(val == "ch_n2"){val = "PPN2"}
+            if(val == "ch_o2"){val = "PPO2"}
+            if(val == "ch_he"){val = "PPHe"}
+            if(val == "ch_pp_l"){val = "압력"}
+            if(val == "ch_mix_pp"){val = "소비된 기체"}
+            if(val == "ch_ata"){
+                if($( "#tn_dmn" ).val() == 1){val = "bar"}
+                if($( "#tn_dmn" ).val() == 2){val = "psi"}
+            }
+            if(val == "ch_Tissue"){val = "조직"}
+            if(val == "ch_UnderDev"){val = "경고!<br>이 Tool은 개발 중입니다. 이 GUI는 진행 중인 작업만 보여줍니다.<br>감사합니다!<br>"}
+            if(val == "ch_tbl_name"){val = "감압표"}
+            if(val == "ch_tbl_cons"){val = "기체 소비량 표"}
+            if(val == "dmn_air"){val = "Air"}
+            if(val == "dmn_mod"){val = "MOD"}
+            if(val == "dmn_ead"){val = "EAD"}
+            if(val == "dmn_end"){val = "END"}
+            if(val == "dmn_msw"){val = "msw"}
+            if(val == "dmn_fsw"){val = "fsw"}
+            if(val == "dmn_bar"){val = "bar"}
+            if(val == "dmn_ata"){val = "bar"}
+            if(val == "tn_price_dls_name_dollars"){val = "달러"}
+            if(val == "tn_price_dls_name_cents"){val = "센트"}
+            if(val == "tn_price_dls_name_euro"){val = "유로"}
+            if(val == "tn_price_dls_name_pound"){val = "파운드"}
+            if(val == "tn_price_dls_name_pence"){val = "펜스"}
+            if(val == "tn_price_dls_name_rouble"){val = "루블"}
+            if(val == "tn_price_dls_name_kopek"){val = "코펙스"}
+            if(val == "tn_price_dls_name_yuan"){val = "원"}
+            if(val == "tn_price_dls_name_fyn"){val = "핀"}
+            if(val == "price_price"){val = "가격"}
+            if(val == "price_currency"){val = "통화"}
+            if(val == "price_gas"){val = "기체"}
+            if(val == "price_gas_total"){val = "총 가격:"}
+            if(val == "ch_price_top_total"){val = "가스 최고 가격"}
+            if(val == "tn_deco_mod"){val = "자동"}
+        }
+        
     return (val.toString());
   }
 

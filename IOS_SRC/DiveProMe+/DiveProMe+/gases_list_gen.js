@@ -47,7 +47,7 @@ function upd_deco_gas_list(){
   }
   
   //Comparing old options value and if found inside identical
-  //fix it droping values to old option values.
+  //fix it dropping values to old option values.
   a = 0;
   for(c = 0 ; c < mix_deco_idx ; c++){
     if(a != start){
@@ -128,6 +128,11 @@ function upd_travel_gas_list(){
     mix_travel_he = tmp.options[tmp.selectedIndex].value;
     
     new_mx_arr.push(mix_travel_o2 , mix_travel_he);
+
+      //update travel MOD array if changed
+      var tmp = document.getElementById("opt_travel_option_mod_" + (c + 1).toString()+"3");
+      var mix_travel_mod = tmp.options[tmp.selectedIndex].value;
+      travel_mix_depth_arr[c] = mix_travel_mod;
 
   }
   
