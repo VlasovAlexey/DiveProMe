@@ -1,3 +1,6 @@
+
+![Alt text](/DiveProMe/tree/master/PromoAssets/github_promo_01.jpg)
+
 # DiveProMe+
 Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
 
