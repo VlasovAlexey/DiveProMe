@@ -1,6 +1,7 @@
 
+<p align="center">
 <img src="https://vlasovalexey.github.io/DiveProMe/PromoAssets/github_promo_01.jpg" width="480" align="center">
-
+</p>
 # DiveProMe+
 Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
 
