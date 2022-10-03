@@ -1,5 +1,5 @@
 
-![Alt text](/DiveProMe/tree/master/PromoAssets/github_promo_01.jpg)
+![Alt text](https://github.com/VlasovAlexey/DiveProMe/blob/master/PromoAssets/github_promo_01.jpg)
 
 # DiveProMe+
 Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
