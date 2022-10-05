@@ -16,19 +16,23 @@ DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multile
 # IOS Screenshots from web browser
 Click to enlarge pictures
 <p align="center">
-    <img src="PromoAssets/IOS_IPhone11_Line_02.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPhone11_Line_04.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPhone11_Line_05.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPhone11_Line_06.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPhone11_Line_07.jpg" width="15%">
+    <img src="PromoAssets/IOS_IPhone11_Line_02.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPhone11_Line_04.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPhone11_Line_05.jpg" width="33%">
 </p>
 <p align="center">
-    <img src="PromoAssets/IOS_IPad_02.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPad_03.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPad_04.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPad_05.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPad_06.jpg" width="15%">
-    <img src="PromoAssets/IOS_IPad_07.jpg" width="15%">
+    <img src="PromoAssets/IOS_IPhone11_Line_06.jpg" width="50%">
+    <img src="PromoAssets/IOS_IPhone11_Line_07.jpg" width="50%">
+</p>
+<p align="center">
+    <img src="PromoAssets/IOS_IPad_02.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPad_03.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPad_04.jpg" width="33%">
+</p>
+<p align="center">
+    <img src="PromoAssets/IOS_IPad_05.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPad_06.jpg" width="33%">
+    <img src="PromoAssets/IOS_IPad_07.jpg" width="33%">
 </p>
 # Features
 - A complete multiple dive / multi-level dive planner for the technical diver
@@ -72,6 +76,7 @@ Click to enlarge pictures
 <p align="center">
     <img src="PromoAssets/github_promo_02.jpg" width="100%" align="center">
 </p>
+
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
 If DiveProMe+ is not working properly, please file a report in the [Facebook Project Page](https://www.facebook.com/DiveProMe/). We also welcome issues submitted on GitHub.
