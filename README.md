@@ -3,9 +3,8 @@
     <img src="PromoAssets/github_promo_01.jpg" width="100%" align="center">
 </p>
 
-
 [![Support](https://img.shields.io/badge/Support-Mail-brightgreen.svg?style=for-the-badge)](mailto:all3862000@mail.ru)
-[![MIT License](https://img.shields.io/badge/License-Apache2.0-blue.svg?style=for-the-badge)](https://github.com/)
+[![MIT License](https://img.shields.io/badge/License-Apache2.0-blue.svg?style=for-the-badge)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Documentation](https://img.shields.io/badge/Documentation-Facebook-brightgreen.svg?style=for-the-badge)](https://www.facebook.com/DiveProMe/)
 
 # DiveProMe+
