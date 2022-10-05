@@ -72,7 +72,10 @@ Click to enlarge pictures
 - Really thats all :)
 
 # Video of usage
-https://user-images.githubusercontent.com/24822433/194119744-b78f4fcd-ecd0-4857-a9af-c110ac560313.mp4
+
+<p align="center">
+    <video src="https://user-images.githubusercontent.com/24822433/194129930-b5c0d8aa-5f75-46d1-9a12-5c4253b7b6f3.mp4" width="100%" align="center">
+</p>
 
 # Browser compatibility
 - Firefox
