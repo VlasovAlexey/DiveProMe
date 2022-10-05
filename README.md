@@ -73,7 +73,7 @@ Click to enlarge pictures
 
 # Video of usage
 <p align="center">
-    < src="https://user-images.githubusercontent.com/24822433/194119744-b78f4fcd-ecd0-4857-a9af-c110ac560313.mp4" width="50%" align="center">    
+    <video src="https://user-images.githubusercontent.com/24822433/194119744-b78f4fcd-ecd0-4857-a9af-c110ac560313.mp4" width="50%" align="center">    
 </p>
 
 # Browser compatibility
