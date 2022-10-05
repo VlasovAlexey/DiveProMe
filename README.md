@@ -3,6 +3,11 @@
     <img src="PromoAssets/github_promo_01.jpg" width="100%" align="center">
 </p>
 
+
+[![Support](https://img.shields.io/badge/Support-Mail-brightgreen.svg?style=for-the-badge)](mailto:all3862000@mail.ru)
+[![MIT License](https://img.shields.io/badge/License-Apache2.0-blue.svg?style=for-the-badge)](https://github.com/)
+[![Documentation](https://img.shields.io/badge/Documentation-Facebook-brightgreen.svg?style=for-the-badge)](https://www.facebook.com/DiveProMe/)
+
 # DiveProMe+
 Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
 
@@ -12,7 +17,8 @@ The simple "Waterfall" GUI style provides users with an unprecedented level of c
 
 Experience of control over safety factors with ZHL16A, ZHL16B, ZHL16C gradient factor method, which allows safety factors to be customized across multiple diving profiles. For example, gradient factors establish a percentage of maximum compartment pressure, which can be individually established based on individual decompression success.
 
-DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and alerts.  It is designed to allow you to compare several scenario, while optimizing your parameters and gas mixes. Includes Gas Mixer (under early development state), Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
+DiveProMe+ calculates all types of Nitrox, Trimix, TriOx, HeliOx, OC and CCR multilevel dives. DiveProMe+ makes plans for Lost deco gas, Range plans, watches and alerts. It is designed to allow you to compare several scenario, while optimizing your parameters and gas mixes. Included Layouts for saving complex dive plans, PDF and XLS Export, Graphs and Charts, data automation export, etc. The settings allow for customized deep and extended stops, control stop times.
+
 # IOS Screenshots from web browser
 Click to enlarge pictures
 <p align="center">
@@ -64,6 +70,11 @@ Click to enlarge pictures
 - Unzip arhive to your OS.
 - Start executable file DiveProMe+
 - Really thats all :)
+
+# Video of usage
+<p align="center">
+    < src="https://user-images.githubusercontent.com/24822433/194119744-b78f4fcd-ecd0-4857-a9af-c110ac560313.mp4" width="50%" align="center">    
+</p>
 
 # Browser compatibility
 - Firefox
