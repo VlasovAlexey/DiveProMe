@@ -12,7 +12,7 @@ Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
 
 DiveProMe+ is a Java and HTML5 decompression program that uses the Bühlmann (ZHL-16) for decompression profiles. The Bühlmann decompression model is well suited to today's technical diving.
 
-The simple "Waterfall" GUI style provides users with an unprecedented level of control and convenience. User can immediately change any part of their dive plan and instantly recalculate their profile.
+The simple "Waterfall" GUI style provides users with an unprecedented level of control and usability. User can immediately change any part of their dive plan and instantly recalculate their profile.
 
 Experience of control over safety factors with ZHL16A, ZHL16B, ZHL16C gradient factor method, which allows safety factors to be customized across multiple diving profiles. For example, gradient factors establish a percentage of maximum compartment pressure, which can be individually established based on individual decompression success.
 
@@ -39,6 +39,7 @@ Click to enlarge pictures
     <img src="PromoAssets/IOS_IPad_06.jpg" width="32%">
     <img src="PromoAssets/IOS_IPad_07.jpg" width="32%">
 </p>
+
 # Features
 - A complete multiple dive / multi-level dive planner for the technical diver
 - Supports Air to TriMix (any combination of O2/He/N2), with an unlimited number of decompression gases. Includes Thirds support for planning dives
