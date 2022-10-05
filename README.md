@@ -21,8 +21,8 @@ Click to enlarge pictures
     <img src="PromoAssets/IOS_IPhone11_Line_05.jpg" width="33%">
 </p>
 <p align="center">
-    <img src="PromoAssets/IOS_IPhone11_Line_06.jpg" width="50%">
-    <img src="PromoAssets/IOS_IPhone11_Line_07.jpg" width="50%">
+    <img src="PromoAssets/IOS_IPhone11_Line_06.jpg" width="49%">
+    <img src="PromoAssets/IOS_IPhone11_Line_07.jpg" width="49%">
 </p>
 <p align="center">
     <img src="PromoAssets/IOS_IPad_02.jpg" width="33%">
