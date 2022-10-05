@@ -83,9 +83,11 @@ Click to enlarge pictures
 - iOS
 - Android
 - Windows Phone
+
 <p align="center">
     <img src="PromoAssets/github_promo_02.jpg" width="100%" align="center">
 </p>
+
 
 # Contributing
 Want to contribute? The team encourages community feedback and contributions. Please follow our contributing guidelines.
