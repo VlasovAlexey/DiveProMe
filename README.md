@@ -72,9 +72,9 @@ Click to enlarge pictures
 - Really thats all :)
 
 # Video of usage
-
 <p align="center">
-    <video src="https://user-images.githubusercontent.com/24822433/194129930-b5c0d8aa-5f75-46d1-9a12-5c4253b7b6f3.mp4" width="100%" align="center">
+    <img src="PromoAssets/ios_ipad_first_start.gif" width="49%" align="center">
+    <img src="PromoAssets/ios_iphone11_first_start.gif" width="30%" align="center">
 </p>
 
 # Browser compatibility
