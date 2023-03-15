@@ -205,6 +205,7 @@
                 ".tn_water_deadsea" : "Dead Sea",
                 ".tn_water_pacific" : "Pacific",
                 ".tn_water_salt" : "Atlantic",
+                ".tn_water_medit" : "Mediterranean Sea",
 
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "Surface Environment Temperature" + lng_temper,
@@ -403,6 +404,7 @@
                 ".tn_water_deadsea" : "Мертвое море",
                 ".tn_water_pacific" : "Тихий океан",
                 ".tn_water_salt" : "Атлантика",
+                ".tn_water_medit" : "Средиземное море",
 
                 ".tn_ppn2_max_deco" : "Максимальное ПД N<sub><small>2</small></sub> деко" + lng_bar,
                 ".tr_celsus" : "Температура на поверхности" + lng_temper,
@@ -607,6 +609,7 @@
                 ".tn_water_deadsea" : "Mar Muerto",
                 ".tn_water_pacific" : "Pacífico",
                 ".tn_water_salt" : "Océano Atlántico",
+                ".tn_water_medit" : "Mar Mediterráneo",
 
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Deco" + lng_bar,
                 ".tr_celsus" : "Temperatura Ambiente en la Superficie" + lng_temper,
@@ -786,7 +789,7 @@
 
                 ".tn_download_local" : "Descarregue a Versão Local",
                 ".tn_btn_tiss" : "Gerar Tabelas",
-                
+
                 ".tn_btn_price" : "Gerar Tabelas",
                 ".tn_btn_learn" : "Gerar Tabelas",
                 ".tn_btn_pp_profile_chart" : "Gerar Tabelas",
@@ -805,6 +808,8 @@
                 ".tn_water_deadsea" : "Mar Morto",
                 ".tn_water_pacific" : "Oceano Pacífico",
                 ".tn_water_salt" : "Atlântico",
+                ".tn_water_medit" : "Mar Mediterrâneo",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "Temperatura Ambiente à Superfície" + lng_temper,
                 ".tr_levels" : "Mistura / Profundidade" + lng_meters + " / Tempo" + lng_min,
@@ -1004,6 +1009,7 @@
                 ".tn_water_deadsea" : "死海",
                 ".tn_water_pacific" : "太平洋地区",
                 ".tn_water_salt" : "大西洋",
+                ".tn_water_medit" : "地中海",
 
                 ".tn_ppn2_max_deco" : "减压阶段最大氮分压" + lng_bar,
                 ".tr_celsus" : "水面环境温度 <sup><small>o</small></sup>C",
@@ -1181,7 +1187,7 @@
                 ".tn_plan_short" : "Класически",
                 ".tn_download_local" : "Изтеглете локалната версия",
                 ".tn_btn_tiss" : "Изграждане на диаграми",
-                
+
                 ".tn_btn_price" : "Изграждане на диаграми",
                 ".tn_btn_learn" : "Изграждане на диаграми",
                 ".tn_btn_pp_profile_chart" : "Изграждане на диаграми",
@@ -1199,6 +1205,8 @@
                 ".tn_water_deadsea" : "Мъртво море",
                 ".tn_water_pacific" : "Тихи океан",
                 ".tn_water_salt" : "Атлантически океан",
+                ".tn_water_medit" : "Средиземно море",
+
                 ".tn_ppn2_max_deco" : "пнN<sub><small>2</small></sub> Макс Деко" + lng_bar,
                 ".tr_celsus" : "Температура на повърхноста" + lng_temper,
                 ".tr_levels" : "Смес / Дълбочина" + lng_meters + " / Време" + lng_min,
@@ -1351,7 +1359,7 @@
                 ".tn_plan_short" : "Classique",
                 ".tn_download_local" : "Télécharger la version local",
                 ".tn_btn_tiss" : "Construire les tableaux",
-                
+
                 ".tn_btn_price" : "Construire les tableaux",
                 ".tn_btn_learn" : "Construire les tableaux",
                 ".tn_btn_pp_profile_chart" : "Construire les tableaux",
@@ -1369,6 +1377,8 @@
                 ".tn_water_deadsea" : "Mer Morte",
                 ".tn_water_pacific" : "Pacifique",
                 ".tn_water_salt" : "Atlantique",
+                ".tn_water_medit" : "Mer Méditerranée",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub>Max Deco" + lng_bar,
                 ".tr_celsus" : "Temperature de surface environnante" + lng_temper,
                 ".tr_levels" : "Mix / Profondeur" + lng_meters + " / Temps" + lng_min,
@@ -1539,6 +1549,8 @@
                 ".tn_water_deadsea" : "사해",
                 ".tn_water_pacific" : "태평양",
                 ".tn_water_salt" : "대서양",
+                ".tn_water_medit" : "지중해",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "표면 환경 온도" + lng_temper,
                 ".tr_levels" : "기체 / 수심" + lng_meters + " / 타임" + lng_min,

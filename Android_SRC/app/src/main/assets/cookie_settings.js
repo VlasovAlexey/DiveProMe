@@ -401,7 +401,13 @@ var water_ph_arr = [
         text: "Pacific",
         id: "tn_water_pacific",
         isdisable: "enabled"
-    }];
+    },
+    {
+        text: "Mediterranean",
+        id: "tn_water_medit",
+        isdisable: "enabled"
+    }
+];
 
 var plan_style_arr = [
     {
@@ -574,6 +580,9 @@ function water_density(){
     }
     if (tn_water_g_idx == 7){
         return 1024; // Pacific
+    }
+    if (tn_water_g_idx == 8){
+        return 1037; // Mediterranean
     }
     return false;
 }
