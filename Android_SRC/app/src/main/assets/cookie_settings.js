@@ -33,6 +33,9 @@ var opt_ibcd_ppn2_usr = 1.5;
 var opt_ibcd_pphe_usr = 1.5;
 var opt_rate_dsc_usr = 25;
 var opt_rate_asc_usr = 15;
+
+var opt_rate_asc_surf_usr = 6;
+
 var opt_rate_asc_deco_usr = 9;
 var opt_rmv_deco_usr = 18;
 var opt_rmv_bt_usr = 20;
@@ -138,6 +141,9 @@ function default_set(){
 
     opt_rate_dsc_usr = 25;
     opt_rate_asc_usr = 15;
+
+    opt_rate_asc_surf_usr = 6;
+
     opt_rate_asc_deco_usr = 9;
     opt_rmv_deco_usr = 18;
     opt_rmv_bt_usr = 20;
@@ -341,6 +347,11 @@ var lng_arr = [
         text: "한국어",
         id: "tn_kr",
         isdisable: "enabled"
+    },
+    {
+        text: "Italiano",
+        id: "tn_it",
+        isdisable: "enabled"
     }
     ];
 var dmns_arr = [
@@ -401,7 +412,32 @@ var water_ph_arr = [
         text: "Pacific",
         id: "tn_water_pacific",
         isdisable: "enabled"
-    }];
+    }
+    ,
+    {
+        text: "Mediterranean",
+        id: "tn_water_mediterranean",
+        isdisable: "enabled"
+    }
+    ,
+    {
+        text: "Black Sea",
+        id: "tn_water_black",
+        isdisable: "enabled"
+    }
+    ,
+    {
+        text: "Caspian Sea",
+        id: "tn_water_caspian",
+        isdisable: "enabled"
+    }
+    ,
+    {
+        text: "Sea of Azov",
+        id: "tn_water_azov",
+        isdisable: "enabled"
+    }
+];
 
 var plan_style_arr = [
     {
@@ -544,7 +580,11 @@ function lng_cng_mix(mix_name){
         if(mix_name == "Air"){mix_name = "Air";}
         if(mix_name == "OXY"){mix_name = "Oxygen";}
     }
-
+    //Italian
+    if(td_lng == 9){
+        if(mix_name == "Air"){mix_name = "Aria";}
+        if(mix_name == "OXY"){mix_name = "Ossigeno";}
+    }
     return mix_name;
 }
 
@@ -552,16 +592,16 @@ function lng_cng_mix(mix_name){
 function water_density(){
     tn_water_g = document.getElementById("tn_water");
     tn_water_g_idx = tn_water_g.options[tn_water_g.selectedIndex].value;
-
+    //from https://en.wikipedia.org/wiki/List_of_bodies_of_water_by_salinity
     if (tn_water_g_idx == 1){
-        return 1030; // atlantic
+        return 1034; // atlantic
     }
 
     if (tn_water_g_idx == 2){
         return 1000; // fresh
     }
     if (tn_water_g_idx == 3){
-        return 1015; // baltic
+        return 1010; // baltic
     }
     if (tn_water_g_idx == 4){
         return 1040; // red sea
@@ -574,6 +614,18 @@ function water_density(){
     }
     if (tn_water_g_idx == 7){
         return 1024; // Pacific
+    }
+    if (tn_water_g_idx == 8){
+        return 1038; // Mediterranean Sea
+    }
+    if (tn_water_g_idx == 9){
+        return 1023; // Black Sea
+    }
+    if (tn_water_g_idx == 10){
+        return 10125; // Caspian Sea
+    }
+    if (tn_water_g_idx == 11){
+        return 1011; // Sea of Azov
     }
     return false;
 }
@@ -771,8 +823,6 @@ function get_working_mix_idx_ccr(wrk_dp, tmp_mix_arr){
 
 //create list of used gases for air breaks menu
 function airbr_mix_arr (){
-
-    //console.log($( "#opt_travel" ).val());
     var travel_arr = travel_mix_arr.slice();
     travel_arr.length = ($( "#opt_travel" ).val()*2);
 
@@ -817,10 +867,6 @@ function airbr_mix_arr (){
     //if nothing, add at least one default mix
     if(fin_arr.length == 0){
         var tmp_arr_gas = [travel_mix_arr[0],travel_mix_arr[1]];
-        //console.log(tmp_arr_gas);
-        //$("#opt_airbr_time_reset").val("1");
-        //$("#opt_airbr_time_reset").val("1").prop("selected", true);
-
         $("#opt_airbr_time_reset").val("1").attr("disabled",true);
 
         fin_arr.push({
@@ -944,6 +990,9 @@ function write_cookie(){
 
     setCookie("opt_rate_dsc_usr1", return_idx("opt_rate_dsc"));
     setCookie("opt_rate_asc_usr1", return_idx("opt_rate_asc"));
+
+    setCookie("opt_rate_asc_surf_usr1", return_idx("opt_rate_asc_surf"));
+
     setCookie("opt_rate_asc_deco_usr1", return_idx("opt_rate_asc_deco"));
     setCookie("opt_rmv_deco_usr1", return_idx("opt_rmv_deco"));
     setCookie("opt_rmv_bt_usr1", return_idx("opt_rmv_bt"));
@@ -1054,6 +1103,9 @@ function read_cookie(){
 
     opt_rate_dsc_usr = parseInt(getCookie("opt_rate_dsc_usr1"));
     opt_rate_asc_usr = parseInt(getCookie("opt_rate_asc_usr1"));
+
+    opt_rate_asc_surf_usr = parseInt(getCookie("opt_rate_asc_surf_usr1"));
+
     opt_rate_asc_deco_usr = parseInt(getCookie("opt_rate_asc_deco_usr1"));
     opt_rmv_deco_usr = parseInt(getCookie("opt_rmv_deco_usr1"));
     opt_rmv_bt_usr = parseInt(getCookie("opt_rmv_bt_usr1"));
@@ -1141,7 +1193,7 @@ function return_idx(html_ids){
     return idx_me;
 }
 //settings doesn`t saved ad it is first start. it will be saved now
-if(getCookie("travelmixdepth_usr1") == null){
+if(getCookie("opt_rate_asc_surf_usr1") == undefined){
     //need explanation for me. If uncomment below line all is don`t work on Android
     //upd_all();
     //console.log("cookie not found!");
@@ -1151,7 +1203,6 @@ else
 {
     read_cookie();
 }
-
 
 function split_fn_to_int(arr){
     tmp_arr = getCookie(arr).split(",");
@@ -1171,6 +1222,8 @@ function split_fn_to_int(arr){
         android_btn();
     }
  }
+
+ 
  //Restore all default settings
 function btn_restore(){
     default_set();
@@ -1213,6 +1266,9 @@ function dim_cng(){
 
     opt_rate_dsc_usr = $( "#opt_rate_dsc" ).val();
     opt_rate_asc_usr = $( "#opt_rate_asc" ).val();
+
+    opt_rate_asc_surf_usr = $( "#opt_rate_asc_surf" ).val();
+
     opt_rate_asc_deco_usr = $( "#opt_rate_asc_deco" ).val();
 
     opt_rmv_deco_usr = $( "#opt_rmv_deco" ).val();
@@ -1310,13 +1366,13 @@ function create_html(){
     del_html_elem("tn_water_set");
     create_custom_option_arr("tn_water_set" , "tn_water" , water_ph_usr , water_ph_arr);
 
-//Create mix numbers selector
+    //Create mix numbers selector
     del_html_elem("tr_deco");
     create_option("tr_deco", "opt_deco", 0, 10, opt_deco_usr , 1 , 0 , "none");
     del_html_elem("tr_travel");
     create_option("tr_travel", "opt_travel", 1, 10, opt_travel_usr , 1 , 0 , "none");
 
-//and other options
+    //and other options
     del_html_elem("tr_ppo2_deco");
     create_option("tr_ppo2_deco", "opt_ppo2_deco", 0.8, 3.19, opt_ppo2_deco_usr , 0.01 , 2 , "press");
     del_html_elem("tr_ppo2_bottom");
@@ -1337,6 +1393,10 @@ function create_html(){
     create_option("tn_rate_dsc", "opt_rate_dsc", 1, 60, opt_rate_dsc_usr , 1 , 0 , "depth");
     del_html_elem("tn_rate_asc");
     create_option("tn_rate_asc", "opt_rate_asc", 1, 40, opt_rate_asc_usr , 1 , 0 , "depth");
+
+    del_html_elem("tn_rate_asc_surf");
+    create_option("tn_rate_asc_surf", "opt_rate_asc_surf", 1, 10, opt_rate_asc_surf_usr , 1 , 0 , "depth");
+    
     del_html_elem("tn_rate_asc_deco");
     create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0 , "depth");
 
@@ -1512,10 +1572,13 @@ function create_html(){
     tn_water_g.addEventListener('change', del_lvl_list);
 
     rate_asc = document.getElementById("opt_rate_asc");
+    rate_asc_surf = document.getElementById("opt_rate_asc_surf");
     rate_dsc = document.getElementById("opt_rate_dsc");
     rate_asc_deco = document.getElementById("opt_rate_asc_deco");
 
     rate_asc.addEventListener('change', upd_all);
+    rate_asc_surf.addEventListener('change', upd_all);
+
     rate_dsc.addEventListener('change', upd_all);
     rate_asc_deco.addEventListener('change', upd_all);
 
@@ -1720,6 +1783,9 @@ create_option("tr_ibcd_ppn2", "opt_ibcd_ppn2", 0.5, 3.5, opt_ibcd_ppn2_usr , 0.1
 create_option("tr_ibcd_pphe", "opt_ibcd_pphe", 0.5, 3.5, opt_ibcd_pphe_usr , 0.1 , 1, "press");
 create_option("tn_rate_dsc", "opt_rate_dsc", 1, 60, opt_rate_dsc_usr , 1 , 0, "depth");
 create_option("tn_rate_asc", "opt_rate_asc", 1, 40, opt_rate_asc_usr , 1 , 0, "depth");
+
+create_option("tn_rate_asc_surf", "opt_rate_asc_surf", 1, 10, opt_rate_asc_surf_usr , 1 , 0, "depth");
+
 create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0, "depth");
 create_option("tn_rmv_deco", "opt_rmv_deco", 3, 60, opt_rmv_deco_usr , 1 , 0, "vol");
 create_option("tn_rmv_bt", "opt_rmv_bt", 3, 60, opt_rmv_bt_usr , 1 , 0 , "vol");
@@ -1859,10 +1925,12 @@ function init_global(){
     tn_water_g.addEventListener('change', del_lvl_list);
 
     rate_asc = document.getElementById("opt_rate_asc");
+    rate_asc_surf = document.getElementById("opt_rate_asc_surf");
     rate_dsc = document.getElementById("opt_rate_dsc");
     rate_asc_deco = document.getElementById("opt_rate_asc_deco");
 
     rate_asc.addEventListener('change', upd_all);
+    rate_asc_surf.addEventListener('change', upd_all);
     rate_dsc.addEventListener('change', upd_all);
     rate_asc_deco.addEventListener('change', upd_all);
 

@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.diveprome.avlasov.diveprome"
         minSdkVersion 19
-        targetSdkVersion 30
-        versionCode 20
-        versionName '12.8'
+        targetSdkVersion 31
+        versionCode 22
+        versionName '13.2'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {

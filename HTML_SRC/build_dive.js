@@ -79,9 +79,9 @@ function build_dive(){
   tmp_lvl_arr = [];
   tmp_lvl_mix_arr = [];
 
-  var rate_asc = document.getElementById("opt_rate_asc");
+  //var rate_asc = document.getElementById("opt_rate_asc");
   //var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
-  var rate_dsc = document.getElementById("opt_rate_dsc");
+  //var rate_dsc = document.getElementById("opt_rate_dsc");
   //var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
 
   //calculate ascending numbers for potentially deco stops
@@ -155,6 +155,21 @@ function build_dive(){
     output = build_dive_segment(tmp_lvl_arr , tmp_lvl_mix_arr, 0);
     output = (GasBreakInsert(LastStopUpd(output)));
   }
+
+  //modify exit to surface speed from interface parameters
+  var rate_asc_surf = document.getElementById("opt_rate_asc_surf");
+  var rate_asc_surf_idx = rate_asc_surf.options[rate_asc_surf.selectedIndex].value;
+
+  tmp_time = ((output[output.length-1].startDepth)*1.0/rate_asc_surf_idx)*1.0;
+  output.push(
+    {
+      endDepth: 0,
+      startDepth: output[output.length-1].startDepth,
+      time: tmp_time,
+      gasName: output[output.length-1].gasName
+    }
+  );
+
   return output;
 }
 //main function to build any dive segment
@@ -162,6 +177,9 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
   var rate_asc = document.getElementById("opt_rate_asc");
   var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
+
+  var rate_asc_surf = document.getElementById("opt_rate_asc_surf");
+  var rate_asc_surf_idx = rate_asc_surf.options[rate_asc_surf.selectedIndex].value;
 
   var rate_dsc = document.getElementById("opt_rate_dsc");
   var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
@@ -248,7 +266,7 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
       }
 
       //add last lvl to surface
-      tmp_time = ((tmp_arr[tmp_arr.length-1].endDepth)*1.0/rate_asc_idx)*1.0;
+      tmp_time = ((tmp_arr[tmp_arr.length-1].endDepth)*1.0/rate_asc_surf_idx)*1.0;
       tmp_arr.push(
         {
           endDepth: 0,

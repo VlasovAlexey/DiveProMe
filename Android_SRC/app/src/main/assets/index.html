@@ -69,18 +69,18 @@
          background: repeating-linear-gradient(45deg, #3986d9 , #efc96d, #c9411a);
          background: repeating-linear-gradient(45deg, #3d203e, #b90037);
          background: repeating-radial-gradient(#aaaaaa, #ffffff);
-         background: repeating-linear-gradient(0deg, #ff9966, #ff5e62);
          background: repeating-linear-gradient(0deg, #36d1dc, #5b86e5);
-         
          background: repeating-linear-gradient(45deg, #000428, #004e92);
          background: repeating-linear-gradient(0deg, #43cea2, #185a9d);
          background: repeating-linear-gradient(45deg, #04101f, #4684ee);
-         background: repeating-linear-gradient(45deg, #3d203e, #b90037);
          background: repeating-linear-gradient(0deg, #4ca1af, #c4e0e5);
          background: repeating-linear-gradient(45deg, #08203e, #4684ee);
          background: repeating-linear-gradient(45deg, #2193b0, #6dd5ed);
          background: repeating-linear-gradient(0deg, #141e30, #243b55);
-         
+         background: repeating-linear-gradient(0deg, #ff9966, #ff5e62);
+         background: repeating-linear-gradient(45deg, #3d203e, #b90037);
+         background: repeating-linear-gradient(45deg, #04101f, #4684ee);
+
          animation: gradient 4s ease infinite;
          -webkit-transition: opacity 200ms ease-in-out;
          -moz-transition: opacity 200ms ease-in-out;
@@ -1402,9 +1402,9 @@
                         <circle cx="32.0264" cy="18.5673" r="3.18105" id="el_INEuwdrwFt9"/>
                      </g>
                   </g>
-               </g>
+                  </g>
             </svg>
-            
+            <!--
             <div>
                <svg svg class="preloader" viewBox="0 -400 1378 3000" width="35%"  height="35%" xmlns="http://www.w3.org/2000/svg" xml:space="preserve">
                   <g
@@ -1418,8 +1418,9 @@
                </g>
                </svg>
             </div>
-            <div style="color: #eeeeee">Copyright © 2022 Alexey Vlasov<br/>
-               Version 12.8
+            -->
+            <div style="color: #eeeeee">Copyright © 2023 Alexey Vlasov<br/>
+               Version 13.2
             </div>
             
          </div>
@@ -1520,7 +1521,7 @@
              ga('set', 'checkProtocolTask', function(){ga('send', 'pageview');});
              ga('send', 'pageview');
          </script>
-         >-->
+         
       <script>
          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -1530,6 +1531,7 @@
          ga('create', 'UA-106149389-1', 'auto');
          ga('send', 'pageview');
       </script>
+      >-->
    </head>
    <body id="body_main" onload="">
       <!-- custom node js Platforms(Win,OsX, Linux) start interface position control
@@ -1641,6 +1643,8 @@
                   <div id="tn_rate_dsc" class="tn_rate_dsc"></div>
                   <div id="tr_rate_asc" class="tr_rate_asc"></div>
                   <div id="tn_rate_asc" class="tn_rate_asc"></div>
+                  <div id="tr_rate_asc_surf" class="tr_rate_asc_surf"></div>
+                  <div id="tn_rate_asc_surf" class="tn_rate_asc_surf"></div>
                   <div id="tr_rate_asc_deco" class="tr_rate_asc_deco"></div>
                   <div id="tn_rate_asc_deco" class="tn_rate_asc_deco"></div>
                </div>
@@ -2103,8 +2107,7 @@
          <div class="overlay-content-progress">
             <div>
                <svg class="shadow" id="eu3lY90mh7v1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  width="150"  height="150" viewBox="0 0 600 600" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
-                  <style><![CDATA[#eu3lY90mh7v9_tr {
-                     animation: eu3lY90mh7v9_tr__tr 2000ms linear infinite normal forwards}@keyframes eu3lY90mh7v9_tr__tr { 0% {transform: translate(280.008987px,320.019785px) rotate(0deg)} 100% {transform: translate(280.008987px,320.019785px) rotate(360deg)}}]]></style>
+                  
                   <g transform="translate(19.991013 0)">
                      <ellipse rx="180" ry="180" transform="translate(280.008982 320.019785)" fill="#fff" stroke="#166bff" stroke-width="20"/>
                      <path d="M230.300596,110.171584c13.78533-17.892982,43.65513-19.303053,60,0" transform="matrix(.69016 0.723657-.723657 0.69016 339.21005-103.380475)" fill="#fff" stroke="#166bff" stroke-width="60" stroke-linecap="round"/>
@@ -2140,32 +2143,32 @@
       <script src="Arial_Digiscream_Normal-normal.js"></script>
       <script src="svg2pdf.src.js"></script>
       <script src="jspdf.plugin.autotable.js"></script>
-      <script src="highstock.js?v0.18113112115111311111131167" charset="UTF-8"></script>
-      <script src="exporting.src.js?v0.163111258113592113157" charset="UTF-8"></script>
-      <script src="offline-exporting.src.js?v0.15123311163171819215" charset="UTF-8"></script>
-      <script src="cns_table.js?v0.118151126123515333111171"></script>
-      <script src="html_new_gen_main.js?v0.11121115333111186411841154923457" charset="UTF-8"></script>
-      <script src="android_fn.js?v0.2841841125111335139116234517" charset="UTF-8"></script>
-      <script src="cookie_settings.js?v0.1122853112131311111836441521679123457wa123" charset="UTF-8"></script>
-      <script src="lng_fn.js?v0.110267w1a134g215f131313112"charset="UTF-8"></script>
-      <script src="dive_comp.js?0.184621112183315141115319123457"charset="UTF-8"></script>
-      <script src="block_gen.js?v0.82611211831531551931123457" charset="UTF-8"></script>
-      <script src="saul_planner.js?v0.1523113" charset="UTF-8"></script>
-      <script src="gases_list_gen.js?v0.13583112711131116143159123457" charset="UTF-8"></script>
-      <script src="build_dive.js?v0.1111543523016311311137" charset="UTF-8"></script>
-      <script src="tables_build.js?v0.1817235236411113118415912345w1" charset="UTF-8"></script>
-      <script src="gf_option.js?v0.1884121423573116131511912345" charset="UTF-8"></script>
-      <script src="chart_theme.js?v0.1821412835731131461115912345" charset="UTF-8"></script>
-      <script src="chart_profile.js?v0.18212113531331874641115912345" charset="UTF-8"></script>
-      <script src="style_manager.js?v0.18121111353311327468114315912345" charset="UTF-8"></script>
-      <script src="ios_fn.js?v0.101211121113133563745" charset="UTF-8"></script>
-      <script src="calc_learn.js?v0.18111267128354314113591213415w" charset="UTF-8"></script>
+      <script src="highstock.js?v0.1811153116241151113311111131167" charset="UTF-8"></script>
+      <script src="exporting.src.js?v0.16135114125816133592113157" charset="UTF-8"></script>
+      <script src="offline-exporting.src.js?v0.1554116233311163171819215" charset="UTF-8"></script>
+      <script src="cns_table.js?v0.11815112612351154536333111171"></script>
+      <script src="html_new_gen_main.js?v0.1112111154563333111186411841154923457" charset="UTF-8"></script>
+      <script src="android_fn.js?v0.284184112511131453651339116234517" charset="UTF-8"></script>
+      <script src="cookie_settings.js?v0.112285311142516313311111836441521679123457wa123" charset="UTF-8"></script>
+      <script src="lng_fn.js?v0.110267w1a134g215f1145v3613313112"charset="UTF-8"></script>
+      <script src="dive_comp.js?0.1846211121833151445v161135319123457"charset="UTF-8"></script>
+      <script src="block_gen.js?v0.826112118315315545v16931123457" charset="UTF-8"></script>
+      <script src="saul_planner.js?v0.1542v6353113" charset="UTF-8"></script>
+      <script src="gases_list_gen.js?v0.134v565833112711131116143159123457" charset="UTF-8"></script>
+      <script src="build_dive.js?v0.11115434v525633016311311137" charset="UTF-8"></script>
+      <script src="tables_build.js?v0.1817234v5253636411113118415912345w1" charset="UTF-8"></script>
+      <script src="gf_option.js?v0.18841214234v575336116131511912345" charset="UTF-8"></script>
+      <script src="chart_theme.js?v0.1821412834v5753361131461115912345" charset="UTF-8"></script>
+      <script src="chart_profile.js?v0.182121134v535316331874641115912345" charset="UTF-8"></script>
+      <script src="style_manager.js?v0.1812v11114353536311327468114315912345" charset="UTF-8"></script>
+      <script src="ios_fn.js?v0.101211121113v1334563356745" charset="UTF-8"></script>
+      <script src="calc_learn.js?v0.18111267v1283454335614113591213415w" charset="UTF-8"></script>
       <!-- Very important place only here node js check functions! -->
-      <script src="nodejs_fn.js?v0.18182441526113573113591213415" charset="UTF-8"></script>
-      <script src="price_calc.js?v0.8842617111411353325191123145" charset="UTF-8"></script>
-      <script src="main.js?v0.18812454115651911131352372113415aw" charset="UTF-8"></script>
-      <script src="lvl_functions.js?v0.18241116237135831141151912345" charset="UTF-8"></script>
-      <script src="style_manager.js?v0.18814121316213573141115912345" charset="UTF-8"></script>
+      <script src="nodejs_fn.js?v0.1818244152v61134573356113591213415" charset="UTF-8"></script>
+      <script src="price_calc.js?v0.8842617111v4113453335625191123145" charset="UTF-8"></script>
+      <script src="main.js?v0.18812454115651911v1313452335672113415aw" charset="UTF-8"></script>
+      <script src="lvl_functions.js?v0.182411162v371345833561141151912345" charset="UTF-8"></script>
+      <script src="style_manager.js?v0.1881412131v62134573356141115912345" charset="UTF-8"></script>
       <!-- Preloader Info Wait when all Page Loaded-->
       <script type="text/javascript">
          window.onload = function() {

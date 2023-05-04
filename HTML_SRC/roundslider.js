@@ -1,5 +1,5 @@
 /*!
- * roundSlider v1.3.3 | (c) 2015-2019, Soundar
+ * roundSlider v1.3.3 | (c) 2020-2022, Soundar
  * MIT license | http://roundsliderui.com/licence.html
  */
 

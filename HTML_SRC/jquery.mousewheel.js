@@ -1,10 +1,4 @@
-/*!
- * jQuery Mousewheel 3.1.13
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- */
+//jQuery Mousewheel 3.1.13
 
 (function (factory) {
     if ( typeof define === 'function' && define.amd ) {

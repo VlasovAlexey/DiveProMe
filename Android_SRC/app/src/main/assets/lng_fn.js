@@ -86,6 +86,15 @@
                 lng_ltr = ", liters";
                 lng_temper = ", <sup><small>o</small></sup>C";
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 9){
+                lng_bar = ", bar";
+                lng_meters = ", metri";
+                lng_meters_min = ", m/min";
+                lng_ltr_min = ", l/min";
+                lng_min = ", min";
+                lng_ltr = ", litri";
+                lng_temper = ", <sup><small>o</small></sup>C";
+            }
 
         }
         else
@@ -162,6 +171,15 @@
                 lng_ltr = ", ft<sup><small>3</small></sup>";
                 lng_temper = ", <sup><small>o</small></sup>F";
             }
+            if(lng_opt.options[lng_opt.selectedIndex].value == 9){
+                lng_bar = ", psi";
+                lng_meters = ", ft";
+                lng_meters_min = ", ft/min";
+                lng_ltr_min = ", ft<sup><small>3</small></sup>/min";
+                lng_min = ", min";
+                lng_ltr = ", ft<sup><small>3</small></sup>";
+                lng_temper = ", <sup><small>o</small></sup>F"
+            }
 
         }
         AssignLng();
@@ -192,7 +210,7 @@
                 ".tn_btn_pp_profile_chart" : "Build Charts",
                 ".tn_btn_cons" : "Build Charts",
                 
-                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licensed under the Apache License 2.0",
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licensed under the Apache License 2.0",
                 ".btn_save" : "Save Current Settings",
                 ".btn_restore" : "Restore Defaults",
                 ".tr_ifc_set" : "Interface Style",
@@ -206,6 +224,11 @@
                 ".tn_water_pacific" : "Pacific",
                 ".tn_water_salt" : "Atlantic",
 
+                ".tn_water_mediterranean" : "Mediterranean Sea",
+                ".tn_water_black" : "Black Sea",
+                ".tn_water_caspian" : "Caspian Sea",
+                ".tn_water_azov" : "Sea of Azov",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "Surface Environment Temperature" + lng_temper,
                 ".tr_levels" : "Mix / Depth" + lng_meters + " / Time" + lng_min,
@@ -214,6 +237,9 @@
 
                 ".tr_rate_dsc" : "Descent Rate" + lng_meters_min,
                 ".tr_rate_asc" : "Ascent Rate" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Ascent Rate to Surface" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Ascent Deco Rate" + lng_meters_min,
                 ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
@@ -350,7 +376,7 @@
                 ".tn_donat_header_silver" : "Silver Donation Section",
                 ".tn_donat_header_bronze" : "Bronze Donation Section",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -404,6 +430,11 @@
                 ".tn_water_pacific" : "Тихий океан",
                 ".tn_water_salt" : "Атлантика",
 
+                ".tn_water_mediterranean" : "Средиземное море",
+                ".tn_water_black" : "Черное море",
+                ".tn_water_caspian" : "Каспийское море",
+                ".tn_water_azov" : "Азовское море",
+
                 ".tn_ppn2_max_deco" : "Максимальное ПД N<sub><small>2</small></sub> деко" + lng_bar,
                 ".tr_celsus" : "Температура на поверхности" + lng_temper,
                 ".tr_levels" : "Смесь / глубина" + lng_meters + " / время" + lng_min,
@@ -412,6 +443,9 @@
 
                 ".tr_rate_dsc" : "Скорость погружения" + lng_meters_min,
                 ".tr_rate_asc" : "Скорость всплытия" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Скорость всплытия на поверхность" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Скорость всплытия на деко" + lng_meters_min,
                 ".tr_rmv_deco" : "Дыхание на деко" + lng_ltr_min,
                 ".tr_rmv_bt" : "Дыхание на дне" + lng_ltr_min,
@@ -554,7 +588,7 @@
                 ".tn_donat_header_silver" : "Серебряная секция",
                 ".tn_donat_header_bronze" : "Бронзовая секция",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -594,7 +628,7 @@
                 ".tn_btn_pp_profile_chart" : "Crear Gráficos",
                 ".tn_btn_cons" : "Crear Gráficos",
 
-                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Bajo licencia Apache 2.0",
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Bajo licencia Apache 2.0",
                 ".btn_save" : "Guardar Configuración Actual",
                 ".btn_restore" : "Restaurar Valores Predeterminados",
                 ".tr_ifc_set" : "Estilo Pantalla",
@@ -608,6 +642,11 @@
                 ".tn_water_pacific" : "Pacífico",
                 ".tn_water_salt" : "Océano Atlántico",
 
+                ".tn_water_mediterranean" : "Mar Mediterráneo",
+                ".tn_water_black" : "Mar Negro",
+                ".tn_water_caspian" : "Mar Caspio",
+                ".tn_water_azov" : "Mar de Azov",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Deco" + lng_bar,
                 ".tr_celsus" : "Temperatura Ambiente en la Superficie" + lng_temper,
                 ".tr_levels" : "Mezcla / Profundidad" + lng_meters + " / Tiempo" + lng_min,
@@ -616,6 +655,9 @@
 
                 ".tr_rate_dsc" : "Velocidad Descenso" + lng_meters_min,
                 ".tr_rate_asc" : "Velocidad Ascenso" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Velocidad Ascenso a Superficie" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Velocidad Ascenso Deco" + lng_meters_min,
                 ".tr_rmv_deco" : "Ratio Consumo Deco" + lng_ltr_min,
                 ".tr_rmv_bt" : "Ratio Consumo Fondo" + lng_ltr_min,
@@ -680,10 +722,10 @@
                 ".tn_calc_he" :"Helio%",
                 ".tn_calc_depth_lo" :"Profundidad Mínima Operativa" + lng_meters,
 
-//".tn_blnd_temp_mode_ideal" :"Modelo Gases Ideales",
-//".tn_blnd_temp_mode_vdv" :"Modelo Van Der Waals",
-//".tn_mix_first_he" :"He",
-//".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+                //".tn_blnd_temp_mode_ideal" :"Modelo Gases Ideales",
+                //".tn_blnd_temp_mode_vdv" :"Modelo Van Der Waals",
+                //".tn_mix_first_he" :"He",
+                //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
 
                 ".tn_price_cur" :"Seleccionar Moneda",
                 ".tn_price_top" :"Precio Gas Top Up",
@@ -753,7 +795,7 @@
                 ".tn_donat_header_silver" : "Sección de Plata",
                 ".tn_donat_header_bronze" : "Sección de Bronce",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -792,7 +834,7 @@
                 ".tn_btn_pp_profile_chart" : "Gerar Tabelas",
                 ".tn_btn_cons" : "Gerar Tabelas",
 
-                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licenciado por Apache License 2.0",
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licenciado por Apache License 2.0",
                 ".btn_save" : "Guardar Definições Atuais",
                 ".btn_restore" : "Restaurar Originais",
                 ".tr_ifc_set" : "Estilo do Interface",
@@ -805,6 +847,12 @@
                 ".tn_water_deadsea" : "Mar Morto",
                 ".tn_water_pacific" : "Oceano Pacífico",
                 ".tn_water_salt" : "Atlântico",
+
+                ".tn_water_mediterranean" : "Mar Mediterrâneo",
+                ".tn_water_black" : "Mar Negro",
+                ".tn_water_caspian" : "Mar Cáspio",
+                ".tn_water_azov" : "Mar de Azov",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "Temperatura Ambiente à Superfície" + lng_temper,
                 ".tr_levels" : "Mistura / Profundidade" + lng_meters + " / Tempo" + lng_min,
@@ -813,6 +861,9 @@
 
                 ".tr_rate_dsc" : "Velocidade de Descida" + lng_meters_min,
                 ".tr_rate_asc" : "Velocidade de Subida" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Velocidade de Subida à Superfície" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Velocidade Subida Durante Deco" + lng_meters_min,
                 ".tr_rmv_deco" : "RMV Deco" + lng_ltr_min,
                 ".tr_rmv_bt" : "RMV Fundo" + lng_ltr_min,
@@ -949,7 +1000,7 @@
                 ".tn_donat_header_silver" : "Doações Prata",
                 ".tn_donat_header_bronze" : "Doações Bronze",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -1005,6 +1056,11 @@
                 ".tn_water_pacific" : "太平洋地区",
                 ".tn_water_salt" : "大西洋",
 
+                ".tn_water_mediterranean" : "地中海",
+                ".tn_water_black" : "黑海",
+                ".tn_water_caspian" : "里海",
+                ".tn_water_azov" : "阿佐夫海",
+
                 ".tn_ppn2_max_deco" : "减压阶段最大氮分压" + lng_bar,
                 ".tr_celsus" : "水面环境温度 <sup><small>o</small></sup>C",
                 ".tr_levels" : "混合比例 / 深度" + lng_meters + " / 时间" + lng_min,
@@ -1013,6 +1069,9 @@
 
                 ".tr_rate_dsc" : "下潜速度" + lng_meters_min,
                 ".tr_rate_asc" : "上升速度" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "上升到表面的速度" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "减压阶段上升速度" + lng_meters_min,
                 ".tr_rmv_deco" : "减压RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "底部RMV" + lng_ltr_min,
@@ -1149,7 +1208,7 @@
                 ".tn_donat_header_silver" : "白银级土豪爸爸",
                 ".tn_donat_header_bronze" : "青铜级土豪爸爸",
 
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -1187,7 +1246,7 @@
                 ".tn_btn_pp_profile_chart" : "Изграждане на диаграми",
                 ".tn_btn_cons" : "Изграждане на диаграми",
 
-                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Licensed under the Apache License 2.0",
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licensed under the Apache License 2.0",
                 ".btn_save" : "Запазване на текущите настройки",
                 ".btn_restore" : "Възстанови фабричните настройки",
                 ".tr_ifc_set" : "Стил на интерфейса",
@@ -1199,6 +1258,12 @@
                 ".tn_water_deadsea" : "Мъртво море",
                 ".tn_water_pacific" : "Тихи океан",
                 ".tn_water_salt" : "Атлантически океан",
+
+                ".tn_water_mediterranean" : "Средиземно море",
+                ".tn_water_black" : "Черно море",
+                ".tn_water_caspian" : "Каспийско море",
+                ".tn_water_azov" : "Азовско море",
+
                 ".tn_ppn2_max_deco" : "пнN<sub><small>2</small></sub> Макс Деко" + lng_bar,
                 ".tr_celsus" : "Температура на повърхноста" + lng_temper,
                 ".tr_levels" : "Смес / Дълбочина" + lng_meters + " / Време" + lng_min,
@@ -1206,6 +1271,9 @@
                 ".btn_del_lvl" : "Изтрий ниво",
                 ".tr_rate_dsc" : "Скорост на спускане" + lng_meters_min,
                 ".tr_rate_asc" : "Скорост на изкачване" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Скорост на изкачване до повърхността" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Скорост на изкачване-деко" + lng_meters_min,
                 ".tr_rmv_deco" : "Деко RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Дънно RMV" + lng_ltr_min,
@@ -1320,7 +1388,7 @@
                 ".tn_donat_header_gold" : "Секция за дарение златна",
                 ".tn_donat_header_silver" : " Секция за дарение сребърна ",
                 ".tn_donat_header_bronze" : " Секция за дарение  ",
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -1341,7 +1409,7 @@
                 ".tr_saul_percent" : "DCS Приемлива вероятност, %"
             },
             7: {
-                //Eng
+                //Fr
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluant",
                 ".tn_plan_oc" : "Circuit ouvert",
@@ -1357,7 +1425,7 @@
                 ".tn_btn_pp_profile_chart" : "Construire les tableaux",
                 ".tn_btn_cons" : "Construire les tableaux",
 
-                ".td_copyright" : "Copyright © 2022 Alexey Vlasov. Sous licence Apache License 2.0",
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Sous licence Apache License 2.0",
                 ".btn_save" : "Enregistrer les données actuelles",
                 ".btn_restore" : "Restorer les données",
                 ".tr_ifc_set" : "Style d’interface",
@@ -1369,6 +1437,12 @@
                 ".tn_water_deadsea" : "Mer Morte",
                 ".tn_water_pacific" : "Pacifique",
                 ".tn_water_salt" : "Atlantique",
+
+                ".tn_water_mediterranean" : "Mer Méditerranée",
+                ".tn_water_black" : "Mer Noire",
+                ".tn_water_caspian" : "Mer Caspienne",
+                ".tn_water_azov" : "Mer d'Azov",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub>Max Deco" + lng_bar,
                 ".tr_celsus" : "Temperature de surface environnante" + lng_temper,
                 ".tr_levels" : "Mix / Profondeur" + lng_meters + " / Temps" + lng_min,
@@ -1376,6 +1450,9 @@
                 ".btn_del_lvl" : "Effacer niveau",
                 ".tr_rate_dsc" : "Vitesse de descente" + lng_meters_min,
                 ".tr_rate_asc" : "Vitesse de remonter" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Vitesse de remontée en surface" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "Vitesse de remontée en deco" + lng_meters_min,
                 ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
@@ -1490,7 +1567,7 @@
                 ".tn_donat_header_gold" : " Section OR des dons ",
                 ".tn_donat_header_silver" : " Section Argent des dons",
                 ".tn_donat_header_bronze" : " Section Bronze des dons",
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -1527,7 +1604,7 @@
                 ".tn_btn_pp_profile_chart" : "차트 작성",
                 ".tn_btn_cons" : "차트 작성",
 
-                ".td_copyright" : "저작권 © 2022 알렉세이 블라소프. Licensed under the Apache License 2.0",
+                ".td_copyright" : "저작권 © 2023 알렉세이 블라소프. Licensed under the Apache License 2.0",
                 ".btn_save" : "현재 설정 저장",
                 ".btn_restore" : "기본값으로 복원",
                 ".tr_ifc_set" : "인터페이스 스타일",
@@ -1539,6 +1616,12 @@
                 ".tn_water_deadsea" : "사해",
                 ".tn_water_pacific" : "태평양",
                 ".tn_water_salt" : "대서양",
+
+                ".tn_water_mediterranean" : "지중해",
+                ".tn_water_black" : "흑해",
+                ".tn_water_caspian" : "카스피해",
+                ".tn_water_azov" : "아조프해",
+
                 ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Max Deco" + lng_bar,
                 ".tr_celsus" : "표면 환경 온도" + lng_temper,
                 ".tr_levels" : "기체 / 수심" + lng_meters + " / 타임" + lng_min,
@@ -1546,6 +1629,9 @@
                 ".btn_del_lvl" : "바닥 삭제",
                 ".tr_rate_dsc" : "하강률" + lng_meters_min,
                 ".tr_rate_asc" : "상승률" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "표면으로의 상승 속도" + lng_meters_min,
+
                 ".tr_rate_asc_deco" : "상승 데코 비율" + lng_meters_min,
                 ".tr_rmv_deco" : "데코 RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "바텀 RMV" + lng_ltr_min,
@@ -1660,7 +1746,7 @@
                 ".tn_donat_header_gold" : "금 기부 섹션",
                 ".tn_donat_header_silver" : "은 기부 섹션",
                 ".tn_donat_header_bronze" : "동 기부 섹션",
-                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
@@ -1679,6 +1765,185 @@
                 ".tr_saul_time_max" : "귀하의 최대 바텀 시간은 다음과 같습니다",
                 ".tr_saul_time_max_dim" : "저작권 © 2021 Dr. Saul Goldman, Professor Emeritus, 대학교 명예교수",
                 ".tr_saul_percent" : "DCS 허용 확률, %"
+            },
+            9: {
+                //Italian
+                ".btn_bailout" : "Bailout",
+                ".btn_diluent" : "Diluente",
+                ".tn_plan_oc" : "Circuito Aperto",
+                ".tr_plan_ccr" : "Tipo di pianificazione",
+                ".tr_plan_style" : "Stile di pianificazione",
+                ".tn_plan_detailed" : "Dettagliato",
+                ".tn_plan_short" : "Classico",
+                ".tn_download_local" : "Scarica la versione del tuo sistema operativo",
+                ".tn_btn_tiss" : "Disegna i grafici",
+
+                ".tn_btn_price" : "Disegna i grafici",
+                ".tn_btn_learn" : "Disegna i grafici",
+                ".tn_btn_pp_profile_chart" : "Disegna i grafici",
+                ".tn_btn_cons" : "Disegna i grafici",
+
+                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Autorizzato secondo la licenza Apache 2.0",
+                ".btn_save" : "Salva le impostazioni attuali",
+                ".btn_restore" : "Ripristina alle impostazioni di fabbrica",
+                ".tr_ifc_set" : "Stile dell’interfaccia",
+                ".tn_color_dark" : "Tema Scuro",
+                ".tn_color_light" : "Tema Chiaro",
+                ".tn_water_baltic" : "Mar Baltico",
+                ".tn_water_redsea" : "Mar Rosso",
+                ".tn_water_glake" : " Gran Lago Salato - UTAH",
+                ".tn_water_deadsea" : "Mar Morto",
+                ".tn_water_pacific" : "Oceano Pacifico",
+                ".tn_water_salt" : "Oceano Atlantico",
+
+                ".tn_water_mediterranean" : "Mar Mediterraneo",
+                ".tn_water_black" : "Mar Nero",
+                ".tn_water_caspian" : "Mar Caspio",
+                ".tn_water_azov" : "Mar d'Azov",
+
+                ".tn_ppn2_max_deco" : "PPN<sub><small>2</small></sub> Mass. Deco" + lng_bar,
+                ".tr_celsus" : "Temperatura ambientale superficiale" + lng_temper,
+                ".tr_levels" : "Mix / Profondità" + lng_meters + " / Tempo" + lng_min,
+                ".btn_add_lvl" : "Aggiungi Livello",
+                ".btn_del_lvl" : "Cancella Livello",
+                
+                ".tr_rate_dsc" : "Velocità di discesa" + lng_meters_min,
+                ".tr_rate_asc" : "Velocità di salita" + lng_meters_min,
+
+                ".tr_rate_asc_surf" : "Velocità di salita in superficie" + lng_meters_min,
+
+                ".tr_rate_asc_deco" : "Velocità di salita in Deco" + lng_meters_min,
+                ".tr_rmv_deco" : "RMV in Deco" + lng_ltr_min,
+                ".tr_rmv_bt" : "RMV sul fondo" + lng_ltr_min,
+                ".tr_cng_time" : "Tempo Ulteriore per cambio miscela" + lng_min,
+                ".tr_lst_stop" : "Ultimo Stop" + lng_meters,
+                ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> Deco" + lng_bar,
+                ".tn_ppo2_bottom" : "PPO<sub><small>2</small></sub> Fondo" + lng_bar,
+                ".tn_ppo2_min" : "PPO<sub><small>2</small></sub> Min." + lng_bar,
+                ".tn_ppn2_max" : "PPN<sub><small>2</small></sub> Mass." + lng_bar,
+                ".tn_ibcd_ppn2" : "CDI PPN<sub><small>2</small></sub> Mass." + lng_bar,
+                ".tn_ibcd_pphe" : "CDI PPHe Mass." + lng_bar,
+                ".tn_dmn_mtr" : "Metri/Litri/Bar/Celsius",
+                ".tn_dmn_imp" : "Piedi/Piedi Cubi/PSI/Fahrenheit",
+                ".tr_mdl" : "Modello Decompressivo",
+                ".tr_water" : "Salinità dell’acqua",
+                ".tn_water_fresh" : "Fresca",
+                ".tr_gf" : "Gradient Factor, %",
+                ".tr_slevel" : "Elevazione dell’immersione" + lng_meters,
+                ".tn_travel" : "Immersione totale/Fondo/Miscele diluenti",
+                ".tn_deco" : "DECO Totale /Miscele di Bailout",
+                ".header0" : "Impostazioni Generali",
+                ".header1" : "Impostazioni dell’immersione",
+                ".header2" : "Allarmi per l’immersione",
+                ".header3" : "Gas per l’immersione",
+                ".header4" : "Sviluppa il profilo dell’immersione",
+                ".header5" : "Pressione parziale dei Gas" + lng_bar,
+                ".header6" : "Tensione gassosa nei compartimenti tissutali",
+                ".header7" : "Consumo di Gas",
+                ".header8" : "Costo dei Gas",
+                //".header9" : "Miscelazione dei Gas",
+                ".header9" : "Strumento di apprendimento",
+                ".tr_lng" : "Lingua",
+                ".tr_dmn" : "Unità",
+                ".td_warn" : "ATTENZIONE! C’È SEMPRE IL RISCHIO DI MALATTIA DA DECOMPRESSIONE (MDD) PER OGNI PROFILO DI IMMERSIONE ANCHE SE SI SEGUE IL PROFILO D’IMMERSIONE PRESCRITTO DALLE TABELLE D’IMMERSIONE. NESSUNA PROCEDURA O TABELLA D’IMMERSIONE POTRÀ PREVENIRE LA POSSIBILITÀ DI UNA MDD O DELLA TOSSICITÀ DA OSSIGENO! La composizione fisiologica di un individuo può variare di giorno in giorno. Si consiglia vivamente di rimanere ben entro i limiti di esposizione forniti dalla pianificazione per ridurre al minimo il rischio di MDD.",
+                ".tn_wrn_ibcd_lip" : "Considerare la risposta dei Lipidi",
+                ".tn_wrn_btm_mix" :"Miscela di fondo superiore a" + lng_ltr,
+                ".tn_wrn_deco_mix49" :"Miscela Deco fino al 49% superiore a" + lng_ltr,
+                ".tn_wrn_deco_mix50" :"Miscela deco dal 50 al 99% superiore a" + lng_ltr,
+                ".tn_wrn_deco_mix100" :"Decompressione O<sub><small>2</small></sub> superiore a" + lng_ltr,
+                ".tn_ibcd_lip_yes" :"Si",
+                ".tn_ibcd_lip_no" :"No",
+                //".tn_blnd_temp" :"Temperatura del gas C<sup><small>o</small></sup>",
+                //".tn_blnd_temp_mode" :"Modello del Gas",
+                //".tn_blend_mix_first" :"Aggiungi il primo gas",
+                //".tn_blend_press_start" :"Pressione iniziale della miscela",
+                //".tn_blend_press_end" :"Nuova pressione della miscela",
+                //".tn_blend_he_start" :"Percentuale iniziale di He nella miscela",
+                //".tn_blend_o2_start" :"Percentuale iniziale di O<sub><small>2</small></sub> nella miscela",
+                //".tn_blend_he_end" :"Percentuale di He fresco nella miscela",
+                //".tn_blend_o2_end" :"Percentuale di O<sub><small>2</small></sub> fresco nella miscela",
+                ".tn_calc_depth" :"Profondità operativa Massima" + lng_meters,
+                ".tn_calc_o2" :"Ossigeno%",
+                ".tn_calc_he" :"Elio%",
+                ".tn_calc_depth_lo" :"Profondità operativa Minima" + lng_meters,
+                //".tn_blnd_temp_mode_ideal" :"Modello ideale",
+                //".tn_blnd_temp_mode_vdv" :"Modello di Van Der Waals",
+                //".tn_mix_first_he" :"He",
+                //".tn_mix_first_o2" :"O<sub><small>2</small></sub>",
+                ".tn_price_cur" :"Selezione valuta",
+                ".tn_price_top" :"Prezzo superiore del gas",
+                ".tn_price_he" :"Prezzo unitario per He",
+                ".tn_price_o2" :" Prezzo unitario per O<sub><small>2</small></sub>",
+                ".tn_price_us" :"Dollaro americano",
+                ".tn_price_eu" :"Euro",
+                ".tn_price_uk" :"Sterlina britannica",
+                ".tn_price_rf" :"Rublo russo",
+                ".tn_price_cn" :"Yuan cinese",
+                ".btn_export_pdf_profile" :"Esporta in formato PDF",
+                ".btn_export_pdf_pp" :" Esporta in formato PDF ",
+                ".tn_btn_overlay" :"Chiudi",
+                ".btn_export_xls" :"Esporta in tabella XLS",
+                ".btn_tbl_pdf" :"Esporta in tabella PDF",
+                ".tn_calc_ead" :"EAD:&nbsp;",
+                ".tn_calc_end" :"END:&nbsp;",
+                ".tn_calc_o2max" : "&nbsp;PPO<sub><small>2</small></sub> Fondo&nbsp;" + lng_bar,
+                ".tn_calc_o2min" : "&nbsp;PPO<sub><small>2</small></sub> Min.&nbsp;" + lng_bar,
+                ".tn_calc_n2max" : "&nbsp;PPN<sub><small>2</small></sub> Mass." + lng_bar,
+                ".tn_calc_f_app" :"Formule e calcoli",
+                ".tn_calc_f_mod" :"Profondità massima operativa" + lng_meters,
+                ".tn_calc_f_ead" :"Profondità equivalente in aria" + lng_meters,
+                ".tn_calc_f_ead2" :"Solo per narcosi da N<sub><small>2</small></sub>",
+                ".tn_calc_f_end" :"Profondità narcotica equivalente" + lng_meters,
+                ".tn_calc_f_end2" :"Narcosi da N<sub><small>2</small></sub> e O<sub><small>2</small></sub>",
+                ".tn_calc_cur_ex_rate" :"Tasso di cambio per un Dollaro",
+                ".tn_calc_cur_ex_rate_pound" :"Sterlina",
+                ".tn_calc_cur_ex_rate_pence" :"Penny",
+                ".tn_calc_cur_ex_rate_euro" :"Euro",
+                ".tn_calc_cur_ex_rate_eucents" :"Centesimi",
+                ".tn_calc_cur_ex_rate_rub" :"Roubli",
+                ".tn_calc_cur_ex_rate_kopek" :"Copechi",
+                ".tn_calc_cur_ex_rate_yuan" :"Yuan",
+                ".tn_calc_cur_ex_rate_fyn" :"Fyn",
+                ".tr_setpoint_start":"Setpoint iniziale del CCR" + lng_bar,
+                ".tr_setpoint_bottom":" Setpoint di fondo del CCR" + lng_bar,
+                ".tr_setpoint_deco":"Setpoin DECO del CCR" + lng_bar,
+                ".tr_airbr_header" : "Pausa di gas",
+                ".tr_airbr_depth" : "La profondità è maggiore di" + lng_meters,
+                ".tr_airbr_o2" : "L’ossigeno da decompressione è maggiore di" + ", %",
+                ".tr_airbr_mix" : "Pausa delle miscele",
+                ".tr_airbr_time_after" : "Pausa dopo" + lng_min,
+                ".tr_airbr_time" : "Tempo di Pausa" + lng_min,
+                ".tr_airbr_time_reset" : "Abilita",
+                ".tn_airbr_time_reset_yes" : "Si",
+                ".tn_airbr_time_reset_no" : "No",
+                ".header10" : "Albo d’onore dei donatori",
+                ".tn_donat_header" : "",
+                ".btn_msg" : "Come fare una donazione",
+                ".btn_tel" : " Chiama gli sviluppatori ",
+                ".btn_ios_msg" : " Come fare una donazione ",
+                ".btn_ios_tel" : "Chiama gli sviluppatori",
+                ".tn_donat_header_founder" : "Sezione donazione dei fondatori",
+                ".tn_donat_header_gold" : "Sezione donazione dorata",
+                ".tn_donat_header_silver" : "Sezione donazione argentata",
+                ".tn_donat_header_bronze" : "Sezione donazione bronzea",
+                ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
+                ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
+                ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
+                ".header11" : "Pianificatore immersioni Ricreative S.A.U.L.",
+                ".tr_saul_mix" : "Mix",
+                ".tr_saul_res_type" : "Tipo di calcolo",
+                ".tr_saul_depth" : "Profondità" + lng_meters,
+                ".tr_saul_btime" : "Tempo di fondo" + lng_min,
+                ".tn_saul_mix_arr_air" : "Aria",
+                ".tn_saul_mix_arr_ean32" : "EAN32",
+                ".tn_saul_res_type_arr_forward" : "%(MDD) per il tempo di fondo selezionato ",
+                ".tn_saul_res_type_arr_reverse" : "Tempo di fondo per una % accettabile (MDD)",
+
+                ".tr_saul_cap_percent" : "Il rischio di MDD è:",
+                ".tr_saul_time_max" : "Il tempo massimo di fondo è:",
+                ".tr_saul_time_max_dim" : "Copyright © 2021 Dr. Saul Goldman, Professore Emerito, Università di Guelph",
+                ".tr_saul_percent" : "La probabilità di una MDD accettabile è: %"
             }
         };
     }
@@ -1724,6 +1989,9 @@
       if(td_lng == 8){
 	    return "기체";
 	  }
+      if(td_lng == 9){
+        return "Mix";
+      }
     }
 
   function plan_lng(val){
@@ -2791,7 +3059,93 @@
             if(val == "ch_price_top_total"){val = "가스 최고 가격"}
             if(val == "tn_deco_mod"){val = "자동"}
         }
-        
+        if(td_lng == 9){
+            if(val  == "t_diluent"){val = "Diluente "}
+            if(val  == "t_zoom"){val = "Azzera lo Zoom"}
+            if(val  == "tab_tr_OTU"){val = "OTU"}
+            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "ld_tis"){val = "Tessuto principale"}
+            if(val  == "amb_pres"){val = "Pressione ambientale "}
+            if(val  == "t_tiss_wrn"){val = "Questa pianificazione non ha soste decompressive. I compartimenti tissutali saranno nascosti."}
+            if(val  == "t_tiss_nt"){val = "Compartimenti tissutali azoto"}
+            if(val  == "t_tiss_hl"){val = "Compartimenti tissutali Elio"}
+            if(val  == "t_tiss_tl"){val = "Compartimenti tissutali totali Azoto ed Elio"}
+            if(val == "tab_tr_o2"){val = "PPO<sub><small>2</small></sub>"}
+            if(val == "tab_tr_n2"){val = "PPN<sub><small>2</small></sub>"}
+            if(val == "tab_tr_he"){val = "PPHe"}
+            if(val == "tab_tr_coms"){val = "Cons."}
+            if(val == "tab_tr_mix"){val = "Mix"}
+            if(val == "tab_dmn_ltr"){
+                if($( "#tn_dmn" ).val() == 1){val = "Litri"}
+                if($( "#tn_dmn" ).val() == 2){val = "Piedi cubici"}
+            }
+            if(val == "Level"){val = "Livello"}
+            if(val == "Ascent"){val = "Salita"}
+            if(val == "Descent"){val = "Discesa"}
+            if(val == "Stop"){val = "Stop"}
+            if(val == "Mix"){val = "Miscela"}
+            if(val == "RunTime"){val = "Durata"}
+            if(val == "Time"){val = "Tempo"}
+            if(val == "Depth"){val = "Profondità"}
+            if(val == "Action"){val = "Azione"}
+            if(val == "Air"){val = "Aria"}
+            if(val == "OXY"){val = "Ossigeno"}
+            if(val == "tab_tr_dmn"){val = "Volume"}
+            if(val == "tab_tr_time"){val = "Tempo"}
+            if(val == "ch_gas_d"){val = "Consumo di gas "}
+            if(val == "ch_gas_amnt"){val = "Quantità"}
+            if(val == "ch_time"){val = "Tempo"}
+            if(val == "ch_gas_ltr"){
+                if($( "#tn_dmn" ).val() == 1){val = "Lt."}
+                if($( "#tn_dmn" ).val() == 2){val = "Ft<sup><small>3</small></sup>"}
+            }
+            if(val == "ch_depth"){val = "Profondità mass."}
+            if(val == "ch_source"){val = "Sorgente"}
+            if(val == "ch_bottom"){val = "Fondo"}
+            if(val == "ch_mtr"){
+                if($( "#tn_dmn" ).val() == 1){val = "m."}
+                if($( "#tn_dmn" ).val() == 2){val = "ft."}
+            }
+            if(val == "ch_tmx"){val = "min."}
+            if(val == "ch_mix"){val = "Cambio Miscela"}
+            if(val == "ch_pp"){val = "Pressioni parziali"}
+            if(val == "ch_n2"){val = "PPN2"}
+            if(val == "ch_o2"){val = "PPO2"}
+            if(val == "ch_he"){val = "PPHe"}
+            if(val == "ch_pp_l"){val = "Pressione"}
+            if(val == "ch_mix_pp"){val = "Miscela usata"}
+            if(val == "ch_ata"){
+                if($( "#tn_dmn" ).val() == 1){val = "bar"}
+                if($( "#tn_dmn" ).val() == 2){val = "psi"}
+            }
+            if(val == "ch_Tissue"){val = "Tessuto"}
+            if(val == "ch_UnderDev"){val = "Attenzione!<br>Questo strumento è sotto sviluppo. Quest’interfaccia è mostrata sotto lavori in corso.<br>Grazie!<br>"}
+            if(val == "ch_tbl_name"){val = "Tabelle decompressive"}
+            if(val == "ch_tbl_cons"){val = "Tabelle dei consumi gassosi"}
+            if(val == "dmn_air"){val = "Aria"}
+            if(val == "dmn_mod"){val = "MOD"}
+            if(val == "dmn_ead"){val = "EAD"}
+            if(val == "dmn_end"){val = "END"}
+            if(val == "dmn_msw"){val = "msw"}
+            if(val == "dmn_fsw"){val = "fsw"}
+            if(val == "dmn_bar"){val = "bar"}
+            if(val == "dmn_ata"){val = "bar"}
+            if(val == "tn_price_dls_name_dollars"){val = "Dollari"}
+            if(val == "tn_price_dls_name_cents"){val = "Centesimi"}
+            if(val == "tn_price_dls_name_euro"){val = "Euro"}
+            if(val == "tn_price_dls_name_pound"){val = "Sterline"}
+            if(val == "tn_price_dls_name_pence"){val = "Penny"}
+            if(val == "tn_price_dls_name_rouble"){val = "Rubli"}
+            if(val == "tn_price_dls_name_kopek"){val = "Copechi"}
+            if(val == "tn_price_dls_name_yuan"){val = "Yuan"}
+            if(val == "tn_price_dls_name_fyn"){val = "Fyn"}
+            if(val == "price_price"){val = "Prezzo"}
+            if(val == "price_currency"){val = "Valuta"}
+            if(val == "price_gas"){val = "Gas"}
+            if(val == "price_gas_total"){val = "Prezzo totale:"}
+            if(val == "ch_price_top_total"){val = "Prezzo superiore del gas"}
+            if(val == "tn_deco_mod"){val = "Auto"}
+        }  
     return (val.toString());
   }
 

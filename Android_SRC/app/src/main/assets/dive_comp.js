@@ -823,7 +823,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
         };
 
         plan.prototype.getCeiling = function (gf) {
-            gf = gf || 1.0
+            gf = gf || 1.0;
             var ceiling = 0;
             //diveprome interface selector
             tn_lst_stop1 = document.getElementById("opt_lst_stop");
@@ -836,11 +836,12 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                 }
             }
             //while (ceiling % (tn_lst_stop1_idx) != 0) {
-                while (ceiling % 3 != 0) {
-                ceiling++;
-            }
+                while (ceiling % 3 != 0) {                
+                  ceiling++;
+                }
             //!!!_problem with time
             // for now correct only if las stop is 3!
+            
             return ceiling;
         };
 
@@ -851,7 +852,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     this.tissues[i][p] = originalTissues[i][p];
                 }
             }
-        }
+        };
 
         plan.prototype.calculateDecompression = function (maintainTissues, gfLow, gfHigh, maxppO2, maxEND, fromDepth) {
             maintainTissues = maintainTissues || false;
@@ -887,7 +888,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             currentGasName = this.addDecoDepthChange(fromDepth, ceiling, maxppO2, maxEND, currentGasName);
 
             //console.log("Start Ceiling:" + ceiling + " with GF:" + gfLow)
-            //you can get first decostop here!
+            //you can get first deco stop here!
             while (ceiling > 0) {
                 var currentDepth = ceiling;
                 var nextDecoDepth = (ceiling - 3);
