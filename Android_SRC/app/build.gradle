@@ -8,8 +8,8 @@ android {
         applicationId "com.diveprome.avlasov.diveprome"
         minSdkVersion 19
         targetSdkVersion 31
-        versionCode 22
-        versionName '13.2'
+        versionCode 23
+        versionName '13.3'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -23,16 +23,17 @@ android {
     }
     productFlavors {
     }
+    namespace 'com.diveprome.avlasov.diveprome'
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    testImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-    api 'com.google.android.gms:play-services-analytics:10.2.4'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    api 'com.google.android.gms:play-services-analytics:18.0.2'
     //classpath 'com.android.tools.build:gradle:4.1.2'
 
     //classpath 'com.google.gms:google-services:4.3.3'

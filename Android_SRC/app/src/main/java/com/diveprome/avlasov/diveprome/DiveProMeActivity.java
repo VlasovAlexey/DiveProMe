@@ -2,21 +2,17 @@ package com.diveprome.avlasov.diveprome;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 
@@ -47,11 +43,11 @@ public class DiveProMeActivity extends AppCompatActivity {
      */
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
-    private View mContentView;
+    //private View mContentView;
 
 
     private WebView mWebView;
-    WebView browser;
+    //WebView browser;
 
     //Make call or mail to on Android
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -72,25 +68,13 @@ public class DiveProMeActivity extends AppCompatActivity {
     }
     
     //main loop
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //hide main bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        //google analytics
-        analytics = GoogleAnalytics.getInstance(this);
-        analytics.setLocalDispatchPeriod(1800);
-        GoogleAnalytics.getInstance(this).setLocalDispatchPeriod(5);
 
-        tracker = analytics.newTracker("UA-106149389-1"); // Replace with actual tracker id
-        tracker.enableExceptionReporting(true);
-        tracker.enableAdvertisingIdCollection(true);
-        tracker.enableAutoActivityTracking(true);
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
-
-        GoogleAnalytics.getInstance(this).dispatchLocalHits();
-        //Google Analytics End
 
         super.onCreate(savedInstanceState);
 
@@ -100,7 +84,7 @@ public class DiveProMeActivity extends AppCompatActivity {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
         cookieManager.acceptCookie();
-        cookieManager.setAcceptFileSchemeCookies(true);
+        //cookieManager.setAcceptFileSchemeCookies(true);
         cookieManager.getInstance().setAcceptCookie(true);
         cookieManager.getCookie(myURL);
 
