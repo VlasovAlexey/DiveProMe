@@ -1504,6 +1504,7 @@
       <link href="apple-touch-icon-180x180+.png" rel="apple-touch-icon" sizes="180x180" />
       <link href="icon-hires+.png" rel="icon" sizes="192x192" />
       <link href="icon-normal+.png" rel="icon" sizes="128x128" />
+      
       <!--<node js specific lines for properly google analytics work
          <script src="analytics.js"></script>
          <script>
@@ -1532,8 +1533,14 @@
          ga('send', 'pageview');
       </script>
       >-->
+      <link rel="manifest" href="/manifest.json">
    </head>
    <body id="body_main" onload="">
+      <script>
+         if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+         }
+      </script>
       <!-- custom node js Platforms(Win,OsX, Linux) start interface position control
          <div id="node_os_custom_height"><br/></div> -->
       <!-- custom window toolbar control -->
@@ -1556,12 +1563,12 @@
                   <table class="tr_download_me" id="tr_download_me">
                      <tr class="tr_download_me">
                         <th class="tr_download_win">
-                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v12.8.zip?v12214134">
+                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_win64_v13.2.zip?v12214134">
                            <img src="download_me.png">
                            </a>
                         </th>
                         <th class="tr_download_mac" >
-                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v12.8.zip?v12243">
+                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_mac64_v13.2.zip?v12243">
                            <img src="download_me.png">
                            </a>
                         </th>
@@ -1571,12 +1578,12 @@
                            </a>
                         </th>
                         <th class="tr_download_andr" >
-                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_12.8.apk?v1245434">
+                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_v0_13.2.apk?v1245434">
                            <img src="download_me.png">
                            </a>
                         </th>
                         <th class="tr_download_lnx" >
-                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v12.8.zip?v1254434">
+                           <a href="/DiveMePro+/BuildsPlatformsStatic/DiveProMe_lin64_v13.2.zip?v1254434">
                            <img src="download_me.png">
                            </a>
                         </th>
@@ -2164,6 +2171,7 @@
       <script src="ios_fn.js?v0.101211121113v1334563356745" charset="UTF-8"></script>
       <script src="calc_learn.js?v0.18111267v1283454335614113591213415w" charset="UTF-8"></script>
       <!-- Very important place only here node js check functions! -->
+      <script src="sw.js?v0.1" charset="UTF-8"></script>
       <script src="nodejs_fn.js?v0.1818244152v61134573356113591213415" charset="UTF-8"></script>
       <script src="price_calc.js?v0.8842617111v4113453335625191123145" charset="UTF-8"></script>
       <script src="main.js?v0.18812454115651911v1313452335672113415aw" charset="UTF-8"></script>
