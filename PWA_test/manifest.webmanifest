@@ -1,5 +1,6 @@
 {
-  "background_color": "#4684ee",
+  "theme_color": "#B12A34",
+  "background_color": "#B12A34",
   "description": "DiveProMe Decompression Planner Software",
   "display": "fullscreen",
   "icons": [
