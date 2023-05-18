@@ -7,7 +7,7 @@
       "src": "apple-touch-icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
+    }
   ],
   "name": "DiveProMe Decompression Planner Software",
   "short_name": "DiveProMe",
