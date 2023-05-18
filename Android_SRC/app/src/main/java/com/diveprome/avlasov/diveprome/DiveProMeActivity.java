@@ -84,7 +84,7 @@ public class DiveProMeActivity extends AppCompatActivity {
         android.webkit.CookieManager cookieManager = android.webkit.CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
         cookieManager.acceptCookie();
-        //cookieManager.setAcceptFileSchemeCookies(true);
+        cookieManager.setAcceptFileSchemeCookies(true);
         cookieManager.getInstance().setAcceptCookie(true);
         cookieManager.getCookie(myURL);
 
