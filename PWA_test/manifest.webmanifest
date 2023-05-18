@@ -7,10 +7,28 @@
     {
       "src": "apple-touch-icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "name": "DiveProMe Decompression Planner Software",
   "short_name": "DiveProMe",
-  "start_url": "/DiveProMe/PWA_test/index.html"
+  "start_url": "/DiveProMe/PWA_test/index.html",
+  "lang": "en",
+  "orientation": "portrait",
+  "display_override": [
+    "window-control-overlay",
+    "standalone",
+    "browser"
+  ],
+  "categories": ["sports", "education"],
+  "screenshots" : [
+    {
+      "src": "apple-touch-icon-512x512.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide"
+    }
+  ]
+  
 }
