@@ -19,7 +19,7 @@ self.addEventListener('install', (e) => {
 	'/DiveProMe/PWA_test/apple-touch-icon-192x192.png.png',
 	'/DiveProMe/PWA_test/apple-touch-icon-512x512.png.png',
 	'/DiveProMe/PWA_test/apple-touch-icon.png.png',
-	'/DiveProMe/PWA_test/apple-touch-icon+.png.png'
+	'/DiveProMe/PWA_test/apple-touch-icon+.png.png',
     ])),
   );
 });
