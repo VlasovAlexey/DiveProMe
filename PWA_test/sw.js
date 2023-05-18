@@ -1,6 +1,6 @@
 self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open('fox-store').then((cache) => cache.addAll([
+    caches.open('diveprome-store').then((cache) => cache.addAll([
       '/DiveProMe/PWA_test/',
       '/DiveProMe/PWA_test/index.html',
       '/DiveProMe/PWA_test/index.js',
