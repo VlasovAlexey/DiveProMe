@@ -63,25 +63,11 @@
   },
   "related_applications": [
     {
-      "platform": "windows",
-      "url": "https://github.com/VlasovAlexey/DiveProMe",
-      "id": "example.ExampleApp"
-    },
-    {
-      "platform": "android",
-      "url": "https://github.com/VlasovAlexey/DiveProMe"
-    },
-    {
-      "platform": "linux",
-      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/"
-    },
-    {
-      "platform": "ios",
-      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/"
-    },
-    {
-      "platform": "mac",
-      "url": "https://github.com/VlasovAlexey/DiveProMe"
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.diveprome.avlasov.diveprome&hl=en_US"
+    }, {
+      "platform": "itunes",
+      "url": "https://www.apple.com/de/app-store/"
     }
   ]
 }
