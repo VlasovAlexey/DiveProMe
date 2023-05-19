@@ -10,16 +10,19 @@ self.addEventListener('install', (e) => {
       '/DiveProMe/PWA_test/images/fox3.jpg',
       '/DiveProMe/PWA_test/images/fox4.jpg',
       '/DiveProMe/PWA_test/apple-touch-icon-76x76.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-76x76+.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-120x120.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-120x120+.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-152x152+.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-180x180.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-180x180+.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-192x192.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon-512x512.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon.png.png',
-      '/DiveProMe/PWA_test/apple-touch-icon+.png.png'
+      '/DiveProMe/PWA_test/apple-touch-icon-76x76+.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-120x120.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-120x120+.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-152x152+.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-180x180.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-180x180+.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-192x192.png',
+      '/DiveProMe/PWA_test/apple-touch-icon-512x512.png',
+      '/DiveProMe/PWA_test/apple-touch-icon.png',
+      '/DiveProMe/PWA_test/apple-touch-icon+.png',
+      '/DiveProMe/PWA_test/diveprome_screenshot_01.png'
+
+      
     ])),
   );
 });

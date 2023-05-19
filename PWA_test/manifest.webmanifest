@@ -1,6 +1,6 @@
 {
-  "theme_color": "#B12A34",
-  "background_color": "#B12A34",
+  "theme_color": "#2B559B",
+  "background_color": "#2B559B",
   "description": "DiveProMe Decompression Planner Software",
   "display": "fullscreen",
   "icons": [
@@ -24,11 +24,41 @@
   "categories": ["sports", "education"],
   "screenshots" : [
     {
-      "src": "apple-touch-icon-512x512.png",
+      "src": "diveprome_screenshot_01.png",
       "sizes": "1280x720",
       "type": "image/png",
       "platform": "wide"
     }
-  ]
-  
+  ],
+  "shortcuts": [
+    {
+      "name": "Main screen",
+      "url": "/index.html"
+    },
+    {
+      "name": "Send Message",
+      "url": "/mailto: all3862000@mail.ru",
+      "description": "Send email to developers."
+    }
+  ],
+  "dir": "auto",
+  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
+  "prefer_related_applications": false,
+  "scope": "https://vlasovalexey.github.io",
+  "share_target": {
+    "action": "/collect-files",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "plan export pdf",
+      "text": "plan export pdf",
+      "url": "url",
+      "files": [
+        {
+          "name": "Your plan",
+          "accept": ["application/pdf", ".pdf"]
+        }
+      ]
+    }
+  }
 }
