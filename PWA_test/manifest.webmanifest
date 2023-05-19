@@ -32,13 +32,13 @@
   ],
   "shortcuts": [
     {
-      "name": "Main screen",
-      "url": "/index.html"
+      "name": "Start screen",
+      "url": "/DiveProMe/PWA_test/index.html"
     },
     {
       "name": "Send Message",
-      "url": "/mailto: all3862000@mail.ru",
-      "description": "Send email to developers."
+      "url": "https://www.facebook.com/DiveProMe",
+      "description": "Ask the community"
     }
   ],
   "dir": "auto",
