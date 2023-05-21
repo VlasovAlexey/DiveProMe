@@ -13,7 +13,7 @@
   ],
   "name": "DiveProMe Decompression Planner Software",
   "short_name": "DiveProMe",
-  "start_url": "/DiveProMe/PWA_test/index.html",
+  "start_url": "/DiveProMe/PWA_test1/index.html",
   "lang": "en",
   "orientation": "portrait",
   "display_override": [
@@ -33,7 +33,7 @@
   "shortcuts": [
     {
       "name": "Start screen",
-      "url": "/DiveProMe/PWA_test/index.html"
+      "url": "/DiveProMe/PWA_test1/index.html"
     },
     {
       "name": "Send Message",
