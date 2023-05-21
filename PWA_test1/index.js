@@ -15,7 +15,7 @@ setInterval(() => {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
-    .register('/DiveProMe/PWA_test/sw.js')
+    .register('/DiveProMe/PWA_test1/sw.js')
     .then(() => { console.log('Service Worker Registered'); });
 }
 

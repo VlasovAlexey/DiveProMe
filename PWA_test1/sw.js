@@ -2,26 +2,26 @@ const CACHE_NAME = 'diveprome-cache';
 
 // Add whichever assets you want to pre-cache here:
 const PRECACHE_ASSETS = [
-  '/DiveProMe/PWA_test/',
-  '/DiveProMe/PWA_test/index.html',
-  '/DiveProMe/PWA_test/index.js',
-  '/DiveProMe/PWA_test/style.css',
-  '/DiveProMe/PWA_test/images/fox1.jpg',
-  '/DiveProMe/PWA_test/images/fox2.jpg',
-  '/DiveProMe/PWA_test/images/fox3.jpg',
-  '/DiveProMe/PWA_test/images/fox4.jpg',
-  '/DiveProMe/PWA_test/apple-touch-icon-76x76.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-76x76+.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-120x120.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-120x120+.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-152x152+.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-180x180.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-180x180+.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-192x192.png',
-  '/DiveProMe/PWA_test/apple-touch-icon-512x512.png',
-  '/DiveProMe/PWA_test/apple-touch-icon.png',
-  '/DiveProMe/PWA_test/apple-touch-icon+.png',
-  '/DiveProMe/PWA_test/diveprome_screenshot_01.png'
+  '/DiveProMe/PWA_test1/',
+  '/DiveProMe/PWA_test1/index.html',
+  '/DiveProMe/PWA_test1/index.js',
+  '/DiveProMe/PWA_test1/style.css',
+  '/DiveProMe/PWA_test1/images/fox1.jpg',
+  '/DiveProMe/PWA_test1/images/fox2.jpg',
+  '/DiveProMe/PWA_test1/images/fox3.jpg',
+  '/DiveProMe/PWA_test1/images/fox4.jpg',
+  '/DiveProMe/PWA_test1/apple-touch-icon-76x76.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-76x76+.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-120x120.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-120x120+.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-152x152+.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-180x180.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-180x180+.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-192x192.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon-512x512.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon.png',
+  '/DiveProMe/PWA_test1/apple-touch-icon+.png',
+  '/DiveProMe/PWA_test1/diveprome_screenshot_01.png'
 ]
 
 // Listener for the install event - pre-caches our assets list on service worker install.
