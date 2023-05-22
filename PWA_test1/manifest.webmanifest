@@ -76,22 +76,6 @@
   "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
   "prefer_related_applications": false,
   "scope": "https://vlasovalexey.github.io",
-  "share_target": {
-    "action": "https://vlasovalexey.github.io",
-    "method": "POST",
-    "enctype": "multipart/form-data",
-    "params": {
-      "title": "plan export pdf",
-      "text": "plan export pdf",
-      "url": "https://vlasovalexey.github.io",
-      "files": [
-        {
-          "name": "Your plan",
-          "accept": ["application/pdf", ".pdf"]
-        }
-      ]
-    }
-  },
   "related_applications": [
     {
       "platform": "play",
