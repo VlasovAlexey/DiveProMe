@@ -5,7 +5,13 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "apple-touch-icon-512x512.png",
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FIJoMFKQNmPiElgR.png?alt=media&token=37f9ddec-494f-41cc-a35d-52df311eeab9",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FIJoMFKQNmPiElgR.png?alt=media&token=37f9ddec-494f-41cc-a35d-52df311eeab9",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -22,29 +28,54 @@
     "browser"
   ],
   "categories": ["sports", "education"],
-  "screenshots" : [
+  "screenshots": [
     {
-      "src": "diveprome_screenshot_01.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "platform": "wide"
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FKxaGqtkBwthDlxV.jpg?alt=media&token=1f62a96f-9dc6-4f26-a2bf-2b2db364142d",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "🖱️ Select - Click to select screenshot"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FlcIApCbFpPichcX.jpg?alt=media&token=01f89047-ea8e-49b8-a01f-c3759d3d2cf5",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FfhypNsNGFOCzLFy.jpg?alt=media&token=1bf04a4e-2af3-49c1-8b05-f1f9f510be3c",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FLhwkHGqwLgAxiJY.jpg?alt=media&token=8e645668-7455-42b0-b5b9-8c53cc5346e0",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FmjIsLrjrAbCuQbN.jpg?alt=media&token=92236b95-1050-4733-9893-0e844eb046ad",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
     }
   ],
   "shortcuts": [
     {
-      "name": "Start screen",
-      "url": "/DiveProMe/PWA_test1/index.html"
-    },
-    {
-      "name": "Send Message",
-      "url": "https://www.facebook.com/DiveProMe",
-      "description": "Ask the community"
+      "name": "Main",
+      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/index.html",
+      "icons": [
+        {
+          "src": "https://progressier.com/assets/img/icons/arrow-down-circle.png?v=192",
+          "sizes": "192x192"
+        }
+      ]
     }
   ],
   "dir": "auto",
   "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
   "prefer_related_applications": false,
-  "scope": "/DiveProMe/PWA_test1/",
+  "scope": "https://vlasovalexey.github.io",
   "share_target": {
     "action": "/collect-files",
     "method": "POST",
@@ -69,5 +100,16 @@
       "platform": "itunes",
       "url": "https://www.apple.com/de/app-store/"
     }
-  ]
+  ],
+  "id": "https://vlasovalexey.github.io/iYaWvyTwaaiug06uGxZd",
+  "protocol_handlers": [
+    {
+      "protocol": "web+pwa",
+      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/?pwaprotocolredirect=%s"
+    },
+    {
+      "protocol": "web+diveprome",
+      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/?pwaprotocolredirect=%s"
+    }
+  ],
 }
