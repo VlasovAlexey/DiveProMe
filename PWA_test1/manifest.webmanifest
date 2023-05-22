@@ -77,13 +77,13 @@
   "prefer_related_applications": false,
   "scope": "https://vlasovalexey.github.io",
   "share_target": {
-    "action": "/collect-files",
+    "action": "https://vlasovalexey.github.io",
     "method": "POST",
     "enctype": "multipart/form-data",
     "params": {
       "title": "plan export pdf",
       "text": "plan export pdf",
-      "url": "url",
+      "url": "https://vlasovalexey.github.io",
       "files": [
         {
           "name": "Your plan",
