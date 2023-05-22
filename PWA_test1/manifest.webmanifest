@@ -89,11 +89,11 @@
   "protocol_handlers": [
     {
       "protocol": "web+pwa",
-      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/?pwaprotocolredirect=%s"
+      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/"
     },
     {
       "protocol": "web+diveprome",
-      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/?pwaprotocolredirect=%s"
+      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/"
     }
   ],
   "share_target": {
