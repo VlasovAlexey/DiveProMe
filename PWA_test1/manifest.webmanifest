@@ -19,7 +19,7 @@
   ],
   "name": "DiveProMe Decompression Planner Software",
   "short_name": "DiveProMe",
-  "start_url": "/DiveProMe/PWA_test1/index.html",
+  "start_url": "/DiveProMe/PWA_test1/",
   "lang": "en",
   "orientation": "portrait",
   "display_override": [
@@ -89,11 +89,14 @@
   "protocol_handlers": [
     {
       "protocol": "web+pwa",
-      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/index.html"
+      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/?pwaprotocolredirect=%s"
     },
     {
       "protocol": "web+diveprome",
-      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/index.html"
+      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/?pwaprotocolredirect=%s"
     }
-  ]
+  ],
+  "share_target": {
+    "method": "GET"
+  }
 }
