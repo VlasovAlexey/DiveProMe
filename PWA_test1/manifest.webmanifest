@@ -5,16 +5,28 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "IJoMFKQNmPiElgR.png",
+      "src": "apple-touch-icon-512x512opacity.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "IJoMFKQNmPiElgR.png",
+      "src": "apple-touch-icon-512x512opacity.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "name": "DiveProMe Decompression Planner Software",
