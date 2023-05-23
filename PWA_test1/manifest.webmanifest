@@ -63,11 +63,11 @@
   "shortcuts": [
     {
       "name": "Main",
-      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/index.html",
+      "url": "https://vlasovalexey.github.io/DiveProMe/PWA_test1/index.html",
       "icons": [
         {
-          "src": "https://progressier.com/assets/img/icons/arrow-down-circle.png?v=192",
-          "sizes": "192x192"
+          "src": "arrow-down-circle.png",
+          "sizes": "92x92"
         }
       ]
     }
@@ -97,6 +97,11 @@
     }
   ],
   "share_target": {
-    "method": "GET"
+    "action": "/PWA_test1/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "url": "/DiveProMe/PWA_test1/"
+    }
   }
 }
