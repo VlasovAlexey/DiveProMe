@@ -5,13 +5,13 @@
   "display": "fullscreen",
   "icons": [
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FIJoMFKQNmPiElgR.png?alt=media&token=37f9ddec-494f-41cc-a35d-52df311eeab9",
+      "src": "IJoMFKQNmPiElgR.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FIJoMFKQNmPiElgR.png?alt=media&token=37f9ddec-494f-41cc-a35d-52df311eeab9",
+      "src": "IJoMFKQNmPiElgR.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -30,31 +30,31 @@
   "categories": ["sports", "education"],
   "screenshots": [
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FKxaGqtkBwthDlxV.jpg?alt=media&token=1f62a96f-9dc6-4f26-a2bf-2b2db364142d",
+      "src": "KxaGqtkBwthDlxV.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
       "label": "🖱️ Select - Click to select screenshot"
     },
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FlcIApCbFpPichcX.jpg?alt=media&token=01f89047-ea8e-49b8-a01f-c3759d3d2cf5",
+      "src": "lcIApCbFpPichcX.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
       "label": "Add title - Add text"
     },
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FfhypNsNGFOCzLFy.jpg?alt=media&token=1bf04a4e-2af3-49c1-8b05-f1f9f510be3c",
+      "src": "fhypNsNGFOCzLFy.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
       "label": "Add title - Add text"
     },
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FLhwkHGqwLgAxiJY.jpg?alt=media&token=8e645668-7455-42b0-b5b9-8c53cc5346e0",
+      "src": "LhwkHGqwLgAxiJY.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
       "label": "Add title - Add text"
     },
     {
-      "src": "https://firebasestorage.googleapis.com/v0/b/pwaa-8d87e.appspot.com/o/DkHIrAEz0JAhUOjS9TrE%2FmjIsLrjrAbCuQbN.jpg?alt=media&token=92236b95-1050-4733-9893-0e844eb046ad",
+      "src": "mjIsLrjrAbCuQbN.jpg",
       "type": "image/jpeg",
       "sizes": "900x1600",
       "label": "Add title - Add text"
@@ -67,7 +67,7 @@
       "icons": [
         {
           "src": "arrow-down-circle.png",
-          "sizes": "92x92"
+          "sizes": "96x96"
         }
       ]
     }
