@@ -8,7 +8,7 @@
 [![Documentation](https://img.shields.io/badge/Documentation-Facebook-brightgreen.svg?style=for-the-badge)](https://www.facebook.com/DiveProMe/)
 
 # DiveProMe+
-Firstly the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/)
+Firstly the latest version online [DiveProMe+](https://vlasovalexey.github.io/DiveProMe/HTML_SRC/)
 
 DiveProMe+ is a Java and HTML5 decompression program that uses the Bühlmann (ZHL-16) for decompression profiles. The Bühlmann decompression model is well suited to today's technical diving.
 
@@ -61,7 +61,7 @@ Click to enlarge pictures
 - ICD Alerts. Steve Burton (Steve Burton, Pattaya, Thailand. December 2004 Rev: 2011) method and PP gas maximum difference
 
 # Geting Started
-- Get the latest version online [DiveProMe+](http://scan3d.ru/DiveMePro+/) or clone\download from GitHub
+- Get the latest version online [DiveProMe+](https://vlasovalexey.github.io/DiveProMe/HTML_SRC) or clone\download from GitHub
 - Unzip arhive. Use latest Google Chrome\Mozilla Firefox\Safari Browser for view
 - Go to DiveProMe/HTML_SRC/
 - Search index.html and start it
