@@ -7,7 +7,7 @@ deleteCookie("mdls_usr1");
 */
 var deco_mix_arr = [50,0,100,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35];
 var deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
-var travel_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
+var travel_mix_depth_arr = [402,402,402,402,402,402,402,402,402,402];
 var travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
 
 var lvl_arr = [1,40,20];
@@ -89,7 +89,7 @@ var opt_calc_cur_ex_rate_yuan_usr = 6;
 var opt_calc_cur_ex_rate_fyn_usr = 45;
 
 //new3_0
-var plan_style_usr = 1;
+var plan_style_usr = 2;
 var plan_ccr_usr = 1;
 
 //new4_0
@@ -118,7 +118,7 @@ var opt_saul_percent_usr = 0.3;
 function default_set(){
     deco_mix_arr = [50,0,100,0,20,30,18,45,15,55,12,60,10,70,21,35,30,30,60,0];
     deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
-    travel_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
+    travel_mix_depth_arr = [402,402,402,402,402,402,402,402,402,402];
     travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
     lvl_arr = [1,39,20];
     lvl_mix_arr = [21,0];
@@ -197,7 +197,7 @@ function default_set(){
     opt_calc_cur_ex_rate_fyn_usr = 45;
 
     //new3_0
-    plan_style_usr = 1;
+    plan_style_usr = 2;
     plan_ccr_usr = 1;
 
     //new4_0
@@ -1406,7 +1406,7 @@ function create_html(){
     create_option("tn_rmv_bt", "opt_rmv_bt", 3, 60, opt_rmv_bt_usr , 1 , 0 , "vol");
 
     del_html_elem("tn_cng_time");
-    create_option("tn_cng_time", "opt_cng_time", 0, 3, opt_cng_time_usr , 1 , 0 , "none");
+    create_option("tn_cng_time", "opt_cng_time", 0, 2, opt_cng_time_usr , 1 , 0 , "none");
     del_html_elem("tn_lst_stop");
     create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
     del_html_elem("tn_slevel");
@@ -1789,7 +1789,7 @@ create_option("tn_rate_asc_surf", "opt_rate_asc_surf", 1, 10, opt_rate_asc_surf_
 create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0, "depth");
 create_option("tn_rmv_deco", "opt_rmv_deco", 3, 60, opt_rmv_deco_usr , 1 , 0, "vol");
 create_option("tn_rmv_bt", "opt_rmv_bt", 3, 60, opt_rmv_bt_usr , 1 , 0 , "vol");
-create_option("tn_cng_time","opt_cng_time", 0, 3, opt_cng_time_usr , 1 , 0 , "none");
+create_option("tn_cng_time","opt_cng_time", 0, 2, opt_cng_time_usr , 1 , 0 , "none");
 create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
 create_option("tn_slevel", "opt_slevel", 0, 4000, opt_slevel_usr , 100 , 0 , "depth");
 create_option("tn_celsus", "opt_celsus", 0, 50, opt_celsus_usr , 2 , 0 , "temper");

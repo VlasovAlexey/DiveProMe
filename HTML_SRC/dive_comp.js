@@ -889,16 +889,44 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
             //console.log("Start Ceiling:" + ceiling + " with GF:" + gfLow)
             //you can get first deco stop here!
+
+            //DiveProMe interface
+            var tn_cng_time = document.getElementById("opt_cng_time");
+            var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
+        
             while (ceiling > 0) {
                 var currentDepth = ceiling;
                 var nextDecoDepth = (ceiling - 3);
                 var time = 0;
+                
+                //DiveProMe interface
+                newGasName = this.addDecoDepthChange(nextDecoDepth, ceiling, maxppO2, maxEND, currentGasName);
+                
                 var gf = gfLow + (gfChangePerMeter * (distanceToSurface - ceiling));
                 //console.log("GradientFactor:"+gf + " Next decoDepth:" + nextDecoDepth);
                 while (ceiling > nextDecoDepth && time <= 10000) {
                     this.addFlat(currentDepth, currentGasName, 1);
                     time++;
-                    ceiling = this.getCeiling(gf);
+                    ceiling = this.getCeiling(gf);                    
+                }
+
+                //DiveProMe interface
+                //Add extra time for gas changing
+                if ($("#tn_plan_ccr").val() == 1) {
+                  //OC
+                  if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0){
+                    this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
+                    //console.log(currentGasName,tn_cng_time_idx);
+                  }          
+                } else {
+                  //CCR
+                  if(opt_blt_dln == 2){
+                    //nothing
+                  }
+                  //CCR Bailout
+                  else{
+                    console.log("bail");
+                  }
                 }
 
                 //console.log("Held diver at " + currentDepth + " for " + time + " minutes on gas " + currentGasName + ".");
@@ -908,7 +936,6 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             if (!maintainTissues) {
                 this.resetTissues(origTissues);
             }
-
             return dive.collapseSegments(this.segments);
         };
 

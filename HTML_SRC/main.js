@@ -169,6 +169,7 @@ function oc_ccr_hide_show_elem() {
         element_id_show("ibcd_block");
 
         element_id_show("t_cons_btn");
+        element_id_show_inline("tn_param_adv");
     } else {
         //ccr plan!
         element_id_hide("btn_add_lvl");
@@ -177,9 +178,6 @@ function oc_ccr_hide_show_elem() {
         element_id_show("tr_setpoint_block");
 
         element_id_hide("tr_gasbreak_block");
-
-        //warning about interface demo mode
-        //openNav();
 
         //Bailout plan
         if (opt_blt_dln == 1) {
@@ -315,7 +313,7 @@ function upd_all() {
     upd_airbr_mix();
 
     //upd_airbr();
-    main_plan_res = ExtraStops(ShortStop(build_dive()));
+    main_plan_res = ShortStop(build_dive());
     main_plan_src = ccr_compact_plan(main_plan_res);
 
     main_plan_table = src_to_5_arr((main_plan_src) , 0);
@@ -511,12 +509,9 @@ function upd_lvl_list() {
             min_max_arr = ret_mix_range_ccr(lvl_arr[att], get_rl_fraction(get_working_mix_idx_ccr(main_lvl, travel_mix_arr)));
         }
 
-
-
-
         if (j > 0) {
 
-            //fix deco computation problem with big steeps between levels under ascent and make maximum ascent level half of previos level
+            //fix deco computation problem with big steeps between levels under ascent and make maximum ascent level half of previous level
             if (j < (lvl_arr.length / 3)) {
                 //alert(lvl_arr[att-2]);
                 if(parseInt(lvl_arr[att - 2] / 2) < 1) {
@@ -537,7 +532,7 @@ function upd_lvl_list() {
 
         //console.log(min_max_arr[0],min_max_arr[1], lvl_arr[att+1]);
         create_option_lvl("tn_levels", "opt_levels_depth_" + j, min_max_arr[0] * 1.0, (min_max_arr[1] * 1.0) - 1, lvl_arr[att + 1] * 1.0, 1, 0);
-        //                                                                                                    ^^fix rounding problem betwin lvl connections
+        //                                                                                                    ^^fix rounding problem between lvl connections
         lvl_dp_watcher[att] = document.getElementById("opt_levels_depth_" + j);
         lvl_dp_watcher[att].addEventListener('change', upd_lvl_opt_arr);
         
