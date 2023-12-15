@@ -210,7 +210,7 @@
                 ".tn_btn_pp_profile_chart" : "Build Charts",
                 ".tn_btn_cons" : "Build Charts",
                 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licensed under the Apache License 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Licensed under the Apache License 2.0",
                 ".btn_save" : "Save Current Settings",
                 ".btn_restore" : "Restore Defaults",
                 ".tr_ifc_set" : "Interface Style",
@@ -378,7 +378,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Recreational Dive Planner",
@@ -416,7 +416,7 @@
                 ".tn_btn_pp_profile_chart" : "Построить диаграммы",
                 ".tn_btn_cons" : "Построить диаграммы",
 
-                ".td_copyright" : "Все права защищены © 2022 Алексей Власов. Использование в соответствии с Apache 2.0 лицензией",
+                ".td_copyright" : "Все права защищены © 2024 Алексей Власов. Использование в соответствии с Apache 2.0 лицензией",
                 ".btn_save" : "Сохранить текущие настройки",
                 ".btn_restore" : "Настройки по умолчанию",
                 ".tr_ifc_set" : "Стиль интерфейса",
@@ -590,7 +590,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Рекриационный планировщик риска погружений",
@@ -628,7 +628,7 @@
                 ".tn_btn_pp_profile_chart" : "Crear Gráficos",
                 ".tn_btn_cons" : "Crear Gráficos",
 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Bajo licencia Apache 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Bajo licencia Apache 2.0",
                 ".btn_save" : "Guardar Configuración Actual",
                 ".btn_restore" : "Restaurar Valores Predeterminados",
                 ".tr_ifc_set" : "Estilo Pantalla",
@@ -797,7 +797,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Planificador de Buceo Recreativo",
@@ -834,7 +834,7 @@
                 ".tn_btn_pp_profile_chart" : "Gerar Tabelas",
                 ".tn_btn_cons" : "Gerar Tabelas",
 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licenciado por Apache License 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Licenciado por Apache License 2.0",
                 ".btn_save" : "Guardar Definições Atuais",
                 ".btn_restore" : "Restaurar Originais",
                 ".tr_ifc_set" : "Estilo do Interface",
@@ -1002,7 +1002,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
 
@@ -1042,7 +1042,7 @@
                 ".tn_btn_pp_profile_chart" : "建立图表",
                 ".tn_btn_cons" : "建立图表",
 
-                ".td_copyright" : " 版权所有© 2022 Alexey Vlasov. 根据Apache 2.0许可证授权",
+                ".td_copyright" : " 版权所有© 2024 Alexey Vlasov. 根据Apache 2.0许可证授权",
                 ".btn_save" : "保存当前设定",
                 ".btn_restore" : "恢复默认设置",
                 ".tr_ifc_set" : "界面风格",
@@ -1210,7 +1210,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. 休闲潜水计划工具软件",
@@ -1246,7 +1246,7 @@
                 ".tn_btn_pp_profile_chart" : "Изграждане на диаграми",
                 ".tn_btn_cons" : "Изграждане на диаграми",
 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Licensed under the Apache License 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Licensed under the Apache License 2.0",
                 ".btn_save" : "Запазване на текущите настройки",
                 ".btn_restore" : "Възстанови фабричните настройки",
                 ".tr_ifc_set" : "Стил на интерфейса",
@@ -1390,7 +1390,7 @@
                 ".tn_donat_header_bronze" : " Секция за дарение  ",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Recreational Dive Planner",
@@ -1425,7 +1425,7 @@
                 ".tn_btn_pp_profile_chart" : "Construire les tableaux",
                 ".tn_btn_cons" : "Construire les tableaux",
 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Sous licence Apache License 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Sous licence Apache License 2.0",
                 ".btn_save" : "Enregistrer les données actuelles",
                 ".btn_restore" : "Restorer les données",
                 ".tr_ifc_set" : "Style d’interface",
@@ -1569,7 +1569,7 @@
                 ".tn_donat_header_bronze" : " Section Bronze des dons",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Planificateur de plongée récréative",
@@ -1604,7 +1604,7 @@
                 ".tn_btn_pp_profile_chart" : "차트 작성",
                 ".tn_btn_cons" : "차트 작성",
 
-                ".td_copyright" : "저작권 © 2023 알렉세이 블라소프. Licensed under the Apache License 2.0",
+                ".td_copyright" : "저작권 © 2024 알렉세이 블라소프. Licensed under the Apache License 2.0",
                 ".btn_save" : "현재 설정 저장",
                 ".btn_restore" : "기본값으로 복원",
                 ".tr_ifc_set" : "인터페이스 스타일",
@@ -1748,7 +1748,7 @@
                 ".tn_donat_header_bronze" : "동 기부 섹션",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. 레크리에이션 다이빙 플래너",
@@ -1783,7 +1783,7 @@
                 ".tn_btn_pp_profile_chart" : "Disegna i grafici",
                 ".tn_btn_cons" : "Disegna i grafici",
 
-                ".td_copyright" : "Copyright © 2023 Alexey Vlasov. Autorizzato secondo la licenza Apache 2.0",
+                ".td_copyright" : "Copyright © 2024 Alexey Vlasov. Autorizzato secondo la licenza Apache 2.0",
                 ".btn_save" : "Salva le impostazioni attuali",
                 ".btn_restore" : "Ripristina alle impostazioni di fabbrica",
                 ".tr_ifc_set" : "Stile dell’interfaccia",
@@ -1928,7 +1928,7 @@
                 ".tn_donat_header_bronze" : "Sezione donazione bronzea",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
                 ".header11" : "Pianificatore immersioni Ricreative S.A.U.L.",
                 ".tr_saul_mix" : "Mix",
