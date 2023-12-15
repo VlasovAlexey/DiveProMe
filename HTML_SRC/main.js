@@ -90,7 +90,7 @@ function upd_travel_list() {
     for (c = 0; c < mix_travel_idx; c++) {
         create_html_text("tr_travel_option", "tr_travel_mix_name_" + ((c + 1).toString()), mix_lng() + ((c + 1).toString()) + " O<sub><small>2</small></sub>, % / He, % / " + plan_lng("dmn_mod") + lng_meters);
 
-        create_option("tr_travel_option", "opt_travel_option_o2_" + (c + 1).toString() + "1", 1, 100, travel_mix_arr[a], 1, 0, "none");
+        create_option("tr_travel_option", "opt_travel_option_o2_" + (c + 1).toString() + "1", 3, 100, travel_mix_arr[a], 1, 0, "none");
         travel_watcher[a] = document.getElementById("opt_travel_option_o2_" + (c + 1).toString() + "1");
         travel_watcher[a].addEventListener('change', upd_travel_gas_list);
         travel_watcher[a].addEventListener('change', del_lvl_list);
