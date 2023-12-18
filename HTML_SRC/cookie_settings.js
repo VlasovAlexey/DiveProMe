@@ -89,7 +89,7 @@ var opt_calc_cur_ex_rate_yuan_usr = 6;
 var opt_calc_cur_ex_rate_fyn_usr = 45;
 
 //new3_0
-var plan_style_usr = 2;
+var plan_style_usr = 1;
 var plan_ccr_usr = 1;
 
 //new4_0
@@ -197,7 +197,7 @@ function default_set(){
     opt_calc_cur_ex_rate_fyn_usr = 45;
 
     //new3_0
-    plan_style_usr = 2;
+    plan_style_usr = 1;
     plan_ccr_usr = 1;
 
     //new4_0

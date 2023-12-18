@@ -912,8 +912,8 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                   //OC
                   if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0){
                     this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
-                    //console.log(currentGasName,tn_cng_time_idx);
-                  }          
+                    //console.log(currentGasName,tn_cng_time_idx);     
+                  }
                 } else {
                   //CCR
                   if(opt_blt_dln == 2){
@@ -921,7 +921,36 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                   }
                   //CCR Bailout
                   else{
-                    console.log("bail");
+                    //create array of all used gases
+                    //first get all deco gasses
+                    cnt = 0;
+                    var all_gas = [];//final array all used gases
+                    var mix_gas_cur = [];
+                    for (c = 0; c < $("#opt_deco").val(); c++){
+                      mix_gas_cur = [deco_mix_arr[cnt] , deco_mix_arr[cnt + 1]];
+                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
+                      cnt = cnt + 2;
+                    }
+                    
+                    //add travel and all used main levels gases
+                    cnt3 = 0;
+                    for(j = 0 ; j < (lvl_arr.length/3) ; j++){  
+                      mix_gas_cur = [travel_mix_arr[(lvl_arr[cnt3])*2-2], travel_mix_arr[(lvl_arr[cnt3])*2+1-2]];
+                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
+                      cnt3 = cnt3 + 3;
+                    }
+                    
+                    //compare used gas list and currentGasName
+                    alien_gas = 1;
+                    alien_gas_new = 1;
+                    for(j = 0 ; j < (all_gas.length) ; j++){
+                      if(all_gas[j] == newGasName ){alien_gas_new = 0;}
+                      if(all_gas[j] == currentGasName ){alien_gas = 0;}
+                    }
+
+                    if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0 && alien_gas == 0 && alien_gas_new == 0){
+                      this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
+                    }
                   }
                 }
 

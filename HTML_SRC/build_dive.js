@@ -301,12 +301,8 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
     //Add Bottom/travel gases
     if($( "#tn_plan_ccr" ).val() == 1){
+      
       //OC Dive
-      //and we need hide consumption first
-      //element_id_show("t_total_cons");
-      //element_id_show("7-header");
-      //element_id_show("7-content");
-
       aaa = 0;
     for(c = 0 ; c < levels_mix_segment_arr.length/2 ; c++){
       ff = [levels_mix_segment_arr[aaa] , levels_mix_segment_arr[aaa+1]];
