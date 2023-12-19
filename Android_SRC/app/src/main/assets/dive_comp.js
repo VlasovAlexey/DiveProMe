@@ -824,11 +824,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
         plan.prototype.getCeiling = function (gf) {
             gf = gf || 1.0;
-            var ceiling = 0;
-            //diveprome interface selector
-            tn_lst_stop1 = document.getElementById("opt_lst_stop");
-            tn_lst_stop1_idx = parseFloat(tn_lst_stop1.options[tn_lst_stop1.selectedIndex].value);
-            
+            var ceiling = 0;  
             for (var i = 0; i < this.tissues.length; i++) {
                 var tissueCeiling = this.tissues[i].calculateCeiling(gf);
                 if (!ceiling || tissueCeiling > ceiling) {
@@ -889,16 +885,73 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
             //console.log("Start Ceiling:" + ceiling + " with GF:" + gfLow)
             //you can get first deco stop here!
+
+            //DiveProMe interface
+            var tn_cng_time = document.getElementById("opt_cng_time");
+            var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
+        
             while (ceiling > 0) {
                 var currentDepth = ceiling;
                 var nextDecoDepth = (ceiling - 3);
                 var time = 0;
+                
+                //DiveProMe interface
+                newGasName = this.addDecoDepthChange(nextDecoDepth, ceiling, maxppO2, maxEND, currentGasName);
+                
                 var gf = gfLow + (gfChangePerMeter * (distanceToSurface - ceiling));
                 //console.log("GradientFactor:"+gf + " Next decoDepth:" + nextDecoDepth);
                 while (ceiling > nextDecoDepth && time <= 10000) {
                     this.addFlat(currentDepth, currentGasName, 1);
                     time++;
-                    ceiling = this.getCeiling(gf);
+                    ceiling = this.getCeiling(gf);                    
+                }
+
+                //DiveProMe interface
+                //Add extra time for gas changing
+                if ($("#tn_plan_ccr").val() == 1) {
+                  //OC
+                  if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0){
+                    this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
+                    //console.log(currentGasName,tn_cng_time_idx);     
+                  }
+                } else {
+                  //CCR
+                  if(opt_blt_dln == 2){
+                    //nothing
+                  }
+                  //CCR Bailout
+                  else{
+                    //create array of all used gases
+                    //first get all deco gasses
+                    cnt = 0;
+                    var all_gas = [];//final array all used gases
+                    var mix_gas_cur = [];
+                    for (c = 0; c < $("#opt_deco").val(); c++){
+                      mix_gas_cur = [deco_mix_arr[cnt] , deco_mix_arr[cnt + 1]];
+                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
+                      cnt = cnt + 2;
+                    }
+                    
+                    //add travel and all used main levels gases
+                    cnt3 = 0;
+                    for(j = 0 ; j < (lvl_arr.length/3) ; j++){  
+                      mix_gas_cur = [travel_mix_arr[(lvl_arr[cnt3])*2-2], travel_mix_arr[(lvl_arr[cnt3])*2+1-2]];
+                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
+                      cnt3 = cnt3 + 3;
+                    }
+                    
+                    //compare used gas list and currentGasName
+                    alien_gas = 1;
+                    alien_gas_new = 1;
+                    for(j = 0 ; j < (all_gas.length) ; j++){
+                      if(all_gas[j] == newGasName ){alien_gas_new = 0;}
+                      if(all_gas[j] == currentGasName ){alien_gas = 0;}
+                    }
+
+                    if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0 && alien_gas == 0 && alien_gas_new == 0){
+                      this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
+                    }
+                  }
                 }
 
                 //console.log("Held diver at " + currentDepth + " for " + time + " minutes on gas " + currentGasName + ".");
@@ -908,7 +961,6 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             if (!maintainTissues) {
                 this.resetTissues(origTissues);
             }
-
             return dive.collapseSegments(this.segments);
         };
 
@@ -976,9 +1028,8 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                 var candidateGas = this.decoGasses[gasName];
                 var mod = 0;
                 var end = 0;
+
                 //diveprome interface
-
-
                 var mix_current_mod = 0;
                 for( var c = 0 ; c < mix_mod_arr.length ; c++){
 
@@ -989,32 +1040,46 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     }
                 }
 
+                var mode_selector_val = 0;
+
                 if(mix_current_mod == 0){
                     //automatic MOD and END detection
                     mod = Math.round(candidateGas.modInMeters(maxppO2, this.isFreshWater));
                     end = Math.round(candidateGas.endInMeters(depth, this.isFreshWater));
+                    mode_selector_val = 0;
                 }
                 else{
                     //manual MOD and END selection
                     mod = mix_current_mod;
                     end = mix_current_mod;
+                    mode_selector_val = 1;
                 }
-
+                
                 //console.log("Found candidate deco gas " + gasName + ": " + (candidateGas.fO2) + "/" + (candidateGas.fHe) + " with mod " + mod + " and END " + end);
-                if (depth <= mod && end <= maxEND) {
-                    //console.log("Candidate " + gasName + " fits within MOD and END limits.");
-                    if (typeof winner == 'undefined' || //either we have no winner yet
+                  if(mode_selector_val = 1){
+                    if (depth <= mod){
+                      //console.log("Candidate " + gasName + " fits within MOD and END limits.");
+                      if (typeof winner == 'undefined' || //either we have no winner yet
                         winner.fO2 < candidateGas.fO2) { //or previous winner is a lower O2
                         //console.log("Replaced winner: " + candidateGas);
                         winner = candidateGas;
                         winnerName = gasName;
+                      }
                     }
-
-                }
+                  }
+                  if(mode_selector_val = 0){
+                    if (depth <= mod && end <= maxEND){
+                      //console.log("Candidate " + gasName + " fits within MOD and END limits.");
+                      if (typeof winner == 'undefined' || //either we have no winner yet
+                        winner.fO2 < candidateGas.fO2) { //or previous winner is a lower O2
+                        //console.log("Replaced winner: " + candidateGas);
+                        winner = candidateGas;
+                        winnerName = gasName;
+                      }
+                    }
+                  }
             }
-
-
-            return winnerName;
+          return winnerName;
         }
 
         plan.prototype.ndl = function (depth, gasName, gf) {

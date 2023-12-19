@@ -79,11 +79,6 @@ function build_dive(){
   tmp_lvl_arr = [];
   tmp_lvl_mix_arr = [];
 
-  //var rate_asc = document.getElementById("opt_rate_asc");
-  //var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
-  //var rate_dsc = document.getElementById("opt_rate_dsc");
-  //var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
-
   //calculate ascending numbers for potentially deco stops
   for (i = 0; i < lvl_arr.length/3; i++) {
 
@@ -306,12 +301,8 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
     //Add Bottom/travel gases
     if($( "#tn_plan_ccr" ).val() == 1){
+      
       //OC Dive
-      //and we need hide consumption first
-      //element_id_show("t_total_cons");
-      //element_id_show("7-header");
-      //element_id_show("7-content");
-
       aaa = 0;
     for(c = 0 ; c < levels_mix_segment_arr.length/2 ; c++){
       ff = [levels_mix_segment_arr[aaa] , levels_mix_segment_arr[aaa+1]];
@@ -762,11 +753,6 @@ function upd_lvl_opt_arr(){
   //upd_lvl_list();
   upd_all();
 }
-
-
-
-
-
   //Dec time equal to real time format xx:xx
   function time_dec_to_time(tmp_time){
     tmp_time_hi = Math.floor(tmp_time);
@@ -828,46 +814,11 @@ function src_to_5_arr(tmp_arr, flag_full){
       var pln_style_val = $("#tn_plan_style option:selected").val();
 
     runtime = 0;
-    var blns = 0;
     for (var i = 0; i < tmp_arr.length; i++) {
         dp_end1 = tmp_arr[i].endDepth*1.0;
         dp_start1 = tmp_arr[i].startDepth*1.0;
         dp_c_time = tmp_arr[i].time*1.0;
         
-        //make plan time rounded if classic style selected
-        /*if (pln_style_val == 2){
-            if(dp_start1 == dp_end1){
-                //levels or stops
-                if(blns >= 1){
-                    dp_c_time = Math.ceil(dp_c_time + blns);
-                    blns = 0;
-                }
-                //dp_c_time = Math.ceil(dp_c_time);
-            }
-             else{
-                //transition balances between levels or stops
-                if(blns >= 1){
-                    //dp_c_time = Math.ceil(dp_c_time + blns);
-                    //blns = 0;
-                    //console.log("ADD!")
-                }
-                else{
-                    blns = blns + dp_c_time;
-                    dp_c_time = 0;
-                }
-                //console.log(blns);
-            }
-            //fix start and exit to surface. Every time this make round to ceil. This add two more minutes to detailed plan anyway
-            if(i == 0 || i == tmp_arr.length-1){
-                dp_c_time = Math.ceil(tmp_arr[i].time*1.0);
-            }
-            //final update
-            runtime = runtime + (dp_c_time);
-        }
-        else{
-            runtime = runtime + (dp_c_time);
-        }*/
-
         runtime = runtime + (dp_c_time);
         dp_c_mix = tmp_arr[i].gasName;
 
@@ -1093,34 +1044,6 @@ function GasBreakInsert(main_arr) {
         }
     }
     return main_arr;
-}
-
-//ADD extra stops for gas changing
-function ExtraStops(output) {
-    var tn_cng_time = document.getElementById("opt_cng_time");
-    var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
-
-//if changing mix time === 0 we need add some time for property dive plan computation.
-    if(tn_cng_time_idx === 0)
-    {
-        //!!!need deep test! changed from 0.0 to 0.00001 after v9.11
-        //it is important. if 0.0 then crash app. need more testing and resolve this strange work
-        tn_cng_time_idx = 0.00001;
-    }
-
-    for(c = 1 ; c < output.length ; c++){
-        if(output[c].gasName != output[c-1].gasName){
-            output.splice(c,0,
-                {
-                    endDepth: output[c].startDepth,
-                    startDepth: output[c].startDepth,
-                    time: tn_cng_time_idx,
-                    gasName: output[c].gasName
-                }
-            );
-        }
-    }
-    return output;
 }
 
 //return max depth in meters from lvl list array

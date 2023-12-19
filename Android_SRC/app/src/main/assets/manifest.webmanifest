@@ -1,0 +1,107 @@
+{
+  "theme_color": "#2B559B",
+  "background_color": "#2B559B",
+  "description": "DiveProMe Decompression Planner Software",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "apple-touch-icon-512x512opacity.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "apple-touch-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "name": "DiveProMe Decompression Planner Software",
+  "short_name": "DiveProMe",
+  "start_url": "/DiveProMe/HTML_SRC/",
+  "lang": "en",
+  "orientation": "portrait",
+  "display_override": [
+    "window-control-overlay",
+    "standalone",
+    "browser"
+  ],
+  "categories": ["sports", "education"],
+  "screenshots": [
+    {
+      "src": "KxaGqtkBwthDlxV.jpg",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "🖱️ Select - Click to select screenshot"
+    },
+    {
+      "src": "lcIApCbFpPichcX.jpg",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "fhypNsNGFOCzLFy.jpg",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "LhwkHGqwLgAxiJY.jpg",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    },
+    {
+      "src": "mjIsLrjrAbCuQbN.jpg",
+      "type": "image/jpeg",
+      "sizes": "900x1600",
+      "label": "Add title - Add text"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Main",
+      "url": "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/index.html",
+      "icons": [
+        {
+          "src": "arrow-down-circle.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "dir": "auto",
+  "iarc_rating_id": "e58c174a-81d2-5c3c-32cc-34b8de4a52e9",
+  "prefer_related_applications": false,
+  "scope": "https://vlasovalexey.github.io",
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.diveprome.avlasov.diveprome&hl=en_US"
+    }, {
+      "platform": "itunes",
+      "url": "https://www.apple.com/de/app-store/"
+    }
+  ],
+  "id": "https://vlasovalexey.github.io/iYaWvyTwaaiug06uGxZd",
+  "protocol_handlers": [
+    {
+      "protocol": "web+pwa",
+      "url": "/DiveProMe/HTML_SRC/index.html%s"
+    },
+    {
+      "protocol": "web+diveprome",
+      "url": "/DiveProMe/HTML_SRC/index.html%s"
+    }
+  ],
+  "share_target": {
+    "action": "/HTML_SRC/",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "url": "/DiveProMe/HTML_SRC/"
+    }
+  }
+}
