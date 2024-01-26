@@ -313,7 +313,7 @@ function upd_all() {
     upd_airbr_mix();
 
     //upd_airbr();
-    main_plan_res = ShortStop(build_dive());
+    main_plan_res = ExtraStops(ShortStop(build_dive()));
     main_plan_src = ccr_compact_plan(main_plan_res);
 
     main_plan_table = src_to_5_arr((main_plan_src) , 0);
@@ -503,6 +503,7 @@ function upd_lvl_list() {
         if ($("#tn_plan_ccr").val() == 1) {
             //OC
             min_max_arr = ret_mix_range_oc(lvl_arr[att], get_rl_fraction(get_working_mix_idx(main_lvl, travel_mix_arr)));
+            //console.log((14) );
 
         } else {
             //CCR

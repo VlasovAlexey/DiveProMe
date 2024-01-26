@@ -49,7 +49,7 @@ function CCR_new_mix_from_depth( ccr_depth, ccr_ppo2_bt , o2fr , hefr){
   //fix problem with depth o2fr new fraction greatest 1
   if(o2fr_new > 1){o2fr_new = 1;}
   
-  //fix problem if o2fr_new > o2 current mix fraction because we can`t remove o2, he, or n2 from existing dulient
+  //fix problem if o2fr_new > o2 current mix fraction because we can`t remove o2, he, or n2 from existing diluent
   if(o2fr_new < o2fr){o2fr_new = o2fr;}
 
   return CCR_mix_upd( o2fr_new , o2fr , hefr);
@@ -184,11 +184,10 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
       //Not Deco Dive Segment
 
         if($( "#tn_plan_ccr" ).val()*1.0 == 2){
-            //CCR dive and we need hide consumption
-            element_id_hide("t_total_cons");
-            element_id_hide("7-header");
-            element_id_hide("7-content");
-            //console.log("true");
+          //CCR dive and we need hide consumption
+          element_id_hide("t_total_cons");
+          element_id_hide("7-header");
+          element_id_hide("7-content");
         }
 
       tmp_arr = [];
@@ -401,7 +400,6 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
     if($( "#tn_plan_ccr" ).val() == 2 && opt_blt_dln == 2){
       //it is CCR Diluent Dive and no Bailout(Deco gases added) dive
       //but we need add deco gases combined from Diluent
-      //var ccr_deco_mix;
       for(dp_lvl = 1 ; dp_lvl < (levels_segment_arr[1]*1.0)+1; dp_lvl=dp_lvl+0.25){  
         ccr_deco_mix = CCR_new_mix_from_depth( dp_lvl , ($("#opt_setpoint_deco" ).val()*1.0) , levels_mix_segment_arr[0]*0.01 , levels_mix_segment_arr[1]*0.01);
         
@@ -418,19 +416,23 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
 
     //eCCR Bailout deco mix add
     if($( "#tn_plan_ccr" ).val() == 2 && opt_blt_dln == 1){
+      
       //get o2 percentage for calculate deepest bailout mix
       var count = 0;
       var tmp_o2_fr_max = 100;
       for(a = 0 ; a < ($("#opt_deco").val()*1.0); a++){
 
         if(deco_mix_arr[count] < tmp_o2_fr_max){tmp_o2_fr_max = deco_mix_arr[count]};
-        count = count+2;
+        count = count + 2;
       }
+
+      //fix problem wit custom depth from gases
+      
       
       //Add deco gases only from below bailout gases
       for(dp_lvl = 1 ; dp_lvl < (levels_segment_arr[1]*1.0)+1; dp_lvl=dp_lvl+0.25){
         ccr_deco_mix = CCR_new_mix_from_depth( dp_lvl , ($("#opt_setpoint_deco").val()*1.0) , levels_mix_segment_arr[0]*0.01 , levels_mix_segment_arr[1]*0.01);
-      
+        
         ccr_deco_mix_tmp = [];
         ccr_deco_mix_tmp[0] = ccr_deco_mix[0];
         ccr_deco_mix_tmp[1] = ccr_deco_mix[1];
@@ -1044,6 +1046,34 @@ function GasBreakInsert(main_arr) {
         }
     }
     return main_arr;
+}
+
+//ADD extra stops for gas changing
+function ExtraStops(output) {
+  var tn_cng_time = document.getElementById("opt_cng_time");
+  var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
+
+//if changing mix time === 0 we need add some time for property dive plan computation.
+  if(tn_cng_time_idx === 0)
+  {
+      //!!!need deep test! changed from 0.0 to 0.00001 after v9.11
+      //it is important. if 0.0 then crash app. need more testing and resolve this strange work
+      tn_cng_time_idx = 0.00001;
+  }
+
+  for(c = 1 ; c < output.length ; c++){
+      if(output[c].gasName != output[c-1].gasName){
+          output.splice(c,0,
+              {
+                  endDepth: output[c].startDepth,
+                  startDepth: output[c].startDepth,
+                  time: tn_cng_time_idx,
+                  gasName: output[c].gasName
+              }
+          );
+      }
+  }
+  return output;
 }
 
 //return max depth in meters from lvl list array
