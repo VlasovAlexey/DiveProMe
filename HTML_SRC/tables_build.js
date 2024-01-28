@@ -14,6 +14,7 @@ function ccr_compact_plan(tmp_arr) {
               tmp_arr.splice(j, 1);
           }
       }
+      
       for (j = 0; j < tmp_arr.length - 1; j++) {
           //ccr_last_add_cnt = ccr_last_add_cnt + 1;
           //collapse different mixes for "descent"
@@ -33,12 +34,14 @@ function ccr_compact_plan(tmp_arr) {
               if (tmp_arr[j + 1].startDepth == tmp_arr[j + 1].endDepth && ccr_glue == 1) {
                   //next is flat!
                   ccr_time_sh = ccr_time_sh + tmp_arr[j].time;
-                  ccr_fixed_plan.push({
-                      gasName: tmp_arr[j - 1].gasName,
-                      startDepth: ccr_start_dp,
-                      endDepth: tmp_arr[j].endDepth,
-                      time: ccr_time_sh
-                  });
+                  
+                    ccr_fixed_plan.push({
+                        gasName: tmp_arr[j - 1].gasName,
+                        startDepth: ccr_start_dp,
+                        endDepth: tmp_arr[j].endDepth,
+                        time: ccr_time_sh
+                    });
+                               
                   // and we reset counter and time
                   ccr_time_sh = 0;
                   ccr_glue = 0;

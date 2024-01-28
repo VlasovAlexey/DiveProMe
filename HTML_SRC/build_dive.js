@@ -1061,18 +1061,52 @@ function ExtraStops(output) {
       tn_cng_time_idx = 0.00001;
   }
 
-  for(c = 1 ; c < output.length ; c++){
-      if(output[c].gasName != output[c-1].gasName){
-          output.splice(c,0,
-              {
-                  endDepth: output[c].startDepth,
-                  startDepth: output[c].startDepth,
-                  time: tn_cng_time_idx,
-                  gasName: output[c].gasName
-              }
-          );
+  //OC plan
+  if ($("#tn_plan_ccr").val() * 1.0 == 1) {
+    for(c = 1 ; c < output.length ; c++){
+    if(output[c].gasName != output[c-1].gasName){
+        output.splice(c,0,            {   
+            gasName: output[c].gasName,
+            startDepth: output[c].startDepth,
+            endDepth: output[c].startDepth,
+            time: tn_cng_time_idx
+          }
+        );
       }
+    }
   }
+  //CCR bailout plan
+  if ($("#tn_plan_ccr").val() * 1.0 == 2 && opt_blt_dln == 1) {
+    
+    var god_deco_gas = 0;
+    var deco_mix_stp = ($("#opt_deco").val() * 1.0);
+  
+    for(c = 1 ; c < output.length ; c++){
+      
+      var cnt = 0;
+
+      //we need add extra stop time only if changed to bailout array mix  
+      for (j = 0; j < deco_mix_stp; j++) {
+        //console.log( mix_to_txt_arr([deco_mix_arr[cnt], deco_mix_arr[cnt + 1]]));
+        if(output[c].gasName == (mix_to_txt_arr([deco_mix_arr[cnt], deco_mix_arr[cnt + 1]]))){
+          god_deco_gas = 1;
+        }
+         cnt = cnt + 2;
+      }
+
+      if(output[c].gasName != output[c-1].gasName && god_deco_gas == 1){
+        output.splice(c,0,            {   
+            gasName: output[c].gasName,
+            startDepth: output[c].startDepth,
+            endDepth: output[c].startDepth,
+            time: tn_cng_time_idx
+          }
+        );
+        god_deco_gas = 0;
+      }
+    }
+  }
+   
   return output;
 }
 

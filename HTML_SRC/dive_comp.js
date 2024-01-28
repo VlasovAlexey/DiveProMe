@@ -897,9 +897,9 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             gfLow = gfLow || 1.0;
             gfHigh = gfHigh || 1.0;
             maxppO2 = maxppO2 || 1.6;
-            maxEND = 200;
+            maxEND = maxEND || 30;
             var currentGasName;
-            //console.log(this.segments);
+            
             if (typeof fromDepth == 'undefined') {
                 if (this.segments.length == 0) {
                     throw "No depth to decompress from has been specified, and neither have any dive stages been registered. Unable to decompress.";
