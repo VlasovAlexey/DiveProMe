@@ -2,6 +2,11 @@
 var dive = require("/dive_comp.js");
 init_global();
 
+function btn_link() {
+    
+    //put to clipboard plan
+    navigator.clipboard.writeText("test_text");
+}
 
 function upd_altitide() {
     abs_press[0] = height_to_bar();

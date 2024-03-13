@@ -193,6 +193,8 @@
         lang = {
             1: {
                 //Eng
+                ".btn_link" : "Share Your Plan",
+                
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluent",
 
@@ -399,6 +401,7 @@
 
             //Rus
             2: {
+                ".btn_link" : "Поделиться свои планом",
                 ".btn_bailout" : "Бейлаут",
                 ".btn_diluent" : "Дилуэнт",
 
@@ -611,6 +614,8 @@
 
             //Spa
             3: {
+                ".btn_link" : "Comparta su Plan",
+
                 ".btn_bailout" : "Rescate",
                 ".btn_diluent" : "Diluyente",
 
@@ -817,6 +822,8 @@
             },
             4: {
                 //Prt
+                ".btn_link" : "Partilhar o Plano",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluente",
 
@@ -1024,6 +1031,7 @@
             },
             5 : {
                 //China
+                ".btn_link" : "分享你的计划",
 
                 ".btn_bailout" : "逃生气体",
                 ".btn_diluent" : "稀释气体",
@@ -1231,6 +1239,8 @@
             },
             6 : {
                 //Bulgarian
+                ".btn_link" : "Споделете вашия план",
+
                 ".btn_bailout" : "Аварийна",
                 ".btn_diluent" : "Смесителна",
                 ".tn_plan_oc" : "Отворен цикъл",
@@ -1410,6 +1420,8 @@
             },
             7: {
                 //Fr
+                ".btn_link" : "Partager votre plan",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluant",
                 ".tn_plan_oc" : "Circuit ouvert",
@@ -1589,6 +1601,8 @@
             },
             8: {
                 //Korean
+                ".btn_link" : "계획 공유",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluent",
                 ".tn_plan_oc" : "Open Circuit",
@@ -1768,6 +1782,8 @@
             },
             9: {
                 //Italian
+                ".btn_link" : "Condividi il tuo Piano",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluente",
                 ".tn_plan_oc" : "Circuito Aperto",
