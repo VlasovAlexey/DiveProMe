@@ -5,6 +5,9 @@ deleteCookie("lvl_usr1");
 deleteCookie("lvl_mix_usr1");
 deleteCookie("mdls_usr1");
 */
+var host_name = "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/";
+var link_buffer = "";
+
 var deco_mix_arr = [50,0,100,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35];
 var deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
 var travel_mix_depth_arr = [402,402,402,402,402,402,402,402,402,402];
@@ -961,25 +964,27 @@ function deleteCookie(name) {
         localStorage.removeItem(name);
     }
 }
+
 function write_cookie(){
     setCookie("decomix_usr1", deco_mix_arr.join(","));
+    
     setCookie("decomixdepth_usr1", deco_mix_depth_arr.join(","));
     setCookie("travelmixdepth_usr1", travel_mix_depth_arr.join(","));
     setCookie("travelmix_usr1", travel_mix_arr.join(","));
-
+    
     setCookie("lvl_usr1", lvl_arr.join(","));
     setCookie("lvl_mix_usr1", lvl_mix_arr.join(","));
-
+    
     setCookie("gf_arr_usr1", gf_arr.join(","));
     setCookie("mdls_usr1", return_idx("tn_mdl"));
     setCookie("lngs_usr1", return_idx("tn_lng"));
-
+    
     setCookie("dmns_usr1", return_idx("tn_dmn"));
     setCookie("color_usr1", return_idx("tn_color"));
     setCookie("water_ph_usr1", return_idx("tn_water"));
     setCookie("opt_deco_usr1", return_idx("opt_deco"));
     setCookie("opt_travel_usr1", return_idx("opt_travel"));
-
+    
     setCookie("opt_ppo2_deco_usr1", return_idx("opt_ppo2_deco"));
     setCookie("opt_ppo2_bottom_usr1", return_idx("opt_ppo2_bottom"));
     setCookie("opt_ppo2_min_usr1", return_idx("opt_ppo2_min"));
@@ -987,12 +992,12 @@ function write_cookie(){
     setCookie("opt_ppn2_max_deco_usr1", return_idx("opt_ppn2_max_deco"));
     setCookie("opt_ibcd_ppn2_usr1", return_idx("opt_ibcd_ppn2"));
     setCookie("opt_ibcd_pphe_usr1", return_idx("opt_ibcd_pphe"));
-
+    
     setCookie("opt_rate_dsc_usr1", return_idx("opt_rate_dsc"));
     setCookie("opt_rate_asc_usr1", return_idx("opt_rate_asc"));
-
+    
     setCookie("opt_rate_asc_surf_usr1", return_idx("opt_rate_asc_surf"));
-
+    
     setCookie("opt_rate_asc_deco_usr1", return_idx("opt_rate_asc_deco"));
     setCookie("opt_rmv_deco_usr1", return_idx("opt_rmv_deco"));
     setCookie("opt_rmv_bt_usr1", return_idx("opt_rmv_bt"));
@@ -1000,14 +1005,14 @@ function write_cookie(){
     setCookie("opt_lst_stop_usr1", return_idx("opt_lst_stop"));
     setCookie("opt_slevel_usr1", return_idx("opt_slevel"));
     setCookie("opt_celsus_usr1", return_idx("opt_celsus"));
-
+    
     //new
     setCookie("opt_wrn_ibcd_lip_usr1", return_idx("opt_wrn_ibcd_lip"));
     setCookie("opt_wrn_btm_mix_usr1", return_idx("opt_wrn_btm_mix"));
     setCookie("opt_wrn_deco_mix49_usr1", return_idx("opt_wrn_deco_mix49"));
     setCookie("opt_wrn_deco_mix50_usr1", return_idx("opt_wrn_deco_mix50"));
     setCookie("opt_wrn_deco_mix100_usr1", return_idx("opt_wrn_deco_mix100"));
-
+    
     //setCookie("opt_blnd_temp_usr1", return_idx("opt_blnd_temp"));
     //setCookie("opt_blnd_temp_mode_usr1", return_idx("opt_blnd_temp_mode"));
 
@@ -1023,17 +1028,17 @@ function write_cookie(){
     setCookie("opt_calc_o2_usr1", return_idx("opt_calc_o2"));
     setCookie("opt_calc_he_usr1", return_idx("opt_calc_he"));
     setCookie("opt_calc_depth_lo_usr1", return_idx("opt_calc_depth_lo"));
-
+    
     setCookie("opt_price_cur_usr1", return_idx("opt_price_cur"));
     setCookie("opt_price_he_dls_usr1", return_idx("opt_price_he_dls"));
     setCookie("opt_price_he_cnt_usr1", return_idx("opt_price_he_cnt"));
-
+    
     setCookie("opt_price_o2_dls_usr1", return_idx("opt_price_o2_dls"));
     setCookie("opt_price_o2_cnt_usr1", return_idx("opt_price_o2_cnt"));
-
+    
     setCookie("opt_price_top_dls_usr1", return_idx("opt_price_top_dls"));
     setCookie("opt_price_top_cnt_usr1", return_idx("opt_price_top_cnt"));
-
+    
     //new2_0
     setCookie("opt_calc_cur_ex_rate_pound_usr1", return_idx("opt_calc_cur_ex_rate_pound"));
     setCookie("opt_calc_cur_ex_rate_pence_usr1", return_idx("opt_calc_cur_ex_rate_pence"));
@@ -1041,19 +1046,19 @@ function write_cookie(){
     setCookie("opt_calc_cur_ex_rate_eucents_usr1", return_idx("opt_calc_cur_ex_rate_eucents"));
     setCookie("opt_calc_cur_ex_rate_rub_usr1", return_idx("opt_calc_cur_ex_rate_rub"));
     setCookie("opt_calc_cur_ex_rate_kopek_usr1", return_idx("opt_calc_cur_ex_rate_kopek"));
-
+    
     setCookie("opt_calc_cur_ex_rate_yuan_usr1", return_idx("opt_calc_cur_ex_rate_yuan"));
     setCookie("opt_calc_cur_ex_rate_fyn_usr1", return_idx("opt_calc_cur_ex_rate_fyn"));
-
+    
     //new3_0
     setCookie("plan_style_usr1", return_idx("tn_plan_style"));
     setCookie("plan_ccr_usr1", return_idx("tn_plan_ccr"));
-
+    
     //new4_0
     setCookie("opt_setpoint_start_usr1", return_idx("opt_setpoint_start"));
     setCookie("opt_setpoint_bottom_usr1", return_idx("opt_setpoint_bottom"));
     setCookie("opt_setpoint_deco_usr1", return_idx("opt_setpoint_deco"));
-
+    
     //new5_0
     setCookie("opt_airbr_depth_usr1", return_idx("opt_airbr_depth"));
     setCookie("opt_airbr_o2_usr1", return_idx("opt_airbr_o2"));
@@ -1061,16 +1066,137 @@ function write_cookie(){
     setCookie("opt_airbr_time_after_usr1", return_idx("opt_airbr_time_after"));
     setCookie("opt_airbr_time_usr1", return_idx("opt_airbr_time"));
     setCookie("opt_airbr_time_reset_usr1", return_idx("opt_airbr_time_reset"));
-
+    
     //new6_0
     setCookie("opt_blt_dln_usr1", opt_blt_dln);
-
+    
     //new7_0
     setCookie("opt_saul_mix_usr1", return_idx("opt_saul_mix"));
     setCookie("opt_saul_res_type_usr1", return_idx("opt_saul_res_type"));
     setCookie("opt_saul_depth_usr1", return_idx("opt_saul_depth"));
     setCookie("opt_saul_btime_usr1", return_idx("opt_saul_btime"));
     setCookie("opt_saul_percent_usr1", return_idx("opt_saul_percent"));
+}
+
+function btn_link() {
+    //put to clipboard plan
+    navigator.clipboard.writeText(share_plan_link_gen());
+}
+
+function share_plan_link_gen(){
+    //add to var for plan sharing link
+    link_buffer = host_name + "?diveprome:"
+    link_buffer += "decomix_usr1=" + deco_mix_arr.join(",") + ":";
+    link_buffer += "decomixdepth_usr1=" + deco_mix_depth_arr.join(",") + ":";    
+    link_buffer += "travelmixdepth_usr1=" + travel_mix_depth_arr.join(",") + ":";
+    link_buffer += "travelmix_usr1=" + travel_mix_arr.join(",") + ":";
+
+    link_buffer += "lvl_usr1=" + lvl_arr.join(",") + ":";
+    link_buffer += "lvl_mix_usr1=" + lvl_mix_arr.join(",") + ":";
+
+    link_buffer += "gf_arr_usr1=" + gf_arr.join(",") + ":";
+
+    link_buffer += "mdls_usr1=" + return_idx("tn_mdl") + ":";
+    link_buffer += "lngs_usr1=" + return_idx("tn_mdl") + ":";
+
+    link_buffer += "dmns_usr1=" + return_idx("tn_mdl") + ":";
+    link_buffer += "color_usr1=" + return_idx("tn_color") + ":";
+    link_buffer += "water_ph_usr1=" + return_idx("tn_water") + ":";
+    link_buffer += "opt_deco_usr1=" + return_idx("opt_deco") + ":";
+    link_buffer += "opt_travel_usr1=" + return_idx("opt_travel") + ":";
+
+    link_buffer += "opt_ppo2_deco_usr1=" + return_idx("opt_ppo2_deco") + ":";
+    link_buffer += "opt_ppo2_bottom_usr1=" + return_idx("opt_ppo2_bottom") + ":";
+    link_buffer += "opt_ppo2_min_usr1=" + return_idx("opt_ppo2_min") + ":";
+    link_buffer += "opt_ppn2_max_usr1=" + return_idx("opt_ppn2_max") + ":";
+    link_buffer += "opt_ppn2_max_deco_usr1=" + return_idx("opt_ppn2_max_deco") + ":";
+    link_buffer += "opt_ibcd_ppn2_usr1=" + return_idx("opt_ibcd_ppn2") + ":";
+    link_buffer += "opt_ibcd_pphe_usr1=" + return_idx("opt_ibcd_pphe") + ":";
+
+    link_buffer += "opt_rate_dsc_usr1=" + return_idx("opt_rate_dsc") + ":";
+    link_buffer += "opt_rate_asc_usr1=" + return_idx("opt_rate_asc") + ":";
+
+    link_buffer += "opt_rate_asc_surf_usr1=" + return_idx("opt_rate_asc_surf") + ":";
+
+    link_buffer += "opt_rate_asc_deco_usr1=" + return_idx("opt_rate_asc_deco") + ":";
+    link_buffer += "opt_rmv_deco_usr1=" + return_idx("opt_rmv_deco") + ":";
+    link_buffer += "opt_rmv_bt_usr1=" + return_idx("opt_rmv_bt") + ":";
+    link_buffer += "opt_cng_time_usr1=" + return_idx("opt_cng_time") + ":";
+    link_buffer += "opt_lst_stop_usr1=" + return_idx("opt_lst_stop") + ":";
+    link_buffer += "opt_slevel_usr1=" + return_idx("opt_slevel") + ":";
+    link_buffer += "opt_celsus_usr1=" + return_idx("opt_celsus") + ":";
+
+    //new
+    link_buffer += "opt_wrn_ibcd_lip_usr1=" + return_idx("opt_wrn_ibcd_lip") + ":";
+    link_buffer += "opt_wrn_btm_mix_usr1=" + return_idx("opt_wrn_btm_mix") + ":";
+    link_buffer += "opt_wrn_deco_mix49_usr1=" + return_idx("opt_wrn_deco_mix49") + ":";
+    link_buffer += "opt_wrn_deco_mix50_usr1=" + return_idx("opt_wrn_deco_mix50") + ":";
+    link_buffer += "opt_wrn_deco_mix100_usr1=" + return_idx("opt_wrn_deco_mix100") + ":";
+
+    //setCookie("opt_blnd_temp_usr1", return_idx("opt_blnd_temp"));
+    //setCookie("opt_blnd_temp_mode_usr1", return_idx("opt_blnd_temp_mode"));
+
+    //setCookie("opt_blend_mix_first_usr1", return_idx("opt_blend_mix_first"));
+    //setCookie("opt_blend_press_start_usr1", return_idx("opt_blend_press_start"));
+    //setCookie("opt_blend_press_end_usr1", return_idx("opt_blend_press_end"));
+    //setCookie("opt_blend_he_start_usr1", return_idx("opt_blend_he_start"));
+    //setCookie("opt_blend_o2_start_usr1", return_idx("opt_blend_o2_start"));
+    //setCookie("opt_blend_he_end_usr1", return_idx("opt_blend_he_end"));
+    //setCookie("opt_blend_o2_end_usr1", return_idx("opt_blend_o2_end"));
+
+    link_buffer += "opt_calc_depth_usr1=" + return_idx("opt_calc_depth") + ":";
+    link_buffer += "opt_calc_o2_usr1=" + return_idx("opt_calc_o2") + ":";
+    link_buffer += "opt_calc_he_usr1=" + return_idx("opt_calc_he") + ":";
+    link_buffer += "opt_calc_depth_lo_usr1=" + return_idx("opt_calc_depth_lo") + ":";
+
+    link_buffer += "opt_price_cur_usr1=" + return_idx("opt_price_cur") + ":";
+    link_buffer += "opt_price_he_dls_usr1=" + return_idx("opt_price_he_dls") + ":";
+    link_buffer += "opt_price_he_cnt_usr1=" + return_idx("opt_price_he_cnt") + ":";
+
+    link_buffer += "opt_price_o2_dls_usr1=" + return_idx("opt_price_o2_dls") + ":";
+    link_buffer += "opt_price_o2_cnt_usr1=" + return_idx("opt_price_o2_cnt") + ":";
+
+    link_buffer += "opt_price_top_dls_usr1=" + return_idx("opt_price_top_dls") + ":";
+    link_buffer += "opt_price_top_cnt_usr1=" + return_idx("opt_price_top_cnt") + ":";
+
+    //new2_0
+    link_buffer += "opt_calc_cur_ex_rate_pound_usr1=" + return_idx("opt_calc_cur_ex_rate_pound") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_pence_usr1=" + return_idx("opt_calc_cur_ex_rate_pence") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_euro_usr1=" + return_idx("opt_calc_cur_ex_rate_euro") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_eucents_usr1=" + return_idx("opt_calc_cur_ex_rate_eucents") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_rub_usr1=" + return_idx("opt_calc_cur_ex_rate_rub") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_kopek_usr1=" + return_idx("opt_calc_cur_ex_rate_kopek") + ":";
+
+    link_buffer += "opt_calc_cur_ex_rate_yuan_usr1=" + return_idx("opt_calc_cur_ex_rate_yuan") + ":";
+    link_buffer += "opt_calc_cur_ex_rate_fyn_usr1=" + return_idx("opt_calc_cur_ex_rate_fyn") + ":";
+
+    //new3_0
+    link_buffer += "plan_style_usr1=" + return_idx("tn_plan_style") + ":";
+    link_buffer += "plan_ccr_usr1=" + return_idx("tn_plan_ccr") + ":";
+
+    //new4_0
+    link_buffer += "opt_setpoint_start_usr1=" + return_idx("opt_setpoint_start") + ":";
+    link_buffer += "opt_setpoint_bottom_usr1=" + return_idx("opt_setpoint_bottom") + ":";
+    link_buffer += "opt_setpoint_deco_usr1=" + return_idx("opt_setpoint_deco") + ":";
+
+    //new5_0
+    link_buffer += "opt_airbr_depth_usr1=" + return_idx("opt_airbr_depth") + ":";
+    link_buffer += "opt_airbr_o2_usr1=" + return_idx("opt_airbr_o2") + ":";
+    link_buffer += "opt_airbr_mix_usr1=" + return_idx("opt_airbr_mix") + ":";
+    link_buffer += "opt_airbr_time_after_usr1=" + return_idx("opt_airbr_time_after") + ":";
+    link_buffer += "opt_airbr_time_usr1=" + return_idx("opt_airbr_time") + ":";
+    link_buffer += "opt_airbr_time_reset_usr1=" + return_idx("opt_airbr_time_reset") + ":";
+
+    //new6_0
+    link_buffer += "opt_blt_dln_usr1=" + opt_blt_dln + ":";
+
+    //new7_0
+    link_buffer += "opt_saul_mix_usr1=" + return_idx("opt_saul_mix") + ":";
+    link_buffer += "opt_saul_res_type_usr1=" + return_idx("opt_saul_res_type") + ":";
+    link_buffer += "opt_saul_depth_usr1=" + return_idx("opt_saul_depth") + ":";
+    link_buffer += "opt_saul_btime_usr1=" + return_idx("opt_saul_btime") + ":";
+    link_buffer += "opt_saul_percent_usr1=" + return_idx("opt_saul_percent") + ":";
+    return link_buffer;
 }
 
 function read_cookie(){

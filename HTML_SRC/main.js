@@ -2,10 +2,10 @@
 var dive = require("/dive_comp.js");
 init_global();
 
+
 function btn_link() {
-    
     //put to clipboard plan
-    navigator.clipboard.writeText("test_text");
+    navigator.clipboard.writeText(share_plan_link_gen());
 }
 
 function upd_altitide() {
