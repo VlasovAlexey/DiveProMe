@@ -1104,9 +1104,9 @@ function share_plan_link_gen(){
     link_buffer += "gf_arr_usr1=" + gf_arr.join(",") + ":";
 
     link_buffer += "mdls_usr1=" + return_idx("tn_mdl") + ":";
-    link_buffer += "lngs_usr1=" + return_idx("tn_mdl") + ":";
+    link_buffer += "lngs_usr1=" + return_idx("tn_lng") + ":";
 
-    link_buffer += "dmns_usr1=" + return_idx("tn_mdl") + ":";
+    link_buffer += "dmns_usr1=" + return_idx("tn_dmn") + ":";
     link_buffer += "color_usr1=" + return_idx("tn_color") + ":";
     link_buffer += "water_ph_usr1=" + return_idx("tn_water") + ":";
     link_buffer += "opt_deco_usr1=" + return_idx("opt_deco") + ":";
