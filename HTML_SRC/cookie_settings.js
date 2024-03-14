@@ -1,10 +1,17 @@
-/*
-deleteCookie("decomix_usr1");
-deleteCookie("travelmix_usr1");
-deleteCookie("lvl_usr1");
-deleteCookie("lvl_mix_usr1");
-deleteCookie("mdls_usr1");
-*/
+//current page location constants creation
+const {
+    host, hostname, href, origin, pathname, port, protocol, search
+  } = window.location
+  
+//host // "ui.dev"
+//hostname // "ui"
+//href // "https://ui.dev/get-current-url-javascript/?comments=false"
+//origin // "https://ui.dev"
+//pathname // "/get-current-url-javascript/""
+//port // ""
+//protocol // "https:"
+//search // "?comments=false"
+
 var host_name = "https://vlasovalexey.github.io/DiveProMe/HTML_SRC/";
 var link_buffer = "";
 
@@ -1085,7 +1092,7 @@ function btn_link() {
 
 function share_plan_link_gen(){
     //add to var for plan sharing link
-    link_buffer = host_name + "?diveprome:"
+    link_buffer = host_name + "?=1:diveprome=1:"
     link_buffer += "decomix_usr1=" + deco_mix_arr.join(",") + ":";
     link_buffer += "decomixdepth_usr1=" + deco_mix_depth_arr.join(",") + ":";    
     link_buffer += "travelmixdepth_usr1=" + travel_mix_depth_arr.join(",") + ":";
@@ -1311,11 +1318,142 @@ function read_cookie(){
     opt_saul_depth_usr = parseInt(getCookie("opt_saul_depth_usr1"));
     opt_saul_btime_usr = parseInt(getCookie("opt_saul_btime_usr1"));
     opt_saul_percent_usr = parseFloat(getCookie("opt_saul_percent_usr1"));
+
+    //assign values from url if present and recognised
+    if(search == "" ){
+        //do nothing but in future :)
+    }
+    else
+    {
+        //data present
+        url_arr = search.split(":");
+        if(url_arr.length > 10){
+            if(find_val_url("decomix_usr1") != undefined){deco_mix_arr = split_text_to_int(find_val_url("decomix_usr1"));};
+            if(find_val_url("decomixdepth_usr1") != undefined){deco_mix_depth_arr = split_text_to_int(find_val_url("decomixdepth_usr1"));};
+            if(find_val_url("travelmixdepth_usr1") != undefined){travel_mix_depth_arr = split_text_to_int(find_val_url("travelmixdepth_usr1"));};
+            if(find_val_url("travelmix_usr1") != undefined){travel_mix_arr = split_text_to_int(find_val_url("travelmix_usr1"));};
+
+            if(find_val_url("lvl_usr1") != undefined){lvl_arr = split_text_to_int(find_val_url("lvl_usr1"));};
+            if(find_val_url("lvl_mix_usr1") != undefined){lvl_mix_arr = split_text_to_int(find_val_url("lvl_mix_usr1"));};
+
+            if(find_val_url("gf_arr_usr1") != undefined){gf_arr = split_text_to_int(find_val_url("gf_arr_usr1"));};
+            if(find_val_url("mdls_usr1") != undefined){mdls_usr = parseInt(find_val_url("mdls_usr1"));};
+            if(find_val_url("lngs_usr1") != undefined){lngs_usr = parseInt(find_val_url("lngs_usr1"));};
+    
+            if(find_val_url("dmns_usr1") != undefined){dmns_usr = parseInt(find_val_url("dmns_usr1"));};
+
+            if(find_val_url("color_usr1") != undefined){color_usr = parseInt(find_val_url("color_usr1"));};
+            if(find_val_url("water_ph_usr1") != undefined){water_ph_usr = parseInt(find_val_url("water_ph_usr1"));};
+            if(find_val_url("opt_deco_usr1") != undefined){opt_deco_usr = parseInt(find_val_url("opt_deco_usr1"));};
+            if(find_val_url("opt_travel_usr1") != undefined){opt_travel_usr = parseInt(find_val_url("opt_travel_usr1"));};
+
+            if(find_val_url("opt_ppo2_deco_usr1") != undefined){opt_ppo2_deco_usr = parseFloat(find_val_url("opt_ppo2_deco_usr1"));};
+            if(find_val_url("opt_ppo2_bottom_usr1") != undefined){opt_ppo2_bottom_usr = parseFloat(find_val_url("opt_ppo2_bottom_usr1"));};
+            if(find_val_url("opt_ppo2_min_usr1") != undefined){opt_ppo2_min_usr = parseFloat(find_val_url("opt_ppo2_min_usr1"));};
+            if(find_val_url("opt_ppo2_max_usr1") != undefined){opt_ppo2_max_usr = parseFloat(find_val_url("opt_ppo2_max_usr1"));};
+            if(find_val_url("opt_ppn2_max_deco_usr1") != undefined){opt_ppn2_max_deco_usr = parseFloat(find_val_url("opt_ppn2_max_deco_usr1"));};
+            if(find_val_url("opt_ibcd_ppn2_usr1") != undefined){opt_ibcd_ppn2_usr = parseFloat(find_val_url("opt_ibcd_ppn2_usr1"));};
+            if(find_val_url("opt_ibcd_pphe_usr1") != undefined){opt_ibcd_pphe_usr = parseFloat(find_val_url("opt_ibcd_pphe_usr1"));};
+
+            if(find_val_url("opt_rate_dsc_usr1") != undefined){opt_rate_dsc_usr = parseInt(find_val_url("opt_rate_dsc_usr1"));};
+            if(find_val_url("opt_rate_asc_usr1") != undefined){opt_rate_asc_usr = parseInt(find_val_url("opt_rate_asc_usr1"));};
+
+            if(find_val_url("opt_rate_asc_surf_usr1") != undefined){opt_rate_asc_surf_usr = parseInt(find_val_url("opt_rate_asc_surf_usr1"));};
+
+            if(find_val_url("opt_rate_asc_deco_usr1") != undefined){opt_rate_asc_deco_usr = parseInt(find_val_url("opt_rate_asc_deco_usr1"));};
+            if(find_val_url("opt_rmv_deco_usr1") != undefined){opt_rmv_deco_usr = parseInt(find_val_url("opt_rmv_deco_usr1"));};
+            if(find_val_url("opt_rmv_bt_usr1") != undefined){opt_rmv_bt_usr = parseInt(find_val_url("opt_rmv_bt_usr1"));};
+            if(find_val_url("opt_cng_time_usr1") != undefined){opt_cng_time_usr = parseInt(find_val_url("opt_cng_time_usr1"));};
+            if(find_val_url("opt_lst_stop_usr1") != undefined){opt_lst_stop_usr = parseInt(find_val_url("opt_lst_stop_usr1"));};
+            if(find_val_url("opt_slevel_usr1") != undefined){opt_slevel_usr = parseInt(find_val_url("opt_slevel_usr1"));};
+            if(find_val_url("opt_celsus_usr1") != undefined){opt_celsus_usr = parseInt(find_val_url("opt_celsus_usr1"));};
+    
+            //new
+            if(find_val_url("opt_wrn_ibcd_lip_usr1") != undefined){opt_wrn_ibcd_lip_usr = parseInt(find_val_url("opt_wrn_ibcd_lip_usr1"));};
+            if(find_val_url("opt_wrn_btm_mix_usr1") != undefined){opt_wrn_btm_mix_usr = parseInt(find_val_url("opt_wrn_btm_mix_usr1"));};
+            if(find_val_url("opt_wrn_deco_mix49_usr1") != undefined){opt_wrn_deco_mix49_usr = parseInt(find_val_url("opt_wrn_deco_mix49_usr1"));};
+            if(find_val_url("opt_wrn_deco_mix50_usr1") != undefined){opt_wrn_deco_mix50_usr = parseInt(find_val_url("opt_wrn_deco_mix50_usr1"));};
+            if(find_val_url("opt_wrn_deco_mix100_usr1") != undefined){opt_wrn_deco_mix100_usr = parseInt(find_val_url("opt_wrn_deco_mix100_usr1"));};
+    
+            if(find_val_url("opt_calc_depth_usr1") != undefined){opt_calc_depth_usr = parseInt(find_val_url("opt_calc_depth_usr1"));};
+            if(find_val_url("opt_calc_o2_usr1") != undefined){opt_calc_o2_usr = parseInt(find_val_url("opt_calc_o2_usr1"));};
+            if(find_val_url("opt_calc_he_usr1") != undefined){opt_calc_he_usr = parseInt(find_val_url("opt_calc_he_usr1"));};
+            if(find_val_url("opt_calc_depth_lo_usr1") != undefined){opt_calc_depth_lo_usr = parseInt(find_val_url("opt_calc_depth_lo_usr1"));};
+
+            if(find_val_url("opt_price_cur_usr1") != undefined){opt_price_cur_usr = parseInt(find_val_url("opt_price_cur_usr1"));};
+            if(find_val_url("opt_price_he_dls_usr1") != undefined){opt_price_he_dls_usr = parseInt(find_val_url("opt_price_he_dls_usr1"));};
+            if(find_val_url("opt_price_he_cnt_usr1") != undefined){opt_price_he_cnt_usr = parseInt(find_val_url("opt_price_he_cnt_usr1"));};
+
+            if(find_val_url("opt_price_o2_dls_usr1") != undefined){opt_price_o2_dls_usr = parseInt(find_val_url("opt_price_o2_dls_usr1"));};
+            if(find_val_url("opt_price_o2_cnt_usr1") != undefined){opt_price_o2_cnt_usr = parseInt(find_val_url("opt_price_o2_cnt_usr1"));};
+
+            if(find_val_url("opt_price_top_dls_usr1") != undefined){opt_price_top_dls_usr = parseInt(find_val_url("opt_price_top_dls_usr1"));};
+            if(find_val_url("opt_price_top_cnt_usr1") != undefined){opt_price_top_cnt_usr = parseInt(find_val_url("opt_price_top_cnt_usr1"));};
+
+            //new2_0
+            if(find_val_url("opt_calc_cur_ex_rate_pound_usr1") != undefined){opt_calc_cur_ex_rate_pound_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_pound_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_pence_usr1") != undefined){opt_calc_cur_ex_rate_pence_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_pence_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_euro_usr1") != undefined){opt_calc_cur_ex_rate_euro_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_euro_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_eucents_usr1") != undefined){opt_calc_cur_ex_rate_eucents_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_eucents_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_rub_usr1") != undefined){opt_calc_cur_ex_rate_rub_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_rub_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_kopek_usr1") != undefined){opt_calc_cur_ex_rate_kopek_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_kopek_usr1"));};
+
+            if(find_val_url("opt_calc_cur_ex_rate_yuan_usr1") != undefined){opt_calc_cur_ex_rate_yuan_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_yuan_usr1"));};
+            if(find_val_url("opt_calc_cur_ex_rate_fyn_usr1") != undefined){opt_calc_cur_ex_rate_fyn_usr = parseInt(find_val_url("opt_calc_cur_ex_rate_fyn_usr1"));};
+
+            //new3_0
+            if(find_val_url("plan_style_usr1") != undefined){plan_style_usr = parseInt(find_val_url("plan_style_usr1"));};
+            if(find_val_url("plan_ccr_usr1") != undefined){plan_ccr_usr = parseInt(find_val_url("plan_ccr_usr1"));};
+    
+            //new4_0
+            if(find_val_url("opt_setpoint_start_usr1") != undefined){opt_setpoint_start_usr = parseFloat(find_val_url("opt_setpoint_start_usr1"));};
+            if(find_val_url("opt_setpoint_bottom_usr1") != undefined){opt_setpoint_bottom_usr = parseFloat(find_val_url("opt_setpoint_bottom_usr1"));};
+            if(find_val_url("opt_setpoint_deco_usr1") != undefined){opt_setpoint_deco_usr = parseFloat(find_val_url("opt_setpoint_deco_usr1"));};
+
+            //new5_0
+            if(find_val_url("opt_airbr_depth_usr1") != undefined){opt_airbr_depth_usr = parseInt(find_val_url("opt_airbr_depth_usr1"));};
+            if(find_val_url("opt_airbr_o2_usr1") != undefined){opt_airbr_o2_usr = parseInt(find_val_url("opt_airbr_o2_usr1"));};
+            if(find_val_url("opt_airbr_mix_usr1") != undefined){opt_airbr_mix_usr = parseInt(find_val_url("opt_airbr_mix_usr1"));};
+            if(find_val_url("opt_airbr_time_after_usr1") != undefined){opt_airbr_time_after_usr = parseInt(find_val_url("opt_airbr_time_after_usr1"));};
+            if(find_val_url("opt_airbr_time_usr1") != undefined){opt_airbr_time_usr = parseInt(find_val_url("opt_airbr_time_usr1"));};
+            if(find_val_url("opt_airbr_time_reset_usr1") != undefined){opt_airbr_time_reset_usr = parseInt(find_val_url("opt_airbr_time_reset_usr1"));};
+    
+            //new6_0
+            if(find_val_url("opt_blt_dln_usr1") != undefined){opt_blt_dln_usr = parseInt(find_val_url("opt_blt_dln_usr1"));};
+
+            //new7_0
+            if(find_val_url("opt_saul_mix_usr1") != undefined){opt_saul_mix_usr = parseInt(find_val_url("opt_saul_mix_usr1"));};
+            if(find_val_url("opt_saul_res_type_usr1") != undefined){opt_saul_res_type_usr = parseInt(find_val_url("opt_saul_res_type_usr1"));};
+            if(find_val_url("opt_saul_depth_usr1") != undefined){opt_saul_depth_usr = parseInt(find_val_url("opt_saul_depth_usr1"));};
+            if(find_val_url("opt_saul_btime_usr1") != undefined){opt_saul_btime_usr = parseInt(find_val_url("opt_saul_btime_usr1"));};
+            if(find_val_url("opt_saul_percent_usr1") != undefined){opt_saul_percent_usr = parseFloat(find_val_url("opt_saul_percent_usr1"));};
+        }
+    }
 }
+
+function split_text_to_int(arr){
+    tmp_arr = arr.split(",");
+    for(c = 0 ; c < tmp_arr.length ; c++){
+        tmp_arr[c] = parseInt(tmp_arr[c]);
+    }
+    return tmp_arr;
+}
+
+function find_val_url( find_val){
+    var url_array = search.split(":");
+    for(c = 0 ; c < url_array.length ; c++){    
+        if(url_array[c].indexOf(find_val) != -1){
+            url_array = (url_array[c].split("="));
+            if(url_array.length > 1){
+                return url_array[1];
+            }
+        }
+    }
+}
+
 function return_idx(html_ids){
     tmp4 = document.getElementById(html_ids);
     idx_me = tmp4.options[tmp4.selectedIndex].value;
-    //console.log(idx_me);
     return idx_me;
 }
 //settings doesn`t saved ad it is first start. it will be saved now
