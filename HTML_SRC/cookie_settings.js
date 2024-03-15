@@ -1088,6 +1088,15 @@ function write_cookie(){
 function btn_link() {
     //put to clipboard plan
     navigator.clipboard.writeText(share_plan_link_gen());
+    openLnkWrn();
+}
+
+//Open overlay window with copy link warning
+function openLnkWrn() {
+    del_html_elem("tn_overlay_text");
+    create_html_text("tn_overlay_text", "opt_overlay_text", plan_lng("ch_lnkClipboard"));
+    document.getElementById("AlertOverlay").style.height = "100%";
+    document.getElementById("AlertOverlay").style.opacity = "1";
 }
 
 function share_plan_link_gen(){
@@ -1203,6 +1212,7 @@ function share_plan_link_gen(){
     link_buffer += "opt_saul_depth_usr1=" + return_idx("opt_saul_depth") + ":";
     link_buffer += "opt_saul_btime_usr1=" + return_idx("opt_saul_btime") + ":";
     link_buffer += "opt_saul_percent_usr1=" + return_idx("opt_saul_percent") + ":";
+    link_buffer += "diveprome_end=1" + ":";
     return link_buffer;
 }
 
@@ -1326,8 +1336,16 @@ function read_cookie(){
     else
     {
         //data present
-        url_arr = search.split(":");
+        
+        url_arr = search;
+        
+        if(url_arr.indexOf("%") != -1){
+            url_arr = decodeURIComponent(url_arr);
+        }
+
         if(url_arr.length > 10){
+            url_arr = url_arr.split(":"); 
+
             if(find_val_url("decomix_usr1") != undefined){deco_mix_arr = split_text_to_int(find_val_url("decomix_usr1"));};
             if(find_val_url("decomixdepth_usr1") != undefined){deco_mix_depth_arr = split_text_to_int(find_val_url("decomixdepth_usr1"));};
             if(find_val_url("travelmixdepth_usr1") != undefined){travel_mix_depth_arr = split_text_to_int(find_val_url("travelmixdepth_usr1"));};
@@ -1440,7 +1458,11 @@ function split_text_to_int(arr){
 }
 
 function find_val_url( find_val){
-    var url_array = search.split(":");
+    var url_array = search;
+    if(url_array.indexOf("%") != -1){
+        url_array = decodeURIComponent(url_array);
+    }
+    url_array = url_array.split(":")
     for(c = 0 ; c < url_array.length ; c++){    
         if(url_array[c].indexOf(find_val) != -1){
             url_array = (url_array[c].split("="));

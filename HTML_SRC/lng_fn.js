@@ -380,7 +380,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Recreational Dive Planner",
@@ -593,7 +593,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Рекриационный планировщик риска погружений",
@@ -802,7 +802,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Planificador de Buceo Recreativo",
@@ -1009,7 +1009,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
 
@@ -1218,7 +1218,7 @@
 
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Shestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. 休闲潜水计划工具软件",
@@ -1400,7 +1400,7 @@
                 ".tn_donat_header_bronze" : " Секция за дарение  ",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Recreational Dive Planner",
@@ -1581,7 +1581,7 @@
                 ".tn_donat_header_bronze" : " Section Bronze des dons",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov, Fabrice Pierre Palacio",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. Planificateur de plongée récréative",
@@ -1762,7 +1762,7 @@
                 ".tn_donat_header_bronze" : "동 기부 섹션",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
                 ".header11" : "S.A.U.L. 레크리에이션 다이빙 플래너",
@@ -1944,7 +1944,7 @@
                 ".tn_donat_header_bronze" : "Sezione donazione bronzea",
                 ".td_founder_list" : "Thomas Holloway, Vladimir Polyakov, Franjo Sánchez Castejón, Nikita Azarenko, Hugo Ballester, 大漠骑兵Andy （谢鹏）, Lee Nam Gil, Marco P.",
                 ".td_gold_list" : "Aleksandr Sestopalec, Aliaksander Lukyanchenka, Michail Balabanov",
-                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov",
+                ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
                 ".header11" : "Pianificatore immersioni Ricreative S.A.U.L.",
                 ".tr_saul_mix" : "Mix",
@@ -2018,6 +2018,8 @@
       };
       if(td_lng == 1){
         
+          if(val  == "ch_lnkClipboard"){val = "The share link is in your clipboard!"}
+
           if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluent "}
 
@@ -2121,6 +2123,8 @@
 
     }
     if(td_lng == 2){
+        if(val  == "ch_lnkClipboard"){val = "Ссылка на ваш план скопирована в буфер обмена!"}
+
         if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Дилуэнт "}
         if(val  == "t_zoom"){val = "Сбросить масштаб"}
@@ -2224,6 +2228,7 @@
 
     }
     if(td_lng == 3){
+        if(val  == "ch_lnkClipboard"){val = "El enlace de su plan se ha copiado en el portapapeles!"}
         if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Diluyente "}
         if(val  == "t_zoom"){val = "Reinicializar Acercamiento"}
@@ -2325,6 +2330,8 @@
         if(val == "tn_deco_mod"){val = "Auto"}
     }
       if(td_lng == 4){
+          if(val  == "ch_lnkClipboard"){val = "A ligação do seu plano é copiada para a área de transferência!"}
+
           if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluente "}
           if(val  == "t_zoom"){val = "Reset Zoom"}
@@ -2414,6 +2421,7 @@
           if(val == "tn_deco_mod"){val = "Auto"}
       }
       if(td_lng == 5){
+          if(val  == "ch_lnkClipboard"){val = "您的计划链接已复制到剪贴板！"}
           if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "稀释气 "}
           if(val  == "t_zoom"){val = "重置缩放"}
@@ -2504,6 +2512,8 @@
 
       }
       if(td_lng == 6) {
+          if(val  == "ch_lnkClipboard"){val = "Връзката с вашия план е копирана в клипборда!"}
+
           if(val  == "tab_tr_TTS"){val = "ТТС"}
           if (val == "t_diluent") {
               val = "Смесител "
@@ -2746,6 +2756,8 @@
           }
       }
       if(td_lng == 7) {
+          if(val  == "ch_lnkClipboard"){val = "Le lien avec votre plan a été copié dans le presse-papiers !"}
+
           if(val  == "tab_tr_TTS"){val = "TTS"}
           if (val == "t_diluent") {
               val = "Diluent "
@@ -2988,6 +3000,8 @@
           }
         }
         if(td_lng == 8){
+            if(val  == "ch_lnkClipboard"){val = "요금제 링크가 클립보드에 복사되었습니다!"}
+
             if(val  == "tab_tr_TTS"){val = "TTS"}
             if(val  == "t_diluent"){val = "Diluent "}
             if(val  == "t_zoom"){val = "줌 재설정"}
@@ -3076,6 +3090,8 @@
             if(val == "tn_deco_mod"){val = "자동"}
         }
         if(td_lng == 9){
+            if(val  == "ch_lnkClipboard"){val = "Il link al piano è stato copiato negli appunti!"}
+
             if(val  == "t_diluent"){val = "Diluente "}
             if(val  == "t_zoom"){val = "Azzera lo Zoom"}
             if(val  == "tab_tr_OTU"){val = "OTU"}

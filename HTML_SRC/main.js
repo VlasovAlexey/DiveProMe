@@ -426,10 +426,9 @@ function openNav() {
     del_html_elem("tn_overlay_text");
     create_html_text("tn_overlay_text", "opt_overlay_text", plan_lng("ch_UnderDev"));
     document.getElementById("AlertOverlay").style.height = "100%";
-    //document.getElementById("AlertOverlay").style.display = "block";
     document.getElementById("AlertOverlay").style.opacity = "1";
-
 }
+
 
 //and close
 function closeNav() {
