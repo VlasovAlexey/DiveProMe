@@ -348,7 +348,7 @@ select
 .btn_tel,
 .btn_bailout,
 .btn_diluent,
-
+.btn_link,
 .tn_btn_price,
 .tn_btn_learn,
 .tn_btn_pp_profile_chart,
@@ -387,7 +387,7 @@ select
 .btn_tel:hover,
 .btn_bailout:hover,
 .btn_diluent:hover,
-
+.btn_link:hover,
 .tn_btn_price:hover,
 .tn_btn_learn:hover,
 .tn_btn_pp_profile_chart:hover,
@@ -410,7 +410,7 @@ select
 .btn_tel:active,
 .btn_bailout:active,
 .btn_diluent:active,
-
+.btn_link:active,
 .tn_btn_price:active,
 .tn_btn_learn:active,
 .tn_btn_pp_profile_chart:active,
@@ -832,15 +832,12 @@ a#windowControlMinimize{
     background-position: 0 0;
 }
 
-#body_main{
-    /* This is the magic bit for Firefox */
-    scrollbar-width: none;
-}
-
-#body_main::-webkit-scrollbar {
-    /* This is the magic bit for WebKit */
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
     display: none;
 }
+
+.element::-webkit-scrollbar { width: 0 !important }
 
 .tn_price_table_total_style{
     font-weight: bold;

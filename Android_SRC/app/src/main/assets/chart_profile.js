@@ -368,10 +368,11 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
 //build tissue charts if button pressed
 function btn_build_tiss() {
     
+
     element_id_hide("t_tiss_btn");
     element_id_show("t_tiss_chart");
 
-    //if decompreesion dive build tissue table
+    //if decompression dive build tissue table
     if (ld_dp > 6) {
         //build array_for_tissue_categories. Time stamp
         var tiss_cat_arr = [];
@@ -648,7 +649,9 @@ function btn_build_tiss() {
 
         tiss_val_fin_arr_tl.push(aa_a);
 
-
+        //!!!crappy fixes time discrepancy with the main plan. Very bad but works...
+        tiss_cat_arr[tiss_cat_arr.length-1] = main_plan[main_plan.length-2].replace(/\(|\)|/g,"");
+        
         //Build Tissue Nitrogen Chart
         Highcharts.chart("t_tiss_ng", {
 
@@ -1033,10 +1036,10 @@ if ($("#tn_plan_ccr").val() == 2) {
     var dil_name = $("#opt_levels_mix_0 option:selected").text();
 
     for (i = 0; i < ccr_fixed_plan.length/5 - 1; i++) {
-        //console.log(ccr_fixed_plan[counter + 4]);
+        
         var cnt = 0;
         var current_dil = gass_from_name_arr(ccr_fixed_plan[counter + 4]);
-        //console.log(current_dil);
+        
         var flag_to_del = 1;
         //Only for Bailout plan
         if (opt_blt_dln == 1) {

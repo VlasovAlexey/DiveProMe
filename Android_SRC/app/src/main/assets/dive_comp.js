@@ -1,3 +1,45 @@
+//return sorted decompression mix by MOD from shallow to deepest
+function ret_deco_sorted (dec_arr, dec_depth){
+  var ppo2_bottom = $("#opt_ppo2_deco").val() * 1.0;
+  var deco_arr_len = $("#opt_deco").val() * 1.0;
+  
+  var tmp_arr = dec_arr.slice(0);
+  var nrm = 0;
+  var nrm_dp = 0;
+  var cur_dp = 0;
+  var dp_o2_max = 0;
+  var compare = 0;
+  for(c = 0 ; c < deco_arr_len ; c++){
+    if(dec_depth[nrm_dp] == 0){
+      //automatic deco depth
+      //calculation of correction without altitude above sea level
+      var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001)));
+      //var WaterDensTempCompensation = 1;
+      dp_o2_max = Math.floor((WaterDensTempCompensation * (ppo2_bottom/(tmp_arr[nrm]*0.01)*10)) - (10) + 1);//+1m fixing rounding to standard
+      cur_dp = dp_o2_max;
+    } else {
+      //manual selected deco depth
+      cur_dp = dec_depth[nrm_dp];
+    }
+    
+    //rounding by 3 meters. For example. 7 rounded to 6. 98 rounded to 99.
+    compare = ((cur_dp/3).toFixed(0)) * 3;
+    if(compare != cur_dp){
+      if((cur_dp - compare) < 1.5){
+        
+      }
+    }
+    
+    console.log(tmp_arr[nrm], cur_dp, compare);
+
+    nrm = nrm + 2;
+    nrm_dp = nrm_dp + 1;
+  }
+  console.log("----------------");
+  return tmp_arr;
+}
+//ret_deco_sorted (deco_mix_arr , deco_mix_depth_arr);
+
 var abs_press = [1.0];
 var comp_tiss_arr =[];
 
@@ -857,7 +899,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             maxppO2 = maxppO2 || 1.6;
             maxEND = maxEND || 30;
             var currentGasName;
-            //console.log(this.segments);
+            
             if (typeof fromDepth == 'undefined') {
                 if (this.segments.length == 0) {
                     throw "No depth to decompress from has been specified, and neither have any dive stages been registered. Unable to decompress.";
@@ -905,7 +947,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     time++;
                     ceiling = this.getCeiling(gf);                    
                 }
-
+                /*
                 //DiveProMe interface
                 //Add extra time for gas changing
                 if ($("#tn_plan_ccr").val() == 1) {
@@ -947,13 +989,13 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                       if(all_gas[j] == newGasName ){alien_gas_new = 0;}
                       if(all_gas[j] == currentGasName ){alien_gas = 0;}
                     }
-
+                    
                     if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0 && alien_gas == 0 && alien_gas_new == 0){
                       this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
                     }
                   }
                 }
-
+                */
                 //console.log("Held diver at " + currentDepth + " for " + time + " minutes on gas " + currentGasName + ".");
                 //console.log("Moving diver from current depth " + currentDepth + " to next ceiling of " + ceiling);
                 currentGasName = this.addDecoDepthChange(currentDepth, ceiling, maxppO2, maxEND, currentGasName);

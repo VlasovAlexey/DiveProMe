@@ -2,7 +2,6 @@
 var dive = require("/dive_comp.js");
 init_global();
 
-
 function upd_altitide() {
     abs_press[0] = height_to_bar();
     del_lvl_list();
@@ -313,7 +312,7 @@ function upd_all() {
     upd_airbr_mix();
 
     //upd_airbr();
-    main_plan_res = ShortStop(build_dive());
+    main_plan_res = ExtraStops(ShortStop(build_dive()));
     main_plan_src = ccr_compact_plan(main_plan_res);
 
     main_plan_table = src_to_5_arr((main_plan_src) , 0);
@@ -427,10 +426,9 @@ function openNav() {
     del_html_elem("tn_overlay_text");
     create_html_text("tn_overlay_text", "opt_overlay_text", plan_lng("ch_UnderDev"));
     document.getElementById("AlertOverlay").style.height = "100%";
-    //document.getElementById("AlertOverlay").style.display = "block";
     document.getElementById("AlertOverlay").style.opacity = "1";
-
 }
+
 
 //and close
 function closeNav() {
@@ -503,6 +501,7 @@ function upd_lvl_list() {
         if ($("#tn_plan_ccr").val() == 1) {
             //OC
             min_max_arr = ret_mix_range_oc(lvl_arr[att], get_rl_fraction(get_working_mix_idx(main_lvl, travel_mix_arr)));
+            //console.log((14) );
 
         } else {
             //CCR
