@@ -2020,7 +2020,7 @@
         
           if(val  == "ch_lnkClipboard"){val = "The share link is in your clipboard!"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS"}
+          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
           if(val  == "t_diluent"){val = "Diluent "}
 
           if(val  == "t_zoom"){val = "Reset Zoom"}
@@ -2125,7 +2125,7 @@
     if(td_lng == 2){
         if(val  == "ch_lnkClipboard"){val = "Ссылка на ваш план скопирована в буфер обмена!"}
 
-        if(val  == "tab_tr_TTS"){val = "TTS"}
+        if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
         if(val  == "t_diluent"){val = "Дилуэнт "}
         if(val  == "t_zoom"){val = "Сбросить масштаб"}
 
@@ -2229,7 +2229,7 @@
     }
     if(td_lng == 3){
         if(val  == "ch_lnkClipboard"){val = "El enlace de su plan se ha copiado en el portapapeles!"}
-        if(val  == "tab_tr_TTS"){val = "TTS"}
+        if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
         if(val  == "t_diluent"){val = "Diluyente "}
         if(val  == "t_zoom"){val = "Reinicializar Acercamiento"}
         if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -2332,7 +2332,7 @@
       if(td_lng == 4){
           if(val  == "ch_lnkClipboard"){val = "A ligação do seu plano é copiada para a área de transferência!"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS"}
+          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
           if(val  == "t_diluent"){val = "Diluente "}
           if(val  == "t_zoom"){val = "Reset Zoom"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -2422,7 +2422,7 @@
       }
       if(td_lng == 5){
           if(val  == "ch_lnkClipboard"){val = "您的计划链接已复制到剪贴板！"}
-          if(val  == "tab_tr_TTS"){val = "TTS"}
+          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
           if(val  == "t_diluent"){val = "稀释气 "}
           if(val  == "t_zoom"){val = "重置缩放"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -2514,7 +2514,7 @@
       if(td_lng == 6) {
           if(val  == "ch_lnkClipboard"){val = "Връзката с вашия план е копирана в клипборда!"}
 
-          if(val  == "tab_tr_TTS"){val = "ТТС"}
+          if(val  == "tab_tr_TTS"){val = "ТТС" + lng_min}
           if (val == "t_diluent") {
               val = "Смесител "
           }
@@ -2758,7 +2758,7 @@
       if(td_lng == 7) {
           if(val  == "ch_lnkClipboard"){val = "Le lien avec votre plan a été copié dans le presse-papiers !"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS"}
+          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
           if (val == "t_diluent") {
               val = "Diluent "
           }
@@ -3002,7 +3002,7 @@
         if(td_lng == 8){
             if(val  == "ch_lnkClipboard"){val = "요금제 링크가 클립보드에 복사되었습니다!"}
 
-            if(val  == "tab_tr_TTS"){val = "TTS"}
+            if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
             if(val  == "t_diluent"){val = "Diluent "}
             if(val  == "t_zoom"){val = "줌 재설정"}
             if(val  == "tab_tr_OTU"){val = "OTU"}
@@ -3091,7 +3091,8 @@
         }
         if(td_lng == 9){
             if(val  == "ch_lnkClipboard"){val = "Il link al piano è stato copiato negli appunti!"}
-
+            
+            if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
             if(val  == "t_diluent"){val = "Diluente "}
             if(val  == "t_zoom"){val = "Azzera lo Zoom"}
             if(val  == "tab_tr_OTU"){val = "OTU"}

@@ -311,7 +311,6 @@ function upd_all() {
     airbr_mix_arr();
     upd_airbr_mix();
 
-    //upd_airbr();
     main_plan_res = ExtraStops(ShortStop(build_dive()));
     main_plan_src = ccr_compact_plan(main_plan_res);
 
@@ -319,8 +318,6 @@ function upd_all() {
     main_plan = src_to_5_arr(main_plan_src , 1);
     main_plan_ccr_fix = src_to_5_arr(main_plan_res , 1);
   
-    
-
     //Build main dive table
     dplan_sort_arr(main_plan_table);
     

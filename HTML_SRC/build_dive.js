@@ -180,6 +180,8 @@ function build_dive_segment(levels_segment_arr , levels_mix_segment_arr){
   var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
   var output = [];
 
+  first_ascent = 0;
+
     if(max_lvl_depth(levels_segment_arr) < 7){
       //Not Deco Dive Segment
 

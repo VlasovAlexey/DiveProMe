@@ -207,7 +207,7 @@ function btn_export_xls(){
             raw : true
         }
     );
-    XLSX.utils.book_append_sheet(wb, ws, plan_lng("tab_tr_OTU") + "," + plan_lng("tab_tr_CNS"));
+    XLSX.utils.book_append_sheet(wb, ws, plan_lng("tab_tr_OTU") + "," + plan_lng("tab_tr_CNS")+ "," + plan_lng("tab_tr_TTS"));
 
 
     //save xls

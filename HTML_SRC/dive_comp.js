@@ -30,7 +30,7 @@ function ret_deco_sorted (dec_arr, dec_depth){
       }
     }
     
-    console.log(tmp_arr[nrm], cur_dp, compare);
+    //console.log(tmp_arr[nrm], cur_dp, compare);
 
     nrm = nrm + 2;
     nrm_dp = nrm_dp + 1;
@@ -42,7 +42,7 @@ function ret_deco_sorted (dec_arr, dec_depth){
 
 var abs_press = [1.0];
 var comp_tiss_arr =[];
-
+var first_ascent = 0;
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;
 if(!u&&a)return a(o,!0);
 if(i)return i(o,!0);
@@ -924,7 +924,8 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             var ceiling = this.getCeiling(gfLow);
 
             currentGasName = this.addDecoDepthChange(fromDepth, ceiling, maxppO2, maxEND, currentGasName);
-
+            
+            
             //console.log("Start Ceiling:" + ceiling + " with GF:" + gfLow)
             //you can get first deco stop here!
 
@@ -1007,6 +1008,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
         };
 
         plan.prototype.addDecoDepthChange = function(fromDepth, toDepth, maxppO2, maxEND, currentGasName) {
+        
             if (typeof currentGasName == 'undefined') {
                 currentGasName = this.bestDecoGasName(fromDepth, maxppO2, maxEND);
                 if (typeof currentGasName == 'undefined') {
@@ -1038,11 +1040,24 @@ return s})({"/dive_comp.js":[function(require,module,exports){
 
                 //take us to the ceiling at 30fpm or 10 mpm (the fastest ascent rate possible.)
                 //diveprome interface code
-                var rate_asc_deco = document.getElementById("opt_rate_asc_deco");
-                var rate_asc_deco_idx = rate_asc_deco.options[rate_asc_deco.selectedIndex].value;
+                if (first_ascent == 0){
+                  //first ascent from bottom to first deco stop with custom ascending speed
+                  var rate_asc = document.getElementById("opt_rate_asc");
+                  var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
                 
-                var depthdiff = fromDepth - ceiling;
-                var time = depthdiff/(rate_asc_deco_idx*1.0);
+                  var depthdiff = fromDepth - ceiling;
+                  var time = depthdiff/(rate_asc_idx*1.0);
+
+                  first_ascent = 1;
+                } else {
+                  //all other deco stops with deco ascending speed
+                  var rate_asc_deco = document.getElementById("opt_rate_asc_deco");
+                  var rate_asc_deco_idx = rate_asc_deco.options[rate_asc_deco.selectedIndex].value;
+                
+                  var depthdiff = fromDepth - ceiling;
+                  var time = depthdiff/(rate_asc_deco_idx*1.0);
+                }
+
                 //console.log("Moving diver from " + fromDepth + " to " + ceiling + " on gas " + currentGasName + " over " + time + " minutes (10 meters or 30 feet per minute).")
                 this.addDepthChange(fromDepth, ceiling, currentGasName, time);
 
