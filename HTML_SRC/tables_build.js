@@ -1147,8 +1147,8 @@ function total_cns_otu(tmp_arr) {
 
   td = document.createElement("td");
   //td.setAttribute("class", "tab_black");
-  td.innerHTML = plan_lng("tab_tr_TTS");
-  pdf_table_otu_cns_arr.push(plan_lng("tab_tr_TTS"));
+  td.innerHTML = plan_lng("tab_tr_TTS") + lng_min;
+  pdf_table_otu_cns_arr.push(plan_lng("tab_tr_TTS") + lng_min);
   tr.appendChild(td);
 
   table.appendChild(tr);

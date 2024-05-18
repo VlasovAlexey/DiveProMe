@@ -941,12 +941,7 @@ function ShortStop(mn_plan){
 //Recombine plan if last stop changed from 3 meters to 6 meters
 //post changes
 function LastStopUpd (plan){
-    for (var i = 0; i < plan.length; i++) {
-
-    }
-
-
-    if($( "#opt_lst_stop" ).val() == 6){
+    /*if($( "#opt_lst_stop" ).val() == 6){
 
         //plan is 6 meters las stop. We need some magic
             var add_time = plan[plan.length - 2].time + plan[plan.length - 4].time;
@@ -963,6 +958,7 @@ function LastStopUpd (plan){
     else{
         //last stop is 3 meters and nothing will be changed
     }
+    */
     return plan;
 }
 //Insert gas break in to the plan

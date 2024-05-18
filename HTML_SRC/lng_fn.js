@@ -2020,13 +2020,13 @@
         
           if(val  == "ch_lnkClipboard"){val = "The share link is in your clipboard!"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluent "}
 
           if(val  == "t_zoom"){val = "Reset Zoom"}
 
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
           if(val  == "ld_tis"){val = "Leading Tissue"}
           if(val  == "amb_pres"){val = "Ambient Pressure"}
@@ -2125,12 +2125,12 @@
     if(td_lng == 2){
         if(val  == "ch_lnkClipboard"){val = "Ссылка на ваш план скопирована в буфер обмена!"}
 
-        if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+        if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Дилуэнт "}
         if(val  == "t_zoom"){val = "Сбросить масштаб"}
 
         if(val  == "tab_tr_OTU"){val = "OTU"}
-        if(val  == "tab_tr_CNS"){val = "CNS%"}
+        if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
         if(val  == "ld_tis"){val = "Лидирующая ткань"}
         if(val  == "amb_pres"){val = "Атмосферное давление"}
@@ -2229,11 +2229,11 @@
     }
     if(td_lng == 3){
         if(val  == "ch_lnkClipboard"){val = "El enlace de su plan se ha copiado en el portapapeles!"}
-        if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+        if(val  == "tab_tr_TTS"){val = "TTS"}
         if(val  == "t_diluent"){val = "Diluyente "}
         if(val  == "t_zoom"){val = "Reinicializar Acercamiento"}
         if(val  == "tab_tr_OTU"){val = "OTU"}
-        if(val  == "tab_tr_CNS"){val = "CNS%"}
+        if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
         if(val  == "ld_tis"){val = "Carga Compartimentos"}
         if(val  == "amb_pres"){val = "Presión Ambiente"}
@@ -2332,11 +2332,11 @@
       if(td_lng == 4){
           if(val  == "ch_lnkClipboard"){val = "A ligação do seu plano é copiada para a área de transferência!"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "Diluente "}
           if(val  == "t_zoom"){val = "Reset Zoom"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
           if(val  == "ld_tis"){val = "Tecido Director"}
           if(val  == "amb_pres"){val = "Pressão Ambiente"}
           if(val  == "t_tiss_wrn"){val = "Este Plano Não Exige Paragens Descompressivas. Os Compartimentos dos Tecidos serão Ocultados."}
@@ -2422,11 +2422,11 @@
       }
       if(td_lng == 5){
           if(val  == "ch_lnkClipboard"){val = "您的计划链接已复制到剪贴板！"}
-          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if(val  == "t_diluent"){val = "稀释气 "}
           if(val  == "t_zoom"){val = "重置缩放"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
           if(val  == "ld_tis"){val = "领先的组织"}
           if(val  == "amb_pres"){val = "环境压力"}
           if(val  == "t_tiss_wrn"){val = "这个计划没有包含减压停留。组织腔隔会被隐藏"}
@@ -2514,7 +2514,7 @@
       if(td_lng == 6) {
           if(val  == "ch_lnkClipboard"){val = "Връзката с вашия план е копирана в клипборда!"}
 
-          if(val  == "tab_tr_TTS"){val = "ТТС" + lng_min}
+          if(val  == "tab_tr_TTS"){val = "ТТС"}
           if (val == "t_diluent") {
               val = "Смесител "
           }
@@ -2525,7 +2525,7 @@
               val = "ЕКТ"
           }
           if (val == "tab_tr_CNS") {
-              val = "ЦНС%"
+              val = "ЦНС, %"
           }
           if (val == "ld_tis") {
               val = "Водеща тъкан"
@@ -2758,7 +2758,7 @@
       if(td_lng == 7) {
           if(val  == "ch_lnkClipboard"){val = "Le lien avec votre plan a été copié dans le presse-papiers !"}
 
-          if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+          if(val  == "tab_tr_TTS"){val = "TTS"}
           if (val == "t_diluent") {
               val = "Diluent "
           }
@@ -2769,7 +2769,7 @@
               val = "OTU"
           }
           if (val == "tab_tr_CNS") {
-              val = "CNS%"
+              val = "CNS, %"
           }
           if (val == "ld_tis") {
               val = "Leading Tissue"
@@ -3002,11 +3002,11 @@
         if(td_lng == 8){
             if(val  == "ch_lnkClipboard"){val = "요금제 링크가 클립보드에 복사되었습니다!"}
 
-            if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+            if(val  == "tab_tr_TTS"){val = "TTS"}
             if(val  == "t_diluent"){val = "Diluent "}
             if(val  == "t_zoom"){val = "줌 재설정"}
             if(val  == "tab_tr_OTU"){val = "OTU"}
-            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "tab_tr_CNS"){val = "CNS, %"}
             if(val  == "ld_tis"){val = "선도 조직"}
             if(val  == "amb_pres"){val = "주변 압력"}
             if(val  == "t_tiss_wrn"){val = "이 계획에는 감압 정지가 없습니다. 조직 구획이 숨겨집니다."}
@@ -3092,11 +3092,11 @@
         if(td_lng == 9){
             if(val  == "ch_lnkClipboard"){val = "Il link al piano è stato copiato negli appunti!"}
             
-            if(val  == "tab_tr_TTS"){val = "TTS" + lng_min}
+            if(val  == "tab_tr_TTS"){val = "TTS"}
             if(val  == "t_diluent"){val = "Diluente "}
             if(val  == "t_zoom"){val = "Azzera lo Zoom"}
             if(val  == "tab_tr_OTU"){val = "OTU"}
-            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "tab_tr_CNS"){val = "CNS, %"}
             if(val  == "ld_tis"){val = "Tessuto principale"}
             if(val  == "amb_pres"){val = "Pressione ambientale "}
             if(val  == "t_tiss_wrn"){val = "Questa pianificazione non ha soste decompressive. I compartimenti tissutali saranno nascosti."}

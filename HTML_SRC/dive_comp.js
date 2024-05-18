@@ -43,6 +43,7 @@ function ret_deco_sorted (dec_arr, dec_depth){
 var abs_press = [1.0];
 var comp_tiss_arr =[];
 var first_ascent = 0;
+
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;
 if(!u&&a)return a(o,!0);
 if(i)return i(o,!0);
@@ -929,15 +930,17 @@ return s})({"/dive_comp.js":[function(require,module,exports){
             //console.log("Start Ceiling:" + ceiling + " with GF:" + gfLow)
             //you can get first deco stop here!
 
-            //DiveProMe interface
-            var tn_cng_time = document.getElementById("opt_cng_time");
-            var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
-        
             while (ceiling > 0) {
                 var currentDepth = ceiling;
                 var nextDecoDepth = (ceiling - 3);
                 var time = 0;
-                
+                 //diveprome interface
+                 //if last stop is 6 meters we need change nextDepth(it is last depth now) to 0 meters! 
+                 if($( "#opt_lst_stop" ).val() == 6 && currentDepth == 6){
+                  nextDecoDepth = 0;
+                }
+                //diveprome interface end
+
                 //DiveProMe interface
                 newGasName = this.addDecoDepthChange(nextDecoDepth, ceiling, maxppO2, maxEND, currentGasName);
                 
@@ -948,57 +951,13 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     time++;
                     ceiling = this.getCeiling(gf);                    
                 }
-                /*
-                //DiveProMe interface
-                //Add extra time for gas changing
-                if ($("#tn_plan_ccr").val() == 1) {
-                  //OC
-                  if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0){
-                    this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
-                    //console.log(currentGasName,tn_cng_time_idx);     
-                  }
-                } else {
-                  //CCR
-                  if(opt_blt_dln == 2){
-                    //nothing
-                  }
-                  //CCR Bailout
-                  else{
-                    //create array of all used gases
-                    //first get all deco gasses
-                    cnt = 0;
-                    var all_gas = [];//final array all used gases
-                    var mix_gas_cur = [];
-                    for (c = 0; c < $("#opt_deco").val(); c++){
-                      mix_gas_cur = [deco_mix_arr[cnt] , deco_mix_arr[cnt + 1]];
-                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
-                      cnt = cnt + 2;
-                    }
-                    
-                    //add travel and all used main levels gases
-                    cnt3 = 0;
-                    for(j = 0 ; j < (lvl_arr.length/3) ; j++){  
-                      mix_gas_cur = [travel_mix_arr[(lvl_arr[cnt3])*2-2], travel_mix_arr[(lvl_arr[cnt3])*2+1-2]];
-                      all_gas.push(mix_to_txt_arr(mix_gas_cur));
-                      cnt3 = cnt3 + 3;
-                    }
-                    
-                    //compare used gas list and currentGasName
-                    alien_gas = 1;
-                    alien_gas_new = 1;
-                    for(j = 0 ; j < (all_gas.length) ; j++){
-                      if(all_gas[j] == newGasName ){alien_gas_new = 0;}
-                      if(all_gas[j] == currentGasName ){alien_gas = 0;}
-                    }
-                    
-                    if(newGasName != currentGasName && tn_cng_time_idx*1.0 > 0 && alien_gas == 0 && alien_gas_new == 0){
-                      this.addFlat(currentDepth, currentGasName, tn_cng_time_idx*1.0);
-                    }
-                  }
-                }
-                */
+                //diveprome interface end
+
                 //console.log("Held diver at " + currentDepth + " for " + time + " minutes on gas " + currentGasName + ".");
                 //console.log("Moving diver from current depth " + currentDepth + " to next ceiling of " + ceiling);
+                
+               
+
                 currentGasName = this.addDecoDepthChange(currentDepth, ceiling, maxppO2, maxEND, currentGasName);
             }
             if (!maintainTissues) {
@@ -1038,14 +997,16 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     }
                 }
 
+                
                 //take us to the ceiling at 30fpm or 10 mpm (the fastest ascent rate possible.)
+                var depthdiff = fromDepth - ceiling;
+
                 //diveprome interface code
                 if (first_ascent == 0){
                   //first ascent from bottom to first deco stop with custom ascending speed
                   var rate_asc = document.getElementById("opt_rate_asc");
                   var rate_asc_idx = rate_asc.options[rate_asc.selectedIndex].value;
-                
-                  var depthdiff = fromDepth - ceiling;
+                  
                   var time = depthdiff/(rate_asc_idx*1.0);
 
                   first_ascent = 1;
@@ -1053,8 +1014,7 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                   //all other deco stops with deco ascending speed
                   var rate_asc_deco = document.getElementById("opt_rate_asc_deco");
                   var rate_asc_deco_idx = rate_asc_deco.options[rate_asc_deco.selectedIndex].value;
-                
-                  var depthdiff = fromDepth - ceiling;
+        
                   var time = depthdiff/(rate_asc_deco_idx*1.0);
                 }
 
