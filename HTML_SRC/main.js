@@ -312,6 +312,8 @@ function upd_all() {
     upd_airbr_mix();
 
     main_plan_res = ExtraStops(ShortStop(build_dive()));
+    //main_plan_res = ShortStop(build_dive());
+
     main_plan_src = ccr_compact_plan(main_plan_res);
 
     main_plan_table = src_to_5_arr((main_plan_src) , 0);

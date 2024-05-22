@@ -8,8 +8,8 @@ android {
         applicationId "com.diveprome.avlasov.diveprome"
         minSdkVersion 23
         targetSdkVersion 33
-        versionCode 27
-        versionName '14.3'
+        versionCode 28
+        versionName '14.4'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {

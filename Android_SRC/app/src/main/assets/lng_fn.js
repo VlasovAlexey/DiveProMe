@@ -2026,7 +2026,7 @@
           if(val  == "t_zoom"){val = "Reset Zoom"}
 
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
           if(val  == "ld_tis"){val = "Leading Tissue"}
           if(val  == "amb_pres"){val = "Ambient Pressure"}
@@ -2130,7 +2130,7 @@
         if(val  == "t_zoom"){val = "Сбросить масштаб"}
 
         if(val  == "tab_tr_OTU"){val = "OTU"}
-        if(val  == "tab_tr_CNS"){val = "CNS%"}
+        if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
         if(val  == "ld_tis"){val = "Лидирующая ткань"}
         if(val  == "amb_pres"){val = "Атмосферное давление"}
@@ -2233,7 +2233,7 @@
         if(val  == "t_diluent"){val = "Diluyente "}
         if(val  == "t_zoom"){val = "Reinicializar Acercamiento"}
         if(val  == "tab_tr_OTU"){val = "OTU"}
-        if(val  == "tab_tr_CNS"){val = "CNS%"}
+        if(val  == "tab_tr_CNS"){val = "CNS, %"}
 
         if(val  == "ld_tis"){val = "Carga Compartimentos"}
         if(val  == "amb_pres"){val = "Presión Ambiente"}
@@ -2336,7 +2336,7 @@
           if(val  == "t_diluent"){val = "Diluente "}
           if(val  == "t_zoom"){val = "Reset Zoom"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
           if(val  == "ld_tis"){val = "Tecido Director"}
           if(val  == "amb_pres"){val = "Pressão Ambiente"}
           if(val  == "t_tiss_wrn"){val = "Este Plano Não Exige Paragens Descompressivas. Os Compartimentos dos Tecidos serão Ocultados."}
@@ -2426,7 +2426,7 @@
           if(val  == "t_diluent"){val = "稀释气 "}
           if(val  == "t_zoom"){val = "重置缩放"}
           if(val  == "tab_tr_OTU"){val = "OTU"}
-          if(val  == "tab_tr_CNS"){val = "CNS%"}
+          if(val  == "tab_tr_CNS"){val = "CNS, %"}
           if(val  == "ld_tis"){val = "领先的组织"}
           if(val  == "amb_pres"){val = "环境压力"}
           if(val  == "t_tiss_wrn"){val = "这个计划没有包含减压停留。组织腔隔会被隐藏"}
@@ -2525,7 +2525,7 @@
               val = "ЕКТ"
           }
           if (val == "tab_tr_CNS") {
-              val = "ЦНС%"
+              val = "ЦНС, %"
           }
           if (val == "ld_tis") {
               val = "Водеща тъкан"
@@ -2769,7 +2769,7 @@
               val = "OTU"
           }
           if (val == "tab_tr_CNS") {
-              val = "CNS%"
+              val = "CNS, %"
           }
           if (val == "ld_tis") {
               val = "Leading Tissue"
@@ -3006,7 +3006,7 @@
             if(val  == "t_diluent"){val = "Diluent "}
             if(val  == "t_zoom"){val = "줌 재설정"}
             if(val  == "tab_tr_OTU"){val = "OTU"}
-            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "tab_tr_CNS"){val = "CNS, %"}
             if(val  == "ld_tis"){val = "선도 조직"}
             if(val  == "amb_pres"){val = "주변 압력"}
             if(val  == "t_tiss_wrn"){val = "이 계획에는 감압 정지가 없습니다. 조직 구획이 숨겨집니다."}
@@ -3091,11 +3091,12 @@
         }
         if(td_lng == 9){
             if(val  == "ch_lnkClipboard"){val = "Il link al piano è stato copiato negli appunti!"}
-
+            
+            if(val  == "tab_tr_TTS"){val = "TTS"}
             if(val  == "t_diluent"){val = "Diluente "}
             if(val  == "t_zoom"){val = "Azzera lo Zoom"}
             if(val  == "tab_tr_OTU"){val = "OTU"}
-            if(val  == "tab_tr_CNS"){val = "CNS%"}
+            if(val  == "tab_tr_CNS"){val = "CNS, %"}
             if(val  == "ld_tis"){val = "Tessuto principale"}
             if(val  == "amb_pres"){val = "Pressione ambientale "}
             if(val  == "t_tiss_wrn"){val = "Questa pianificazione non ha soste decompressive. I compartimenti tissutali saranno nascosti."}
