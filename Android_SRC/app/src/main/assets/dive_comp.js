@@ -951,14 +951,18 @@ return s})({"/dive_comp.js":[function(require,module,exports){
                     time++;
                     ceiling = this.getCeiling(gf);                    
                 }
+                //this.addFlat(currentDepth, currentGasName, 5);
                 //diveprome interface end
 
                 //console.log("Held diver at " + currentDepth + " for " + time + " minutes on gas " + currentGasName + ".");
                 //console.log("Moving diver from current depth " + currentDepth + " to next ceiling of " + ceiling);
                 
-               
+               //diveprome interface
+               //var tn_cng_time = document.getElementById("opt_cng_time");
+               //var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
 
                 currentGasName = this.addDecoDepthChange(currentDepth, ceiling, maxppO2, maxEND, currentGasName);
+                
             }
             if (!maintainTissues) {
                 this.resetTissues(origTissues);

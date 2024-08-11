@@ -3,13 +3,13 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion 33
+    compileSdk 34
     defaultConfig {
         applicationId "com.diveprome.avlasov.diveprome"
-        minSdkVersion 23
-        targetSdkVersion 33
-        versionCode 28
-        versionName '14.4'
+        minSdkVersion 22
+        targetSdk 34
+        versionCode 30
+        versionName '14.5'
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildTypes {
@@ -28,12 +28,20 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    api 'com.google.android.gms:play-services-analytics:18.0.4'
+    testImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    api 'com.google.android.gms:play-services-analytics:18.1.0'
+    constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
     //classpath 'com.android.tools.build:gradle:4.1.2'
 
     //classpath 'com.google.gms:google-services:4.3.3'
