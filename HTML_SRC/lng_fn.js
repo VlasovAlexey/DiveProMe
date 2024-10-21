@@ -596,7 +596,7 @@
                 ".td_silver_list" : "Maxim Parinov, Anton Bedarev, Andrey Nikolskiy, Denis Bogatyrev, Alexander Svetovidov, Tomáš Tyšer",
                 ".td_bronze_list" : "Evgenij Vlasov, Evgenij Pyanyh, Nikolaj Voronin, Valerij Vakshul",
 
-                ".header11" : "S.A.U.L. Рекриационный планировщик риска погружений",
+                ".header11" : "S.A.U.L. Рекреационный планировщик риска погружений",
                 ".tr_saul_mix" : "Смесь",
                 ".tr_saul_res_type" : "Метод расчета",
                 ".tr_saul_depth" : "Глубина" + lng_meters,
