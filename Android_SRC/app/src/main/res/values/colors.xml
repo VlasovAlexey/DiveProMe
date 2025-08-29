@@ -3,6 +3,7 @@
     <color name="colorPrimary">#555555</color>
     <color name="colorPrimaryDark">#222222</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="black_overlay">#66000000</color>
+    <color name="splash_background_color">#38a1e7</color>
+    <color name="splash_status_bar_color">#808080</color>
 </resources>

@@ -56,6 +56,9 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowContentAccess(true);
 
+        webView.setHorizontalScrollBarEnabled(false);
+        webView.setVerticalScrollBarEnabled(false);
+
         // Set WebView clients
         webView.setWebViewClient(new WebViewClient() {
             @Override

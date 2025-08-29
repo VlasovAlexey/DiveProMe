@@ -83,14 +83,8 @@ function loadScript(url, callback){
 //Hide download section if run on Android Platform
 function hide_download_icons_android(){
     if(IsAndroid() === true){
-        CSSLoad("style_hide_download_section.css?v0221");
-        CSSLoad("style_hide_window_control_section.css?v023");
-
-        //and hide buttons on mobile devices PDF and XLS save documents
-        element_id_hide("btn_export_pdf_profile");
-        element_id_hide("btn_export_xls");
-        element_id_hide("btn_tbl_pdf");
-        element_id_hide("btn_export_pdf_pp");
+        CSSLoad("css/style_hide_download_section.css?v0221");
+        CSSLoad("css/style_hide_window_control_section.css?v023");
     }
 }
 hide_download_icons_android();

@@ -457,6 +457,12 @@
 
                 try {
                     Highcharts.downloadURL(svgData, filename);
+                    
+                    //diveprome interface start
+                    var content = convertDataURIToBinary(svgData);
+                    generateAndDownload(content, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf" , "application/pdf");
+                    //diveprome interface end
+
                     if (successCallback) {
                         successCallback();
                     }
@@ -803,6 +809,7 @@
                 fallbackToExportServer,
                 svgSuccess
             );
+            
         };
 
         // Extend the default options to use the local exporter logic
@@ -848,7 +855,6 @@
 
     }(Highcharts));
     return (function () {
-
 
     }());
 }));

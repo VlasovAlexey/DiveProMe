@@ -119,6 +119,9 @@ function btn_export_tbl_plan_pdf(){
     else {
         doc.save("DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
     }
+    //Android specific saving
+    var content = (doc.output("arraybuffer"));
+    generateAndDownload(content, "DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf" , "application/pdf");
 }
 
 //Function add consumption to PDF
@@ -211,10 +214,14 @@ function btn_export_xls(){
 
 
     //save xls
-    XLSX.writeFile(wb, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xlsx");
-
-
-    //XLSX.save("DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xlsx");
+    XLSX.writeFile(wb, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xls",{bookType: "biff8", type: "buffer"});
+    
+    //Android saving
+    var content = XLSX.write(wb, {
+        bookType: 'biff8',
+        type: 'array'
+    });
+    generateAndDownload(content, "DiveProMe " + plan_lng("ch_depth") + ' '+ ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".xls" , "application/vnd.ms-excel");
 }
 
 
@@ -227,7 +234,7 @@ function btn_export_pdf(){
 
     DrawChart("chart_pdf","chart_pdf", "chart_pdf", main_plan);
 
-            chart_mainprofile.exportChartLocal({
+         chart_mainprofile.exportChartLocal({
             type: 'application/pdf',
             //type : "image/svg+xml",
             filename: "DiveProMe " + fname_depth + ' '+ ld_dp + fname_dim
@@ -247,14 +254,14 @@ function btn_export_pdf_pp(){
     var fname_depth = plan_lng("ch_depth");
     var fname_dim = plan_lng("ch_mtr").replace(".", "");
     var fname_pp = plan_lng("ch_pp");
-    f//orce_lng = 1;
+    force_lng = 1;
     pp_profile_chart ("chart_pdf");
     chart_pp_profile.exportChartLocal({
         type: 'application/pdf',
         filename: "DiveProMe " + fname_pp + ' ' + fname_depth + ' ' + ld_dp + fname_dim
     });
     //delete "temp" html element for PDF
-    del_html_elem("chart_pdf");
+    //del_html_elem("chart_pdf");
     //force_lng = 0;
 }
 //sleep interface to a xxx sec

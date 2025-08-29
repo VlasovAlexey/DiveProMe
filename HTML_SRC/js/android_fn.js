@@ -8,11 +8,9 @@ function IsAndroid(){
     var ua = navigator.userAgent.toLowerCase();
     //console.log(ua);
     var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-    // var isWV = ua.indexOf("wv") > -1;
     if(isAndroid) {
         //we under Android :) simply but some times does`t work
-        //fix later if you work lover lollipop
-        return false;
+        return true;
     }
     //web View class not present
     return false;
@@ -64,4 +62,19 @@ function showStatus(message, type) {
             statusEl.style.display = 'none';
         }, 5000);
     }
+}
+
+//convert DataURI to Binary Array
+var BASE64_MARKER = ';base64,';
+function convertDataURIToBinary(dataURI) {
+  var base64Index = dataURI.indexOf(BASE64_MARKER) + BASE64_MARKER.length;
+  var base64 = dataURI.substring(base64Index);
+  var raw = window.atob(base64);
+  var rawLength = raw.length;
+  var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+  for(i = 0; i < rawLength; i++) {
+    array[i] = raw.charCodeAt(i);
+  }
+  return array;
 }
