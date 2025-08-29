@@ -84,8 +84,8 @@ function loadScript(url, callback){
 function hide_download_icons_android(){
     if(IsAndroid() === true){
         CSSLoad("css/style_hide_download_section.css?v0221");
-        CSSLoad("css/style_hide_window_control_section.css?v023");
     }
+    CSSLoad("css/style_hide_window_control_section.css?v023");
 }
 hide_download_icons_android();
 
