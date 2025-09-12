@@ -17,11 +17,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.util.TypedValue;
+import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.io.OutputStream;
@@ -42,19 +45,43 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //check SDK version for adding or hiding actionBar Height for proper GUI work
+        FrameLayout frameLayout = findViewById(R.id.main_frame);
+        if (Build.VERSION.SDK_INT > 34) {
+            // Получаем высоту ActionBar
+            TypedValue tv = new TypedValue();
+            if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+                int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+                frameLayout.setPadding(0, actionBarHeight, 0, 0);
+            }
+        }
+
         Log.d(TAG, "Activity created - minSdk: 31, targetSdk: 34");
 
         // Initialize WebView
         webView = findViewById(R.id.myWeb);
-        setupWebView();
+        setupWebView(savedInstanceState);
     }
 
-    private void setupWebView() {
+    private void setupWebView(Bundle savedInstanceState) {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowContentAccess(true);
+
+        // Enabling caching (modern approach)
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+
+        // Accept cookies
+        CookieManager cookieManager = CookieManager.getInstance();
+        cookieManager.setAcceptCookie(true);
+        cookieManager.setAcceptThirdPartyCookies(webView, true);
+
+        // API 21+ requires explicit permission for file cookies
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cookieManager.setAcceptFileSchemeCookies(true);
+        }
 
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
@@ -65,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 Log.d(TAG, "Loading URL: " + url);
                 return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                // Save cookies after loading the page
+                CookieManager.getInstance().flush();
             }
         });
 
@@ -79,8 +113,14 @@ public class MainActivity extends AppCompatActivity {
         // Add JavaScript interface
         webView.addJavascriptInterface(new WebAppInterface(), "Android");
 
-        // Load the HTML content
-        webView.loadUrl("file:///android_asset/index.html");
+        // Restore WebView state if there is a saved state
+        if (savedInstanceState != null) {
+            webView.restoreState(savedInstanceState);
+        } else {
+            // Load the HTML content
+            webView.loadUrl("file:///android_asset/index.html");
+        }
+
         Log.i(TAG, "WebView initialized and loading HTML content");
     }
 
@@ -194,5 +234,32 @@ public class MainActivity extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }
+    }
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        webView.saveState(outState);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Restore session when activity resumes
+        webView.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Save state when paused
+        webView.onPause();
+        CookieManager.getInstance().flush();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Clear WebView and free resources
+        webView.destroy();
     }
 }
