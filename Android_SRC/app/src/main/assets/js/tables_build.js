@@ -456,10 +456,12 @@ function dplan_press_arr(tmp_arr) {
               //include water density, altitude correction and water temperature correction
               //console.log(1 / ((water_density_temperature_correction() * water_density() * 0.001) - ((1 - height_to_bar()))));
               //calculation of correction without altitude above sea level
-              var WaterDensTempCompensation = ((water_density_temperature_correction() * water_density() * 0.001));
+              //var WaterDensTempCompensation = ((water_density_temperature_correction() * water_density() * 0.001));
+              //alredy compensated
+              var WaterDensTempCompensation = 1.0;
 
               //for oxygen
-              if (j === 0) {
+              if (j == 0) {
                   depth = depth_from_name_arr(dec_table[tick + 1]);
                   time_add = time_to_dec_time(dec_table[tick + 2]);
 
