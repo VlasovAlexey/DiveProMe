@@ -9,6 +9,7 @@ function upd_altitide() {
 
 function upd_gf_opt() {
     upd_gf();
+    upd_vpm_conserv_opt();
 }
 
 function del_lvl_list() {
@@ -169,14 +170,19 @@ function oc_ccr_hide_show_elem() {
 
         element_id_show("t_cons_btn");
         element_id_show_inline("tn_param_adv");
-    } else {
-        //ccr plan!
-        element_id_hide("btn_add_lvl");
-        element_id_hide("btn_del_lvl");
 
+        // OC mode: hide CCR diluent metabolic rate
+        element_id_hide("tr_ccr_dil_rmv");
+        element_id_hide("tn_ccr_dil_rmv");
+    } else {
+        //ccr plan! (multiple CCR levels supported — add/del buttons intentionally kept visible)
         element_id_show("tr_setpoint_block");
 
         element_id_hide("tr_gasbreak_block");
+
+        // CCR mode: always show diluent metabolic rate field
+        element_id_show("tr_ccr_dil_rmv");
+        element_id_show("tn_ccr_dil_rmv");
 
         //Bailout plan
         if (opt_blt_dln == 1) {
@@ -207,9 +213,9 @@ function oc_ccr_hide_show_elem() {
             element_id_hide("2-content");
             element_id_hide("2-header");
 
-            element_id_hide("7-header");
-            element_id_hide("t_total_cons");
-            element_id_hide("7-content");
+            // Show diluent consumption table (metabolic rate calculation)
+            element_id_show("7-header");
+            element_id_show("t_total_cons");
 
             element_id_hide("tr_pp");
 
@@ -218,12 +224,13 @@ function oc_ccr_hide_show_elem() {
             element_id_hide("t_cons_btn");
         }
     }
-    // /if NO decompression mixtures then hide all gas consumptions
+    // if NO decompression mixtures: for OC hide consumptions; for CCR Diluent mode keep showing (metabolic rate)
     if (($("#tn_plan_ccr").val() * 1.0 == 2)) {
-        if (($("#opt_deco").val() * 1.0) == 0) {
+        if (opt_blt_dln == 1 && ($("#opt_deco").val() * 1.0) == 0) {
             element_id_hide("7-header");
             element_id_hide("t_total_cons");
         }
+        // Diluent mode always shows consumption — do not hide
     }
 }
 
@@ -302,7 +309,8 @@ function upd_all() {
     //Update GUI dimension first. It is important for correct update GUI elements at any time
     changeGuiDim();
     oc_ccr_hide_show_elem();
-   
+    upd_vpm_conserv_opt();
+
     upd_travel_list();
     upd_deco_list();
     upd_lvl_list();
@@ -563,5 +571,76 @@ if(getCookie("version_check") == null || getCookie("version_check") != "11.5"){
     //setCookie("version_check", "11.5");
     //console.log("first start current version!");
     //btn_restore();
-    
+
+}
+
+// ── Surface interval / repetitive dives ────────────────────────────────────
+
+function upd_rst_tissues_btn() {
+    var btn = document.getElementById("btn_reset_tissues");
+    if (btn) {
+        btn.style.display = (current_dive_num > 1) ? "inline-block" : "none";
+    }
+}
+upd_rst_tissues_btn();
+
+function showNextDiveModal() {
+    var hSel = document.getElementById("si_hours_sel");
+    var mSel = document.getElementById("si_mins_sel");
+    if (!hSel || !mSel) return;
+    hSel.innerHTML = '';
+    for (var h = 0; h <= 23; h++) {
+        var opt = document.createElement("option");
+        opt.value = h;
+        opt.text = h + " h";
+        hSel.appendChild(opt);
+    }
+    mSel.innerHTML = '';
+    for (var m = 0; m <= 55; m += 5) {
+        var opt2 = document.createElement("option");
+        opt2.value = m;
+        opt2.text = m + " min";
+        mSel.appendChild(opt2);
+    }
+    var overlay = document.getElementById("si_modal_overlay");
+    if (overlay) {
+        overlay.style.height = "100%";
+        overlay.style.opacity = "1";
+    }
+}
+
+function closeSIModal() {
+    var overlay = document.getElementById("si_modal_overlay");
+    if (overlay) {
+        overlay.style.height = "0%";
+        overlay.style.opacity = "0";
+    }
+}
+
+function confirmNextDive_SI() {
+    if (!window._last_final_tissues || window._last_final_tissues.length !== 16) {
+        closeSIModal();
+        return;
+    }
+    var hSel = document.getElementById("si_hours_sel");
+    var mSel = document.getElementById("si_mins_sel");
+    var hours = hSel ? (parseInt(hSel.options[hSel.selectedIndex].value) || 0) : 0;
+    var mins  = mSel ? (parseInt(mSel.options[mSel.selectedIndex].value) || 0) : 0;
+    surface_interval_min = hours * 60 + mins;
+    pre_tissues_arr = window._last_final_tissues.slice();
+    current_dive_num++;
+    closeSIModal();
+    write_cookie();
+    upd_rst_tissues_btn();
+    upd_all();
+}
+
+function resetSurfaceTissues() {
+    current_dive_num = 1;
+    pre_tissues_arr = null;
+    surface_interval_min = 0;
+    window._last_final_tissues = null;
+    write_cookie();
+    upd_rst_tissues_btn();
+    upd_all();
 }

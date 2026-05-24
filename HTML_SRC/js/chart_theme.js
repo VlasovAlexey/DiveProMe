@@ -12,22 +12,28 @@ function ChartThemeLight(){
             style: {
                 color: 'black',
                 fontSize: '16px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                fontFamily: 'Signika, serif'
             }
         },
         subtitle: {
             style: {
-                color: 'black'
+                color: 'black',
+                fontFamily: 'Signika, serif'
             }
         },
         tooltip: {
-            borderWidth: 0
+            borderWidth: 0,
+            style: {
+                fontFamily: 'Signika, serif'
+            }
         },
         legend: {
         itemStyle: {
             fontWeight: 'bold',
             fontSize: '13px',
-            color: '#000000'
+            color: '#000000',
+            fontFamily: 'Signika, serif'
         },
         itemHoverStyle: {
             color: '#606063'
@@ -39,20 +45,35 @@ function ChartThemeLight(){
         xAxis: {
             labels: {
                 style: {
-                    color: '#6e6e70'
+                    color: '#6e6e70',
+                    fontFamily: 'Signika, serif'
+                }
+            },
+            title: {
+                style: {
+                    fontFamily: 'Signika, serif'
                 }
             }
         },
         yAxis: {
             labels: {
                 style: {
-                    color: '#6e6e70'
+                    color: '#6e6e70',
+                    fontFamily: 'Signika, serif'
+                }
+            },
+            title: {
+                style: {
+                    fontFamily: 'Signika, serif'
                 }
             }
         },
         plotOptions: {
             series: {
-                shadow: true
+                shadow: true,
+                marker: {
+                    lineColor: '#a0a0a0'
+                }
             },
             candlestick: {
                 lineColor: '#404048'
@@ -107,20 +128,23 @@ function ChartThemeDark(){
       style: {
          color: '#E0E0E3',
          textTransform: 'uppercase',
-         fontSize: '20px'
+         fontSize: '20px',
+         fontFamily: '\'Unica One\', sans-serif'
       }
    },
    subtitle: {
       style: {
          color: '#E0E0E3',
-         textTransform: 'uppercase'
+         textTransform: 'uppercase',
+         fontFamily: '\'Unica One\', sans-serif'
       }
    },
    xAxis: {
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: '#E0E0E3',
+            fontFamily: '\'Unica One\', sans-serif'
          }
       },
       lineColor: '#707073',
@@ -128,8 +152,8 @@ function ChartThemeDark(){
       tickColor: '#707073',
       title: {
          style: {
-            color: '#A0A0A3'
-
+            color: '#A0A0A3',
+            fontFamily: '\'Unica One\', sans-serif'
          }
       }
    },
@@ -137,7 +161,8 @@ function ChartThemeDark(){
       gridLineColor: '#707073',
       labels: {
          style: {
-            color: '#E0E0E3'
+            color: '#E0E0E3',
+            fontFamily: '\'Unica One\', sans-serif'
          }
       },
       lineColor: '#707073',
@@ -146,14 +171,16 @@ function ChartThemeDark(){
       tickWidth: 1,
       title: {
          style: {
-            color: '#A0A0A3'
+            color: '#A0A0A3',
+            fontFamily: '\'Unica One\', sans-serif'
          }
       }
    },
    tooltip: {
       backgroundColor: 'rgba(0, 0, 0, 0.85)',
       style: {
-         color: '#F0F0F0'
+         color: '#F0F0F0',
+         fontFamily: '\'Unica One\', sans-serif'
       }
    },
    plotOptions: {
@@ -177,7 +204,8 @@ function ChartThemeDark(){
    },
    legend: {
       itemStyle: {
-         color: '#E0E0E3'
+         color: '#E0E0E3',
+         fontFamily: '\'Unica One\', sans-serif'
       },
       itemHoverStyle: {
          color: '#FFF'
@@ -287,4 +315,333 @@ function ChartThemeDark(){
 };
 return Highcharts.theme;
 
+}
+
+function ChartThemeMilitary(){
+    Highcharts.theme = {
+        colors: ['#7db866', '#a8d870', '#c8f090', '#4a9e2a', '#5ab82e', '#2d8c1a', '#9dd65a',
+                 '#6abf3a', '#3a6e1e', '#b8e88a', '#1e5a0e'],
+        chart: {
+            backgroundColor: '#060d04',
+            style: {
+                fontFamily: '\'MilitaryHUD\', monospace'
+            },
+            plotBorderColor: '#2d5a1b'
+        },
+        title: {
+            style: {
+                color: '#a8d870',
+                textTransform: 'uppercase',
+                fontSize: '18px',
+                fontFamily: '\'MilitaryHUD\', monospace'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#7db866',
+                textTransform: 'uppercase',
+                fontFamily: '\'MilitaryHUD\', monospace'
+            }
+        },
+        xAxis: {
+            gridLineColor: '#1e3a12',
+            labels: {
+                style: {
+                    color: '#7db866',
+                    fontFamily: '\'MilitaryHUD\', monospace'
+                }
+            },
+            lineColor: '#2d5a1b',
+            minorGridLineColor: '#0e1f09',
+            tickColor: '#2d5a1b',
+            title: {
+                style: {
+                    color: '#7db866',
+                    fontFamily: '\'MilitaryHUD\', monospace'
+                }
+            }
+        },
+        yAxis: {
+            gridLineColor: '#1e3a12',
+            labels: {
+                style: {
+                    color: '#7db866',
+                    fontFamily: '\'MilitaryHUD\', monospace'
+                }
+            },
+            lineColor: '#2d5a1b',
+            minorGridLineColor: '#0e1f09',
+            tickColor: '#2d5a1b',
+            tickWidth: 1,
+            title: {
+                style: {
+                    color: '#7db866',
+                    fontFamily: '\'MilitaryHUD\', monospace'
+                }
+            }
+        },
+        tooltip: {
+            backgroundColor: 'rgba(6, 13, 4, 0.92)',
+            borderColor: '#4a7c2a',
+            style: {
+                color: '#c8f090',
+                fontFamily: '\'MilitaryHUD\', monospace'
+            }
+        },
+        plotOptions: {
+            series: {
+                dataLabels: {
+                    color: '#7db866'
+                },
+                marker: {
+                    lineColor: '#1e3a12'
+                }
+            },
+            boxplot: {
+                fillColor: '#0e1f09'
+            },
+            candlestick: {
+                lineColor: '#a8d870'
+            },
+            errorbar: {
+                color: '#7db866'
+            }
+        },
+        legend: {
+            itemStyle: {
+                color: '#a8d870',
+                fontFamily: '\'MilitaryHUD\', monospace'
+            },
+            itemHoverStyle: {
+                color: '#c8f090'
+            },
+            itemHiddenStyle: {
+                color: '#2d5a1b'
+            }
+        },
+        credits: {
+            style: {
+                color: '#2d5a1b'
+            }
+        },
+        labels: {
+            style: {
+                color: '#4a7c2a'
+            }
+        },
+        drilldown: {
+            activeAxisLabelStyle: {
+                color: '#a8d870'
+            },
+            activeDataLabelStyle: {
+                color: '#a8d870'
+            }
+        },
+        navigation: {
+            buttonOptions: {
+                symbolStroke: '#7db866',
+                theme: {
+                    fill: '#0e1f09'
+                }
+            }
+        },
+        rangeSelector: {
+            buttonTheme: {
+                fill: '#0e1f09',
+                stroke: '#2d5a1b',
+                style: {
+                    color: '#7db866'
+                },
+                states: {
+                    hover: {
+                        fill: '#1e3a12',
+                        stroke: '#4a7c2a',
+                        style: {
+                            color: '#a8d870'
+                        }
+                    },
+                    select: {
+                        fill: '#060d04',
+                        stroke: '#4a7c2a',
+                        style: {
+                            color: '#c8f090'
+                        }
+                    }
+                }
+            },
+            inputBoxBorderColor: '#2d5a1b',
+            inputStyle: {
+                backgroundColor: '#0e1f09',
+                color: '#7db866'
+            },
+            labelStyle: {
+                color: '#7db866'
+            }
+        },
+        navigator: {
+            handles: {
+                backgroundColor: '#1e3a12',
+                borderColor: '#4a7c2a'
+            },
+            outlineColor: '#2d5a1b',
+            maskFill: 'rgba(74,124,42,0.15)',
+            series: {
+                color: '#7db866',
+                lineColor: '#a8d870'
+            },
+            xAxis: {
+                gridLineColor: '#1e3a12'
+            }
+        },
+        scrollbar: {
+            barBackgroundColor: '#1e3a12',
+            barBorderColor: '#2d5a1b',
+            buttonArrowColor: '#7db866',
+            buttonBackgroundColor: '#0e1f09',
+            buttonBorderColor: '#2d5a1b',
+            rifleColor: '#a8d870',
+            trackBackgroundColor: '#060d04',
+            trackBorderColor: '#0e1f09'
+        },
+        dataLabelsColor: '#7db866',
+        textColor: '#7db866',
+        contrastTextColor: '#c8f090'
+    };
+    return Highcharts.theme;
+}
+
+function ChartThemeSailor(){
+    Highcharts.theme = {
+        colors: ['#e91e8c', '#ff69b4', '#7cb9e8', '#c2185b', '#ffadd6',
+                 '#f48fb1', '#ad1457', '#81d4fa', '#ffd700', '#ff80ab',
+                 '#4fc3f7'],
+        chart: {
+            backgroundColor: '#ffffff',
+            style: {
+                fontFamily: '\'FirstFont\', sans-serif'
+            },
+            plotBorderColor: '#f8bbd0'
+        },
+        title: {
+            style: {
+                color: '#c2185b',
+                fontSize: '18px',
+                fontWeight: 'bold'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#e91e8c'
+            }
+        },
+        xAxis: {
+            gridLineColor: '#fce4ec',
+            labels: {
+                style: { color: '#ad1457' }
+            },
+            lineColor: '#f48fb1',
+            minorGridLineColor: '#fff0f5',
+            tickColor: '#f48fb1',
+            title: {
+                style: { color: '#c2185b' }
+            }
+        },
+        yAxis: {
+            gridLineColor: '#fce4ec',
+            labels: {
+                style: { color: '#ad1457' }
+            },
+            lineColor: '#f48fb1',
+            minorGridLineColor: '#fff0f5',
+            tickColor: '#f48fb1',
+            tickWidth: 1,
+            title: {
+                style: { color: '#c2185b' }
+            }
+        },
+        tooltip: {
+            backgroundColor: 'rgba(255,240,245,0.95)',
+            borderColor: '#f48fb1',
+            style: { color: '#2d1a2e' }
+        },
+        plotOptions: {
+            series: {
+                dataLabels: { color: '#c2185b' },
+                marker: { lineColor: '#fce4ec' }
+            },
+            boxplot:     { fillColor: '#fce4ec' },
+            candlestick: { lineColor: '#e91e8c' },
+            errorbar:    { color: '#e91e8c' }
+        },
+        legend: {
+            itemStyle:       { color: '#2d1a2e' },
+            itemHoverStyle:  { color: '#e91e8c' },
+            itemHiddenStyle: { color: '#f8bbd0' }
+        },
+        credits: {
+            style: { color: '#f48fb1' }
+        },
+        labels: {
+            style: { color: '#ad1457' }
+        },
+        drilldown: {
+            activeAxisLabelStyle:  { color: '#c2185b' },
+            activeDataLabelStyle:  { color: '#c2185b' }
+        },
+        navigation: {
+            buttonOptions: {
+                symbolStroke: '#e91e8c',
+                theme: { fill: '#fce4ec' }
+            }
+        },
+        rangeSelector: {
+            buttonTheme: {
+                fill: '#fce4ec',
+                stroke: '#f48fb1',
+                style: { color: '#c2185b' },
+                states: {
+                    hover: {
+                        fill: '#f8bbd0',
+                        stroke: '#e91e8c',
+                        style: { color: '#ad1457' }
+                    },
+                    select: {
+                        fill: '#e91e8c',
+                        stroke: '#c2185b',
+                        style: { color: '#ffffff' }
+                    }
+                }
+            },
+            inputBoxBorderColor: '#f48fb1',
+            inputStyle: { backgroundColor: '#fff0f5', color: '#2d1a2e' },
+            labelStyle:  { color: '#c2185b' }
+        },
+        navigator: {
+            handles: {
+                backgroundColor: '#fce4ec',
+                borderColor: '#f48fb1'
+            },
+            outlineColor: '#f48fb1',
+            maskFill: 'rgba(233,30,140,0.1)',
+            series: {
+                color: '#e91e8c',
+                lineColor: '#ff69b4'
+            },
+            xAxis: { gridLineColor: '#fce4ec' }
+        },
+        scrollbar: {
+            barBackgroundColor: '#f48fb1',
+            barBorderColor:     '#f48fb1',
+            buttonArrowColor:   '#ffffff',
+            buttonBackgroundColor: '#fce4ec',
+            buttonBorderColor:     '#f48fb1',
+            rifleColor:         '#e91e8c',
+            trackBackgroundColor: '#fff0f5',
+            trackBorderColor:     '#fce4ec'
+        },
+        dataLabelsColor: '#c2185b',
+        textColor: '#2d1a2e',
+        contrastTextColor: '#e91e8c'
+    };
+    return Highcharts.theme;
 }

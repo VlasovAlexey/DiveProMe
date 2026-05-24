@@ -36,7 +36,7 @@ function ccr_compact_plan(tmp_arr) {
                   ccr_time_sh = ccr_time_sh + tmp_arr[j].time;
                   
                     ccr_fixed_plan.push({
-                        gasName: tmp_arr[j - 1].gasName,
+                        gasName: tmp_arr[j].gasName,
                         startDepth: ccr_start_dp,
                         endDepth: tmp_arr[j].endDepth,
                         time: ccr_time_sh
@@ -55,35 +55,25 @@ function ccr_compact_plan(tmp_arr) {
       //add last not added element of array
       ccr_fixed_plan.push(tmp_arr[tmp_arr.length - 1]);
 
-      //replace diluent levels mixes to one proper diluent mix
-
-      var dil_name = $("#opt_levels_mix_0 option:selected").text();
-
+      // Keep actual gasName from the engine for each segment.
+      // The engine already emits correct gas names for each level (diluent or bailout OC gas).
+      // No replacement needed — just identify which segments are diluent vs OC bailout.
       for (j = 0; j < ccr_fixed_plan.length; j++) {
           var cnt = 0;
           var current_dil = gass_from_name_arr(ccr_fixed_plan[j].gasName);
-          var flag_to_del = 1;
+          var flag_is_deco_gas = 0;
 
-          //Only for Bailout plan
+          //Only for Bailout plan: mark OC bailout gases
           if (opt_blt_dln == 1) {
               for (c = 0; c < $("#opt_deco").val(); c++) {
-                  //if current level mix is not equal a deco mix
                   if (current_dil[0] == deco_mix_arr[cnt] && current_dil[2] == deco_mix_arr[cnt + 1]) {
-                      flag_to_del = 0;
+                      flag_is_deco_gas = 1;
                   }
                   cnt = cnt + 2;
               }
           }
-
-          if (flag_to_del == 1) {
-              //replace current mix with proper diluent mix
-              ccr_fixed_plan.splice(j, 1, {
-                  gasName: dil_name,
-                  startDepth: ccr_fixed_plan[j].startDepth,
-                  endDepth: ccr_fixed_plan[j].endDepth,
-                  time: ccr_fixed_plan[j].time
-              });
-          }
+          // Store the deco-gas flag on the segment for use in consumption calculation
+          ccr_fixed_plan[j].isDecoGas = (flag_is_deco_gas === 1);
       }
 
       tmp_arr = ccr_fixed_plan;
@@ -124,7 +114,6 @@ function dplan_sort_arr(tmp_arr) {
   //make real copy not equal massive
   var dec_table = tmp_arr.slice();
     
-    //CCR diluent first gas marker
     var diluent_cng = 0;
     pdf_table_export_arr = [];
 
@@ -326,8 +315,21 @@ function dplan_sort_arr(tmp_arr) {
           } else {
               //CCR
               if (i > 0 && j === 4) {
-                  if (diluent_cng == 0) {
-                      //add text "Diluent" only for first mix in the plan
+                  var gasKey = dec_table[tick].toString();
+                  var isOcBailoutGas = false;
+                  if (opt_blt_dln == 1) {
+                      // Bailout mode: check if this gas is an OC deco gas
+                      var mix_parts = gass_from_name_arr(gasKey);
+                      var cnt_chk = 0;
+                      for (var b_chk = 0; b_chk < $("#opt_deco").val(); b_chk++) {
+                          if (mix_parts[0] == deco_mix_arr[cnt_chk] && mix_parts[2] == deco_mix_arr[cnt_chk + 1]) {
+                              isOcBailoutGas = true;
+                          }
+                          cnt_chk += 2;
+                      }
+                  }
+                  if (!isOcBailoutGas) {
+                      // Every diluent row gets "Diluent" prefix
                       text = document.createTextNode(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
                       pdf_table_export_arr.push(plan_lng("t_diluent") + plan_lng(dec_table[tick]));
                   } else {
@@ -386,6 +388,21 @@ function dplan_press_arr(tmp_arr) {
 
   var time_base = 0;
   var time_add = 0;
+
+  // CCR partial pressure tracking
+  var isCCRPlan = ($("#tn_plan_ccr").val() == 2);
+  var _ccrPhase = 'descent';
+  var _bottomPhaseEnded = false;
+  var _maxDepthSeen = 0;
+  var _sp_start  = isCCRPlan ? (parseFloat($("#opt_setpoint_start").val())  || 0.7) : 0;
+  var _sp_bottom = isCCRPlan ? (parseFloat($("#opt_setpoint_bottom").val()) || 1.3) : 0;
+  var _sp_deco   = isCCRPlan ? (parseFloat($("#opt_setpoint_deco").val())   || 1.5) : 0;
+  var _ccrSP = _sp_start;
+  var _ccr_ppO2_start = 0, _ccr_ppO2_end = 0;
+  var _ccr_ppN2_start = 0, _ccr_ppN2_end = 0;
+  var _ccr_ppHe_start = 0, _ccr_ppHe_end = 0;
+  var _ccr_pAmb_start = 0, _ccr_pAmb_end = 0;
+  var _isOCBailout = false;
 
   for (i = 0; i < rows; i++) {
       tr = document.createElement("tr");
@@ -486,6 +503,79 @@ function dplan_press_arr(tmp_arr) {
                       o2_fr_end = (14.5037738 * ((WaterDensTempCompensation * (o2_fr * (depth_end) * 0.001)) + ((height_to_bar()) * (0.01 * o2_fr)))).toFixed(1);
                   }
 
+                  // CCR setpoint-based PPO2 override
+                  if (isCCRPlan) {
+                      // Detect if current segment uses an OC bailout deco gas
+                      _isOCBailout = false;
+                      if (opt_blt_dln == 1) {
+                          var _gasArrCCR = gass_from_name_arr(dec_table[tick + 4].toString());
+                          var _blt_cnt = 0;
+                          for (var _bc = 0; _bc < $("#opt_deco").val(); _bc++) {
+                              if (_gasArrCCR[0] == deco_mix_arr[_blt_cnt] && _gasArrCCR[2] == deco_mix_arr[_blt_cnt + 1]) {
+                                  _isOCBailout = true;
+                                  break;
+                              }
+                              _blt_cnt = _blt_cnt + 2;
+                          }
+                      }
+                      if (!_isOCBailout) {
+                          // Phase detection: descent → sp_start, bottom flat → sp_bottom, ascent/deco → sp_deco
+                          var _ds = parseFloat(depth_start);
+                          var _de = parseFloat(depth_end);
+                          if (_ds < _de) {
+                              _ccrPhase = 'descent';
+                              _ccrSP = _sp_start;
+                              if (_de > _maxDepthSeen) _maxDepthSeen = _de;
+                          } else if (_ds > _de) {
+                              _ccrPhase = 'deco';
+                              _bottomPhaseEnded = true;
+                              _ccrSP = _sp_deco;
+                          } else {
+                              // Flat segment: bottom if at or beyond current max depth, deco if shallower.
+                              // This correctly handles multi-level dives (e.g. 64m→32m→93m):
+                              // the 93m level is bottom even though we ascended to 32m first.
+                              if (_ds >= _maxDepthSeen) {
+                                  _maxDepthSeen = _ds;
+                                  _ccrPhase = 'bottom';
+                                  _ccrSP = _sp_bottom;
+                                  _bottomPhaseEnded = false;
+                              } else {
+                                  _ccrPhase = 'deco';
+                                  _bottomPhaseEnded = true;
+                                  _ccrSP = _sp_deco;
+                              }
+                          }
+                          // Ambient pressure in bar (depth in metres, 0.1 bar/m)
+                          _ccr_pAmb_start = WaterDensTempCompensation * depth_start * 0.1 + height_to_bar();
+                          _ccr_pAmb_end   = WaterDensTempCompensation * depth_end   * 0.1 + height_to_bar();
+                          // CCR PPO2 = min(setpoint, pAmb)
+                          _ccr_ppO2_start = Math.min(_ccrSP, _ccr_pAmb_start);
+                          _ccr_ppO2_end   = Math.min(_ccrSP, _ccr_pAmb_end);
+                          // Diluent inert gas distribution
+                          var _dilAll = gass_from_name_arr(dec_table[tick + 4].toString());
+                          var _dil_n2 = _dilAll[1];
+                          var _dil_he = _dilAll[2];
+                          var _dil_inert = _dil_n2 + _dil_he;
+                          if (_dil_inert > 0) {
+                              _ccr_ppN2_start = (_ccr_pAmb_start - _ccr_ppO2_start) * _dil_n2 / _dil_inert;
+                              _ccr_ppN2_end   = (_ccr_pAmb_end   - _ccr_ppO2_end)   * _dil_n2 / _dil_inert;
+                              _ccr_ppHe_start = (_ccr_pAmb_start - _ccr_ppO2_start) * _dil_he / _dil_inert;
+                              _ccr_ppHe_end   = (_ccr_pAmb_end   - _ccr_ppO2_end)   * _dil_he / _dil_inert;
+                          } else {
+                              _ccr_ppN2_start = _ccr_ppN2_end = 0;
+                              _ccr_ppHe_start = _ccr_ppHe_end = 0;
+                          }
+                          // Override O2 display values with CCR setpoint-based PPO2
+                          if ($("#tn_dmn").val() == 1) {
+                              o2_fr_start = _ccr_ppO2_start.toFixed(2);
+                              o2_fr_end   = _ccr_ppO2_end.toFixed(2);
+                          } else {
+                              o2_fr_start = (14.5037738 * _ccr_ppO2_start).toFixed(1);
+                              o2_fr_end   = (14.5037738 * _ccr_ppO2_end).toFixed(1);
+                          }
+                      }
+                  }
+
                   if (depth_start == depth_end) {
                       text = document.createTextNode(o2_fr_start);
                       ppo2_array.push([1 * (time_base).toFixed(1), 1 * parseFloat(o2_fr_start).toFixed(2)]);
@@ -522,6 +612,17 @@ function dplan_press_arr(tmp_arr) {
                       n2_fr_end = (14.5037738 * ((WaterDensTempCompensation * (n2_fr * (depth_end) * 0.001)) + ((height_to_bar()) * (0.01 * n2_fr)))).toFixed(1);
                   }
 
+                  // CCR setpoint-based PPN2 override
+                  if (isCCRPlan && !_isOCBailout) {
+                      if ($("#tn_dmn").val() == 1) {
+                          n2_fr_start = _ccr_ppN2_start.toFixed(2);
+                          n2_fr_end   = _ccr_ppN2_end.toFixed(2);
+                      } else {
+                          n2_fr_start = (14.5037738 * _ccr_ppN2_start).toFixed(1);
+                          n2_fr_end   = (14.5037738 * _ccr_ppN2_end).toFixed(1);
+                      }
+                  }
+
                   if (depth_start == depth_end) {
                       text = document.createTextNode(n2_fr_start);
                       ppn2_array.push([1 * (time_base).toFixed(1), 1 * parseFloat(n2_fr_start).toFixed(2)]);
@@ -556,6 +657,17 @@ function dplan_press_arr(tmp_arr) {
                       //include water density, altitude correction and water temperature correction
                       he_fr_start = (14.5037738 * ((WaterDensTempCompensation * (he_fr * (depth_start) * 0.001)) + ((height_to_bar()) * (0.01 * he_fr)))).toFixed(1);
                       he_fr_end = (14.5037738 * ((WaterDensTempCompensation * (he_fr * (depth_end) * 0.001)) + ((height_to_bar()) * (0.01 * he_fr)))).toFixed(1);
+                  }
+
+                  // CCR setpoint-based PPHe override
+                  if (isCCRPlan && !_isOCBailout) {
+                      if ($("#tn_dmn").val() == 1) {
+                          he_fr_start = _ccr_ppHe_start.toFixed(2);
+                          he_fr_end   = _ccr_ppHe_end.toFixed(2);
+                      } else {
+                          he_fr_start = (14.5037738 * _ccr_ppHe_start).toFixed(1);
+                          he_fr_end   = (14.5037738 * _ccr_ppHe_end).toFixed(1);
+                      }
                   }
 
                   if (depth_start == depth_end) {
@@ -1222,24 +1334,20 @@ function total_gass_arr(tmp_arr) {
           tick = tick + 1;
       }
   }
-  //if CCR BAILOUT mode remove tree or two lines with first gas
-  if ($("#tn_plan_ccr").val() == 2) {
-      //CCR!                     ^^^^
-      var mxt_idx = 0;
-      for (i = 0; i < dec_table.length; i++) {
-          if (dec_table[0].Mix != dec_table[i].Mix) {
-              mxt_idx = i;
-              break;
-          }
-      }
-      //cut first gas
-      dec_table.splice(0, mxt_idx);
-  }
+  // CCR: no longer cut first gas — each segment is handled individually
+  // (diluent segments use metabolic rate formula, OC bailout gas uses OC RMV formula)
 
 
   tick = 0;
   gas_swich = 0;
   coms_ttl_arr = [];
+
+  var is_ccr_plan = ($("#tn_plan_ccr").val() * 1.0 == 2);
+  var opt_ccr_dil_rmv_el = document.getElementById("opt_ccr_dil_rmv");
+  var ccr_dil_rmv_rate = opt_ccr_dil_rmv_el
+      ? parseFloat(opt_ccr_dil_rmv_el.options[opt_ccr_dil_rmv_el.selectedIndex].value)
+      : 1.0;
+
   for (i = 0; i < dec_table.length; i++) {
 
       depth = depth_from_name_arr(dec_table[tick].Depth);
@@ -1256,16 +1364,35 @@ function total_gass_arr(tmp_arr) {
 
       time1 = time_to_dec_time(dec_table[tick].Time);
 
-      //select consumption rate deco or bottom
-
-      if (i - 1 < (lvl_arr.length / 3) * 2) {
-          //include water density, altitude correction and water temperature correction
-          coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_bt_idx);
-          //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_bt_idx);
+      if (is_ccr_plan) {
+          // CCR mode: check if this segment is an OC bailout deco gas
+          var mix_parts_c = gass_from_name_arr(dec_table[tick].Mix);
+          var is_oc_bailout = false;
+          if (opt_blt_dln == 1) {
+              var cnt_c = 0;
+              for (var bc = 0; bc < $("#opt_deco").val(); bc++) {
+                  if (mix_parts_c[0] == deco_mix_arr[cnt_c] && mix_parts_c[2] == deco_mix_arr[cnt_c + 1]) {
+                      is_oc_bailout = true;
+                  }
+                  cnt_c += 2;
+              }
+          }
+          if (is_oc_bailout) {
+              // OC bailout gas: use deco RMV formula (depth-dependent)
+              coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_deco_idx);
+          } else {
+              // CCR diluent: metabolic consumption = rate × time (depth-independent)
+              coms = Math.ceil(time1 * ccr_dil_rmv_rate);
+          }
       } else {
-          //include water density, altitude correction and water temperature correction
-          coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_deco_idx);
-          //coms = Math.ceil((time1) * (((depth_end + depth_start)*0.5)*0.1+1) * opt_rmv_deco_idx);
+          // OC mode: use standard depth-dependent formula
+          if (i - 1 < (lvl_arr.length / 3) * 2) {
+              //include water density, altitude correction and water temperature correction
+              coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_bt_idx);
+          } else {
+              //include water density, altitude correction and water temperature correction
+              coms = Math.ceil((time1) * ((WaterDensTempCompensation * (((depth_end + depth_start) * 0.5) * 0.1)) + (height_to_bar())) * opt_rmv_deco_idx);
+          }
       }
 
       coms_ttl_arr.push({
@@ -1278,17 +1405,17 @@ function total_gass_arr(tmp_arr) {
   //if CCR dive dipest 6 meters process to display gas consumption
   if (coms_ttl_arr.length > 0) {
 
-      //current CCR mode on
+      // Ensure consumption table is visible for CCR modes
       if ($("#tn_plan_ccr").val() == 2) {
-
-          //current diluent on
-          if (opt_blt_dln == 1) {
-              //deco mixes present
-              if ($("#opt_deco").val() * 1.0 != 0) {
-                  //show consumptions if hide
-                  //element_id_show("7-header");
-                  //element_id_show("t_total_cons");
-              }
+          // Diluent mode: always show (metabolic diluent consumption)
+          if (opt_blt_dln == 2) {
+              element_id_show("7-header");
+              element_id_show("t_total_cons");
+          }
+          // Bailout mode with deco gases: show (already handled by oc_ccr_hide_show_elem)
+          if (opt_blt_dln == 1 && $("#opt_deco").val() * 1.0 != 0) {
+              element_id_show("7-header");
+              element_id_show("t_total_cons");
           }
       }
       

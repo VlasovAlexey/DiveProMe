@@ -20,12 +20,12 @@ var deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
 var travel_mix_depth_arr = [402,402,402,402,402,402,402,402,402,402];
 var travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
 
-var lvl_arr = [1,40,20];
+var lvl_arr = [1,45,20];
 var lvl_mix_arr = [21,0];
 
-var gf_arr = [20,80];
+var gf_arr = [30,85];
 
-var mdls_usr = 2;
+var mdls_usr = 1;
 var lngs_usr = 1;
 
 var dmns_usr = 1;
@@ -34,7 +34,7 @@ var water_ph_usr = 4;
 var opt_deco_usr = 2;
 var opt_travel_usr = 7;
 
-var opt_ppo2_deco_usr = 1.58;
+var opt_ppo2_deco_usr = 1.60;
 var opt_ppo2_bottom_usr = 1.4;
 var opt_ppo2_min_usr = 0.18;
 var opt_ppn2_max_usr = 3.95;
@@ -49,10 +49,12 @@ var opt_rate_asc_surf_usr = 6;
 var opt_rate_asc_deco_usr = 9;
 var opt_rmv_deco_usr = 18;
 var opt_rmv_bt_usr = 20;
+var opt_ccr_dil_rmv_usr = 1.0;
 var opt_cng_time_usr = 0;
 var opt_lst_stop_usr = 3;
 var opt_slevel_usr = 0;
 var opt_celsus_usr = 22;
+var opt_vpm_conserv_usr = 2;
 
 //New dim
 var opt_wrn_ibcd_lip_usr = 2;
@@ -125,15 +127,20 @@ var opt_saul_depth_usr = 12;
 var opt_saul_btime_usr = 30;
 var opt_saul_percent_usr = 0.3;
 
+//new8_0 - surface interval / repetitive dives
+var current_dive_num = 1;
+var pre_tissues_arr = null;
+var surface_interval_min = 0;
+
 function default_set(){
     deco_mix_arr = [50,0,100,0,20,30,18,45,15,55,12,60,10,70,21,35,30,30,60,0];
     deco_mix_depth_arr = [0,0,0,0,0,0,0,0,0,0];
     travel_mix_depth_arr = [402,402,402,402,402,402,402,402,402,402];
     travel_mix_arr = [21,0,20,30,18,45,15,50,12,60,8,70,40,0,80,0,21,35,100,0];
-    lvl_arr = [1,39,20];
+    lvl_arr = [1,45,20];
     lvl_mix_arr = [21,0];
-    gf_arr = [20,80];
-    mdls_usr = 2;
+    gf_arr = [30,85];
+    mdls_usr = 1;
     lngs_usr = 1;
     dmns_usr = 1;
     color_usr = 1;
@@ -141,7 +148,7 @@ function default_set(){
     opt_deco_usr = 2;
     opt_travel_usr = 7;
 
-    opt_ppo2_deco_usr = 1.58;
+    opt_ppo2_deco_usr = 1.60;
     opt_ppo2_bottom_usr = 1.4;
     opt_ppo2_min_usr = 0.18;
     opt_ppn2_max_usr = 3.95;
@@ -157,10 +164,12 @@ function default_set(){
     opt_rate_asc_deco_usr = 9;
     opt_rmv_deco_usr = 18;
     opt_rmv_bt_usr = 20;
+    opt_ccr_dil_rmv_usr = 1.0;
     opt_cng_time_usr = 0;
     opt_lst_stop_usr = 3;
     opt_slevel_usr = 0;
     opt_celsus_usr = 22;
+    opt_vpm_conserv_usr = 2;
 
     //New dim
     opt_wrn_ibcd_lip_usr = 2;
@@ -233,6 +242,10 @@ function default_set(){
     opt_saul_btime_usr = 30;
     opt_saul_percent_usr = 0.3;
 
+    //new8_1 - tab state reset
+    _tab_open_states = _tab_default_states.slice();
+    _tab_states_save();
+
 }
 
 var price_main_arr = [
@@ -297,26 +310,14 @@ var blend_mix_first_arr = [
     }];
 
 var mdls_arr = [
-    {
-        text: "ZHL-A",
-        id: "tn_mdl_zhl_a",
-        isdisable: "enabled"
-    },
-    {
-        text: "ZHL-B",
-        id: "tn_mdl_zhl_b",
-        isdisable: "enabled"
-    },
-    {
-        text: "ZHL-C",
-        id: "tn_mdl_zhl_c",
-        isdisable: "enabled"
-    },
-    {
-        text: "VPM-B",
-        id: "tn_mdl_vpm_b",
-        isdisable: "disabled"
-    }];
+    { text: "ZHL-B",     id: "tn_mdl_zhl_b",    isdisable: "enabled" },
+    { text: "ZHL-C",     id: "tn_mdl_zhl_c",    isdisable: "enabled" },
+    { text: "VPM-A",     id: "tn_mdl_vpm_a",    isdisable: "enabled" },
+    { text: "VPM-B",     id: "tn_mdl_vpm_b",    isdisable: "enabled" },
+    { text: "VPM-B/E",   id: "tn_mdl_vpm_be",   isdisable: "enabled" },
+    { text: "VPM-B/GFS", id: "tn_mdl_vpm_bgfs", isdisable: "enabled" },
+    { text: "VPM-B/FBO", id: "tn_mdl_vpm_bfbo", isdisable: "enabled" }
+];
 var lng_arr = [
     {
         text: "English",
@@ -384,6 +385,16 @@ var color_arr = [
     {
         text: "Light Theme",
         id: "tn_color_light",
+        isdisable: "enabled"
+    },
+    {
+        text: "Military Theme",
+        id: "tn_color_military",
+        isdisable: "enabled"
+    },
+    {
+        text: "Sailor Moon Theme",
+        id: "tn_color_sailor",
         isdisable: "enabled"
     }];
 var water_ph_arr = [
@@ -632,7 +643,7 @@ function water_density(){
         return 1023; // Black Sea
     }
     if (tn_water_g_idx == 10){
-        return 10125; // Caspian Sea
+        return 1012; // Caspian Sea
     }
     if (tn_water_g_idx == 11){
         return 1011; // Sea of Azov
@@ -907,6 +918,23 @@ function lng_cng(mix_name){
     return result;
 }
 
+// Show/hide VPM conservatism row based on current model selection.
+// Visible only for VPM without GF: VPM-A(3), VPM-B(4), VPM-BE(5), VPM-B/FBO(7).
+// Hidden for ZHL (1,2) and VPM-B/GFS (6).
+function upd_vpm_conserv_opt() {
+    var mdl = document.getElementById("tn_mdl");
+    if (!mdl) return;
+    var mdl_idx = mdl.options[mdl.selectedIndex].value * 1;
+    var isVpmNoGfs = (mdl_idx >= 3 && mdl_idx !== 6);
+    if (isVpmNoGfs) {
+        element_id_show("tr_vpm_conserv");
+        element_id_show("tn_vpm_conserv");
+    } else {
+        element_id_hide("tr_vpm_conserv");
+        element_id_hide("tn_vpm_conserv");
+    }
+}
+
 //Show\Hide HTML elements
 function element_id_show(id) {
     var x = document.getElementById(id);
@@ -1008,9 +1036,11 @@ function write_cookie(){
     setCookie("opt_rate_asc_deco_usr1", return_idx("opt_rate_asc_deco"));
     setCookie("opt_rmv_deco_usr1", return_idx("opt_rmv_deco"));
     setCookie("opt_rmv_bt_usr1", return_idx("opt_rmv_bt"));
+    setCookie("opt_ccr_dil_rmv_usr1", return_idx("opt_ccr_dil_rmv"));
     setCookie("opt_cng_time_usr1", return_idx("opt_cng_time"));
     setCookie("opt_lst_stop_usr1", return_idx("opt_lst_stop"));
     setCookie("opt_slevel_usr1", return_idx("opt_slevel"));
+    setCookie("opt_vpm_conserv_usr1", return_idx("opt_vpm_conserv"));
     setCookie("opt_celsus_usr1", return_idx("opt_celsus"));
     
     //new
@@ -1083,6 +1113,17 @@ function write_cookie(){
     setCookie("opt_saul_depth_usr1", return_idx("opt_saul_depth"));
     setCookie("opt_saul_btime_usr1", return_idx("opt_saul_btime"));
     setCookie("opt_saul_percent_usr1", return_idx("opt_saul_percent"));
+
+    //new8_0
+    setCookie("dive_num_usr1", current_dive_num);
+    setCookie("si_min_usr1", surface_interval_min);
+    if (pre_tissues_arr && pre_tissues_arr.length === 16) {
+        setCookie("pt_n2_usr1", pre_tissues_arr.map(function(t){return t.pN2.toFixed(6);}).join(","));
+        setCookie("pt_he_usr1", pre_tissues_arr.map(function(t){return t.pHe.toFixed(6);}).join(","));
+    } else {
+        setCookie("pt_n2_usr1", "");
+        setCookie("pt_he_usr1", "");
+    }
 }
 
 function btn_link() {
@@ -1137,10 +1178,12 @@ function share_plan_link_gen(){
     link_buffer += "opt_rate_asc_deco_usr1=" + return_idx("opt_rate_asc_deco") + ":";
     link_buffer += "opt_rmv_deco_usr1=" + return_idx("opt_rmv_deco") + ":";
     link_buffer += "opt_rmv_bt_usr1=" + return_idx("opt_rmv_bt") + ":";
+    link_buffer += "opt_ccr_dil_rmv_usr1=" + return_idx("opt_ccr_dil_rmv") + ":";
     link_buffer += "opt_cng_time_usr1=" + return_idx("opt_cng_time") + ":";
     link_buffer += "opt_lst_stop_usr1=" + return_idx("opt_lst_stop") + ":";
     link_buffer += "opt_slevel_usr1=" + return_idx("opt_slevel") + ":";
     link_buffer += "opt_celsus_usr1=" + return_idx("opt_celsus") + ":";
+    link_buffer += "opt_vpm_conserv_usr1=" + return_idx("opt_vpm_conserv") + ":";
 
     //new
     link_buffer += "opt_wrn_ibcd_lip_usr1=" + return_idx("opt_wrn_ibcd_lip") + ":";
@@ -1212,6 +1255,13 @@ function share_plan_link_gen(){
     link_buffer += "opt_saul_depth_usr1=" + return_idx("opt_saul_depth") + ":";
     link_buffer += "opt_saul_btime_usr1=" + return_idx("opt_saul_btime") + ":";
     link_buffer += "opt_saul_percent_usr1=" + return_idx("opt_saul_percent") + ":";
+    //new8_0
+    link_buffer += "dive_num_usr1=" + current_dive_num + ":";
+    link_buffer += "si_min_usr1=" + surface_interval_min + ":";
+    if (pre_tissues_arr && pre_tissues_arr.length === 16) {
+        link_buffer += "pt_n2_usr1=" + pre_tissues_arr.map(function(t){return t.pN2.toFixed(6);}).join(",") + ":";
+        link_buffer += "pt_he_usr1=" + pre_tissues_arr.map(function(t){return t.pHe.toFixed(6);}).join(",") + ":";
+    }
     link_buffer += "diveprome_end=1" + ":";
     return link_buffer;
 }
@@ -1252,10 +1302,12 @@ function read_cookie(){
     opt_rate_asc_deco_usr = parseInt(getCookie("opt_rate_asc_deco_usr1"));
     opt_rmv_deco_usr = parseInt(getCookie("opt_rmv_deco_usr1"));
     opt_rmv_bt_usr = parseInt(getCookie("opt_rmv_bt_usr1"));
+    opt_ccr_dil_rmv_usr = parseFloat(getCookie("opt_ccr_dil_rmv_usr1"));
     opt_cng_time_usr = parseInt(getCookie("opt_cng_time_usr1"));
     opt_lst_stop_usr = parseInt(getCookie("opt_lst_stop_usr1"));
     opt_slevel_usr = parseInt(getCookie("opt_slevel_usr1"));
     opt_celsus_usr = parseInt(getCookie("opt_celsus_usr1"));
+    opt_vpm_conserv_usr = parseInt(getCookie("opt_vpm_conserv_usr1"));
 
     //new
     opt_wrn_ibcd_lip_usr = parseInt(getCookie("opt_wrn_ibcd_lip_usr1"));
@@ -1329,6 +1381,24 @@ function read_cookie(){
     opt_saul_btime_usr = parseInt(getCookie("opt_saul_btime_usr1"));
     opt_saul_percent_usr = parseFloat(getCookie("opt_saul_percent_usr1"));
 
+    //new8_0
+    var _dn = getCookie("dive_num_usr1");
+    if (_dn) { current_dive_num = parseInt(_dn) || 1; }
+    var _si = getCookie("si_min_usr1");
+    if (_si) { surface_interval_min = parseInt(_si) || 0; }
+    var _ptn2 = getCookie("pt_n2_usr1");
+    var _pthe = getCookie("pt_he_usr1");
+    if (_ptn2 && _pthe) {
+        var _n2arr = _ptn2.split(",");
+        var _hearr = _pthe.split(",");
+        if (_n2arr.length === 16 && _hearr.length === 16) {
+            pre_tissues_arr = [];
+            for (var _i = 0; _i < 16; _i++) {
+                pre_tissues_arr.push({ pN2: parseFloat(_n2arr[_i]), pHe: parseFloat(_hearr[_i]) });
+            }
+        }
+    }
+
     //assign values from url if present and recognised
     if(search == "" ){
         //do nothing but in future :)
@@ -1381,9 +1451,11 @@ function read_cookie(){
             if(find_val_url("opt_rate_asc_deco_usr1") != undefined){opt_rate_asc_deco_usr = parseInt(find_val_url("opt_rate_asc_deco_usr1"));};
             if(find_val_url("opt_rmv_deco_usr1") != undefined){opt_rmv_deco_usr = parseInt(find_val_url("opt_rmv_deco_usr1"));};
             if(find_val_url("opt_rmv_bt_usr1") != undefined){opt_rmv_bt_usr = parseInt(find_val_url("opt_rmv_bt_usr1"));};
+            if(find_val_url("opt_ccr_dil_rmv_usr1") != undefined){opt_ccr_dil_rmv_usr = parseFloat(find_val_url("opt_ccr_dil_rmv_usr1"));};
             if(find_val_url("opt_cng_time_usr1") != undefined){opt_cng_time_usr = parseInt(find_val_url("opt_cng_time_usr1"));};
             if(find_val_url("opt_lst_stop_usr1") != undefined){opt_lst_stop_usr = parseInt(find_val_url("opt_lst_stop_usr1"));};
             if(find_val_url("opt_slevel_usr1") != undefined){opt_slevel_usr = parseInt(find_val_url("opt_slevel_usr1"));};
+            if(find_val_url("opt_vpm_conserv_usr1") != undefined){opt_vpm_conserv_usr = parseInt(find_val_url("opt_vpm_conserv_usr1"));};
             if(find_val_url("opt_celsus_usr1") != undefined){opt_celsus_usr = parseInt(find_val_url("opt_celsus_usr1"));};
     
             //new
@@ -1445,6 +1517,20 @@ function read_cookie(){
             if(find_val_url("opt_saul_depth_usr1") != undefined){opt_saul_depth_usr = parseInt(find_val_url("opt_saul_depth_usr1"));};
             if(find_val_url("opt_saul_btime_usr1") != undefined){opt_saul_btime_usr = parseInt(find_val_url("opt_saul_btime_usr1"));};
             if(find_val_url("opt_saul_percent_usr1") != undefined){opt_saul_percent_usr = parseFloat(find_val_url("opt_saul_percent_usr1"));};
+
+            //new8_0
+            if(find_val_url("dive_num_usr1") != undefined){current_dive_num = parseInt(find_val_url("dive_num_usr1")) || 1;};
+            if(find_val_url("si_min_usr1") != undefined){surface_interval_min = parseInt(find_val_url("si_min_usr1")) || 0;};
+            if(find_val_url("pt_n2_usr1") != undefined && find_val_url("pt_he_usr1") != undefined){
+                var _un2 = find_val_url("pt_n2_usr1").split(",");
+                var _uhe = find_val_url("pt_he_usr1").split(",");
+                if (_un2.length === 16 && _uhe.length === 16) {
+                    pre_tissues_arr = [];
+                    for (var _ui = 0; _ui < 16; _ui++) {
+                        pre_tissues_arr.push({ pN2: parseFloat(_un2[_ui]), pHe: parseFloat(_uhe[_ui]) });
+                    }
+                }
+            };
         }
     }
 }
@@ -1525,6 +1611,12 @@ function btn_restore(){
 
     write_cookie();
 
+    //new8_1 - apply default tab states to DOM (all closed except tab 4)
+    if (window._slider_instance) {
+        window._slider_instance.body.hide();
+        window._slider_instance.body.eq(4).show();
+    }
+
     upd_all();
 }
 
@@ -1559,11 +1651,13 @@ function dim_cng(){
 
     opt_rmv_deco_usr = $( "#opt_rmv_deco" ).val();
     opt_rmv_bt_usr = $( "#opt_rmv_bt" ).val();
+    opt_ccr_dil_rmv_usr = $( "#opt_ccr_dil_rmv" ).val();
 
     opt_cng_time_usr = $( "#opt_cng_time" ).val();
     opt_lst_stop_usr = $( "#opt_lst_stop" ).val();
     opt_slevel_usr = $( "#opt_slevel" ).val();
     opt_celsus_usr = $( "#opt_celsus" ).val();
+    opt_vpm_conserv_usr = $( "#opt_vpm_conserv" ).val();
 
     opt_wrn_ibcd_lip_usr = $( "#opt_wrn_ibcd_lip" ).val();
 
@@ -1632,6 +1726,8 @@ function dim_cng(){
     upd_saul_depth();
     upd_saul();
 
+    upd_vpm_conserv_opt();
+
 }
 
 //Create dynamic HTML elements
@@ -1686,6 +1782,9 @@ function create_html(){
     del_html_elem("tn_rate_asc_deco");
     create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0 , "depth");
 
+    del_html_elem("tn_ccr_dil_rmv");
+    create_option("tn_ccr_dil_rmv", "opt_ccr_dil_rmv", 0.5, 2.0, opt_ccr_dil_rmv_usr , 0.1 , 1 , "vol");
+
     del_html_elem("tn_rmv_deco");
     create_option("tn_rmv_deco", "opt_rmv_deco", 3, 60, opt_rmv_deco_usr , 1 , 0 , "vol");
     del_html_elem("tn_rmv_bt");
@@ -1697,6 +1796,8 @@ function create_html(){
     create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
     del_html_elem("tn_slevel");
     create_option("tn_slevel", "opt_slevel", 0, 4000, opt_slevel_usr , 100 , 0 , "depth");
+    del_html_elem("tn_vpm_conserv");
+    create_option("tn_vpm_conserv", "opt_vpm_conserv", 0, 5, opt_vpm_conserv_usr, 1, 0, "none");
     del_html_elem("tn_celsus");
     create_option("tn_celsus", "opt_celsus", 0, 50, opt_celsus_usr , 2 , 0 , "temper");
 
@@ -1842,11 +1943,16 @@ function create_html(){
     opt_rmv_deco.addEventListener('change', upd_all);
     opt_rmv_bt.addEventListener('change', upd_all);
 
+    var opt_ccr_dil_rmv_el = document.getElementById("opt_ccr_dil_rmv");
+    if (opt_ccr_dil_rmv_el) { opt_ccr_dil_rmv_el.addEventListener('change', upd_all); }
+
     tn_celsus = document.getElementById("opt_celsus");
     tn_celsus.addEventListener('change', upd_altitide);
 
     tn_slevel = document.getElementById("opt_slevel");
     tn_slevel.addEventListener('change', upd_altitide);
+
+    document.getElementById("opt_vpm_conserv").addEventListener('change', upd_all);
 
     tn_lst_stop = document.getElementById("opt_lst_stop");
     tn_lst_stop.addEventListener('change', upd_all);
@@ -2073,11 +2179,13 @@ create_option("tn_rate_asc", "opt_rate_asc", 1, 40, opt_rate_asc_usr , 1 , 0, "d
 create_option("tn_rate_asc_surf", "opt_rate_asc_surf", 1, 10, opt_rate_asc_surf_usr , 1 , 0, "depth");
 
 create_option("tn_rate_asc_deco", "opt_rate_asc_deco", 1, 20, opt_rate_asc_deco_usr , 1 , 0, "depth");
+create_option("tn_ccr_dil_rmv", "opt_ccr_dil_rmv", 0.5, 2.0, opt_ccr_dil_rmv_usr , 0.1 , 1, "vol");
 create_option("tn_rmv_deco", "opt_rmv_deco", 3, 60, opt_rmv_deco_usr , 1 , 0, "vol");
 create_option("tn_rmv_bt", "opt_rmv_bt", 3, 60, opt_rmv_bt_usr , 1 , 0 , "vol");
 create_option("tn_cng_time","opt_cng_time", 0, 2, opt_cng_time_usr , 1 , 0 , "none");
 create_option("tn_lst_stop", "opt_lst_stop", 3, 6, opt_lst_stop_usr , 3 , 0 , "depth");
 create_option("tn_slevel", "opt_slevel", 0, 4000, opt_slevel_usr , 100 , 0 , "depth");
+create_option("tn_vpm_conserv", "opt_vpm_conserv", 0, 5, opt_vpm_conserv_usr, 1, 0, "none");
 create_option("tn_celsus", "opt_celsus", 0, 50, opt_celsus_usr , 2 , 0 , "temper");
 
 //new
@@ -2195,11 +2303,16 @@ function init_global(){
     opt_rmv_deco.addEventListener('change', upd_all);
     opt_rmv_bt.addEventListener('change', upd_all);
 
+    var opt_ccr_dil_rmv_el2 = document.getElementById("opt_ccr_dil_rmv");
+    if (opt_ccr_dil_rmv_el2) { opt_ccr_dil_rmv_el2.addEventListener('change', upd_all); }
+
     tn_celsus = document.getElementById("opt_celsus");
     tn_celsus.addEventListener('change', upd_altitide);
 
     tn_slevel = document.getElementById("opt_slevel");
     tn_slevel.addEventListener('change', upd_altitide);
+
+    document.getElementById("opt_vpm_conserv").addEventListener('change', upd_all);
 
     tn_lst_stop = document.getElementById("opt_lst_stop");
     tn_lst_stop.addEventListener('change', upd_all);

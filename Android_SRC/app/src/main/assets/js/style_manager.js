@@ -1,4 +1,30 @@
 
+// Remove all previously loaded theme CSS links so switching themes
+// doesn't leave stale font/color rules (e.g. MilitaryHUD font persisting).
+function CSSRemoveTheme(){
+    var themeFiles = [
+        "style_main.css",
+        "style_light.css",
+        "style_military.css",
+        "style_sailor.css",
+        "roundslider_main.css",
+        "roundslider_light.css",
+        "roundslider_military.css",
+        "roundslider_sailor.css"
+    ];
+    var links = document.head.getElementsByTagName("link");
+    // Iterate backwards so removal doesn't shift remaining indices
+    for (var i = links.length - 1; i >= 0; i--) {
+        var href = links[i].getAttribute("href") || "";
+        for (var j = 0; j < themeFiles.length; j++) {
+            if (href.indexOf(themeFiles[j]) !== -1) {
+                links[i].parentNode.removeChild(links[i]);
+                break;
+            }
+        }
+    }
+}
+
 //Load default Style
 function CSSLoad(file){
     var link = document.createElement("link");
@@ -12,6 +38,9 @@ function CSSLoad(file){
 function assign_css_style(){
     tn_cng_color = document.getElementById("tn_color");
     tn_color_idx = tn_cng_color.options[tn_cng_color.selectedIndex].value;
+
+    // Remove any previously loaded theme sheets before adding the new one
+    CSSRemoveTheme();
 
     //load custom scrollbars
     CSSLoad("css/jquery.mCustomScrollbar.css");
@@ -31,6 +60,17 @@ function assign_css_style(){
         CSSLoad("css/style_light.css?v51111041131113");
         CSSLoad("css/roundslider_light.css");
     }
+    if(tn_color_idx*1.0 === 3){
+        CSSLoad("css/style_military.css?v1");
+        CSSLoad("css/roundslider_military.css");
+    }
+    if(tn_color_idx*1.0 === 4){
+        CSSLoad("css/style_sailor.css?v1");
+        CSSLoad("css/roundslider_sailor.css");
+    }
+    // Trigger resize after CSS loads so Highcharts reflows charts within the container
+    // and they do not overflow the right edge of the screen when switching themes.
+    setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 200);
     ZoomButtonChangeStyle();
 }
 assign_css_style();
@@ -54,6 +94,24 @@ function ZoomButtonChangeStyle(){
         ColorZoobButtonFillHover = "#eeeeee";
         ColorZoobButtonTextHover = "#0080fc";
         ColorZoobButtonStrokeHover = "#0080fc";
+    }
+    if(tn_color_idx*1.0 === 3){
+        ColorZoobButtonFill = "#1a3a0f";
+        ColorZoobButtonStroke = "#4a7c2a";
+        ColorZoobButtonText = "#a8d870";
+        ZoobButtonRadius = 2;
+        ColorZoobButtonFillHover = "#0a1f06";
+        ColorZoobButtonTextHover = "#c8f090";
+        ColorZoobButtonStrokeHover = "#6abf3a";
+    }
+    if(tn_color_idx*1.0 === 4){
+        ColorZoobButtonFill = "#e91e8c";
+        ColorZoobButtonStroke = "#f48fb1";
+        ColorZoobButtonText = "#ffffff";
+        ZoobButtonRadius = 20;
+        ColorZoobButtonFillHover = "#fff0f5";
+        ColorZoobButtonTextHover = "#e91e8c";
+        ColorZoobButtonStrokeHover = "#e91e8c";
     }
 }
 

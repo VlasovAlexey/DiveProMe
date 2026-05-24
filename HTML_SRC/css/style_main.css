@@ -1032,3 +1032,60 @@ a#windowControlMinimize{
     filter: drop-shadow( 0px 5px 10px rgba(20, 20, 20, 1));
 }
 
+/* ── Surface interval / repetitive dives ───────────────────────────────── */
+
+.div_next_dive_bar {
+    width: 91%;
+    padding: 4px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.btn_next_dive,
+.btn_reset_tissues {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: FirstFont;
+    font-size: 16px;
+    width: auto;
+    position: relative;
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+    text-shadow: 0 0px 0px #ffffff;
+    padding: .4em 1em;
+    outline: none;
+    border: 2px solid #969696;
+    border-radius: 15px;
+    background: #424242;
+    transition: .2s ease-in-out;
+    cursor: pointer;
+    box-shadow: 0 0 0px #ffffff inset, 0 0px 0px #ffffff inset, 0 0px 0px #ffffff;
+}
+.btn_next_dive:hover,
+.btn_reset_tissues:hover {
+    background: #eeeeee;
+    color: #424242;
+    border: 2px solid #0080fc;
+}
+.btn_next_dive:active,
+.btn_reset_tissues:active {
+    top: 1px;
+    background: #424242;
+    color: #eeeeee;
+    box-shadow: 0 0 0px #ffffff inset, 0 0px 0px #ffffff inset, 0 0px 0px #ffffff;
+}
+
+.si_modal_selects {
+    padding: 12px 0;
+}
+.si_modal_selects select {
+    width: 120px;
+    margin: 0 8px;
+}
+
+@keyframes divenum_fade {
+    from { opacity: 1; }
+    to   { opacity: 0.75; }
+}
+

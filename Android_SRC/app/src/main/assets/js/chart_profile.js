@@ -9,6 +9,12 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
     if (tn_color_idx * 1.0 == 2) {
         Highcharts.setOptions(ChartThemeLight());
     }
+    if (tn_color_idx * 1.0 == 3) {
+        Highcharts.setOptions(ChartThemeMilitary());
+    }
+    if (tn_color_idx * 1.0 == 4) {
+        Highcharts.setOptions(ChartThemeSailor());
+    }
 
     ld_dp = max_lvl_depth(lvl_arr);
     //meters
@@ -34,17 +40,17 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
     if ($("#tn_plan_ccr").val() == 1) {
 
     }
-    //CCR Diluent Dive Color
-    if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 2) {
-        chart_zone_arr.push({
-            value: 100000,
-            color: "#fffa6c"
-        });
-    }
+    //CCR Diluent Dive Color: zones are built correctly in the loop (ascending order)
     //CCR Bailout Dive Color
     if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 1) {
         //Just nothing but need fix after all processed zones after for loop
     }
+
+    // CCR Diluent: track current zone color (zones must be built in ascending x order)
+    var dil_zone_color = "#fffa6c";
+    var dil_zone_alt   = "#ff9b6c";
+    // CCR Bailout: unified zone color tracking (diluent + OC phases)
+    var blt_current_zone_color = dil_zone_color;
 
     chart_label_arr = [];
     //OC
@@ -140,33 +146,62 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
                 //eCCR
                 //Bailout dive
                 if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 1) {
-                    //get o2 percentage for calculate deepest bailout mix
                     count = 0;
-                    //Check real(interface selection) deco mix list and if this gas exist add gas label and color change
+                    var is_deco_bailout_gas = false;
+                    //Check real(interface selection) deco mix list and if this gas exist — OC bailout transition
                     for (dlst = 0; dlst < $("#opt_deco").val(); dlst++) {
                         if (gass_from_name_arr(tmp_arr[a9 + 4])[0] == deco_mix_arr[count] && gass_from_name_arr(tmp_arr[a9 + 4])[2] == deco_mix_arr[count + 1]) {
                             if (tmp_arr[a9] != "Descent") {
-                                //check it is not descent
+                                is_deco_bailout_gas = true;
+                                // Close current zone (last diluent period ends here)
+                                chart_zone_arr.push({ value: tmp_timex, color: blt_current_zone_color });
                                 chart_label_arr.push({
                                     x: tmp_timex,
                                     title: plan_lng(tmp_arr[a9 + 4]),
                                     text: plan_lng(tmp_arr[a9 + 4])
                                 });
+                                // Set OC gas color for the new zone
                                 if (clr_tick === 0) {
-                                    clr = "#666ae9";
+                                    blt_current_zone_color = "#666ae9";
                                     clr_tick = 1;
                                 } else {
-                                    clr = "#8fadd7";
+                                    blt_current_zone_color = "#8fadd7";
                                     clr_tick = 0;
                                 }
-                                chart_zone_arr.push({
-                                    value: tmp_timex,
-                                    color: clr
-                                });
                             }
                         }
                         count = count + 2;
                     }
+                    // Not an OC bailout gas — it's a diluent→diluent change
+                    if (!is_deco_bailout_gas) {
+                        // Close current diluent zone
+                        chart_zone_arr.push({ value: tmp_timex, color: blt_current_zone_color });
+                        chart_label_arr.push({
+                            x: tmp_timex,
+                            title: plan_lng("t_diluent") + plan_lng(tmp_arr[a9 + 4]),
+                            text: plan_lng("t_diluent") + plan_lng(tmp_arr[a9 + 4])
+                        });
+                        // Switch to next diluent color
+                        var _dil_tmp2 = dil_zone_color;
+                        dil_zone_color = dil_zone_alt;
+                        dil_zone_alt = _dil_tmp2;
+                        blt_current_zone_color = dil_zone_color;
+                    }
+                }
+                //CCR Diluent dive: add label for each diluent gas change
+                if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 2) {
+                    // Add label and zone for any gas change (including during descent)
+                    chart_label_arr.push({
+                        x: tmp_timex,
+                        title: plan_lng("t_diluent") + plan_lng(tmp_arr[a9 + 4]),
+                        text: plan_lng("t_diluent") + plan_lng(tmp_arr[a9 + 4])
+                    });
+                    // Close previous diluent zone AT this time (zones must be ascending)
+                    chart_zone_arr.push({ value: tmp_timex, color: dil_zone_color });
+                    // Swap colors for the next zone
+                    var _dil_tmp = dil_zone_color;
+                    dil_zone_color = dil_zone_alt;
+                    dil_zone_alt   = _dil_tmp;
                 }
             }
         }
@@ -206,19 +241,14 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
         }
 
     }
-    //CCR Bailout Dive final color fix
+    //CCR Diluent Dive final trailing zone (covers rest of dive with current diluent color)
+    if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 2) {
+        chart_zone_arr.push({ color: dil_zone_color });
+    }
+
+    //CCR Bailout Dive final trailing zone (covers rest of dive with last gas color)
     if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 1) {
-        if (clr_tick === 0) {
-            clr = "#666ae9";
-            clr_tick = 1;
-        } else {
-            clr = "#8fadd7";
-            clr_tick = 0;
-        }
-        chart_zone_arr.push({
-            value: 1000,
-            color: clr
-        });
+        chart_zone_arr.push({ color: blt_current_zone_color });
     }
 
     //Change Reset Zoom Text Language
@@ -270,11 +300,10 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
         },
 
         title: {
-            text: plan_lng("ch_depth") + ' ' + ld_dp_fixed + plan_lng("ch_mtr")
+            text: 'Dive #' + current_dive_num + ' · ' + ld_dp_fixed + plan_lng("ch_mtr")
         },
         subtitle: {
-            text: plan_lng("ch_source") + ': <a href="http://scan3d.ru/DiveMePro+">' +
-                'divepro.me</a>'
+            text: null
         },
         xAxis: {
 
@@ -363,11 +392,36 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
         ]
     });
 
+    // Animate chart title opacity 100%→75% for repetitive dives (dive #2+)
+    if (current_dive_num > 1) {
+        setTimeout(function() {
+            var titleEl = document.querySelector('#profile_chart .highcharts-title');
+            if (titleEl) {
+                titleEl.style.animation = 'divenum_fade 2s ease-in-out forwards';
+            }
+        }, 350);
+    }
+
 }
 
 //build tissue charts if button pressed
 function btn_build_tiss() {
-    
+
+    // Apply selected theme style
+    var tn_cng_color2 = document.getElementById("tn_color");
+    var tn_color_idx2 = tn_cng_color2.options[tn_cng_color2.selectedIndex].value;
+    if (tn_color_idx2 * 1.0 == 1) {
+        Highcharts.setOptions(ChartThemeDark());
+    }
+    if (tn_color_idx2 * 1.0 == 2) {
+        Highcharts.setOptions(ChartThemeLight());
+    }
+    if (tn_color_idx2 * 1.0 == 3) {
+        Highcharts.setOptions(ChartThemeMilitary());
+    }
+    if (tn_color_idx2 * 1.0 == 4) {
+        Highcharts.setOptions(ChartThemeSailor());
+    }
 
     element_id_hide("t_tiss_btn");
     element_id_show("t_tiss_chart");
@@ -389,20 +443,29 @@ function btn_build_tiss() {
         a = 0;
         b = 0;
 
-        //add start time zero
-        tiss_cat_arr.push(0);
+        // For first dives, pre-push t=0. For repetitive dives the t=0 row is already
+        // the first entry in comp_tiss_arr (prepended by populateTissueTimeline),
+        // so the loop below handles it — no duplicate push needed.
+        var _has_pretiss = (window._dive_start_tissues && window._dive_start_tissues.length >= 16);
+
+        if (!_has_pretiss) {
+            //add start time zero
+            tiss_cat_arr.push(0);
+        }
 
         var dp_arr = [];
-        //add start ambient pressure in bars
-        //bar
-        if ($("#tn_dmn").val() == 1) {
-            //include water density, altitude correction and water temperature correction
-            dp_arr.push((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())));
-        }
-        //psi
-        if ($("#tn_dmn").val() == 2) {
-            //include water density, altitude correction and water temperature correction
-            dp_arr.push(14.5037738 * ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())))).toFixed(2);
+        if (!_has_pretiss) {
+            //add start ambient pressure in bars
+            //bar
+            if ($("#tn_dmn").val() == 1) {
+                //include water density, altitude correction and water temperature correction
+                dp_arr.push((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())));
+            }
+            //psi
+            if ($("#tn_dmn").val() == 2) {
+                //include water density, altitude correction and water temperature correction
+                dp_arr.push(14.5037738 * ((water_density_temperature_correction() * water_density() * 0.001 * (1)) - ((1 - height_to_bar())))).toFixed(2);
+            }
         }
 
         //process all other values
@@ -437,11 +500,15 @@ function btn_build_tiss() {
         for (s = 0; s < 16; s++) {
             vis = false;
 
-            //add first helium and nitrogen value extracted from first mix in dive plan
+            // For first dives push surface (0) as t=0 start.
+            // For repetitive dives the pre-dive row is already the first entry
+            // in comp_tiss_arr, so the j-loop below provides the t=0 value.
             var rgas = gass_from_name_arr(main_plan_src[0].gasName);
-            tiss_val_arr_ng.push(0);
-            tiss_val_arr_hl.push(0);
-            tiss_val_arr_tl.push(0);
+            if (!_has_pretiss) {
+                tiss_val_arr_ng.push(0);
+                tiss_val_arr_hl.push(0);
+                tiss_val_arr_tl.push(0);
+            }
 
             //process all other
             for (j = 0; j < comp_tiss_arr.length / 17; j++) {
@@ -543,9 +610,13 @@ function btn_build_tiss() {
         var m_val_max_tl = [];
         var m_val_cr_tl = 0;
 
-        m_val_max_ng.push(0);
-        m_val_max_hl.push(0);
-        m_val_max_tl.push(0);
+        // Skip pre-push of 0 for repetitive dives — loop provides the t=0 value
+        // from comp_tiss_arr's pre-dive entry.
+        if (!_has_pretiss) {
+            m_val_max_ng.push(0);
+            m_val_max_hl.push(0);
+            m_val_max_tl.push(0);
+        }
 
         aa_a = 0;
         bb_b = 0;
@@ -1143,8 +1214,7 @@ function pp_profile_chart(html_id2) {
             text: plan_lng("ch_pp")
         },
         subtitle: {
-            text: plan_lng("ch_source") + ': <a href="http://scan3d.ru/DiveMePro">' +
-                'divepro.me</a>'
+            text: null
         },
         xAxis: {
             plotBands: [],

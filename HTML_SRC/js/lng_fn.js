@@ -194,7 +194,13 @@
             1: {
                 //Eng
                 ".btn_link" : "Share Your Plan",
-                
+
+                ".btn_next_dive" : "Next Dive",
+                ".btn_reset_tissues" : "Reset Tissues",
+                ".si_modal_title" : "Surface Interval",
+                ".btn_si_confirm" : "Start Next Dive",
+                ".btn_si_cancel" : "Cancel",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluent",
 
@@ -204,7 +210,6 @@
                 ".tn_plan_detailed" : "Detailed",
                 ".tn_plan_short" : "Classic",
 
-                ".tn_download_local" : "Download Local Version",
                 ".tn_btn_tiss" : "Build Charts",
 
                 ".tn_btn_price" : "Build Charts",
@@ -218,6 +223,8 @@
                 ".tr_ifc_set" : "Interface Style",
                 ".tn_color_dark" : "Dark Theme",
                 ".tn_color_light" : "Light Theme",
+                ".tn_color_military" : "Military Theme",
+                ".tn_color_sailor" : "Sailor Moon Theme",
 
                 ".tn_water_baltic" : "Baltic Sea",
                 ".tn_water_redsea" : "Red Sea",
@@ -245,6 +252,7 @@
                 ".tr_rate_asc_deco" : "Ascent Deco Rate" + lng_meters_min,
                 ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "CCR Dil Metabolic" + lng_ltr_min,
                 ".tr_cng_time" : "Mix Change Extra Time" + lng_min,
                 ".tr_lst_stop" : "Last Stop" + lng_meters,
 
@@ -261,6 +269,7 @@
                 ".tn_water_fresh" : "Fresh",
                 ".tr_gf" : "Gradient Factor, %",
                 ".tr_slevel" : "Dive Elevation" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Conservatism",
                 ".tn_travel" : "Total Travel/Bottom/Diluent Mixes",
                 ".tn_deco" : "Total Deco/Bailout Mixes",
 
@@ -402,6 +411,13 @@
             //Rus
             2: {
                 ".btn_link" : "Поделиться свои планом",
+
+                ".btn_next_dive" : "Следующее погружение",
+                ".btn_reset_tissues" : "Сбросить ткани",
+                ".si_modal_title" : "Поверхностный интервал",
+                ".btn_si_confirm" : "Начать следующее погружение",
+                ".btn_si_cancel" : "Отмена",
+
                 ".btn_bailout" : "Бейлаут",
                 ".btn_diluent" : "Дилуэнт",
 
@@ -411,7 +427,6 @@
                 ".tn_plan_detailed" : "Детальный",
                 ".tn_plan_short" : "Классический",
 
-                ".tn_download_local" : "Скачать локальную версию",
                 ".tn_btn_tiss" : "Построить диаграммы",
 
                 ".tn_btn_price" : "Построить диаграммы",
@@ -425,6 +440,8 @@
                 ".tr_ifc_set" : "Стиль интерфейса",
                 ".tn_color_dark" : " Ночная тема",
                 ".tn_color_light" : "Дневная тема",
+                ".tn_color_military" : "Военная тема",
+                ".tn_color_sailor" : "Тема Сейлор Мун",
 
                 ".tn_water_baltic" : "Балтийское море",
                 ".tn_water_redsea" : "Красное море",
@@ -452,6 +469,7 @@
                 ".tr_rate_asc_deco" : "Скорость всплытия на деко" + lng_meters_min,
                 ".tr_rmv_deco" : "Дыхание на деко" + lng_ltr_min,
                 ".tr_rmv_bt" : "Дыхание на дне" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "Расход дилюента CCR" + lng_ltr_min,
                 ".tr_cng_time" : "Время смены смесей" + lng_min,
                 ".tr_lst_stop" : "Последняя остановка" + lng_meters,
 
@@ -471,7 +489,7 @@
 
                 ".tr_gf" : "Градиент фактор, %",
                 ".tr_slevel" : "Альтиту́да" + lng_meters,
-
+                ".tr_vpm_conserv" : "VPM Консерватизм",
                 ".tn_travel" : "Число донных/транспортных/дилуэнт смесей",
                 ".tn_deco" : "Число декомпрессионных/бейлаут смесей",
 
@@ -616,6 +634,12 @@
             3: {
                 ".btn_link" : "Comparta su Plan",
 
+                ".btn_next_dive" : "Siguiente inmersión",
+                ".btn_reset_tissues" : "Restablecer tejidos",
+                ".si_modal_title" : "Intervalo de superficie",
+                ".btn_si_confirm" : "Iniciar siguiente inmersión",
+                ".btn_si_cancel" : "Cancelar",
+
                 ".btn_bailout" : "Rescate",
                 ".btn_diluent" : "Diluyente",
 
@@ -625,7 +649,6 @@
                 ".tn_plan_detailed" : "Detallado",
                 ".tn_plan_short" : "Clásico",
 
-                ".tn_download_local" : "Descargar Versión Local",
                 ".tn_btn_tiss" : "Crear Gráficos",
 
                 ".tn_btn_price" : "Crear Gráficos",
@@ -639,6 +662,8 @@
                 ".tr_ifc_set" : "Estilo Pantalla",
                 ".tn_color_dark" : "Tema Oscuro",
                 ".tn_color_light" : "Tema Claro",
+                ".tn_color_military" : "Tema Militar",
+                ".tn_color_sailor" : "Tema Sailor Moon",
 
                 ".tn_water_baltic" : "Mar Báltico",
                 ".tn_water_redsea" : "Mar Rojo",
@@ -666,6 +691,7 @@
                 ".tr_rate_asc_deco" : "Velocidad Ascenso Deco" + lng_meters_min,
                 ".tr_rmv_deco" : "Ratio Consumo Deco" + lng_ltr_min,
                 ".tr_rmv_bt" : "Ratio Consumo Fondo" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "Metabólico Dil CCR" + lng_ltr_min,
                 ".tr_cng_time" : "Tiempo Extra Cambio de Gas" + lng_min,
                 ".tr_lst_stop" : "Última Parada" + lng_meters,
 
@@ -682,6 +708,7 @@
                 ".tn_water_fresh" : "Dulce",
                 ".tr_gf" : "Factores Gradiente, %",
                 ".tr_slevel" : "Elevación Buceo" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Conservatismo",
                 ".tn_travel" : "Mezcla Total Viaje/Fondo/Diluente",
                 ".tn_deco" : "Mezcla Total Deco/Bailout",
 
@@ -824,6 +851,12 @@
                 //Prt
                 ".btn_link" : "Partilhar o Plano",
 
+                ".btn_next_dive" : "Próximo mergulho",
+                ".btn_reset_tissues" : "Redefinir tecidos",
+                ".si_modal_title" : "Intervalo de superfície",
+                ".btn_si_confirm" : "Iniciar próximo mergulho",
+                ".btn_si_cancel" : "Cancelar",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluente",
 
@@ -833,7 +866,6 @@
                 ".tn_plan_detailed" : "Detalhado",
                 ".tn_plan_short" : "Clássico",
 
-                ".tn_download_local" : "Descarregue a Versão Local",
                 ".tn_btn_tiss" : "Gerar Tabelas",
                 
                 ".tn_btn_price" : "Gerar Tabelas",
@@ -847,6 +879,8 @@
                 ".tr_ifc_set" : "Estilo do Interface",
                 ".tn_color_dark" : "Tema Escuro",
                 ".tn_color_light" : "Tema Claro",
+                ".tn_color_military" : "Tema Militar",
+                ".tn_color_sailor" : "Tema Sailor Moon",
 
                 ".tn_water_baltic" : "Mar Báltico",
                 ".tn_water_redsea" : "Mar Vermelho",
@@ -874,6 +908,7 @@
                 ".tr_rate_asc_deco" : "Velocidade Subida Durante Deco" + lng_meters_min,
                 ".tr_rmv_deco" : "RMV Deco" + lng_ltr_min,
                 ".tr_rmv_bt" : "RMV Fundo" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "Metabólico Dil CCR" + lng_ltr_min,
                 ".tr_cng_time" : "Tempo Extra Para Mudança de Mistura" + lng_min,
                 ".tr_lst_stop" : "Último Patamar" + lng_meters,
 
@@ -890,6 +925,7 @@
                 ".tn_water_fresh" : "Doce",
                 ".tr_gf" : "Fatores de Gradiente, %",
                 ".tr_slevel" : "Altitude do Mergulho" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Conservadorismo",
                 ".tn_travel" : "Mistura Total Travel/Fundo/Diluente",
                 ".tn_deco" : "Mistura Total Deco/Bailout",
 
@@ -1033,6 +1069,12 @@
                 //China
                 ".btn_link" : "分享你的计划",
 
+                ".btn_next_dive" : "下一次潜水",
+                ".btn_reset_tissues" : "重置组织",
+                ".si_modal_title" : "水面休息时间",
+                ".btn_si_confirm" : "开始下一次潜水",
+                ".btn_si_cancel" : "取消",
+
                 ".btn_bailout" : "逃生气体",
                 ".btn_diluent" : "稀释气体",
 
@@ -1042,7 +1084,6 @@
                 ".tn_plan_detailed" : "细节",
                 ".tn_plan_short" : "标准",
 
-                ".tn_download_local" : "下载各系统平台对应的本地版本",
                 ".tn_btn_tiss" : "建立图表",
 
                 ".tn_btn_price" : "建立图表",
@@ -1056,6 +1097,8 @@
                 ".tr_ifc_set" : "界面风格",
                 ".tn_color_dark" : "深色主题",
                 ".tn_color_light" : "浅色主题",
+                ".tn_color_military" : "军事主题",
+                ".tn_color_sailor" : "美少女战士主题",
 
                 ".tn_water_baltic" : "波罗的海",
                 ".tn_water_redsea" : "红海",
@@ -1083,6 +1126,7 @@
                 ".tr_rate_asc_deco" : "减压阶段上升速度" + lng_meters_min,
                 ".tr_rmv_deco" : "减压RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "底部RMV" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "CCR稀释气代谢率" + lng_ltr_min,
                 ".tr_cng_time" : "切换气体所需的额外时间" + lng_min,
                 ".tr_lst_stop" : "最后停留深度" + lng_meters,
 
@@ -1099,6 +1143,7 @@
                 ".tn_water_fresh" : "淡水",
                 ".tr_gf" : "梯度因子GF值, %",
                 ".tr_slevel" : "潜点海拔高度" + lng_meters,
+                ".tr_vpm_conserv" : "VPM 保守系数",
                 ".tn_travel" : "旅行气体/底部气体/稀释气体 数量总计",
                 ".tn_deco" : "减压气体/逃生气体 数量总计",
 
@@ -1241,6 +1286,12 @@
                 //Bulgarian
                 ".btn_link" : "Споделете вашия план",
 
+                ".btn_next_dive" : "Следващо гмуркане",
+                ".btn_reset_tissues" : "Нулиране на тъканите",
+                ".si_modal_title" : "Повърхностен интервал",
+                ".btn_si_confirm" : "Следващо гмуркане",
+                ".btn_si_cancel" : "Отказ",
+
                 ".btn_bailout" : "Аварийна",
                 ".btn_diluent" : "Смесителна",
                 ".tn_plan_oc" : "Отворен цикъл",
@@ -1248,7 +1299,6 @@
                 ".tr_plan_style" : "Стил на планиране",
                 ".tn_plan_detailed" : "Детайлно",
                 ".tn_plan_short" : "Класически",
-                ".tn_download_local" : "Изтеглете локалната версия",
                 ".tn_btn_tiss" : "Изграждане на диаграми",
                 
                 ".tn_btn_price" : "Изграждане на диаграми",
@@ -1262,6 +1312,8 @@
                 ".tr_ifc_set" : "Стил на интерфейса",
                 ".tn_color_dark" : "Нощна тема",
                 ".tn_color_light" : "Дневна тема",
+                ".tn_color_military" : "Военна тема",
+                ".tn_color_sailor" : "Тема Сейлър Мун",
                 ".tn_water_baltic" : "Балтийско море",
                 ".tn_water_redsea" : "Червено море",
                 ".tn_water_glake" : "Великото езеро Юта",
@@ -1287,6 +1339,7 @@
                 ".tr_rate_asc_deco" : "Скорост на изкачване-деко" + lng_meters_min,
                 ".tr_rmv_deco" : "Деко RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Дънно RMV" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "CCR Дилуент Метаболизъм" + lng_ltr_min,
                 ".tr_cng_time" : "Допълнително време за смяна на газа" + lng_min,
                 ".tr_lst_stop" : "Последен стоп" + lng_meters,
                 ".tn_ppo2_deco" : "пнO<sub><small>2</small></sub> Деко" + lng_bar,
@@ -1302,6 +1355,7 @@
                 ".tn_water_fresh" : "Прясна",
                 ".tr_gf" : "Градиент фактор, %",
                 ".tr_slevel" : "Височинен дайв" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Консерватизъм",
                 ".tn_travel" : "Общо Транспортна/Дънна/Смесителна газ",
                 ".tn_deco" : "Общо Деко/Аварийна газ",
                 ".header0" : "Общи настройки",
@@ -1422,6 +1476,12 @@
                 //Fr
                 ".btn_link" : "Partager votre plan",
 
+                ".btn_next_dive" : "Plongée suivante",
+                ".btn_reset_tissues" : "Réinitialiser les tissus",
+                ".si_modal_title" : "Intervalle de surface",
+                ".btn_si_confirm" : "Commencer la plongée suivante",
+                ".btn_si_cancel" : "Annuler",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluant",
                 ".tn_plan_oc" : "Circuit ouvert",
@@ -1429,7 +1489,6 @@
                 ".tr_plan_style" : "Style de plan",
                 ".tn_plan_detailed" : "en détail",
                 ".tn_plan_short" : "Classique",
-                ".tn_download_local" : "Télécharger la version local",
                 ".tn_btn_tiss" : "Construire les tableaux",
                 
                 ".tn_btn_price" : "Construire les tableaux",
@@ -1443,6 +1502,8 @@
                 ".tr_ifc_set" : "Style d’interface",
                 ".tn_color_dark" : "Thème foncé",
                 ".tn_color_light" : "Thème Clair",
+                ".tn_color_military" : "Thème Militaire",
+                ".tn_color_sailor" : "Thème Sailor Moon",
                 ".tn_water_baltic" : "Mer Baltique",
                 ".tn_water_redsea" : "Mer Rouge",
                 ".tn_water_glake" : "Les grands lacs Utah",
@@ -1468,6 +1529,7 @@
                 ".tr_rate_asc_deco" : "Vitesse de remontée en deco" + lng_meters_min,
                 ".tr_rmv_deco" : "Deco RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "Bottom RMV" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "Métabolique Dil CCR" + lng_ltr_min,
                 ".tr_cng_time" : "Temps de changement de gaz" + lng_min,
                 ".tr_lst_stop" : "Dernier Stop" + lng_meters,
                 ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> Deco" + lng_bar,
@@ -1483,6 +1545,7 @@
                 ".tn_water_fresh" : "Douce",
                 ".tr_gf" : "Facteur du gradien, %",
                 ".tr_slevel" : "Altitude de plongée" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Conservatisme",
                 ".tn_travel" : "Total Travel/Fond/Diluent mélangé ",
                 ".tn_deco" : "Total Déco/Bailout mélangé",
                 ".header0" : "Réglages généraux",
@@ -1603,6 +1666,12 @@
                 //Korean
                 ".btn_link" : "계획 공유",
 
+                ".btn_next_dive" : "다음 잠수",
+                ".btn_reset_tissues" : "조직 초기화",
+                ".si_modal_title" : "수면 휴식 시간",
+                ".btn_si_confirm" : "다음 잠수 시작",
+                ".btn_si_cancel" : "취소",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluent",
                 ".tn_plan_oc" : "Open Circuit",
@@ -1610,7 +1679,6 @@
                 ".tr_plan_style" : "계획 스타일",
                 ".tn_plan_detailed" : "상세한",
                 ".tn_plan_short" : "클레식",
-                ".tn_download_local" : "로컬 버전 다운로드",
                 ".tn_btn_tiss" : "차트 작성",
 
                 ".tn_btn_price" : "차트 작성",
@@ -1624,6 +1692,8 @@
                 ".tr_ifc_set" : "인터페이스 스타일",
                 ".tn_color_dark" : "어두운 테마",
                 ".tn_color_light" : "밝은 테마",
+                ".tn_color_military" : "군사 테마",
+                ".tn_color_sailor" : "세일러문 테마",
                 ".tn_water_baltic" : "발트 해",
                 ".tn_water_redsea" : "홍해",
                 ".tn_water_glake" : "그레이트 레이크 유타",
@@ -1649,6 +1719,7 @@
                 ".tr_rate_asc_deco" : "상승 데코 비율" + lng_meters_min,
                 ".tr_rmv_deco" : "데코 RMV" + lng_ltr_min,
                 ".tr_rmv_bt" : "바텀 RMV" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "CCR 희석기 대사율" + lng_ltr_min,
                 ".tr_cng_time" : "기체 체인지 추가 시간" + lng_min,
                 ".tr_lst_stop" : "Last Stop" + lng_meters,
                 ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> 데코" + lng_bar,
@@ -1664,6 +1735,7 @@
                 ".tn_water_fresh" : "민물",
                 ".tr_gf" : "Gradient Factor, %",
                 ".tr_slevel" : "다이빙 고도" + lng_meters,
+                ".tr_vpm_conserv" : "VPM 보수성",
                 ".tn_travel" : "Total Travel/Bottom/Diluent Mixes",
                 ".tn_deco" : "Total Deco/Bailout Mixes",
                 ".header0" : "전역 설정",
@@ -1784,6 +1856,12 @@
                 //Italian
                 ".btn_link" : "Condividi il tuo Piano",
 
+                ".btn_next_dive" : "Immersione successiva",
+                ".btn_reset_tissues" : "Azzera tessuti",
+                ".si_modal_title" : "Intervallo di superficie",
+                ".btn_si_confirm" : "Inizia immersione successiva",
+                ".btn_si_cancel" : "Annulla",
+
                 ".btn_bailout" : "Bailout",
                 ".btn_diluent" : "Diluente",
                 ".tn_plan_oc" : "Circuito Aperto",
@@ -1791,7 +1869,6 @@
                 ".tr_plan_style" : "Stile di pianificazione",
                 ".tn_plan_detailed" : "Dettagliato",
                 ".tn_plan_short" : "Classico",
-                ".tn_download_local" : "Scarica la versione del tuo sistema operativo",
                 ".tn_btn_tiss" : "Disegna i grafici",
 
                 ".tn_btn_price" : "Disegna i grafici",
@@ -1805,6 +1882,8 @@
                 ".tr_ifc_set" : "Stile dell’interfaccia",
                 ".tn_color_dark" : "Tema Scuro",
                 ".tn_color_light" : "Tema Chiaro",
+                ".tn_color_military" : "Tema Militare",
+                ".tn_color_sailor" : "Tema Sailor Moon",
                 ".tn_water_baltic" : "Mar Baltico",
                 ".tn_water_redsea" : "Mar Rosso",
                 ".tn_water_glake" : " Gran Lago Salato - UTAH",
@@ -1831,6 +1910,7 @@
                 ".tr_rate_asc_deco" : "Velocità di salita in Deco" + lng_meters_min,
                 ".tr_rmv_deco" : "RMV in Deco" + lng_ltr_min,
                 ".tr_rmv_bt" : "RMV sul fondo" + lng_ltr_min,
+                ".tr_ccr_dil_rmv" : "Metabolico Dil CCR" + lng_ltr_min,
                 ".tr_cng_time" : "Tempo Ulteriore per cambio miscela" + lng_min,
                 ".tr_lst_stop" : "Ultimo Stop" + lng_meters,
                 ".tn_ppo2_deco" : "PPO<sub><small>2</small></sub> Deco" + lng_bar,
@@ -1846,6 +1926,7 @@
                 ".tn_water_fresh" : "Fresca",
                 ".tr_gf" : "Gradient Factor, %",
                 ".tr_slevel" : "Elevazione dell’immersione" + lng_meters,
+                ".tr_vpm_conserv" : "VPM Conservatorismo",
                 ".tn_travel" : "Immersione totale/Fondo/Miscele diluenti",
                 ".tn_deco" : "DECO Totale /Miscele di Bailout",
                 ".header0" : "Impostazioni Generali",
@@ -1969,7 +2050,8 @@
         var td_lng = lng_opt.options[lng_opt.selectedIndex].value;
         if(force == "force"){td_lng = 3}
         for (var i in lang[td_lng]) {
-            document.querySelector(i).innerHTML = lang[td_lng][i];
+            var el = document.querySelector(i);
+            if (el) el.innerHTML = lang[td_lng][i];
         }
 
         price_lng_cur_upd();

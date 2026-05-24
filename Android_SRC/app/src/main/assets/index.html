@@ -34,7 +34,7 @@
          z-index: 99;
          opacity:1;
          
-         background: repeating-linear-gradient(45deg, #08203e, #4684ee);
+         
          background: repeating-linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
       
          background: repeating-radial-gradient(#aaaaaa, #ffffff);
@@ -58,6 +58,7 @@
          background: repeating-linear-gradient(45deg, #3986d9 , #efc96d, #c9411a);
          background: repeating-linear-gradient(0deg, #43cea2, #185a9d);
          
+         background: repeating-linear-gradient(45deg, #08203e, #4684ee);
          animation: gradient 4s ease infinite;
          -webkit-transition: opacity 200ms ease-in-out;
          -moz-transition: opacity 200ms ease-in-out;
@@ -1396,8 +1397,8 @@
                </svg>
             </div>
             -->
-            <div style="color: #eeeeee">Copyright © 2025 Alexey Vlasov<br/>
-               Version 15.4
+            <div style="color: #eeeeee">Copyright © 2026 Alexey Vlasov<br/>
+               Version 16.0
             </div>
             
          </div>
@@ -1500,38 +1501,6 @@
                <div class="header0"></div>
             </div>
             <div class="content" id="0-content">
-               <div class="div_block" id="visuallyhidden">
-                  <div id="tn_download_local" class="tn_download_local"></div>
-                  <table class="tr_download_me" id="tr_download_me">
-                     <tr class="tr_download_me">
-                        <th class="tr_download_win">
-                           <a href="https://github.com/VlasovAlexey/DiveProMe/releases">
-                           <img src="images/download_me.png">
-                           </a>
-                        </th>
-                        <th class="tr_download_mac" >
-                           <a href="https://github.com/VlasovAlexey/DiveProMe/releases">
-                           <img src="images/download_me.png">
-                           </a>
-                        </th>
-                        <th class="tr_download_ios" >
-                           <a href="https://github.com/VlasovAlexey/DiveProMe/releases">
-                           <img src="images/download_me.png">
-                           </a>
-                        </th>
-                        <th class="tr_download_andr" >
-                           <a href="https://github.com/VlasovAlexey/DiveProMe/releases">
-                           <img src="images/download_me.png">
-                           </a>
-                        </th>
-                        <th class="tr_download_lnx" >
-                           <a href="https://github.com/VlasovAlexey/DiveProMe/releases">
-                           <img src="images/download_me.png">
-                           </a>
-                        </th>
-                     </tr>
-                  </table>
-               </div>
                <div class="div_block">
                   <div id="tr_lng" class="tr_lng"></div>
                   <div id="tr_lng_sel" class="tr_lng_sel"></div>
@@ -1547,6 +1516,8 @@
                   <div id="tn_water_set" class="tn_water_set"></div>
                   <div id="tr_slevel" class="tr_slevel"></div>
                   <div id="tn_slevel" class="tn_slevel"></div>
+                  <div id="tr_vpm_conserv" class="tr_vpm_conserv" style="display:none"></div>
+                  <div id="tn_vpm_conserv" class="tn_vpm_conserv" style="display:none"></div>
                   <div id="tr_celsus" class="tr_celsus"></div>
                   <div id="tn_celsus" class="tn_celsus"></div>
                </div>
@@ -1596,6 +1567,8 @@
                   <div id="tn_rate_asc_surf" class="tn_rate_asc_surf"></div>
                   <div id="tr_rate_asc_deco" class="tr_rate_asc_deco"></div>
                   <div id="tn_rate_asc_deco" class="tn_rate_asc_deco"></div>
+                  <div id="tr_ccr_dil_rmv" class="tr_ccr_dil_rmv"></div>
+                  <div id="tn_ccr_dil_rmv" class="tn_ccr_dil_rmv"></div>
                </div>
                <div class="div_block">
                   <div id="tr_rmv_bt" class="tr_rmv_bt"></div>
@@ -1675,6 +1648,10 @@
                      <button type="button" onClick="btn_del_lvl();" id="btn_del_lvl" class="btn_del_lvl"></button>
                      <button type="button" onClick="btn_bailout();" id="btn_bailout" class="btn_bailout">Bailout</button>
                      <button type="button" onClick="btn_diluent();" id="btn_diluent" class="btn_diluent">Diluent</button>
+                  </div>
+                  <div id="div_next_dive_bar" class="div_next_dive_bar">
+                     <button type="button" id="btn_next_dive" class="btn_next_dive" onClick="showNextDiveModal();"></button>
+                     <button type="button" id="btn_reset_tissues" class="btn_reset_tissues" onClick="resetSurfaceTissues();" style="display:none;"></button>
                   </div>
                </div>
             </div>
@@ -2053,6 +2030,18 @@
             <button type="button" onClick="closeNav();" id="tn_btn_overlay" class="tn_btn_overlay"></button>
          </div>
       </div>
+      <div id="si_modal_overlay" class="overlay" onClick="closeSIModal();">
+         <div class="overlay-content" onclick="event.stopPropagation();">
+            <div class="tn_overlay_text si_modal_title"></div>
+            <div class="si_modal_selects">
+               <select id="si_hours_sel" class="si_hours_sel"></select>
+               <select id="si_mins_sel" class="si_mins_sel"></select>
+            </div>
+            <button type="button" onClick="confirmNextDive_SI();" class="tn_btn_overlay btn_si_confirm"></button>
+            <br/>
+            <button type="button" onClick="closeSIModal();" class="tn_btn_overlay btn_si_cancel"></button>
+         </div>
+      </div>
       <div id="Overlay_progress" class="overlay_progress">
          <div class="overlay-content-progress">
             <div>
@@ -2101,7 +2090,8 @@
       <script src="js/android_fn.js?v0.2841841125111331433253636551339116234517" charset="UTF-8"></script>
       <script src="js/cookie_settings.js?v0.11228531133143232516365313311111836441521679123457wa123" charset="UTF-8"></script>
       <script src="js/lng_fn.js?v0.110267w1a134g21665f131345233v3366513313112"charset="UTF-8"></script>
-      <script src="js/dive_comp.js?0.184621112183331351434253v16651135319123457"charset="UTF-8"></script>
+      <script src="js/zhl16-engine.js" charset="UTF-8"></script>
+      <script src="js/vpm-engine.js" charset="UTF-8"></script>
       <script src="js/block_gen.js?v0.82611211831333523315545v1696531123457" charset="UTF-8"></script>
       <script src="js/saul_planner.js?v0.1542v63653333531213" charset="UTF-8"></script>
       <script src="js/gases_list_gen.js?v0.134v5658333563323112711131116143159123457" charset="UTF-8"></script>
@@ -2131,4 +2121,9 @@
          };
       </script>
       <!--<Preloader_End>-->
+      <script>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('./sw.js');
+        }
+      </script>
    </body>

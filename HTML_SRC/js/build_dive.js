@@ -1,165 +1,345 @@
-//CCR get new property mix for selected ppo2
-function CCR_mix_upd(o2fr_new, o2fr, hefr) {
-	var mix_fin = [];
-	var n2fr_new;
-	var hefr_new;
+// Globals formerly provided by dive_comp.js (removed; engine replaced by ApexDeco)
+var abs_press     = [1.0];
+var comp_tiss_arr = [];
+var first_ascent  = 0;
+var mix_mod_arr   = [];
+// dive_comp.js also defined a browser require() bundler used by main.js line 2
+if (typeof require === 'undefined') { window.require = function() { return {}; }; }
 
-	var out_res;
-	n2fr = 1 - o2fr - hefr;
-	//out_res = (1 - hefr)/(1 - o2fr);
-	out_res = (1 - o2fr_new) / (1 - o2fr);
-	out_res = o2fr_new - (out_res * o2fr);
-	n2fr_new = n2fr - (n2fr / 1 * out_res);
-	hefr_new = hefr - (hefr / 1 * out_res);
+function buildApexLevels(levels_arr, levels_mix_arr) {
+	var tn_cng_el    = document.getElementById("opt_cng_time");
+	var gasChangeTime = parseInt(tn_cng_el.options[tn_cng_el.selectedIndex].value) || 0;
 
+	var levels = [];
+	var a = 0, b = 0;
+	for (var i = 0; i < levels_arr.length / 3; i++) {
+		var o2    = Math.round(levels_mix_arr[b] * 1);
+		var he    = Math.round(levels_mix_arr[b + 1] * 1);
+		var depth = levels_arr[a + 1] * 1.0;
+		var time  = levels_arr[a + 2] * 1.0;
 
-
-	//Check created mix not equal any bailout mixes
-	//Only for Bailout CCR plan
-	var cnt = 0;
-	if (opt_blt_dln == 1 && $("#tn_plan_ccr").val() == 2) {
-		for (c = 0; c < $("#opt_deco").val(); c++) {
-
-			//if current level mix is not equal a deco mix
-			if (o2fr_new * 100 == deco_mix_arr[cnt] && hefr_new * 100 == deco_mix_arr[cnt + 1]) {
-				//we need change current diluent mix to different a bailout mix
-				//not good resolve we simply add 1% oxygen to current computed value
-				//anyway this strange diluent like tmx 101/0 will be removed from any tables
-				o2fr_new = o2fr_new + 0.01;
-				//console.log(o2fr_new*100, hefr_new*100,deco_mix_arr[cnt], deco_mix_arr[cnt+1]);
-				break;
+		// If gas changed between consecutive bottom levels, insert a pause
+		// so the engine loads tissues during the mix change (not just cosmetic).
+		if (i > 0 && gasChangeTime > 0) {
+			var prev = levels[levels.length - 1];
+			if (prev.o2 !== o2 || prev.he !== he) {
+				levels.push({ depth: depth, time: gasChangeTime, o2: o2, he: he });
 			}
-			cnt = cnt + 2;
+		}
+
+		levels.push({ depth: depth, time: time, o2: o2, he: he });
+		a += 3;
+		b += 2;
+	}
+	return levels;
+}
+
+function buildApexLevelsCCR(levels_arr, levels_mix_arr) {
+	var tn_cng_el    = document.getElementById("opt_cng_time");
+	var gasChangeTime = parseInt(tn_cng_el.options[tn_cng_el.selectedIndex].value) || 0;
+
+	var sp_start  = $("#opt_setpoint_start").val() * 1.0;
+	var sp_bottom = $("#opt_setpoint_bottom").val() * 1.0;
+	var sp_deco   = $("#opt_setpoint_deco").val() * 1.0;
+	var levels = [];
+	var a = 0, b = 0;
+	for (var i = 0; i < levels_arr.length / 3; i++) {
+		var depth = levels_arr[a + 1] * 1.0;
+		var time  = levels_arr[a + 2] * 1.0;
+		var o2    = Math.round(levels_mix_arr[b] * 1);
+		var he    = Math.round(levels_mix_arr[b + 1] * 1);
+		if (i === 0) {
+			// Variant A: first level gets a zero-time descent entry (sp_start),
+			// then the actual bottom time entry (sp_bottom).
+			levels.push({ depth: depth, time: 0,    o2: o2, he: he, setpoint: sp_start });
+			levels.push({ depth: depth, time: time,  o2: o2, he: he, setpoint: sp_bottom });
+		} else {
+			// If diluent mix changed, insert a pause so engine loads tissues during mix change.
+			if (gasChangeTime > 0) {
+				var prevCCR = levels[levels.length - 1];
+				if (prevCCR.o2 !== o2 || prevCCR.he !== he) {
+					levels.push({ depth: depth, time: gasChangeTime, o2: o2, he: he, setpoint: sp_bottom });
+				}
+			}
+			// Additional levels use sp_bottom; engine handles inter-level ascents/descents.
+			levels.push({ depth: depth, time: time,  o2: o2, he: he, setpoint: sp_bottom });
+		}
+		a += 3;
+		b += 2;
+	}
+	// Diluent mode: append a zero-time level at the last depth so lastSP = sp_deco during deco.
+	if (opt_blt_dln == 2 && levels.length > 0) {
+		var last = levels[levels.length - 1];
+		levels.push({ depth: last.depth, time: 0, o2: last.o2, he: last.he, setpoint: sp_deco });
+	}
+	return levels;
+}
+
+function buildApexDecos() {
+	var decos = [];
+	var opt_deco_el = document.getElementById("opt_deco");
+	var mix_deco_idx = opt_deco_el.options[opt_deco_el.selectedIndex].value * 1;
+	var aaa = 0;
+	for (var c = 0; c < mix_deco_idx; c++) {
+		var o2 = deco_mix_arr[aaa] * 1;
+		var he = deco_mix_arr[aaa + 1] * 1;
+		var manualMOD = deco_mix_depth_arr[c] * 1;
+		var depthOverrideOn = manualMOD !== 0;
+		if ($("#opt_lst_stop").val() == 6) {
+			var curMixMOD = depthOverrideOn ? manualMOD : GetDecoMODinMeters(o2, he);
+			curMixMOD = 3 * Math.round(curMixMOD / 3);
+			if (curMixMOD >= 6) {
+				decos.push({ o2: o2, he: he, depthOverrideOn: depthOverrideOn, depthOverride: depthOverrideOn ? manualMOD : null });
+			}
+		} else {
+			decos.push({ o2: o2, he: he, depthOverrideOn: depthOverrideOn, depthOverride: depthOverrideOn ? manualMOD : null });
+		}
+		aaa += 2;
+	}
+	return decos;
+}
+
+// Returns a shallow-copied, SI-desaturated tissue array for t=0 chart display.
+// Must be called AFTER buildApexSettings() so the full settings object is available
+// for getSurfacePressure() inside applySurfaceInterval().
+// Returns null if this is a first dive (no pre_tissues_arr).
+function computeDiveStartTissues(settings) {
+	if (!pre_tissues_arr || pre_tissues_arr.length < 16) return null;
+	// Shallow copy — do NOT mutate the stored pre_tissues_arr
+	var dst = pre_tissues_arr.map(function(t) { return { pN2: t.pN2, pHe: t.pHe }; });
+	if (surface_interval_min > 0 && typeof DecoEngine !== 'undefined' && DecoEngine.applySurfaceInterval) {
+		DecoEngine.applySurfaceInterval(dst, surface_interval_min, settings); // mutates dst in-place
+	}
+	return dst;
+}
+
+function buildApexSettings(mdl_idx, isCCR) {
+	var rate_asc_el      = document.getElementById("opt_rate_asc");
+	var rate_asc         = rate_asc_el.options[rate_asc_el.selectedIndex].value * 1.0;
+	var rate_asc_deco_el = document.getElementById("opt_rate_asc_deco");
+	var rate_asc_deco    = rate_asc_deco_el.options[rate_asc_deco_el.selectedIndex].value * 1.0;
+	var rate_dsc_el      = document.getElementById("opt_rate_dsc");
+	var rate_dsc         = rate_dsc_el.options[rate_dsc_el.selectedIndex].value * 1.0;
+	var rate_surf_el     = document.getElementById("opt_rate_asc_surf");
+	var rate_surf        = rate_surf_el.options[rate_surf_el.selectedIndex].value * 1.0;
+	var ppo2_deco_el     = document.getElementById("opt_ppo2_deco");
+	var ppO2Deco         = ppo2_deco_el.options[ppo2_deco_el.selectedIndex].value * 1.0;
+	var lst_stop_el      = document.getElementById("opt_lst_stop");
+	var lastStop         = lst_stop_el.options[lst_stop_el.selectedIndex].value * 1;
+	var alt_el           = document.getElementById("opt_slevel");
+	var altitude         = alt_el.options[alt_el.selectedIndex].value * 1.0;
+	var tn_water_el      = document.getElementById("tn_water");
+	var waterIdx         = tn_water_el.options[tn_water_el.selectedIndex].value * 1;
+	var waterType        = (waterIdx === 2) ? 1 : 0;
+	var vpmModelMap      = { 3: 'VPMA', 4: 'VPMB', 5: 'VPMBE', 6: 'VPMB_GFS', 7: 'VPMBFBO' };
+	var vpm_conserv_el   = document.getElementById("opt_vpm_conserv");
+	var vpm_conserv      = vpm_conserv_el ? vpm_conserv_el.options[vpm_conserv_el.selectedIndex].value * 1 : 0;
+	var tn_cng_el        = document.getElementById("opt_cng_time");
+	var gasChangeTime    = parseInt(tn_cng_el.options[tn_cng_el.selectedIndex].value) || 0;
+	var settings = {
+		circuit: isCCR ? 'CCR' : 'OC',
+		decoModel: 'ZHLC_GF',
+		gfLo: gf_arr[0],
+		gfHi: gf_arr[1],
+		conservatism: vpm_conserv,
+		metric: true,
+		waterType: waterType,
+		altitude: altitude,
+		descentRate: rate_dsc,
+		ascentRate: rate_asc,
+		decoAscentRate: rate_asc_deco,
+		surfaceAscentRate: rate_surf,
+		stepSize: 3,
+		lastStop: lastStop,
+		minStopTime: 1,
+		ppO2Deco: ppO2Deco,
+		gasChangeTime: gasChangeTime,
+		_isVPM: mdl_idx >= 3,
+		_vpmModel: vpmModelMap[mdl_idx] || 'VPMB'
+	};
+	if (pre_tissues_arr && pre_tissues_arr.length === 16) {
+		settings._preTissues = pre_tissues_arr;
+		if (surface_interval_min > 0) { settings._surfaceInterval = surface_interval_min; }
+	}
+	return settings;
+}
+
+// Build comp_tiss_arr from per-segment tissue snapshots stored on apexResult.plan.
+// Each plan segment (descent / bottom / stop / ascent) already carries _tissues[]
+// captured by the engine's plan.push override — so no engine replay is needed.
+// Layout: groups of 17 per time-step (16 tissue objects + 1 dummy), matching
+// what chart_profile.js btn_build_tiss() expects.
+function populateTissueTimeline(apexResult) {
+	comp_tiss_arr = [];
+
+	// Prepend t=0 initial tissue state for repetitive dives (post surface-interval).
+	// window._dive_start_tissues was computed by computeDiveStartTissues() before the
+	// engine ran, so applySurfaceInterval() was called with the correct settings object.
+	var _t0_src = window._dive_start_tissues;
+	if (_t0_src && _t0_src.length >= 16) {
+		for (var _j0 = 0; _j0 < 16; _j0++) {
+			var _t0 = _t0_src[_j0] || { pN2: 0, pHe: 0 };
+			comp_tiss_arr.push({ TimeCurrent: 0, EndDepthL: 0, StartDepthL: 0,
+				NitroLoad: _t0.pN2, HeliumLoad: _t0.pHe, TotalLoad: _t0.pN2 + _t0.pHe, HalfTime: 0 });
+		}
+		comp_tiss_arr.push({ TimeCurrent: 0, EndDepthL: 0, StartDepthL: 0,
+			NitroLoad: 0, HeliumLoad: 0, TotalLoad: 0, HalfTime: 0 });
+	}
+
+	// Use engine's cumulative runtime delta for each segment's TimeCurrent.
+	// seg.runtime already includes implicit inter-stop transit time internally,
+	// so (seg.runtime - prevRuntime) gives stop+transit = compartment chart x-axis
+	// that sums to exactly engine.totalRuntime (35), matching ApexDeco's display.
+	// No separate deco-rate calculation needed.
+	var _prevRuntime = 0;
+
+	var plan = apexResult.plan || [];
+	for (var i = 0; i < plan.length; i++) {
+		var seg = plan[i];
+		if (seg.type === 'surface') continue;
+		var segTime = seg.time || 0;
+		if (segTime <= 0) continue;
+		if (!seg._tissues || seg._tissues.length < 16) continue;
+
+		// Determine end depth in metres — chart formula uses EndDepthL/10 as 10m-units,
+		// so EndDepthL must be in metres (not decimetres). Example: 30m → EndDepthL=30 →
+		// chart computes density×(30/10+1)=density×4 ≈ 4 bar ✓
+		var endDepthM = (seg.type === 'ascent' || seg.type === 'descent')
+			? (seg.endDepth || 0)
+			: (seg.depth   || 0);
+		var endDepthL = endDepthM; // metres
+
+		// Engine runtime delta: includes stop time + any implicit transit before this segment.
+		var segTimeCurrent = (seg.runtime !== undefined)
+			? (seg.runtime - _prevRuntime)
+			: segTime;
+		_prevRuntime = (seg.runtime !== undefined) ? seg.runtime : (_prevRuntime + segTime);
+
+		// 16 tissue compartment entries
+		for (var j = 0; j < 16; j++) {
+			var t = seg._tissues[j] || { pN2: 0, pHe: 0 };
+			comp_tiss_arr.push({
+				TimeCurrent: segTimeCurrent,
+				EndDepthL:   endDepthL,
+				StartDepthL: endDepthL,
+				NitroLoad:   t.pN2,
+				HeliumLoad:  t.pHe,
+				TotalLoad:   t.pN2 + t.pHe,
+				HalfTime:    0
+			});
+		}
+		// 17th dummy entry required by the chart's length/17 iteration
+		comp_tiss_arr.push({
+			TimeCurrent: segTimeCurrent,
+			EndDepthL:   endDepthL,
+			StartDepthL: endDepthL,
+			NitroLoad: 0, HeliumLoad: 0, TotalLoad: 0, HalfTime: 0
+		});
+	}
+
+	// Fallback: if no segments had tissue data, use only the final state
+	if (comp_tiss_arr.length === 0) {
+		var tissues  = apexResult.finalTissues || [];
+		var totalTime = apexResult.totalRuntime || 0;
+		for (var i = 0; i < 16; i++) {
+			var t = tissues[i] || { pN2: 0, pHe: 0 };
+			comp_tiss_arr.push({ StartDepthL: 0, EndDepthL: 0, TimeCurrent: totalTime,
+				NitroLoad: t.pN2, HeliumLoad: t.pHe, TotalLoad: t.pN2 + t.pHe, HalfTime: 0 });
+		}
+		comp_tiss_arr.push({ StartDepthL: 0, EndDepthL: 0, TimeCurrent: 0,
+			NitroLoad: 0, HeliumLoad: 0, TotalLoad: 0, HalfTime: 0 });
+	}
+}
+
+function convertApexPlanToLegacy(apexResult, rate_asc, rate_asc_deco, rate_asc_surf) {
+	var output = [];
+	var plan   = apexResult.plan || [];
+	// _prevEngineRuntime tracks the engine's cumulative runtime after the previous segment.
+	// Used to compute implicit transit times from engine runtime deltas so that:
+	//   transit.time + stop.time = seg.runtime - prevRuntime  (an exact integer for 1-min grid)
+	// This makes the profile chart x-axis sum to exactly engine.totalRuntime (35), not 37.
+	var _prevEngineRuntime = 0;
+
+	for (var i = 0; i < plan.length; i++) {
+		var seg = plan[i];
+		if (seg.type === 'surface') continue;
+		var gasName = mix_to_txt_arr([seg.o2, seg.he]);
+		if (seg.type === 'descent' || seg.type === 'ascent') {
+			output.push({ startDepth: seg.startDepth, endDepth: seg.endDepth,
+				time: seg.time, engineRuntime: seg.runtime, gasName: gasName });
+		} else if (seg.type === 'gas_change') {
+			// Engine-computed gas change pause: tissue loading already done inside engine.
+			// Mark as gas change so ExtraStops() does not insert a duplicate.
+			var gcDepth = seg.depth;
+			output.push({ startDepth: gcDepth, endDepth: gcDepth,
+				time: seg.time, engineRuntime: seg.runtime, gasName: gasName, isGasChange: true });
+		} else if (seg.type === 'bottom' || seg.type === 'stop') {
+			var segDepth = seg.depth;
+			if (output.length > 0) {
+				var prevEnd = output[output.length - 1].endDepth;
+				if (prevEnd > segDepth) {
+					// Transit time from engine runtime delta: seg.runtime - seg.time - prevRuntime.
+					// For a 1-min grid stop this equals (prevDepth - stopDepth) / ascentRate exactly,
+					// so transit + stop = integer → profile chart total = engine.totalRuntime = 35.
+					// Use the PREVIOUS segment's gas: switches happen AT stop depth, not during ascent.
+					var transitTime = seg.runtime - seg.time - _prevEngineRuntime;
+					output.push({ startDepth: prevEnd, endDepth: segDepth,
+						time: transitTime,
+						engineRuntime: seg.runtime - seg.time,
+						gasName: output[output.length - 1].gasName, implicit: true });
+				}
+			}
+			output.push({ startDepth: segDepth, endDepth: segDepth,
+				time: seg.time, engineRuntime: seg.runtime, gasName: gasName });
+		}
+		_prevEngineRuntime = seg.runtime;
+	}
+	if (output.length > 0) {
+		var last = output[output.length - 1];
+		if (last.endDepth > 0) {
+			// Surface ascent: implicit. Give it an engineRuntime that includes the ascent time
+			// so to_5_column_arr_full produces _chartTime > 0 → gradual line on profile chart.
+			// (The engine does not count this in totalRuntime, but the chart should show it.)
+			var surfTime = last.endDepth / rate_asc_surf;
+			output.push({ startDepth: last.endDepth, endDepth: 0,
+				time: surfTime,
+				engineRuntime: last.engineRuntime + surfTime,
+				gasName: last.gasName, implicit: true });
 		}
 	}
-
-	mix_fin.push(o2fr_new);
-	mix_fin.push(hefr_new);
-	mix_fin.push(n2fr_new);
-
-	return mix_fin;
+	return output;
 }
-
-//CCR get new mix array from depth
-function CCR_new_mix_from_depth(ccr_depth, ccr_ppo2_bt, o2fr, hefr) {
-	var o2fr_new;
-
-	o2fr_new = ccr_ppo2_bt / (ccr_depth * 0.1 + 1);
-
-	//fix problem with depth o2fr new fraction greatest 1
-	if (o2fr_new > 1) {
-		o2fr_new = 1;
-	}
-
-	//fix problem if o2fr_new > o2 current mix fraction because we can`t remove o2, he, or n2 from existing diluent
-	if (o2fr_new < o2fr) {
-		o2fr_new = o2fr;
-	}
-
-	return CCR_mix_upd(o2fr_new, o2fr, hefr);
-}
-//test_me = CCR_new_mix_from_depth( 21, 1.6, 0.2 , 0.3);
 
 //build whole profile
 function build_dive() {
-
-	//Update levels array(depth and time) to actual from interface
-	//It is important to do because the GUI is complicated and does not always return the actual data
 	var cnt = 1;
-	for (j = 0; j < (lvl_arr.length / 3); j++) {
+	for (var j = 0; j < (lvl_arr.length / 3); j++) {
 		var tmp = document.getElementById("opt_levels_depth_" + j);
-		var lvl_depth_tmp = tmp.options[tmp.selectedIndex].value;
+		lvl_arr[cnt]     = tmp.options[tmp.selectedIndex].value * 1.0;
 		tmp = document.getElementById("opt_levels_time_" + j);
-		var lvl_time_tmp = tmp.options[tmp.selectedIndex].value;
-		//Depth
-		lvl_arr[cnt] = lvl_depth_tmp * 1.0;
-		//Time
-		lvl_arr[cnt + 1] = lvl_time_tmp * 1.0;
-		cnt = cnt + 3;
+		lvl_arr[cnt + 1] = tmp.options[tmp.selectedIndex].value * 1.0;
+		cnt += 3;
 	}
 
-	a9 = 0;
-	b9 = 0;
-	tmp_lvl_arr = [];
-	tmp_lvl_mix_arr = [];
+	var tmp_lvl_arr     = lvl_arr.slice();
+	var tmp_lvl_mix_arr = lvl_mix_arr.slice();
+	var output = build_dive_segment(tmp_lvl_arr, tmp_lvl_mix_arr);
 
-	//calculate ascending numbers for potentially deco stops
-	for (i = 0; i < lvl_arr.length / 3; i++) {
+	var isDecoDive = max_lvl_depth(tmp_lvl_arr) >= 7;
 
-		if (i > 0) {
-			//console.log("all_as_fine_ASCENT");
-			//if ascend you need build potentially deco levels
-			if (lvl_arr[a9 + 1] * 1.0 < lvl_arr[a9 - 2] * 1.0) {
-				del_to_depth = lvl_arr[a9 + 1] * 1.0;
-
-				out_segment = build_dive_segment(tmp_lvl_arr, tmp_lvl_mix_arr, 0);
-
-				//Delete from end to next lvl all levels after
-				for (f = out_segment.length - 1; f >= 0; f--) {
-					if (out_segment[f].startDepth < del_to_depth) {
-						out_segment.splice(f, 1);
-					}
-				}
-				//Delete all Ascent\Descent
-				for (z = 0; z < out_segment.length; z++) {
-					//fix very short ascent segments one by one. Delete using second pass.
-					for (f = 0; f < out_segment.length; f++) {
-						if (out_segment[f].startDepth != out_segment[f].endDepth) {
-							out_segment.splice(f, 1);
-
-						}
-					}
-
-				}
-				//Delete all levels from start
-				out_segment.splice(0, tmp_lvl_arr.length / 3);
-				//console.log(out_segment);
-				//Everything is almost ready for add extra deco stops if exist
-				for (f = 0; f < out_segment.length; f++) {
-
-					tmp_lvl_arr.push(tmp_lvl_arr.length / 3 + 1, out_segment[f].startDepth, out_segment[f].time);
-					ret_mix = gass_from_name_arr(out_segment[f].gasName);
-					tmp_lvl_mix_arr.push(ret_mix[0], ret_mix[2]);
-				}
-				//Add next level after adding potentially deco stops lvl`s
-				tmp_lvl_arr.push(tmp_lvl_arr.length / 3 + 1, lvl_arr[a9 + 1] * 1.0, lvl_arr[a9 + 2] * 1.0);
-				tmp_lvl_mix_arr.push(lvl_mix_arr[b9] * 1.0, lvl_mix_arr[b9 + 1] * 1.0);
-			} else {
-				tmp_lvl_arr.push(tmp_lvl_arr.length / 3 + 1, lvl_arr[a9 + 1] * 1.0, lvl_arr[a9 + 2] * 1.0);
-				tmp_lvl_mix_arr.push(lvl_mix_arr[b9] * 1.0, lvl_mix_arr[b9 + 1] * 1.0);
-			}
-		} else {
-			tmp_lvl_arr.push(lvl_arr[a9] * 1.0, lvl_arr[a9 + 1] * 1.0, lvl_arr[a9 + 2] * 1.0);
-			tmp_lvl_mix_arr.push(lvl_mix_arr[b9] * 1.0, lvl_mix_arr[b9 + 1] * 1.0);
-
-		}
-		a9 = a9 + 3;
-		b9 = b9 + 2;
-	}
-
-	//if last last segment above 7 meters. This code does`t work correct with no deco segments and
-	//zacominchen:))
-	if (tmp_lvl_arr[tmp_lvl_arr.length - 2] * 1.0 < 7) {
-
-		output = build_dive_segment(tmp_lvl_arr, tmp_lvl_mix_arr, 0);
-
+	if (isDecoDive) {
+		// Both OC and CCR now use ApexDeco; surface ascent already included by convertApexPlanToLegacy
+		output = GasBreakInsert(output);
 	} else {
-		//compute regular dive under 6 meters last lvl
-		output = build_dive_segment(tmp_lvl_arr, tmp_lvl_mix_arr, 0);
-		output = (GasBreakInsert(LastStopUpd(output)));
+		var rate_asc_surf_el  = document.getElementById("opt_rate_asc_surf");
+		var rate_asc_surf_idx = rate_asc_surf_el.options[rate_asc_surf_el.selectedIndex].value;
+		output.push({
+			endDepth: 0,
+			startDepth: output[output.length - 1].startDepth,
+			time: (output[output.length - 1].startDepth * 1.0 / rate_asc_surf_idx) * 1.0,
+			gasName: output[output.length - 1].gasName
+		});
 	}
-
-	//modify exit to surface speed from interface parameters
-	var rate_asc_surf = document.getElementById("opt_rate_asc_surf");
-	var rate_asc_surf_idx = rate_asc_surf.options[rate_asc_surf.selectedIndex].value;
-
-	tmp_time = ((output[output.length - 1].startDepth) * 1.0 / rate_asc_surf_idx) * 1.0;
-	output.push({
-		endDepth: 0,
-		startDepth: output[output.length - 1].startDepth,
-		time: tmp_time,
-		gasName: output[output.length - 1].gasName
-	});
 
 	return output;
 }
@@ -172,6 +352,9 @@ function build_dive_segment(levels_segment_arr, levels_mix_segment_arr) {
 	var rate_asc_surf = document.getElementById("opt_rate_asc_surf");
 	var rate_asc_surf_idx = rate_asc_surf.options[rate_asc_surf.selectedIndex].value;
 
+	var rate_asc_deco_el2 = document.getElementById("opt_rate_asc_deco");
+	var rate_asc_deco_idx = rate_asc_deco_el2.options[rate_asc_deco_el2.selectedIndex].value;
+
 	var rate_dsc = document.getElementById("opt_rate_dsc");
 	var rate_dsc_idx = rate_dsc.options[rate_dsc.selectedIndex].value;
 	var output = [];
@@ -182,10 +365,16 @@ function build_dive_segment(levels_segment_arr, levels_mix_segment_arr) {
 		//Not Deco Dive Segment
 
 		if ($("#tn_plan_ccr").val() * 1.0 == 2) {
-			//CCR dive and we need hide consumption
-			element_id_hide("t_total_cons");
-			element_id_hide("7-header");
-			element_id_hide("7-content");
+			if (opt_blt_dln == 2) {
+				// CCR Diluent mode: show diluent metabolic consumption even for shallow dives
+				element_id_show("7-header");
+				element_id_show("t_total_cons");
+			} else {
+				// CCR Bailout mode without deco gases: hide (no OC gases used)
+				element_id_hide("t_total_cons");
+				element_id_hide("7-header");
+				element_id_hide("7-content");
+			}
 		}
 
 		tmp_arr = [];
@@ -260,261 +449,57 @@ function build_dive_segment(levels_segment_arr, levels_mix_segment_arr) {
 		output = tmp_arr;
 	} else
 
-	//Deco Dive_Segment! 
+	//Deco Dive_Segment!
 	{
 		//reset compartment info array every graph rebuild
 		comp_tiss_arr = [];
-
-		//reset previos plan
-		var plan = [];
-		var mdl = document.getElementById("tn_mdl");
-		var mdl_idx = mdl.options[mdl.selectedIndex].value;
-		var buhlmann = dive.deco.buhlmann();
-		vpm = dive.deco.vpm();
-		//Select algorithm
-		if (mdl_idx == 1) {
-			plan = new buhlmann.plan(buhlmann.ZH16ATissues);
-		}
-		if (mdl_idx == 2) {
-			plan = new buhlmann.plan(buhlmann.ZH16BTissues);
-		}
-		if (mdl_idx == 3) {
-			plan = new buhlmann.plan(buhlmann.ZH16CTissues);
-		}
-		if (mdl_idx == 4) {
-			plan = new vpm.plan(1, true);
-		}
-
-		//Add Bottom/travel gases
-		if ($("#tn_plan_ccr").val() == 1) {
-
-			//OC Dive
-			aaa = 0;
-			for (c = 0; c < levels_mix_segment_arr.length / 2; c++) {
-				ff = [levels_mix_segment_arr[aaa], levels_mix_segment_arr[aaa + 1]];
-
-				plan.addBottomGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa] * 0.01, levels_mix_segment_arr[aaa + 1] * 0.01);
-
-				//add bottom gass as deco gass !!!_need_deep_test_!!!
-				//plan.addDecoGas(mix_to_txt_arr(ff), levels_mix_segment_arr[aaa]*0.01, levels_mix_segment_arr[aaa+1]*0.01);
-
-				aaa = aaa + 2;
-			}
-		} else { //eCCR Dive Bailout and Diluent Dive
-			//mixes for descent
-			for (dp_lvl = 1; dp_lvl < (levels_segment_arr[1] * 1.0) + 1; dp_lvl++) {
-				ccr_descent_mix = CCR_new_mix_from_depth(dp_lvl, ($("#opt_setpoint_start").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
-
-				ccr_descent_mix_tmp = [];
-				ccr_descent_mix_tmp[0] = ccr_descent_mix[0];
-				ccr_descent_mix_tmp[1] = ccr_descent_mix[1];
-
-				ccr_descent_mix[0] = Math.ceil(ccr_descent_mix[0] * 100);
-				ccr_descent_mix[1] = Math.ceil(ccr_descent_mix[1] * 100);
-
-				plan.addBottomGas(mix_to_txt_arr(ccr_descent_mix), ccr_descent_mix_tmp[0], ccr_descent_mix_tmp[1]);
-			}
-			//mix for bottom
-			ccr_descent_mix = CCR_new_mix_from_depth((levels_segment_arr[1] * 1.0), ($("#opt_setpoint_bottom").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
-
-			ccr_descent_mix_tmp = [];
-			ccr_descent_mix_tmp[0] = ccr_descent_mix[0];
-			ccr_descent_mix_tmp[1] = ccr_descent_mix[1];
-
-			ccr_descent_mix[0] = Math.ceil(ccr_descent_mix[0] * 100);
-			ccr_descent_mix[1] = Math.ceil(ccr_descent_mix[1] * 100);
-
-			plan.addBottomGas(mix_to_txt_arr(ccr_descent_mix), ccr_descent_mix_tmp[0], ccr_descent_mix_tmp[1]);
-		}
-
-
-		//Add deco gases
-		var mix_deco = document.getElementById("opt_deco");
-		var mix_deco_idx = mix_deco.options[mix_deco.selectedIndex].value;
-		aaa = 0;
-
 		mix_mod_arr = [];
-		var counter = 0;
 
-		for (c = 0; c < mix_deco_idx; c++) {
-			tmp3 = [deco_mix_arr[aaa], deco_mix_arr[aaa + 1]];
+		var mdl     = document.getElementById("tn_mdl");
+		var mdl_idx = mdl.options[mdl.selectedIndex].value * 1;
 
-			//This CCR Bailout Dive or OC Dive and deco gases is enable
-			if (opt_blt_dln == 1) {
-				if (deco_mix_depth_arr[counter] != 0) {
-					//Manual MOD set for current deco mix
-					var curMixMOD = deco_mix_depth_arr[counter];
-				} else {
-					////Auto MOD set for current deco mix
-					var curMixMOD = GetDecoMODinMeters(deco_mix_arr[aaa], deco_mix_arr[aaa + 1]);
-				}
+		if (parseInt($("#tn_plan_ccr").val()) === 1) {
 
-				//Do a curMixMOD multiple of three
-				curMixMOD = (3 * ((curMixMOD / 3).toFixed(0)));
-				if ($("#opt_lst_stop").val() == 6) {
-					//6 meters last stop. Check current mix MOD and if less that 6 meters does`t add to the deco gas list
-					if (curMixMOD >= 6) {
-						plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa] * 0.01, deco_mix_arr[aaa + 1] * 0.01);
-						mix_mod_arr.push({
-							mix: mix_to_txt_arr(tmp3),
-							mod: deco_mix_depth_arr[counter]
-						});
-					}
-				} else {
-					//3 meters last stop. Do nothing. Simply add deco gases to the list
-					plan.addDecoGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa] * 0.01, deco_mix_arr[aaa + 1] * 0.01);
-					mix_mod_arr.push({
-						mix: mix_to_txt_arr(tmp3),
-						mod: deco_mix_depth_arr[counter]
-					});
-				}
-			}
-			//as Bottom/Travel gases, for lvl compatibility
-			plan.addBottomGas(mix_to_txt_arr(tmp3), deco_mix_arr[aaa] * 0.01, deco_mix_arr[aaa + 1] * 0.01);
-			counter = counter + 1;
-			aaa = aaa + 2;
-		}
-
-		//eCCR Diluent deco mix add
-		if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 2) {
-			//it is CCR Diluent Dive and no Bailout(Deco gases added) dive
-			//but we need add deco gases combined from Diluent
-			for (dp_lvl = 1; dp_lvl < (levels_segment_arr[1] * 1.0) + 1; dp_lvl = dp_lvl + 0.25) {
-				ccr_deco_mix = CCR_new_mix_from_depth(dp_lvl, ($("#opt_setpoint_deco").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
-
-				ccr_deco_mix_tmp = [];
-				ccr_deco_mix_tmp[0] = ccr_deco_mix[0];
-				ccr_deco_mix_tmp[1] = ccr_deco_mix[1];
-
-				ccr_deco_mix[0] = Math.ceil(ccr_deco_mix[0] * 100);
-				ccr_deco_mix[1] = Math.ceil(ccr_deco_mix[1] * 100);
-
-				plan.addDecoGas(mix_to_txt_arr(ccr_deco_mix), ccr_deco_mix_tmp[0], ccr_deco_mix_tmp[1]);
-			}
-		}
-
-		//eCCR Bailout deco mix add
-		if ($("#tn_plan_ccr").val() == 2 && opt_blt_dln == 1) {
-
-			//get o2 percentage for calculate deepest bailout mix
-			var count = 0;
-			var tmp_o2_fr_max = 100;
-			for (a = 0; a < ($("#opt_deco").val() * 1.0); a++) {
-
-				if (deco_mix_arr[count] < tmp_o2_fr_max) {
-					tmp_o2_fr_max = deco_mix_arr[count]
-				};
-				count = count + 2;
+			//OC Dive - ApexDeco engines
+			var apex_levels   = buildApexLevels(levels_segment_arr, levels_mix_segment_arr);
+			var apex_decos    = buildApexDecos();
+			var apex_settings = buildApexSettings(mdl_idx, false);
+			// Pre-compute SI-adjusted t=0 tissue state while settings are available
+			window._dive_start_tissues = computeDiveStartTissues(apex_settings);
+			var apexResult    = apex_settings._isVPM
+				? VPMEngine.calculate(apex_levels, apex_decos, apex_settings, apex_settings._vpmModel)
+				: DecoEngine.calculate(apex_levels, apex_decos, apex_settings);
+			if (apexResult && !apexResult.error) {
+				window._last_final_tissues = apexResult.finalTissues || null;
+				populateTissueTimeline(apexResult);
+				output = convertApexPlanToLegacy(apexResult, rate_asc_idx * 1.0, rate_asc_deco_idx * 1.0, rate_asc_surf_idx * 1.0);
+			} else {
+				window._last_final_tissues = null;
+				output = [];
 			}
 
-			//fix problem wit custom depth from gases
-
-
-			//Add deco gases only from below bailout gases
-			for (dp_lvl = 1; dp_lvl < (levels_segment_arr[1] * 1.0) + 1; dp_lvl = dp_lvl + 0.25) {
-				ccr_deco_mix = CCR_new_mix_from_depth(dp_lvl, ($("#opt_setpoint_deco").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
-
-				ccr_deco_mix_tmp = [];
-				ccr_deco_mix_tmp[0] = ccr_deco_mix[0];
-				ccr_deco_mix_tmp[1] = ccr_deco_mix[1];
-
-				ccr_deco_mix[0] = Math.ceil(ccr_deco_mix[0] * 100);
-				ccr_deco_mix[1] = Math.ceil(ccr_deco_mix[1] * 100);
-
-				if (ccr_deco_mix[0] <= tmp_o2_fr_max) {
-					plan.addDecoGas(mix_to_txt_arr(ccr_deco_mix), ccr_deco_mix_tmp[0], ccr_deco_mix_tmp[1]);
-				}
-			}
-		}
-
-		//Add lvl changes
-		//Get current ascending deco speed
-		if ($("#tn_plan_ccr").val() == 1) {
-			//OC Dive
-			aaa = 0;
-			fff = 0;
-			for (c = 0; c < levels_mix_segment_arr.length / 2; c++) {
-				ff = [levels_mix_segment_arr[aaa], levels_mix_segment_arr[aaa + 1]];
-				if (c === 0) {
-					tmp_time = levels_segment_arr[fff + 1] * 1.0 / rate_dsc_idx;
-					plan.addDepthChange(0, levels_segment_arr[fff + 1] * 1.0, mix_to_txt_arr(ff), tmp_time * 1.0);
-					plan.addDepthChange(levels_segment_arr[fff + 1] * 1.0, levels_segment_arr[fff + 1] * 1.0, mix_to_txt_arr(ff), levels_segment_arr[fff + 2] * 1.0);
-				} else {
-					if (((levels_segment_arr[fff + 1 - 3] * 1.0) - (levels_segment_arr[fff + 1] * 1.0)) >= 0) {
-						tmp_time = (Math.abs((levels_segment_arr[fff + 1 - 3] * 1.0) - (levels_segment_arr[fff + 1] * 1.0))) / rate_asc_idx;
-					} else {
-						tmp_time = (Math.abs((levels_segment_arr[fff + 1 - 3] * 1.0) - (levels_segment_arr[fff + 1] * 1.0))) / rate_dsc_idx;
-					}
-					//fix lib crush because time can`t == 0;
-					if (tmp_time === 0) {
-						tmp_time = 0.001;
-					}
-					plan.addDepthChange(levels_segment_arr[fff + 1 - 3] * 1.0, levels_segment_arr[fff + 1] * 1.0, mix_to_txt_arr(ff), tmp_time);
-					plan.addDepthChange(levels_segment_arr[fff + 1] * 1.0, levels_segment_arr[fff + 1] * 1.0, mix_to_txt_arr(ff), levels_segment_arr[fff + 2] * 1.0);
-				}
-				aaa = aaa + 2;
-				fff = fff + 3;
-			}
 		} else {
-			//eCCR Dive
-			//add descent segment
-			var ccr_start_mix;
-			for (dp_lvl = 1; dp_lvl < (levels_segment_arr[1] * 1.0) + 1; dp_lvl++) {
-				ccr_start_mix = CCR_new_mix_from_depth(dp_lvl, ($("#opt_setpoint_start").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
 
-				ccr_start_mix[0] = Math.ceil(ccr_start_mix[0] * 100);
-				ccr_start_mix[1] = Math.ceil(ccr_start_mix[1] * 100);
-				ccr_start_mix[2] = Math.ceil(ccr_start_mix[2] * 100);
-
-				tmp_time = levels_segment_arr[1] * 1.0 / rate_dsc_idx;
-				tmp_time = tmp_time / (levels_segment_arr[1] * 1.0);
-
-
-				plan.addDepthChange(dp_lvl - 1, dp_lvl, mix_to_txt_arr(ccr_start_mix), tmp_time * 1.0);
-			}
-			//bottom segment
-			ccr_start_mix = CCR_new_mix_from_depth((levels_segment_arr[1] * 1.0), ($("#opt_setpoint_bottom").val() * 1.0), levels_mix_segment_arr[0] * 0.01, levels_mix_segment_arr[1] * 0.01);
-			ccr_start_mix[0] = Math.ceil(ccr_start_mix[0] * 100);
-			ccr_start_mix[1] = Math.ceil(ccr_start_mix[1] * 100);
-			ccr_start_mix[2] = Math.ceil(ccr_start_mix[2] * 100);
-
-			plan.addDepthChange(levels_segment_arr[1] * 1.0, levels_segment_arr[1] * 1.0, mix_to_txt_arr(ccr_start_mix), levels_segment_arr[2] * 1.0);
-
-		}
-
-		var ppo2_deco = document.getElementById("opt_ppo2_deco");
-		var ppo2_deco_idx = ppo2_deco.options[ppo2_deco.selectedIndex].value;
-
-		//fix computation GF error with zero
-		if (gf_arr[0] === 0) {
-			gf_arr[0] = 1;
-		}
-		//compute END for specific lib param
-		var ppn2_max_deco = document.getElementById("opt_ppn2_max_deco");
-		var ppn2_max_deco_idx = ppn2_max_deco.options[ppn2_max_deco.selectedIndex].value;
-
-		//OLD!
-		//var mxis_end = (((parseFloat(ppn2_max_deco_idx))/0.79)-1)*10;
-		//NEW!
-		var WaterDensTempCompensation = (1 / ((water_density_temperature_correction() * water_density() * 0.001 * (1))));
-		var mxis_end = (((parseFloat(ppn2_max_deco_idx)) / 0.79) - 1) * 10 * height_to_bar() * WaterDensTempCompensation;
-
-		//All is ready for plan computation    
-		if ($("#tn_plan_ccr").val() == 1) {
-			//OC Dive
-			output = plan.calculateDecompression(false, gf_arr[0] * 0.01, gf_arr[1] * 0.01, ppo2_deco_idx * 1.0, mxis_end);
+		//CCR Dive - ApexDeco engine
+		var apex_levels_ccr   = buildApexLevelsCCR(levels_segment_arr, levels_mix_segment_arr);
+		// Bailout mode: pass deco gases; Diluent mode: no deco gases (stays on CCR)
+		var apex_decos_ccr    = (opt_blt_dln == 1) ? buildApexDecos() : [];
+		var apex_settings_ccr = buildApexSettings(mdl_idx, true);
+		// Pre-compute SI-adjusted t=0 tissue state while settings are available
+		window._dive_start_tissues = computeDiveStartTissues(apex_settings_ccr);
+		var apexResultCCR     = apex_settings_ccr._isVPM
+			? VPMEngine.calculate(apex_levels_ccr, apex_decos_ccr, apex_settings_ccr, apex_settings_ccr._vpmModel)
+			: DecoEngine.calculate(apex_levels_ccr, apex_decos_ccr, apex_settings_ccr);
+		if (apexResultCCR && !apexResultCCR.error) {
+			window._last_final_tissues = apexResultCCR.finalTissues || null;
+			populateTissueTimeline(apexResultCCR);
+			output = convertApexPlanToLegacy(apexResultCCR, rate_asc_idx * 1.0, rate_asc_deco_idx * 1.0, rate_asc_surf_idx * 1.0);
 		} else {
-			//eCCR Diluent Dive 
-			if (opt_blt_dln == 2) {
-				//warning! crappy code with yoomba yumba -0.1 because we have strange defence between OC and eCCR mixes precessions. Need deep test and fix!
-				output = plan.calculateDecompression(false, gf_arr[0] * 0.01, gf_arr[1] * 0.01, $("#opt_setpoint_deco").val(), mxis_end);
-			}
-			//eCCR Bailout Dive
-			if (opt_blt_dln == 1) {
-				output = plan.calculateDecompression(false, gf_arr[0] * 0.01, gf_arr[1] * 0.01, $("#opt_setpoint_deco").val(), mxis_end);
-			}
+			window._last_final_tissues = null;
+			output = [];
 		}
 
+		} // end CCR else
 
 	}
 	//fix ascent error on very short dives
@@ -792,7 +777,11 @@ function to_5_column_arr(tmp_arr) {
 		dp_start1 = tmp_arr[i].startDepth * 1.0;
 		dp_c_time = tmp_arr[i].time * 1.0;
 
-		runtime = runtime + (dp_c_time);
+		// implicit segments (inter-stop transits, surface ascent) are excluded from runtime
+		// to match ApexDeco formula: runtime = Math.ceil(engine plan segments only)
+		if (!tmp_arr[i].implicit) {
+			runtime = runtime + dp_c_time;
+		}
 		dp_c_mix = tmp_arr[i].gasName;
 
 		if (dp_end1 == dp_start1) {
@@ -816,12 +805,17 @@ function to_5_column_arr(tmp_arr) {
 		}
 		dec_table.push(time_dec_to_time(dp_c_time));
 
-		//make plan time rounded if classic style selected
-		if (pln_style_val == 2) {
-			dec_table.push("(" + time_dec_to_time(Math.ceil(runtime)) + ")");
+		// Classic: ceil to whole minutes (unchanged).
+		// Detailed: 1-second precision; implicit transit rows show runtime+transitTime
+		// (= arrival time at next stop) so consecutive rows never share the same value.
+		var _rtVal;
+		if (pln_style_val === "1") {
+			var _rtBase = (tmp_arr[i].implicit) ? runtime + dp_c_time : runtime;
+			_rtVal = time_dec_to_time(Math.round(_rtBase * 60) / 60);
 		} else {
-			dec_table.push("(" + time_dec_to_time(runtime) + ")");
+			_rtVal = time_dec_to_time(Math.ceil(runtime));
 		}
+		dec_table.push("(" + _rtVal + ")");
 
 		dec_table.push(dp_c_mix);
 	}
@@ -836,15 +830,29 @@ function to_5_column_arr_full(tmp_arr) {
 	var pln_style_val = $("#tn_plan_style option:selected").val();
 
 	runtime = 0;
+	// _prevEngRT: tracks cumulative engine runtime after the previous segment.
+	// Using engine runtime deltas for the TIME field ensures the profile chart
+	// x-axis sums to exactly engine.totalRuntime (35), identical to ApexDeco,
+	// while transit segments preserve gradual ascent lines (not vertical steps).
+	var _prevEngRT = 0;
 	var blns = 0;
 	for (var i = 0; i < tmp_arr.length; i++) {
 		dp_end1 = tmp_arr[i].endDepth * 1.0;
 		dp_start1 = tmp_arr[i].startDepth * 1.0;
 		dp_c_time = tmp_arr[i].time * 1.0;
 
+		// Chart x-axis time: engine runtime delta so chart total = engine.totalRuntime.
+		// ExtraStops gas-change segments have no engineRuntime → fall back to dp_c_time.
+		var _engRT = (tmp_arr[i].engineRuntime !== undefined)
+			? tmp_arr[i].engineRuntime
+			: (_prevEngRT + dp_c_time);
+		var _chartTime = _engRT - _prevEngRT;
+		_prevEngRT = _engRT;
 
-		runtime = runtime + (dp_c_time);
-
+		// Runtime column: exclude implicit segments (matches plan table accumulation).
+		if (!tmp_arr[i].implicit) {
+			runtime = runtime + dp_c_time;
+		}
 
 		dp_c_mix = tmp_arr[i].gasName;
 
@@ -867,8 +875,8 @@ function to_5_column_arr_full(tmp_arr) {
 		} else {
 			dec_table.push(dp_start1 + "-" + dp_end1);
 		}
-		dec_table.push(time_dec_to_time(dp_c_time));
-		dec_table.push("(" + time_dec_to_time(runtime) + ")");
+		dec_table.push(time_dec_to_time(_chartTime));
+		dec_table.push("(" + time_dec_to_time(Math.ceil(runtime)) + ")");
 		dec_table.push(dp_c_mix);
 	}
 	return dec_table;
@@ -880,16 +888,19 @@ function ShortStop(mn_plan) {
 	for (var i = 0; i < mn_plan.length; i++) {
 		//only for stops or flat segments
 		if (mn_plan[i].startDepth == mn_plan[i].endDepth) {
-			//only for non integer time
-			if (mn_plan[i].time != Math.floor(mn_plan[i].time)) {
+			//only for non-integer time: round to nearest minute (conservative — keeps sub-minute stops)
+			// Math.round instead of Math.floor: 0.667min→1min (kept), not 0min (removed).
+			// Math.floor caused sub-minute deco stops to vanish, silently dropping decompression time.
+			if (mn_plan[i].time != Math.round(mn_plan[i].time)) {
 
 				var rep = {
 					gasName: mn_plan[i].gasName,
 					startDepth: mn_plan[i].startDepth,
 					endDepth: mn_plan[i].endDepth,
-					//fix not integer time if present
-					time: Math.floor(mn_plan[i].time)
-					//time : Math.ceil(mn_plan[i].time)
+					time: Math.round(mn_plan[i].time),
+					// Preserve engineRuntime so to_5_column_arr_full can compute exact
+					// chart x-axis deltas even after the stop time is rounded.
+					engineRuntime: mn_plan[i].engineRuntime
 				};
 				mn_plan.splice(i, 1, rep);
 			}
@@ -898,25 +909,7 @@ function ShortStop(mn_plan) {
 
 	return mn_plan;
 }
-//Recombine plan if last stop changed from 3 meters to 6 meters
-//post changes
-function LastStopUpd(plan) {
-	if ($("#opt_lst_stop").val() == 6) {
-		if ($("#opt_lst_stop").val() > 0) {
-			if (plan != undefined) {
-        //plan is 6 meters las stop and no deco mixes and only one deco stop on 3 meters
-				if (plan[plan.length - 1].startDepth == 3 && plan[plan.length - 2].startDepth == 3 && plan[plan.length - 3].startDepth != 6) {
-					plan[plan.length - 1].startDepth = 6;
-					plan[plan.length - 1].endDepth = 6;
-					plan[plan.length - 2].startDepth = 6;
-					plan[plan.length - 2].endDepth = 6;
-					plan[plan.length - 3].endDepth = 6;
-				}
-			}
-		}
-	}
-	return plan;
-}
+
 //Insert gas break in to the plan
 function GasBreakInsert(main_arr) {
 
@@ -1016,12 +1009,15 @@ function ExtraStops(output) {
 	//OC plan
 	if ($("#tn_plan_ccr").val() * 1.0 == 1) {
 		for (c = 1; c < output.length; c++) {
+			// Skip if engine already inserted a gas_change segment at this position
+			if (output[c].isGasChange) { c++; continue; }
 			if (output[c].gasName != output[c - 1].gasName) {
 				output.splice(c, 0, {
 					gasName: output[c].gasName,
 					startDepth: output[c].startDepth,
 					endDepth: output[c].startDepth,
-					time: tn_cng_time_idx
+					time: tn_cng_time_idx,
+					isGasChange: true
 				});
 			}
 		}
@@ -1033,12 +1029,13 @@ function ExtraStops(output) {
 		var deco_mix_stp = ($("#opt_deco").val() * 1.0);
 
 		for (c = 1; c < output.length; c++) {
+			// Skip if engine already inserted a gas_change segment at this position
+			if (output[c].isGasChange) { c++; continue; }
 
 			var cnt = 0;
 
-			//we need add extra stop time only if changed to bailout array mix  
+			//we need add extra stop time only if changed to bailout array mix
 			for (j = 0; j < deco_mix_stp; j++) {
-				//console.log( mix_to_txt_arr([deco_mix_arr[cnt], deco_mix_arr[cnt + 1]]));
 				if (output[c].gasName == (mix_to_txt_arr([deco_mix_arr[cnt], deco_mix_arr[cnt + 1]]))) {
 					god_deco_gas = 1;
 				}
@@ -1050,7 +1047,8 @@ function ExtraStops(output) {
 					gasName: output[c].gasName,
 					startDepth: output[c].startDepth,
 					endDepth: output[c].startDepth,
-					time: tn_cng_time_idx
+					time: tn_cng_time_idx,
+					isGasChange: true
 				});
 				god_deco_gas = 0;
 			}
