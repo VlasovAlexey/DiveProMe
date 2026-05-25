@@ -64,17 +64,8 @@ function showStatus(message, type) {
     }
 }
 
-// Animate the Save button for ~45 sec after saving on Android
-// (signals the WebView needs time to persist cookies)
+// Compatibility stub for older cached scripts that may still call android_btn().
 function android_btn(){
-    var button_sv = document.getElementById("btn_save");
-    if (!button_sv) return;
-    button_sv.style.animationName = "ibcd_ppn2_anim";
-    button_sv.style.animationDuration = "2s";
-    button_sv.style.animationIterationCount = "infinite";
-    setTimeout(function() {
-        button_sv.style.animationName = "none";
-    }, 45000);
 }
 
 //convert DataURI to Binary Array

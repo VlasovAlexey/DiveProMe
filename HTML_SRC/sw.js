@@ -1,4 +1,4 @@
-const CACHE_NAME = 'diveprome-v16';
+const CACHE_NAME = 'diveprome-v161';
 const UPDATE_INTERVAL_MS = 90 * 24 * 60 * 60 * 1000; // 90 days
 const TS_KEY = '_sw_last_update';
 
