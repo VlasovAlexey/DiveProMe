@@ -245,7 +245,8 @@ function getMainDepthValue() {
     //var theSelected=document.getElementById( "mainDepthSelect" );
     //return theSelected.options[getMainDepthIndex()].value;
     var meters = $( "#opt_saul_depth" ).val()*1.0;
-    var feet = Math.ceil(Math.ceil(meters * 3.28084) / 10) * 10;
+    //Round metres-to-feet UP to the next 10-ft step (conservative — overestimates P(DCS) lookup).
+    var feet = Math.ceil(meters * 3.28084 / 10) * 10;
     return feet;
 }
 function updateFieldsBreathingMixture() {

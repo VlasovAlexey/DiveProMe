@@ -2122,7 +2122,9 @@
       </script>
       <!--<Preloader_End>-->
       <script>
-        if ('serviceWorker' in navigator) {
+        // ServiceWorkers require a non-file: origin; skip registration in
+        // Android WebView (file:///android_asset/...) to avoid a console error.
+        if ('serviceWorker' in navigator && location.protocol !== 'file:') {
           navigator.serviceWorker.register('./sw.js');
         }
       </script>

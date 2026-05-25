@@ -16,8 +16,12 @@
 
 
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/splash_background_color</item>
-        <item name="android:statusBarColor">@color/splash_status_bar_color</item>
+        <item name="android:windowBackground">@color/theme_default_bg</item>
+        <!-- Transparent system bars so the container's background shows through and
+             the JS-driven theme switch can repaint the status/navigation areas. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">

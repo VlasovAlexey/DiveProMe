@@ -3,13 +3,20 @@ package com.diveprome.avlasov.diveprome;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
-import android.app.DownloadManager;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
+import android.animation.Animator;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,8 +24,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.util.TypedValue;
-import android.webkit.CookieManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -28,14 +33,16 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG = "WebViewFileDownload";
+    private static final String TAG = "DiveProMe";
     private static final int CREATE_FILE_REQUEST_CODE = 1001;
+
     private WebView webView;
+    private FrameLayout container;
+    private WindowInsetsControllerCompat insetsController;
+    private int currentStatusColor;
+
     private String pendingFileName;
     private String pendingMimeType;
     private byte[] pendingFileData;
@@ -43,24 +50,63 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Edge-to-edge: system bars are transparent; container background shows through them.
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        insetsController = new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView());
+
         setContentView(R.layout.activity_main);
 
-        //check SDK version for adding or hiding actionBar Height for proper GUI work
-        FrameLayout frameLayout = findViewById(R.id.main_frame);
-        if (Build.VERSION.SDK_INT > 34) {
-            // Получаем высоту ActionBar
-            TypedValue tv = new TypedValue();
-            if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
-                int actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
-                frameLayout.setPadding(0, actionBarHeight, 0, 0);
-            }
-        }
+        container = findViewById(R.id.main_frame);
 
-        Log.d(TAG, "Activity created - minSdk: 31, targetSdk: 34");
+        // Default to the Dark theme background; JS will call setStatusBarColor once the
+        // WebView finishes loading and the user's saved theme is applied.
+        currentStatusColor = Color.parseColor("#2b2b2c");
+        container.setBackgroundColor(currentStatusColor);
+        insetsController.setAppearanceLightStatusBars(false);
+        insetsController.setAppearanceLightNavigationBars(false);
 
-        // Initialize WebView
+        // Shift content down by the status-bar height and up by the nav-bar height so the
+        // WebView is never hidden behind the system bars.
+        ViewCompat.setOnApplyWindowInsetsListener(container, (view, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(
+                    WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout()
+            );
+            view.setPadding(bars.left, bars.top, bars.right, bars.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
+
+        Log.d(TAG, "Activity created");
+
         webView = findViewById(R.id.myWeb);
         setupWebView(savedInstanceState);
+    }
+
+    /**
+     * Smoothly transitions the container background (which is visible through the transparent
+     * status and navigation bars) to {@code toColor} over 200 ms, and updates the status-bar
+     * icon tint to keep good contrast.
+     */
+    private void animateStatusBarColor(int toColor) {
+        ValueAnimator animator = ValueAnimator.ofObject(new ArgbEvaluator(), currentStatusColor, toColor);
+        animator.setDuration(200);
+        animator.addUpdateListener(animation ->
+                container.setBackgroundColor((int) animation.getAnimatedValue()));
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                currentStatusColor = toColor;
+            }
+        });
+        animator.start();
+
+        // Choose dark or light system-bar icons based on background luminance.
+        double luminance = (0.299 * Color.red(toColor)
+                          + 0.587 * Color.green(toColor)
+                          + 0.114 * Color.blue(toColor)) / 255.0;
+        boolean lightIcons = luminance > 0.5;
+        insetsController.setAppearanceLightStatusBars(lightIcons);
+        insetsController.setAppearanceLightNavigationBars(lightIcons);
     }
 
     private void setupWebView(Bundle savedInstanceState) {
@@ -69,24 +115,11 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setDomStorageEnabled(true);
         webSettings.setAllowFileAccess(true);
         webSettings.setAllowContentAccess(true);
-
-        // Enabling caching (modern approach)
         webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-
-        // Accept cookies
-        CookieManager cookieManager = CookieManager.getInstance();
-        cookieManager.setAcceptCookie(true);
-        cookieManager.setAcceptThirdPartyCookies(webView, true);
-
-        // API 21+ requires explicit permission for file cookies
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            cookieManager.setAcceptFileSchemeCookies(true);
-        }
 
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
 
-        // Set WebView clients
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -97,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                // Save cookies after loading the page
-                CookieManager.getInstance().flush();
             }
         });
 
@@ -110,34 +141,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Add JavaScript interface
         webView.addJavascriptInterface(new WebAppInterface(), "Android");
 
-        // Restore WebView state if there is a saved state
         if (savedInstanceState != null) {
             webView.restoreState(savedInstanceState);
         } else {
-            // Load the HTML content
             webView.loadUrl("file:///android_asset/index.html");
         }
 
-        Log.i(TAG, "WebView initialized and loading HTML content");
+        Log.i(TAG, "WebView initialized");
     }
 
-    // JavaScript interface for handling blob downloads
+    // JavaScript interface exposed to the WebView as window.Android
     public class WebAppInterface {
+
+        /**
+         * Called by style_manager.js when the user switches themes.
+         * {@code hexColor} is the body background color of the new theme, e.g. "#2b2b2c".
+         */
+        @JavascriptInterface
+        public void setStatusBarColor(String hexColor) {
+            try {
+                int toColor = Color.parseColor(hexColor);
+                runOnUiThread(() -> animateStatusBarColor(toColor));
+            } catch (IllegalArgumentException e) {
+                Log.e(TAG, "setStatusBarColor: invalid color: " + hexColor);
+            }
+        }
+
+        /** Called by android_fn.js to save a dive profile or log file from the WebView. */
         @JavascriptInterface
         public void downloadFile(String base64Data, String fileName, String mimeType) {
             Log.d(TAG, "Received download request for: " + fileName);
-
             try {
                 byte[] data = Base64.decode(base64Data, Base64.DEFAULT);
-
-                // For Android 10+ we use MediaStore API
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     saveFileWithMediaStore(data, fileName, mimeType);
                 } else {
-                    // Fallback for older versions (though minSdk=31 makes this unreachable)
                     createFileWithSAF(data, fileName, mimeType);
                 }
             } catch (Exception e) {
@@ -167,7 +207,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.i(TAG, "File saved with MediaStore: " + fileName);
                         runOnUiThread(() -> {
                             Toast.makeText(this, "File saved to Downloads folder", Toast.LENGTH_LONG).show();
-                            // Notify the system about the new file
                             Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                             mediaScanIntent.setData(uri);
                             sendBroadcast(mediaScanIntent);
@@ -203,8 +242,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CREATE_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
             if (data != null && data.getData() != null) {
-                Uri uri = data.getData();
-                saveFileWithSAF(uri, pendingFileData);
+                saveFileWithSAF(data.getData(), pendingFileData);
             }
         }
     }
@@ -215,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
             try (OutputStream outputStream = resolver.openOutputStream(uri)) {
                 if (outputStream != null) {
                     outputStream.write(data);
-                    Log.i(TAG, "File saved with SAF: " + uri.toString());
+                    Log.i(TAG, "File saved with SAF: " + uri);
                     runOnUiThread(() -> Toast.makeText(this,
                             "File saved successfully", Toast.LENGTH_LONG).show());
                 }
@@ -235,6 +273,7 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -244,22 +283,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Restore session when activity resumes
         webView.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        // Save state when paused
         webView.onPause();
-        CookieManager.getInstance().flush();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Clear WebView and free resources
         webView.destroy();
     }
 }

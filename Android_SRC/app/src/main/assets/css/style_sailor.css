@@ -3,10 +3,6 @@
    Light background, pink/magenta primary, gold & sky-blue accents
    ============================================================ */
 
-@font-face {
-    font-family: FirstFont;
-    src: url(font/ProximaNova-Regular.otf);
-}
 
 #clear { clear: both; }
 
@@ -260,7 +256,8 @@ select {
 .tn_btn_tiss, .btn_export_pdf_profile, .btn_export_pdf_pp,
 .btn_export_xls, .btn_tbl_pdf, .btn_msg, .btn_tel,
 .btn_bailout, .btn_diluent, .btn_link,
-.tn_btn_price, .tn_btn_learn, .tn_btn_pp_profile_chart, .tn_btn_cons {
+.tn_btn_price, .tn_btn_learn, .tn_btn_pp_profile_chart, .tn_btn_cons,
+.btn_next_dive, .btn_reset_tissues {
     border: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -285,7 +282,8 @@ select {
 .tn_btn_tiss:hover, .btn_export_pdf_profile:hover, .btn_export_pdf_pp:hover,
 .btn_export_xls:hover, .btn_tbl_pdf:hover, .btn_msg:hover, .btn_tel:hover,
 .btn_bailout:hover, .btn_diluent:hover, .btn_link:hover,
-.tn_btn_price:hover, .tn_btn_learn:hover, .tn_btn_pp_profile_chart:hover, .tn_btn_cons:hover {
+.tn_btn_price:hover, .tn_btn_learn:hover, .tn_btn_pp_profile_chart:hover, .tn_btn_cons:hover,
+.btn_next_dive:hover, .btn_reset_tissues:hover {
     background: #ffffff;
     color: #e91e8c;
     border: 2px solid #e91e8c;
@@ -295,7 +293,8 @@ select {
 .tn_btn_tiss:active, .btn_export_pdf_profile:active, .btn_export_pdf_pp:active,
 .btn_export_xls:active, .btn_tbl_pdf:active, .btn_msg:active, .btn_tel:active,
 .btn_bailout:active, .btn_diluent:active, .btn_link:active,
-.tn_btn_price:active, .tn_btn_learn:active, .tn_btn_pp_profile_chart:active, .tn_btn_cons:active {
+.tn_btn_price:active, .tn_btn_learn:active, .tn_btn_pp_profile_chart:active, .tn_btn_cons:active,
+.btn_next_dive:active, .btn_reset_tissues:active {
     top: 1px;
     background: #c2185b;
     color: #ffffff;
@@ -445,3 +444,64 @@ br { font-size: 0; }
     font-size: 16px;
     margin: 0 auto;
 }
+
+/* ── Learning Tools circle layout ───────────────────────── */
+.tn_calc_end, .tn_calc_ead, .tn_calc_o2max,
+.tn_calc_o2min, .tn_calc_n2max { font-weight: bold; }
+
+#tr_circle_mix {
+    z-index: 98;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 26px;
+    width: 90px;
+    margin-top: -9px;
+    margin-left: -45px;
+    text-align: center;
+    font-weight: bold;
+}
+.opt_circle_mix { display: flex; justify-content: center; align-items: center; }
+
+#tr_circle_param {
+    z-index: 98;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 26px;
+    width: 120px;
+    margin-top: 52px;
+    margin-left: -154px;
+}
+
+/* ── S.A.U.L. section ────────────────────────────────────── */
+.opt_saul_res_type {
+    width: 320px;
+    background-position: calc(100% - 8px) 50%;
+}
+
+.tn_saul_cap_percent,
+.tn_saul_time_max,
+.opt_saul_cap_percent {
+    font-size: 60px;
+    font-family: Sans-Serif;
+    font-weight: 600;
+    animation-name: saul_large_txt_anim;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes saul_large_txt_anim {
+    0%   { color: #f48fb1; }
+    50%  { color: #e91e8c; }
+    100% { color: #f48fb1; }
+}
+
+.tr_saul_link {
+    color: #c2185b;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.tr_saul_time_max_dim { font-size: 12px; }

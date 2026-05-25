@@ -1,12 +1,12 @@
 
 // hide unused elements
-// may be activate later
+// may be activated later
 element_id_hide("tr_airbr_o2");
 element_id_hide("tn_airbr_o2");
 element_id_hide("tn_btn_save");
 
-//open file dialog at any platforms for saving pdf, xls or other file
-//html_id - html id for specific node js file type selector. Data-your data
+//Open file dialog on any platform for saving PDF, XLS or other files
+//html_id — HTML selector for the Node.js file-type chooser element; data — file content to write
 function NodesaveFile(html_id,data, encoding) {
     var chooser = document.querySelector(html_id);
     chooser.addEventListener("change", function(evt) {

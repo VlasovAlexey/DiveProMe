@@ -352,7 +352,9 @@ select
 .tn_btn_price,
 .tn_btn_learn,
 .tn_btn_pp_profile_chart,
-.tn_btn_cons
+.tn_btn_cons,
+.btn_next_dive,
+.btn_reset_tissues
 {
     border: 10px;
     margin-top: 10px;
@@ -391,7 +393,9 @@ select
 .tn_btn_price:hover,
 .tn_btn_learn:hover,
 .tn_btn_pp_profile_chart:hover,
-.tn_btn_cons:hover
+.tn_btn_cons:hover,
+.btn_next_dive:hover,
+.btn_reset_tissues:hover
 {
     background: #ffffff;
     color: #0080fc;
@@ -414,7 +418,9 @@ select
 .tn_btn_price:active,
 .tn_btn_learn:active,
 .tn_btn_pp_profile_chart:active,
-.tn_btn_cons:active
+.tn_btn_cons:active,
+.btn_next_dive:active,
+.btn_reset_tissues:active
 {
     top: 1px;
     background: #ffffff;

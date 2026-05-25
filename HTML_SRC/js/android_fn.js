@@ -3,23 +3,23 @@ const userAgent = navigator.userAgent.toLowerCase();
 const isAndroid = /android/.test(userAgent);
 const isWebView = /version\/\d+\.\d+/.test(userAgent) || /wv/.test(userAgent);
 
-//Check platform if Android return true
+//Check if platform is Android; returns true if so
 function IsAndroid(){
     var ua = navigator.userAgent.toLowerCase();
     //console.log(ua);
     var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
     if(isAndroid) {
-        //we under Android :) simply but some times does`t work
+        //Running on Android. Simple check, but sometimes doesn't work
         return true;
     }
-    //web View class not present
+    //WebView class not present
     return false;
 }
 
-//Generate special data for Android savings
+//Generate file data and trigger download for Android WebView
 function generateAndDownload(content, fileName, mimeType) {
     if (isAndroid && isWebView) {
-        //we under android and webview
+        //Running on Android in WebView
         /*Example of usage
         content = "This is a sample text file generated from WebView.\n\n";
         //fileName = "webview_sample.txt";
@@ -62,6 +62,19 @@ function showStatus(message, type) {
             statusEl.style.display = 'none';
         }, 5000);
     }
+}
+
+// Animate the Save button for ~45 sec after saving on Android
+// (signals the WebView needs time to persist cookies)
+function android_btn(){
+    var button_sv = document.getElementById("btn_save");
+    if (!button_sv) return;
+    button_sv.style.animationName = "ibcd_ppn2_anim";
+    button_sv.style.animationDuration = "2s";
+    button_sv.style.animationIterationCount = "infinite";
+    setTimeout(function() {
+        button_sv.style.animationName = "none";
+    }, 45000);
 }
 
 //convert DataURI to Binary Array

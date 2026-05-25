@@ -13,7 +13,7 @@ function btn_add_lvl(){
     upd_all();  
   }
 }
-//Remove level to level list
+//Remove level from level list
 function btn_del_lvl(){
   if(lvl_arr.length > 3){
     
@@ -115,7 +115,7 @@ function btn_export_tbl_plan_pdf(){
     if(node_enable()===true){
         NodesaveFile("#nodejs_export_pdf", doc.output() , false);
     }
-    //else standart web based datauri64 blob save file for all browser
+    //else standard web-based datauri64 blob save file for all browsers
     else {
         doc.save("DiveProMe " + plan_lng("ch_tbl_name") + " " + plan_lng("ch_depth") + ' ' + ld_dp + (plan_lng("ch_mtr")).replace(".", "") + ".pdf");
     }
@@ -228,7 +228,7 @@ function btn_export_xls(){
 //Export_PDF main depth\time chart
 function btn_export_pdf(){
 
-    //switch to english because PDF generator doesn`t support russian or other UTF-8 code pages
+    //Switch to English because PDF generator doesn't support Russian or other UTF-8 code pages
     var fname_depth = plan_lng("ch_depth");
     var fname_dim = plan_lng("ch_mtr").replace(".", "");
 
@@ -250,7 +250,7 @@ function btn_export_pdf(){
 
 //Export_PDF pp chart
 function btn_export_pdf_pp(){
-    //switch to english because PDF generator doesn`t support russian or other UTF-8 code pages
+    //Switch to English because PDF generator doesn't support Russian or other UTF-8 code pages
     var fname_depth = plan_lng("ch_depth");
     var fname_dim = plan_lng("ch_mtr").replace(".", "");
     var fname_pp = plan_lng("ch_pp");

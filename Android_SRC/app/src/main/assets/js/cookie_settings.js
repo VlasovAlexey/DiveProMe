@@ -25,7 +25,7 @@ var lvl_mix_arr = [21,0];
 
 var gf_arr = [30,85];
 
-var mdls_usr = 1;
+var mdls_usr = 3; //3 = ZHL-C (Bühlmann's variant designed for dive computers)
 var lngs_usr = 1;
 
 var dmns_usr = 1;
@@ -140,7 +140,7 @@ function default_set(){
     lvl_arr = [1,45,20];
     lvl_mix_arr = [21,0];
     gf_arr = [30,85];
-    mdls_usr = 1;
+    mdls_usr = 3; //ZHL-C default (for dive computers)
     lngs_usr = 1;
     dmns_usr = 1;
     color_usr = 1;
@@ -310,6 +310,7 @@ var blend_mix_first_arr = [
     }];
 
 var mdls_arr = [
+    { text: "ZHL-A",     id: "tn_mdl_zhl_a",    isdisable: "enabled" },
     { text: "ZHL-B",     id: "tn_mdl_zhl_b",    isdisable: "enabled" },
     { text: "ZHL-C",     id: "tn_mdl_zhl_c",    isdisable: "enabled" },
     { text: "VPM-A",     id: "tn_mdl_vpm_a",    isdisable: "enabled" },
@@ -919,13 +920,13 @@ function lng_cng(mix_name){
 }
 
 // Show/hide VPM conservatism row based on current model selection.
-// Visible only for VPM without GF: VPM-A(3), VPM-B(4), VPM-BE(5), VPM-B/FBO(7).
-// Hidden for ZHL (1,2) and VPM-B/GFS (6).
+// Visible only for VPM without GF: VPM-A(4), VPM-B(5), VPM-BE(6), VPM-B/FBO(8).
+// Hidden for ZHL (1=A, 2=B, 3=C) and VPM-B/GFS (7).
 function upd_vpm_conserv_opt() {
     var mdl = document.getElementById("tn_mdl");
     if (!mdl) return;
     var mdl_idx = mdl.options[mdl.selectedIndex].value * 1;
-    var isVpmNoGfs = (mdl_idx >= 3 && mdl_idx !== 6);
+    var isVpmNoGfs = (mdl_idx >= 4 && mdl_idx !== 7);
     if (isVpmNoGfs) {
         element_id_show("tr_vpm_conserv");
         element_id_show("tn_vpm_conserv");
@@ -964,40 +965,15 @@ function upd_airbr_mix(){
 }
 
 function setCookie(name, value) {
-    if (IsAndroid() == true) {
-        var expires = "; expires=" + "Mon, 01-Jan-2224 00:00:00 GMT";
-        //make cookie policy
-        //var SameSite = "; SameSite=Strict;  Path=/";
-        var SameSite = "";
-        document.cookie = name + "=" + value + expires + SameSite;
-    }
-    else
-    {
-        localStorage.setItem(name, value);
-    }
+    localStorage.setItem(name, value);
 }
 
 function getCookie(name) {
-    if (IsAndroid() == true) {
-        var r = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-        if (r) return r[2];
-        else return null;
-    }
-    else
-    {
-        return (localStorage.getItem(name));
-    }
+    return localStorage.getItem(name);
 }
+
 function deleteCookie(name) {
-    if (IsAndroid() == true) {
-        var date = new Date();
-        date.setTime(date.getTime() - 1);
-        document.cookie = name += "=; expires=" + date.toGMTString();
-    }
-    else
-    {
-        localStorage.removeItem(name);
-    }
+    localStorage.removeItem(name);
 }
 
 function write_cookie(){
@@ -1588,11 +1564,6 @@ function split_fn_to_int(arr){
  function btn_save(){
     //ga('send', 'event'  , 'Save Settings', 'Save Settings OK!');
     write_cookie();
-
-    //check Anroid platform an enable warning about 40 sec. after save if true
-    if(IsAndroid() === true){
-        android_btn();
-    }
  }
 
  

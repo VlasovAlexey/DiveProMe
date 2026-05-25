@@ -6,4 +6,6 @@
     <color name="black_overlay">#66000000</color>
     <color name="splash_background_color">#38a1e7</color>
     <color name="splash_status_bar_color">#808080</color>
+    <!-- Default background for the activity container (Dark theme) -->
+    <color name="theme_default_bg">#2b2b2c</color>
 </resources>

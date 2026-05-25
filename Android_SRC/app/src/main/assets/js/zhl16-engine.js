@@ -1,4 +1,47 @@
 const DecoEngine = (() => {
+    //ZHL-16A N2 compartments (Bühlmann 1990 theoretical, "1b" slow-compartment variant).
+    //Compartment 1 uses ht=5.0 with the table-style a/b coefficients (more conservative
+    //tolerance), compartments 2-16 are identical to ZHL-16C.
+    const ZHL16A_N2 = [
+        { ht: 5.0,    a: 1.1696, b: 0.5578 },
+        { ht: 8.0,    a: 1.0000, b: 0.6514 },
+        { ht: 12.5,   a: 0.8618, b: 0.7222 },
+        { ht: 18.5,   a: 0.7562, b: 0.7825 },
+        { ht: 27.0,   a: 0.6200, b: 0.8126 },
+        { ht: 38.3,   a: 0.5043, b: 0.8434 },
+        { ht: 54.3,   a: 0.4410, b: 0.8693 },
+        { ht: 77.0,   a: 0.4000, b: 0.8910 },
+        { ht: 109.0,  a: 0.3750, b: 0.9092 },
+        { ht: 146.0,  a: 0.3500, b: 0.9222 },
+        { ht: 187.0,  a: 0.3295, b: 0.9319 },
+        { ht: 239.0,  a: 0.3065, b: 0.9403 },
+        { ht: 305.0,  a: 0.2835, b: 0.9477 },
+        { ht: 390.0,  a: 0.2610, b: 0.9544 },
+        { ht: 498.0,  a: 0.2480, b: 0.9602 },
+        { ht: 635.0,  a: 0.2327, b: 0.9653 }
+    ];
+    //ZHL-16B N2 compartments (Bühlmann 1990 for tables). Compartment 1 uses ht=5.0
+    //with computer-style a/b coefficients (less conservative than A but slower than C).
+    //Compartments 2-16 are identical to ZHL-16C.
+    const ZHL16B_N2 = [
+        { ht: 5.0,    a: 1.2599, b: 0.5050 },
+        { ht: 8.0,    a: 1.0000, b: 0.6514 },
+        { ht: 12.5,   a: 0.8618, b: 0.7222 },
+        { ht: 18.5,   a: 0.7562, b: 0.7825 },
+        { ht: 27.0,   a: 0.6200, b: 0.8126 },
+        { ht: 38.3,   a: 0.5043, b: 0.8434 },
+        { ht: 54.3,   a: 0.4410, b: 0.8693 },
+        { ht: 77.0,   a: 0.4000, b: 0.8910 },
+        { ht: 109.0,  a: 0.3750, b: 0.9092 },
+        { ht: 146.0,  a: 0.3500, b: 0.9222 },
+        { ht: 187.0,  a: 0.3295, b: 0.9319 },
+        { ht: 239.0,  a: 0.3065, b: 0.9403 },
+        { ht: 305.0,  a: 0.2835, b: 0.9477 },
+        { ht: 390.0,  a: 0.2610, b: 0.9544 },
+        { ht: 498.0,  a: 0.2480, b: 0.9602 },
+        { ht: 635.0,  a: 0.2327, b: 0.9653 }
+    ];
+    //ZHL-16C N2 compartments (Bühlmann 1990 for computers, fastest "1a" compartment).
     const ZHL16C_N2 = [
         { ht: 4.0,    a: 1.2599, b: 0.5050 },
         { ht: 8.0,    a: 1.0000, b: 0.6514 },
@@ -17,6 +60,9 @@ const DecoEngine = (() => {
         { ht: 498.0,  a: 0.2480, b: 0.9602 },
         { ht: 635.0,  a: 0.2327, b: 0.9653 }
     ];
+    //Active N2 table — switched in calculate() based on settings.decoModel
+    //('ZHLA_GF' | 'ZHLB_GF' | 'ZHLC_GF'). Default ZHL-16C.
+    let _tblN2 = ZHL16C_N2;
     const ZHL16C_He = [
         { ht: 1.51,   a: 1.7424, b: 0.4245 },
         { ht: 3.02,   a: 1.3830, b: 0.5747 },
@@ -36,11 +82,27 @@ const DecoEngine = (() => {
         { ht: 240.03, a: 0.5119, b: 0.9267 }
     ];
     const NUM_COMPARTMENTS = 16;
-    const WATER_VAPOR_PRESSURE = 0.0577; 
-    const SLP_SW_M = 10.078; 
-    const SLP_FW_M = 10.337; 
-    const SLP_SW_F = 33.066; 
-    const SLP_FW_F = 33.914; 
+    const WATER_VAPOR_PRESSURE = 0.0577;
+    const SLP_SW_M = 10.078;
+    const SLP_FW_M = 10.337;
+    const SLP_SW_F = 33.066;
+    const SLP_FW_F = 33.914;
+    //Reference density for SLP_SW_M/SW_F (kg/m³). 1 atm column of seawater of this
+    //density equals SLP_SW_M metres / SLP_SW_F feet.
+    const SLP_REF_DENSITY = 1025;
+    //Returns metres-per-bar (metric) or feet-per-bar (imperial) for the configured water.
+    //Honours settings.waterDensity (kg/m³) if provided; otherwise falls back to
+    //settings.waterType (0=salt, 1=fresh).
+    function getSlp(settings) {
+        if (settings.waterDensity && settings.waterDensity > 0) {
+            const baseSlp = settings.metric ? SLP_SW_M : SLP_SW_F;
+            return baseSlp * SLP_REF_DENSITY / settings.waterDensity;
+        }
+        if (settings.metric) {
+            return settings.waterType === 0 ? SLP_SW_M : SLP_FW_M;
+        }
+        return settings.waterType === 0 ? SLP_SW_F : SLP_FW_F;
+    }
     function createDefaultSettings() {
         return {
             circuit: 'OC',
@@ -141,13 +203,7 @@ const DecoEngine = (() => {
         return { o2: effO2, n2: effN2, he: Math.max(0, effHe) };
     }
     function getDepthPressure(depth, settings) {
-        let slp;
-        if (settings.metric) {
-            slp = settings.waterType === 0 ? SLP_SW_M : SLP_FW_M;
-        } else {
-            slp = settings.waterType === 0 ? SLP_SW_F : SLP_FW_F;
-        }
-        return depth / slp;
+        return depth / getSlp(settings);
     }
     function getSurfacePressure(settings) {
         const alt = settings.altitude || 0;
@@ -201,7 +257,7 @@ const DecoEngine = (() => {
         const inspN2 = n2Frac * (pAmb - ppH2O);
         const inspHe = heFracEff * (pAmb - ppH2O);
         for (let i = 0; i < NUM_COMPARTMENTS; i++) {
-            tissues[i].pN2 = haldaneEquation(tissues[i].pN2, inspN2, ZHL16C_N2[i].ht, time);
+            tissues[i].pN2 = haldaneEquation(tissues[i].pN2, inspN2, _tblN2[i].ht, time);
             tissues[i].pHe = haldaneEquation(tissues[i].pHe, inspHe, ZHL16C_He[i].ht, time);
         }
     }
@@ -210,12 +266,7 @@ const DecoEngine = (() => {
         if (time <= 0) return 0;
         const ppH2O = WATER_VAPOR_PRESSURE;
         const surfP = getSurfacePressure(settings);
-        let slp;
-        if (settings.metric) {
-            slp = settings.waterType === 0 ? SLP_SW_M : SLP_FW_M;
-        } else {
-            slp = settings.waterType === 0 ? SLP_SW_F : SLP_FW_F;
-        }
+        const slp = getSlp(settings);
         if (setpoint && setpoint > 0) {
             const steps = Math.max(1, Math.ceil(time));
             const dt = time / steps;
@@ -237,7 +288,7 @@ const DecoEngine = (() => {
                 const rN2 = n2Frac * pressureRate;
                 const rHe = heFracEff * pressureRate;
                 for (let i = 0; i < NUM_COMPARTMENTS; i++) {
-                    const kN2 = Math.LN2 / ZHL16C_N2[i].ht;
+                    const kN2 = Math.LN2 / _tblN2[i].ht;
                     const kHe = Math.LN2 / ZHL16C_He[i].ht;
                     tissues[i].pN2 = inspN2Start + rN2 * (dt - 1/kN2)
                         - (inspN2Start - tissues[i].pN2 - rN2/kN2) * Math.exp(-kN2 * dt);
@@ -255,7 +306,7 @@ const DecoEngine = (() => {
             const rN2 = n2Frac * pressureRate;
             const rHe = heFrac * pressureRate;
             for (let i = 0; i < NUM_COMPARTMENTS; i++) {
-                const kN2 = Math.LN2 / ZHL16C_N2[i].ht;
+                const kN2 = Math.LN2 / _tblN2[i].ht;
                 const kHe = Math.LN2 / ZHL16C_He[i].ht;
                 tissues[i].pN2 = inspN2Start + rN2 * (time - 1/kN2)
                     - (inspN2Start - tissues[i].pN2 - rN2/kN2) * Math.exp(-kN2 * time);
@@ -267,22 +318,17 @@ const DecoEngine = (() => {
     }
     function getCeiling(tissues, settings, gfLo, gfHi, maxDepth) {
         const surfP = getSurfacePressure(settings);
-        let slp;
-        if (settings.metric) {
-            slp = settings.waterType === 0 ? SLP_SW_M : SLP_FW_M;
-        } else {
-            slp = settings.waterType === 0 ? SLP_SW_F : SLP_FW_F;
-        }
+        const slp = getSlp(settings);
         let minPAmb = 0;
         for (let i = 0; i < NUM_COMPARTMENTS; i++) {
             const pTotal = tissues[i].pN2 + tissues[i].pHe;
             let a, b;
             if (pTotal > 0) {
-                a = (tissues[i].pN2 * ZHL16C_N2[i].a + tissues[i].pHe * ZHL16C_He[i].a) / pTotal;
-                b = (tissues[i].pN2 * ZHL16C_N2[i].b + tissues[i].pHe * ZHL16C_He[i].b) / pTotal;
+                a = (tissues[i].pN2 * _tblN2[i].a + tissues[i].pHe * ZHL16C_He[i].a) / pTotal;
+                b = (tissues[i].pN2 * _tblN2[i].b + tissues[i].pHe * ZHL16C_He[i].b) / pTotal;
             } else {
-                a = ZHL16C_N2[i].a;
-                b = ZHL16C_N2[i].b;
+                a = _tblN2[i].a;
+                b = _tblN2[i].b;
             }
             const gf = gfLo / 100;
             const pAmbTol = (pTotal - a * gf) / (gf / b - gf + 1);
@@ -339,11 +385,11 @@ const DecoEngine = (() => {
             const pTotal = tissues[i].pN2 + tissues[i].pHe;
             let a, b;
             if (pTotal > 0) {
-                a = (tissues[i].pN2 * ZHL16C_N2[i].a + tissues[i].pHe * ZHL16C_He[i].a) / pTotal;
-                b = (tissues[i].pN2 * ZHL16C_N2[i].b + tissues[i].pHe * ZHL16C_He[i].b) / pTotal;
+                a = (tissues[i].pN2 * _tblN2[i].a + tissues[i].pHe * ZHL16C_He[i].a) / pTotal;
+                b = (tissues[i].pN2 * _tblN2[i].b + tissues[i].pHe * ZHL16C_He[i].b) / pTotal;
             } else {
-                a = ZHL16C_N2[i].a;
-                b = ZHL16C_N2[i].b;
+                a = _tblN2[i].a;
+                b = _tblN2[i].b;
             }
             const mValue = a + pAmb / b;
             const mValueGF = pAmb + gf * (mValue - pAmb);
@@ -404,6 +450,15 @@ const DecoEngine = (() => {
         if (!levels || levels.length === 0) {
             return { error: 'No bottom segments defined', stops: [], totalTime: 0 };
         }
+        //Select Bühlmann ZH-L16 variant for N2 compartments (He table is shared).
+        const _model = (settings.decoModel || 'ZHLC_GF').toUpperCase();
+        if (_model.indexOf('ZHLA') === 0) {
+            _tblN2 = ZHL16A_N2;
+        } else if (_model.indexOf('ZHLB') === 0) {
+            _tblN2 = ZHL16B_N2;
+        } else {
+            _tblN2 = ZHL16C_N2;
+        }
         const stepSizeRaw = settings.stepSize || 3;
         const lastStopRaw = settings.lastStop || 3;
         const stepSize = settings.metric ? stepSizeRaw : Math.round(stepSizeRaw * 3.28084);
@@ -457,7 +512,7 @@ const DecoEngine = (() => {
         let decoZoneStart = 0;
         function buildAscentProjection(fromDepth) {
             const surfP = getSurfacePressure(settings);
-            const slpLocal = settings.metric ? (settings.waterType === 0 ? SLP_SW_M : SLP_FW_M) : (settings.waterType === 0 ? SLP_SW_F : SLP_FW_F);
+            const slpLocal = getSlp(settings);
             const ppH2O = WATER_VAPOR_PRESSURE;
             let n2f, hefEff;
             if (currentSP > 0) {
@@ -484,7 +539,7 @@ const DecoEngine = (() => {
         function projectAscentTissuesAtDepth(projection, fromDepth, depth) {
             const t = (fromDepth - depth) / ascentRate;
             return projection.savedTissues.map((saved, i) => {
-                const kN2 = Math.LN2 / ZHL16C_N2[i].ht;
+                const kN2 = Math.LN2 / _tblN2[i].ht;
                 const kHe = Math.LN2 / ZHL16C_He[i].ht;
                 return {
                     pN2: projection.inspN2Start + projection.rN2 * (t - 1 / kN2)
@@ -864,7 +919,7 @@ const DecoEngine = (() => {
         const ppH2O = WATER_VAPOR_PRESSURE;
         const inspN2 = 0.7902 * (pAmb - ppH2O);
         for (let i = 0; i < NUM_COMPARTMENTS; i++) {
-            tissues[i].pN2 = haldaneEquation(tissues[i].pN2, inspN2, ZHL16C_N2[i].ht, intervalMinutes);
+            tissues[i].pN2 = haldaneEquation(tissues[i].pN2, inspN2, _tblN2[i].ht, intervalMinutes);
             tissues[i].pHe = haldaneEquation(tissues[i].pHe, 0, ZHL16C_He[i].ht, intervalMinutes);
         }
     }
@@ -884,6 +939,8 @@ const DecoEngine = (() => {
         loadTissuesConstantDepth,
         loadTissuesLinearDepthChange,
         WATER_VAPOR_PRESSURE,
+        ZHL16A_N2,
+        ZHL16B_N2,
         ZHL16C_N2,
         ZHL16C_He,
         NUM_COMPARTMENTS,

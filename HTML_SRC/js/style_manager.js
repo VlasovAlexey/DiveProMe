@@ -72,6 +72,14 @@ function assign_css_style(){
     // and they do not overflow the right edge of the screen when switching themes.
     setTimeout(function(){ window.dispatchEvent(new Event('resize')); }, 200);
     ZoomButtonChangeStyle();
+
+    // On Android, update the native status-bar / navigation-bar color to match the
+    // new theme's body background so the system bars blend with the app UI.
+    if (typeof Android !== 'undefined' && typeof Android.setStatusBarColor === 'function') {
+        var themeColors = { 1: '#2b2b2c', 2: '#ffffff', 3: '#060d04', 4: '#fff0f5' };
+        var themeColor = themeColors[tn_color_idx * 1.0];
+        if (themeColor) { Android.setStatusBarColor(themeColor); }
+    }
 }
 assign_css_style();
 

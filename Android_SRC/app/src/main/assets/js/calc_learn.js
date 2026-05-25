@@ -462,7 +462,23 @@ function calc_upd_depth_oxy(){
     //var calc_he_fr = Math.ceil(100 - (((calc_ppo2_bottom * 1.0) / ((calc_depth_max + 10) / 10)) * 100) - (((calc_ppn2_max * 1.0) / ((calc_depth_max + 10) / 10)) * 100));
     //var calc_oxy_fr = 33;
 
-    var calc_depth_max = Math.floor((((calc_ppo2_bottom * 1.0) - (calc_ppn2_max * 1.0) * 1000)) / (calc_he_fr - 100));// + 10
+    //Max depth from best-mix constraint:
+    //  fN2 = 1 - fO2 - fHe  and  pN2 = fN2 × P_abs ≤ ppN2_max,  fO2 = ppO2 / P_abs
+    //  → P_abs × (1 - fHe) = ppO2 + ppN2_max
+    //  → depth = ((ppO2 + ppN2_max)/(1 - fHe/100) - 1) × 10
+    //  = (ppO2 + ppN2_max) × 1000 / (100 - fHe%) - 10
+    var calc_depth_max;
+    if (calc_he_fr >= 100) {
+        calc_depth_max = 400; //guard against /0; clamp to UI max
+    } else {
+        calc_depth_max = Math.floor((calc_ppo2_bottom + calc_ppn2_max) * 1000 / (100 - calc_he_fr) - 10);
+    }
+    if (calc_depth_max < 0) {
+        calc_depth_max = 0;
+    }
+    if (calc_depth_max > 400) {
+        calc_depth_max = 400;
+    }
     //console.log(calc_depth_max);
 
     var calc_depth_min = Math.ceil((calc_ppo2_min*1.0) / ((calc_ppo2_bottom * 1.0) / ((calc_depth_max + 10) / 10)) * 10 - 10);

@@ -130,20 +130,27 @@ function buildApexSettings(mdl_idx, isCCR) {
 	var altitude         = alt_el.options[alt_el.selectedIndex].value * 1.0;
 	var tn_water_el      = document.getElementById("tn_water");
 	var waterIdx         = tn_water_el.options[tn_water_el.selectedIndex].value * 1;
+	//Model indices after ZHL-A was added first: 1=ZHL-A, 2=ZHL-B, 3=ZHL-C,
+	//4=VPM-A, 5=VPM-B, 6=VPM-B/E, 7=VPM-B/GFS, 8=VPM-B/FBO.
 	var waterType        = (waterIdx === 2) ? 1 : 0;
-	var vpmModelMap      = { 3: 'VPMA', 4: 'VPMB', 5: 'VPMBE', 6: 'VPMB_GFS', 7: 'VPMBFBO' };
+	//Pass exact water density (kg/m³) from the UI selection so the engine uses the
+	//real metres-per-bar for stop depths and ceilings (not just binary salt/fresh).
+	var waterDensityVal  = (typeof water_density === 'function') ? water_density() : 0;
+	var vpmModelMap      = { 4: 'VPMA', 5: 'VPMB', 6: 'VPMBE', 7: 'VPMB_GFS', 8: 'VPMBFBO' };
+	var zhlModelMap      = { 1: 'ZHLA_GF', 2: 'ZHLB_GF', 3: 'ZHLC_GF' };
 	var vpm_conserv_el   = document.getElementById("opt_vpm_conserv");
 	var vpm_conserv      = vpm_conserv_el ? vpm_conserv_el.options[vpm_conserv_el.selectedIndex].value * 1 : 0;
 	var tn_cng_el        = document.getElementById("opt_cng_time");
 	var gasChangeTime    = parseInt(tn_cng_el.options[tn_cng_el.selectedIndex].value) || 0;
 	var settings = {
 		circuit: isCCR ? 'CCR' : 'OC',
-		decoModel: 'ZHLC_GF',
+		decoModel: zhlModelMap[mdl_idx] || 'ZHLC_GF',
 		gfLo: gf_arr[0],
 		gfHi: gf_arr[1],
 		conservatism: vpm_conserv,
 		metric: true,
 		waterType: waterType,
+		waterDensity: (waterDensityVal && waterDensityVal > 0) ? waterDensityVal : 0,
 		altitude: altitude,
 		descentRate: rate_dsc,
 		ascentRate: rate_asc,
@@ -154,7 +161,7 @@ function buildApexSettings(mdl_idx, isCCR) {
 		minStopTime: 1,
 		ppO2Deco: ppO2Deco,
 		gasChangeTime: gasChangeTime,
-		_isVPM: mdl_idx >= 3,
+		_isVPM: mdl_idx >= 4,
 		_vpmModel: vpmModelMap[mdl_idx] || 'VPMB'
 	};
 	if (pre_tissues_arr && pre_tissues_arr.length === 16) {
@@ -822,7 +829,7 @@ function to_5_column_arr(tmp_arr) {
 	return dec_table;
 }
 
-//very crappy code. copy of slightly modified function before. add table different info but don`t use "classic" fixes view. it is keep all other (exclude main table) safety
+//Very crappy code. Copy of the above function, slightly modified. Adds table info in a different format but doesn't use the "classic" view fixes. Keeps all other safety checks (excluding the main table).
 function to_5_column_arr_full(tmp_arr) {
 	dec_table = ["Action", "Depth", "Time", "RunTime", "Mix"];
 
@@ -999,10 +1006,10 @@ function ExtraStops(output) {
 	var tn_cng_time = document.getElementById("opt_cng_time");
 	var tn_cng_time_idx = parseInt(tn_cng_time.options[tn_cng_time.selectedIndex].value);
 
-	//if changing mix time === 0 we need add some time for property dive plan computation.
+	//if changing mix time === 0 we need to add some time for proper dive plan computation.
 	if (tn_cng_time_idx === 0) {
 		//!!!need deep test! changed from 0.0 to 0.00001 after v9.11
-		//it is important. if 0.0 then crash app. need more testing and resolve this strange work
+		//Important: if 0.0 then app crashes. Needs more testing to resolve this unexpected behavior.
 		tn_cng_time_idx = 0.00001;
 	}
 

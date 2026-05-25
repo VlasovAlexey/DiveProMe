@@ -16,6 +16,11 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
         Highcharts.setOptions(ChartThemeSailor());
     }
 
+    // Declare colors_custom here so it is always defined even before
+    // the mode-specific blocks set it below (avoids ReferenceError on
+    // Military / Sailor Moon themes that previously had no assignment).
+    var colors_custom = ['#49d4d3', '#20596c'];
+
     ld_dp = max_lvl_depth(lvl_arr);
     //meters
     if ($("#tn_dmn").val() == 1) {
@@ -70,6 +75,14 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
             //Light theme
             colors_custom = ['#f45b5b', '#8085e9'];
         }
+        if ($("#tn_color").val() == 3) {
+            //Military theme
+            colors_custom = ['#7db866', '#4a9e2a'];
+        }
+        if ($("#tn_color").val() == 4) {
+            //Sailor Moon theme
+            colors_custom = ['#e91e8c', '#7cb9e8'];
+        }
     }
     //CCR
     if ($("#tn_plan_ccr").val() == 2) {
@@ -93,6 +106,14 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
                 //Light theme
                 colors_custom = ['#8fadd7', '#666ae9'];
             }
+            if ($("#tn_color").val() == 3) {
+                //Military theme
+                colors_custom = ['#a8d870', '#4a9e2a'];
+            }
+            if ($("#tn_color").val() == 4) {
+                //Sailor Moon theme
+                colors_custom = ['#7cb9e8', '#c2185b'];
+            }
         }
         if (opt_blt_dln == 2) {
             //Diluent
@@ -104,6 +125,14 @@ function DrawChart(html_id, html_id_1, html_id_2, main_plan1) {
             if ($("#tn_color").val() == 2) {
                 //Light theme
                 colors_custom = ['#fffa6c', '#ff9b6c'];
+            }
+            if ($("#tn_color").val() == 3) {
+                //Military theme
+                colors_custom = ['#c8f090', '#6abf3a'];
+            }
+            if ($("#tn_color").val() == 4) {
+                //Sailor Moon theme
+                colors_custom = ['#ffd700', '#ff69b4'];
             }
         }
     }

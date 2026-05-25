@@ -24,6 +24,7 @@ function ChartThemeLight(){
         },
         tooltip: {
             borderWidth: 0,
+            borderColor: '#e0e0e0',
             style: {
                 fontFamily: 'Signika, serif'
             }
@@ -178,6 +179,7 @@ function ChartThemeDark(){
    },
    tooltip: {
       backgroundColor: 'rgba(0, 0, 0, 0.85)',
+      borderColor: '#606063',
       style: {
          color: '#F0F0F0',
          fontFamily: '\'Unica One\', sans-serif'

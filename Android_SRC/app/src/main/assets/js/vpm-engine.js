@@ -51,7 +51,17 @@ const VPMEngine = (() => {
     const SLP_FW_M = 10.337;
     const SLP_SW_F = 33.066;
     const SLP_FW_F = 33.914;
+    //Reference density for SLP_SW_M/SW_F (kg/m³). 1 atm column of seawater of this
+    //density equals SLP_SW_M metres / SLP_SW_F feet.
+    const SLP_REF_DENSITY = 1025;
+    //Returns metres-per-bar (metric) or feet-per-bar (imperial) for the configured water.
+    //Honours settings.waterDensity (kg/m³) when provided; otherwise falls back to
+    //settings.waterType (0=salt, 1=fresh).
     function getSLP(settings) {
+        if (settings.waterDensity && settings.waterDensity > 0) {
+            const baseSlp = settings.metric ? SLP_SW_M : SLP_SW_F;
+            return baseSlp * SLP_REF_DENSITY / settings.waterDensity;
+        }
         if (settings.metric) {
             return settings.waterType === 0 ? SLP_SW_M : SLP_FW_M;
         }

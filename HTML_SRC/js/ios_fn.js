@@ -1,5 +1,5 @@
 
-//check if is IOS
+//Check if platform is iOS
 function IsIOS(){
     return false;
 }

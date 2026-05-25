@@ -1,4 +1,4 @@
-// /main prg start
+// Main program start
 var dive = require("/dive_comp.js");
 init_global();
 
@@ -479,14 +479,14 @@ function upd_lvl_list() {
             //current selected gas is main_lvl index
             main_lvl = lvl_arr[att - 2];
 
-            //need deep tests. Actual fixing problem with levels available gas list.
-            //Remove old crapy calculation current level depth
+            //Needs deep testing. Fixes a problem with the available gas list for levels.
+            //Remove old crappy calculation for current level depth
             //main_lvl = lvl_arr[att+1];
 
         }
-        //get properly mix list for selected level/ Sort\arr etc and make option
+        //Get proper mix list for selected level (sort, filter, etc.) and build option
         idx_arr = [];
-        //make properly mix list for OC(1) or CCR(2) type plan
+        //Build proper mix list for OC(1) or CCR(2) plan type
         if ($("#tn_plan_ccr").val() == 1) {
             //OC
             idx_arr = get_rl_fraction(get_working_mix_idx(main_lvl, travel_mix_arr));
@@ -499,12 +499,12 @@ function upd_lvl_list() {
         lvl_mix_watcher[att] = document.getElementById("opt_levels_mix_" + j);
         lvl_mix_watcher[att].addEventListener('change', upd_lvl_opt_arr);
 
-        //make lvl profile actual gass list to array
+        //Build the actual gas list for the level profile into an array
         h = (lvl_arr[att] - 1) * 2;
 
         lvl_mix_arr.push(idx_arr[h] * 1.0, idx_arr[h + 1] * 1.0);
 
-        //make properly min and max depth for OC(1) or CCR(2) type plan and make option
+        //Build proper min and max depth for OC(1) or CCR(2) plan type and populate option
         if ($("#tn_plan_ccr").val() == 1) {
             //OC
             min_max_arr = ret_mix_range_oc(lvl_arr[att], get_rl_fraction(get_working_mix_idx(main_lvl, travel_mix_arr)));
@@ -517,7 +517,7 @@ function upd_lvl_list() {
 
         if (j > 0) {
 
-            //fix deco computation problem with big steeps between levels under ascent and make maximum ascent level half of previous level
+            //fix deco computation problem with big steps between levels during ascent and make maximum ascent level half of previous level
             if (j < (lvl_arr.length / 3)) {
                 //alert(lvl_arr[att-2]);
                 if(parseInt(lvl_arr[att - 2] / 2) < 1) {
@@ -528,7 +528,7 @@ function upd_lvl_list() {
                 }
             }
 
-            //fix problem with bad decompression computation dive with hight O2(+80)% over 6 meters.
+            //fix problem with bad decompression computation for dives with high O2 (+80%) above 6 meters.
             if (min_max_arr[0] < 7) {
                 if (lvl_arr[att - 2] > 6) {
                     min_max_arr[0] = 7;

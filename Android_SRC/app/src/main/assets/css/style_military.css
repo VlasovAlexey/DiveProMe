@@ -273,7 +273,8 @@ select {
 .btn_export_xls, .btn_tbl_pdf, .btn_msg, .btn_tel,
 .btn_bailout, .btn_diluent, .btn_ios_msg, .btn_ios_tel,
 .btn_link, .tn_btn_price, .tn_btn_learn,
-.tn_btn_pp_profile_chart, .tn_btn_cons {
+.tn_btn_pp_profile_chart, .tn_btn_cons,
+.btn_next_dive, .btn_reset_tissues {
     margin-top: 10px;
     margin-bottom: 10px;
     font-family: 'MilitaryHUD', 'Courier New', monospace;
@@ -300,7 +301,8 @@ select {
 .btn_export_xls:hover, .btn_tbl_pdf:hover, .btn_msg:hover, .btn_tel:hover,
 .btn_bailout:hover, .btn_diluent:hover, .btn_ios_msg:hover, .btn_ios_tel:hover,
 .btn_link:hover, .tn_btn_price:hover, .tn_btn_learn:hover,
-.tn_btn_pp_profile_chart:hover, .tn_btn_cons:hover {
+.tn_btn_pp_profile_chart:hover, .tn_btn_cons:hover,
+.btn_next_dive:hover, .btn_reset_tissues:hover {
     background: #152a0a;
     color: #c8f090;
     border: 1px solid #4a9e2a;
@@ -312,7 +314,8 @@ select {
 .btn_export_xls:active, .btn_tbl_pdf:active, .btn_msg:active, .btn_tel:active,
 .btn_bailout:active, .btn_diluent:active, .btn_ios_msg:active, .btn_ios_tel:active,
 .btn_link:active, .tn_btn_price:active, .tn_btn_learn:active,
-.tn_btn_pp_profile_chart:active, .tn_btn_cons:active {
+.tn_btn_pp_profile_chart:active, .tn_btn_cons:active,
+.btn_next_dive:active, .btn_reset_tissues:active {
     top: 1px;
     background: #0a1a06;
     color: #7db866;
